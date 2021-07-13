@@ -1,0 +1,55 @@
+<html>
+
+<style>
+  .container {
+    display: flex;
+    margin: 20px 0px;
+    border: 1px solid red;
+  }
+
+  .container.col {
+    flex-direction: column;
+  }
+
+  .item {
+    border: 1px solid black;
+    text-align: center;
+  }
+
+  .item.grow-shrink-auto {
+    flex: 1 1 auto;
+  }
+</style>
+
+<body>
+  <!-- 여유공간 및 부족한 공간에 대하여 균등배분 -->
+  <div class="container" style="width:500px">
+    <div class="item grow-shrink-auto">1</div>
+    <div class="item grow-shrink-auto">2</div>
+    <div class="item grow-shrink-auto">3</div>
+  </div>
+  <div class="container" style="width:200px">
+    <div class="item grow-shrink-auto">1</div>
+    <div class="item grow-shrink-auto">2</div>
+    <div class="item grow-shrink-auto">3</div>
+  </div>
+  <div class="container col" style="width:500px;height:500px">
+    <div class="item grow-shrink-auto">1</div>
+    <div class="item grow-shrink-auto">2</div>
+    <div class="item grow-shrink-auto">3</div>
+  </div>
+  <div class="container col" style="width:500px;height:200px">
+    <div class="item grow-shrink-auto">1</div>
+    <div class="item grow-shrink-auto">2</div>
+    <div class="item grow-shrink-auto">3</div>
+  </div>
+
+  <!-- flex 컨테이너 크기가 변동됨에 따라서 flex 항목의 크기를 균등배분-->
+  <div class="container">
+    <div class="item grow-shrink-auto">1</div>
+    <div class="item grow-shrink-auto">2</div>
+    <div class="item grow-shrink-auto">3</div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<html>
+
+<style>
+  .container {
+    display: flex;
+    margin: 20px 0px;
+    padding: 10px;
+    border: 1px solid red;
+  }
+
+  .container.start {
+    align-items: flex-start;
+  }
+
+  .container.end {
+    align-items: flex-end;
+  }
+
+  .container.center {
+    align-items: center;
+  }
+
+  .item {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+  }
+</style>
+
+<body>
+  <!-- 기본은 stretch -->
+  <div class="container" style="height: 100px;">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+  <!-- 교차축 시작선에 -->
+  <div class="container start" style="height: 100px;">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+  <!-- 교차축 끝선에 -->
+  <div class="container end" style="height: 100px;">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+  <!-- 교차축 중간에 -->
+  <div class="container center" style="height: 100px;">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+
+</body>
+
+</html>

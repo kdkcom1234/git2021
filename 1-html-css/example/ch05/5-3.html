@@ -1,0 +1,155 @@
+<html>
+
+<style>
+  .container {
+    display: flex;
+    margin: 20px 0px;
+    padding: 10px;
+    border: 1px solid red;
+  }
+
+  .container.col {
+    flex-direction: column;
+  }
+
+  .item {
+    border: 1px solid black;
+    width: 100px;
+    height: 100px;
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 100px;
+  }
+
+  .item-wo-height {
+    border: 1px solid black;
+    width: 100px;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .item-wo-size {
+    border: 1px solid black;
+    text-align: center;
+  }
+</style>
+
+<body>
+  <!--기본적으로 행(row) 배치, 시작 선에서 시작-->
+  <div class="container">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+
+  <!--기본적으로 항목은 줄어들 수 있음-->
+  <div class="container" style="width:500px">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+    <div class="item">5</div>
+    <div class="item">6</div>
+  </div>
+
+  <!--기본적으로 항목은 교차축 크기만큼 늘어남-->
+  <div class="container" style="width:500px;height:300px;">
+    <div class="item-wo-height">1</div>
+    <div class="item-wo-height">2</div>
+    <div class="item-wo-height">3</div>
+  </div>
+
+  <!--기본적으로 항목의 기본크기는 auto, 컨텐트 크기-->
+  <!--flex-direction이 row이면 가로크기가 컨텐트 크기만큼-->
+  <div class="container" style="width:500px;height:300px;">
+    <div class="item-wo-size">1</div>
+    <div class="item-wo-size">2</div>
+    <div class="item-wo-size">3</div>
+  </div>
+
+  <!--flex-direction이 column이면 세로크기가 컨텐트 크기만큼-->
+  <div class="container col" style="width:500px;height:300px;">
+    <div class="item-wo-size">1</div>
+    <div class="item-wo-size">2</div>
+    <div class="item-wo-size">3</div>
+  </div>
+
+  <!--기본적으로 flex 항목이 넘쳐도 밑으로 내리지 않음-->
+  <div class="container" style="width:500px">
+    <div class="item-wo-size">1</div>
+    <div class="item-wo-size">2</div>
+    <div class="item-wo-size">3</div>
+    <div class="item-wo-size">4</div>
+    <div class="item-wo-size">5</div>
+    <div class="item-wo-size">6</div>
+    <div class="item-wo-size">1</div>
+    <div class="item-wo-size">2</div>
+    <div class="item-wo-size">3</div>
+    <div class="item-wo-size">4</div>
+    <div class="item-wo-size">5</div>
+    <div class="item-wo-size">6</div>
+    <div class="item-wo-size">1</div>
+    <div class="item-wo-size">2</div>
+    <div class="item-wo-size">3</div>
+    <div class="item-wo-size">4</div>
+    <div class="item-wo-size">5</div>
+    <div class="item-wo-size">6</div>
+    <div class="item-wo-size">1</div>
+    <div class="item-wo-size">2</div>
+    <div class="item-wo-size">3</div>
+    <div class="item-wo-size">4</div>
+    <div class="item-wo-size">5</div>
+    <div class="item-wo-size">6</div>
+    <div class="item-wo-size">1</div>
+    <div class="item-wo-size">2</div>
+    <div class="item-wo-size">3</div>
+    <div class="item-wo-size">4</div>
+    <div class="item-wo-size">5</div>
+    <div class="item-wo-size">6</div>
+    <div class="item-wo-size">1</div>
+    <div class="item-wo-size">2</div>
+    <div class="item-wo-size">3</div>
+    <div class="item-wo-size">4</div>
+    <div class="item-wo-size">5</div>
+    <div class="item-wo-size">6</div>
+    <div class="item-wo-size">1</div>
+    <div class="item-wo-size">2</div>
+    <div class="item-wo-size">3</div>
+    <div class="item-wo-size">4</div>
+    <div class="item-wo-size">5</div>
+    <div class="item-wo-size">6</div>
+    <div class="item-wo-size">1</div>
+    <div class="item-wo-size">2</div>
+    <div class="item-wo-size">3</div>
+    <div class="item-wo-size">4</div>
+    <div class="item-wo-size">5</div>
+    <div class="item-wo-size">6</div>
+    <div class="item-wo-size">1</div>
+    <div class="item-wo-size">2</div>
+    <div class="item-wo-size">3</div>
+    <div class="item-wo-size">4</div>
+    <div class="item-wo-size">5</div>
+    <div class="item-wo-size">6</div>
+    <div class="item-wo-size">1</div>
+    <div class="item-wo-size">2</div>
+    <div class="item-wo-size">3</div>
+    <div class="item-wo-size">4</div>
+    <div class="item-wo-size">5</div>
+    <div class="item-wo-size">6</div>
+    <div class="item-wo-size">1</div>
+    <div class="item-wo-size">2</div>
+    <div class="item-wo-size">3</div>
+    <div class="item-wo-size">4</div>
+    <div class="item-wo-size">5</div>
+    <div class="item-wo-size">6</div>
+    <div class="item-wo-size">1</div>
+    <div class="item-wo-size">2</div>
+    <div class="item-wo-size">3</div>
+    <div class="item-wo-size">4</div>
+    <div class="item-wo-size">5</div>
+    <div class="item-wo-size">6</div>
+  </div>
+</body>
+
+</html>

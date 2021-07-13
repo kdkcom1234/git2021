@@ -1,0 +1,77 @@
+<html>
+
+<style>
+  .container {
+    display: flex;
+    margin: 60px 0px;
+    padding: 10px;
+    border: 1px solid red;
+  }
+
+  .container.wrap {
+    /* 항목이 넘치면 다음 행으로 */
+    flex-wrap: wrap;
+  }
+
+  .container.col {
+    flex-direction: column;
+  }
+
+  .container.col-wrap {
+    flex-flow: column wrap;
+  }
+
+  .item {
+    border: 1px solid black;
+    text-align: center;
+  }
+</style>
+
+<body>
+  <div class="container" style="width:50px">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+    <div class="item">5</div>
+    <div class="item">6</div>
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+
+  </div>
+  <div class="container wrap" style="width:50px">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+    <div class="item">5</div>
+    <div class="item">6</div>
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+
+  <div class="container col" style="height:50px">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+  </div>
+
+  <div class="container col wrap" style="height:50px">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+  </div>
+
+  <div class="container col-wrap" style="height:50px">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+  </div>
+</body>
+
+</html>

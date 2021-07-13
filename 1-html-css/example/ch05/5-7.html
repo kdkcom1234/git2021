@@ -1,0 +1,67 @@
+<html>
+
+<style>
+  .container {
+    display: flex;
+    margin: 20px 0px;
+    border: 1px solid red;
+  }
+
+  .container.col {
+    flex-direction: column;
+  }
+
+  .item {
+    border: 1px solid black;
+    flex-basis: 100px;
+    text-align: center;
+  }
+
+  .item.shrink {
+    flex-shrink: 1;
+  }
+
+  .item.one {
+    flex-shrink: 2;
+  }
+</style>
+
+<body>
+  <!-- flex-shrink: 1 -->
+  <!-- 가로 100px 부족한 공간을 균등배분하여 줄임 -->
+  <div class="container" style="width:200px">
+    <div class="item shrink">1</div>
+    <div class="item shrink">2</div>
+    <div class="item shrink">3</div>
+  </div>
+
+  <!-- flex-shrink: 1 -->
+  <!-- 세로 100px 부족한 공간을 균등배분하여 줄임 -->
+  <div class="container col" style="width:200px;height:200px">
+    <div class="item shrink">1</div>
+    <div class="item shrink">2</div>
+    <div class="item shrink">3</div>
+  </div>
+
+  <!-- 1 -> flex-shrink: 2 -->
+  <!-- 2 -> flex-shrink: 1 -->
+  <!-- 3 -> flex-shrink: 1 -->
+  <!-- 가로 100px 부족한 공간을 shrink 비율로 배분하여 줄임 -->
+  <div class="container" style="width:200px;">
+    <div class="item one">1</div>
+    <div class="item shrink">2</div>
+    <div class="item shrink">3</div>
+  </div>
+
+  <!-- 1 -> flex-shrink: 2 -->
+  <!-- 2 -> flex-shrink: 1 -->
+  <!-- 3 -> flex-shrink: 1 -->
+  <!-- 세로 100px 부족한 공간을 shrink 비율로 배분하여 줄임 -->
+  <div class="container col" style="width:200px;height:200px">
+    <div class="item one">1</div>
+    <div class="item shrink">2</div>
+    <div class="item shrink">3</div>
+  </div>
+</body>
+
+</html>

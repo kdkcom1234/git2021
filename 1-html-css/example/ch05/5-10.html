@@ -1,0 +1,75 @@
+<html>
+
+<style>
+  .container {
+    display: flex;
+    margin: 20px 0px;
+    padding: 10px;
+    border: 1px solid red;
+  }
+
+  .container.end {
+    justify-content: flex-end;
+  }
+
+  .container.center {
+    justify-content: center;
+  }
+
+  .container.around {
+    justify-content: space-around;
+  }
+
+  .container.between {
+    justify-content: space-between;
+  }
+
+  .container.even {
+    justify-content: space-evenly;
+  }
+
+  .item {
+    border: 1px solid black;
+    flex-basis: 100px;
+    padding: 10px;
+    text-align: center;
+  }
+</style>
+
+<body>
+  <div class="container" style="width: 500px;">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+  <div class="container end" style="width: 500px;">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+  <div class="container center" style="width: 500px;">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+  <!--여유공간 200px에 대해서 flex 항목사이에 균등 배분-->
+  <div class="container between" style="width: 500px;">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+  <!--여유공간 200px에 대해서 시작/끝선(1) 및 flex 항목사이(2)로 배분-->
+  <div class="container around" style="width: 500px;">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+  <!--여유공간 200px에 대해서 시작, 끝선 및 flex 항목사이를 균등 배분-->
+  <div class="container even" style="width: 500px;">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+</body>
+
+</html>
