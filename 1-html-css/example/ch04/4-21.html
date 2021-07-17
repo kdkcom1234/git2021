@@ -1,0 +1,36 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <title>CSS3 Property Basic</title>
+  <style>
+    .box {
+      width: 150px;
+      height: 100px;
+      background-repeat: no-repeat;
+
+      /* 비율에 따라 가로 또는 세로에 맞춘 후 남는 부분은 숨김 */
+      background-size: cover;
+      background-position: center;
+      display: inline-block;
+      margin-left: 0.5rem;
+    }
+
+    .box:nth-child(1) {
+      background-image: url('./e17905891db6f8f93aaa8aa242b18dda1.jpg');
+    }
+
+    .box:nth-child(2) {
+      background-image: url('./Screenshot40-1920x1080-d67c18fde402b50e42c3c6d8566cca2c.webp');
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+  </div>
+  <div class="box">
+  </div>
+</body>
+
+</html>
