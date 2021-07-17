@@ -1,0 +1,44 @@
+/* body 태그를 중앙 정렬합니다. */
+* {
+  box-sizing: border-box;
+}
+body {
+  width: 700px;
+  margin: 0 auto;
+}
+
+nav {
+  /* scroll이 되어 밖으로 나갈 때 포지션을 처리 */
+  /* scroll 내부에 있을 때는 일반 문서 표시방시을 따름 */
+  position: sticky;
+  top: 0px;
+  z-index: 9999;
+}
+
+article {
+  /* 너비 값을 계산함 */
+  width: calc(100% - 200px - 1rem);
+  float: left;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+section {
+  /* 스크롤 이동할 때 상단 마진을 줌 */
+  scroll-margin-top: 10rem;
+}
+
+aside {
+  width: 200px;
+  float: left;
+  position: sticky;
+  top: 8rem;    
+}
+
+footer {
+  clear: both;
+}
+
+/* header, .banner, nav, article, footer, aside {
+  background-color: burlywood;
+} */

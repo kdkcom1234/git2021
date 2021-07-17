@@ -1,0 +1,26 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <title>CSS3 Style Property Basic</title>
+  <style>
+    #box {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <span onclick="showBox();">Show</span>
+  <div id="box">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </div>
+
+  <script>
+    function showBox() {
+      document.getElementById("box").style.display = "block";
+    }
+  </script>
+</body>
+
+</html>

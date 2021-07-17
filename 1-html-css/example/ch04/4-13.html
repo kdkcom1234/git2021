@@ -1,0 +1,32 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <title>CSS3 Font Property</title>
+  <style>
+    a {
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .div-memo {
+      display: none;
+    }
+
+    a:hover+.div-memo {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <a href="#">메모보기</a>
+  <div class="div-memo">
+    메모입니다.
+  </div>
+</body>
+
+</html>

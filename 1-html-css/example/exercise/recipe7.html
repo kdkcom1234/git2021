@@ -11,7 +11,7 @@
 
     body {
       color: #606C38;
-      width: 500px;
+      width: 700px;
       margin: 0 auto;
     }
 
@@ -24,6 +24,29 @@
       text-decoration: underline;
     }
 
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    ol {
+      padding-left: 1.2rem;
+      margin: 0;
+    }
+
+    th {
+      color: #283618;
+    }
+
+    nav {
+      /* scroll이 되어 밖으로 나갈 때 포지션을 처리 */
+      /* scroll 내부에 있을 때는 일반 문서 표시방시을 따름 */
+      position: sticky;
+      top: 0px;
+      z-index: 9999;
+    }
+
     nav a:active {
       background-color: #dda15e80;
     }
@@ -32,14 +55,29 @@
       color: #606C38;
     }
 
+    nav ul {
+      text-align: center;
+    }
+
+    nav ul>li {
+      display: inline-block;
+    }
+
+    nav ul>li:not(:first-child) {
+      margin-left: 2rem;
+    }
+
+    article {
+      /* 너비 값을 계산함 */
+      width: calc(100% - 200px - 1rem);
+      float: left;
+      margin-right: 1rem;
+      margin-top: 1rem;
+    }
 
     section>h2>a::after {
       content: " - 만개의 레시피에서 보기";
       font-size: 0.5rem;
-    }
-
-    th {
-      color: #283618;
     }
 
     header>h1 {
@@ -49,14 +87,16 @@
     }
 
     section>h2 {
-      background-color: #dda15e80;
+      /* background-color: #dda15e80; */
       padding: 0.5rem;
+      margin: 0;
     }
 
     section {
-      background-color: #fefae0;
       padding: 0.25rem 1rem;
-      margin-top: 2rem;
+      /* 스크롤 이동할 때 상단 마진을 줌 */
+      scroll-margin-top: 10rem;
+      margin-bottom: 1rem;
     }
 
     section table {
@@ -71,14 +111,33 @@
       background-color: #bc6c2520;
     }
 
-    ul,
-    ol {
-      padding-left: 1.2rem;
-    }
-
     section img,
     section table {
       width: 100%;
+    }
+
+    aside {
+      width: 200px;
+      float: left;
+      position: sticky;
+      top: 2.5rem;
+      margin-top: 1rem;
+      padding: 1rem;
+    }
+
+    aside img {
+      margin-bottom: 0.5rem;
+    }
+
+    footer {
+      clear: both;
+    }
+
+    nav,
+    section,
+    aside {
+      background-color: #fefae0;
+      border: 1px solid #dda15e50;
     }
   </style>
 </head>
@@ -275,6 +334,12 @@
       </ol>
     </section>
   </article>
+  <aside>
+    <img src="https://recipe1.ezmember.co.kr/cache/rpe/2021/07/01/5502a5db2f3e3fbc86d7e2d8ae61a4671.jpg" width="100%">
+    <img src="https://recipe1.ezmember.co.kr/cache/rpe/2021/07/15/4839a8d59bb582ae260051a9669620121.jpg" width="100%">
+    <img src="https://recipe1.ezmember.co.kr/cache/shop/2021/07/09/e37fdde9e8b1ffae5eb5ce50da1dd720.jpg" width="100%">
+
+  </aside>
   <footer>
     <address>그린컴퓨터아카데미강남 - 서울특별시 강남구 논현동</address>
   </footer>

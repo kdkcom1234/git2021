@@ -1,0 +1,59 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <title>CSS3 Property Basic</title>
+  <style>
+    body {
+      height: 2000px;
+    }
+
+    .wrapper {
+      position: relative;
+      border: 1px solid black;
+      /* 자식 요소가 absolute이면 컨텐츠 높이가 없어짐 */
+      /* 별도로 높이값을 주어야함 */
+      height: 300px;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+    }
+
+    .red {
+      background-color: red;
+      left: 10px;
+      top: 10px;
+    }
+
+    .green {
+      background-color: green;
+      left: 50px;
+      top: 50px;
+    }
+
+    .blue {
+      background-color: blue;
+      left: 90px;
+      top: 90px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>고정 위치입니다.</h1>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+  <p>Pellentesque est velit, laoreet vel rhoncus sit amet.</p>
+  <p>Proin vitae elit est, ut accumsan arcu. Sed consectetur.</p>
+  <p>Donec molestie massa id lorem hendrerit eu bibendum augue vestibulum.</p>
+  <p>Morbi ut lorem in purus facilisis vulputate. Sed purus nibh.</p>
+  <div class="wrapper">
+    <div class="box red"></div>
+    <div class="box green"></div>
+    <div class="box blue"></div>
+  </div>
+</body>
+
+</html>
