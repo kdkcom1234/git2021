@@ -1,0 +1,28 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <title>CSS3 Selector Basic Page</title>
+  <style>
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul>li::before {
+      content: "✔";
+      margin-right: 0.5rem;
+      color: green;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>할 일</h1>
+  <ul>
+    <li>HTML 태그 공부하기</li>
+    <li>CSS 연습하기</li>
+  </ul>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <title>CSS3 Selector Basic Page</title>
+  <style>
+    ol {
+      list-style: none;
+      padding: 0;
+    }
+
+    /* https://developer.mozilla.org/ko/docs/Web/CSS/CSS_Lists_and_Counters/Using_CSS_counters */
+    ol>li {
+      /* 1씩증가하는 카운터 생성, 카운터 이름은 rint 1*/
+      counter-increment: rint;
+    }
+
+    ol>li::before {
+      content: counter(rint) ". ";
+    }
+
+    ol>li::after {
+      content: " - "attr(data-count) " downloads";
+      font-size: 0.5rem;
+    }
+
+    ol>li::first-letter {
+      font-size: 2em;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>인기 앱</h1>
+  <ol>
+    <li data-count="500,000,000+">Zoom Cloud Meetings</li>
+    <li data-count="100,000,000+">카카오톡</li>
+    <li data-count="100,000,000+">당근마켓</li>
+  </ol>
+</body>
+
+</html>
