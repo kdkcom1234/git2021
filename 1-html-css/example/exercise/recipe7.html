@@ -39,11 +39,17 @@
       color: #283618;
     }
 
+    header>h1 {
+      background-color: #bc6c25;
+      color: #fefae0;
+      padding: 0.5rem;
+    }
+
     nav {
       /* scroll이 되어 밖으로 나갈 때 포지션을 처리 */
       /* scroll 내부에 있을 때는 일반 문서 표시방시을 따름 */
       position: sticky;
-      top: 0px;
+      top: 0;
       z-index: 9999;
     }
 
@@ -75,15 +81,16 @@
       margin-top: 1rem;
     }
 
+    section {
+      padding: 0.25rem 1rem 1rem 1rem;
+      /* 스크롤 이동할 때 상단 마진을 줌 */
+      scroll-margin-top: 10rem;
+      margin-bottom: 1rem;
+    }
+
     section>h2>a::after {
       content: " - 만개의 레시피에서 보기";
       font-size: 0.5rem;
-    }
-
-    header>h1 {
-      background-color: #bc6c25;
-      color: #fefae0;
-      padding: 0.5rem;
     }
 
     section>h2 {
@@ -92,19 +99,18 @@
       margin: 0;
     }
 
-    section {
-      padding: 0.25rem 1rem;
-      /* 스크롤 이동할 때 상단 마진을 줌 */
-      scroll-margin-top: 10rem;
-      margin-bottom: 1rem;
+    section>h3 {
+      margin-top: 2rem;
     }
 
     section table {
       border-collapse: collapse;
     }
 
-    section table td {
+    section table td,
+    section table th {
       border-bottom: 1px solid #283618;
+      text-align: left;
     }
 
     section table tr:nth-child(2n) {
@@ -125,7 +131,7 @@
       padding: 1rem;
     }
 
-    aside img {
+    aside img:not(:last-child) {
       margin-bottom: 0.5rem;
     }
 
@@ -143,7 +149,7 @@
 </head>
 
 <body>
-  <header>
+  <header class="gmd-1">
     <h1>내가 좋아하는 요리 레시피</h1>
   </header>
   <nav>
