@@ -1,0 +1,46 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <!-- table: 가로/세로가 있는 표 형식의 표현가능한 태그-->
+  <!-- border: 외각선 -->
+  <table border="1" cellspacing="0">
+    <!-- thead: 테이블의 헤더부분을 나타내는 시맨틱 태그 -->
+    <thead>
+      <tr>
+        <!--th(table head): 컬럼명(열 이름) -->
+        <th>이름</th>
+        <th>연락처</th>
+      </tr>
+    </thead>
+    <!-- tbody: table의 내용을 나타내는 시맨틱 태그 -->
+    <!-- 브라우저에 따라서 tbody가 자동 생성되므로 -->
+    <!-- 항상 넣도록 한다. -->
+    <tbody>
+      <!--tr: 하나의 행(row)을 표시-->
+      <tr>
+        <!--td: 하나의 셀(cell), 실제 데이터가 표시는 부분-->
+        <!-- table data -->
+
+        <!-- 컨텐츠 항상 td 안에 넣는다.-->
+        <td>홍길동</td>
+        <td>010-1234-5678</td>
+      </tr>
+      <tr>
+        <td>고대근</td>
+        <td>010-2636-5411</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td></td>
+        <td>총 2건</td>
+      </tr>
+    </tfoot>
+  </table>
+</body>
+
+</html>
