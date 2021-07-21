@@ -1,0 +1,39 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    h1 {
+      color: red;
+    }
+
+    /* id 선택자(selector) */
+    /* 해당id의 요소만 선택함 */
+    /* #id {} */
+    #warning-header {
+      color: orange;
+    }
+
+    /* class(클래스) 선택자 */
+    .primary {
+      color: green;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>이것은 제목입니다.</h1>
+  <!-- id는 요소 1개에만 사용할 수 있음 -->
+  <!-- id는 개발용으로 쓸것임. 여분으로 나두고 다른방법을 써야함 -->
+  <!-- style 줄 때는 id를 쓰지맙시다. -->
+
+  <!-- id(identifier): 유일성이 보장되어야함 -->
+  <h1 id="warning-header">이것은 제목입니다.</h1>
+
+  <p>이것은 내용입니다.</p>
+  <!-- class: 그룹에 대한 이름 -->
+  <p class="primary">이것은 내용입니다.</p>
+  <p class="primary">이것은 내용입니다.</p>
+</body>
+
+</html>

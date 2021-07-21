@@ -1,0 +1,45 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    .primary {
+      /* 배경색 */
+      background-color: green;
+    }
+
+    .alert {
+      background-color: red;
+    }
+
+    .text-white {
+      color: white;
+    }
+
+    /* 태그.클래스 */
+    /* 해당 태그에 클래스가 있는 것만 적용 */
+    p.text-green {
+      color: green;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- block형식의 태그는 기본적으로 부모너비의 100% -->
+  <!-- 높이는 컨텐츠 크기만큼 -->
+  <!-- 
+    inline형식의 태그는 기본적으로 너비/높이가 
+    컨텐트 너비/높이에 따름
+  -->
+
+  <!-- 여러개의 클래스를 조합할 수 있음 -->
+  <!-- class="클래스1 클래스2 클래스3 ..." -->
+  <h1 class="primary">이것은 제목입니다.</h1>
+  <h1 class="alert">이것은 제목입니다.</h1>
+  <span class="primary text-white">이것은 설명입니다.</span>
+  <span class="alert text-green">이것은 설명입니다.</span>
+  <p>이것은 내용입니다.</p>
+  <p class="text-green">이것은 내용입니다.</p>
+</body>
+
+</html>
