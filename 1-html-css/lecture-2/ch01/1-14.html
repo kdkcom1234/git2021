@@ -1,0 +1,44 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <!-- table: 표, 행(row)/열(column) -->
+  <!-- border: 외각선 -->
+  <table border="1" cellspacing="0" width="500">
+    <!-- thead: 테이블의 헤더 부분 시맨틱 태그 -->
+    <thead>
+      <tr>
+        <!-- th: table header, 열(column)이름 -->
+        <th>이름</th>
+        <th>연락처</th>
+      </tr>
+    </thead>
+    <!-- tbody: 테이블의 내용 시맨틱 태그-->
+    <tbody>
+      <!-- tr: table row, 1개의 행 -->
+      <tr>
+        <!-- td: table data, 1개의 셀-->
+        <!-- td 실제 컨텐츠 포함됨 -->
+        <td>홍길동</td>
+        <td>010-1234-5678</td>
+      </tr>
+      <tr>
+        <td>고대근</td>
+        <td>010-2636-5411</td>
+      </tr>
+    </tbody>
+    <!-- tfoot: 테이블의 하단영역 시맨틱 태그-->
+    <!-- 주로 요약정보, 알림정보 -->
+    <tfoot>
+      <tr>
+        <td>총 2건입니다.</td>
+        <td></td>
+      </tr>
+    </tfoot>
+  </table>
+</body>
+
+</html>

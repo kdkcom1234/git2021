@@ -1,0 +1,55 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    .menu-item {
+      color: green;
+    }
+
+    /* 부모>자손(자식) */
+    ul>li {
+      background-color: green;
+    }
+
+    /* 클래스선택자와 자손(자식)선택자 응용 */
+    .menu>li {
+      color: white;
+    }
+
+    /* 부모>자손(부모)>자손>..>..>..> */
+    /* .menu>li>a { */
+
+    /* 후손 선택자 */
+    /* 조상 후손*/
+    .menu a {
+      color: antiquewhite;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <h1></h1>
+    <h2></h2>
+    <ul class="menu">
+      <li><a href="">메뉴 - 1</a></li>
+      <li>메뉴 - 2</li>
+      <li>메뉴 - 3</li>
+    </ul>
+    <ul>
+      <li><a hre="">재료 - 1</a></li>
+      <li>재료 - 2</li>
+      <li>재료 - 3</li>
+    </ul>
+    <ol>
+      <li>순서</li>
+      <li>순서</li>
+      <li>순서</li>
+      <li>순서</li>
+    </ol>
+
+  </div>
+</body>
+
+</html>
