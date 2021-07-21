@@ -1,0 +1,25 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    /* 동위선택자: 바로 뒤에 요소를 선택 */
+    h1+h2 {
+      color: red;
+    }
+
+    /* 동위선택자: 뒤에 있는 모든 요소를 선택 */
+    h1~h2 {
+      background-color: orange;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>제목 - 1</h1>
+  <h2>제목 - 2</h2>
+  <h2>제목 - 2</h2>
+  <h2>제목 - 2</h2>
+</body>
+
+</html>

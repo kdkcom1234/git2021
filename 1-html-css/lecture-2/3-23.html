@@ -1,0 +1,38 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    /* 선택자:hover */
+    /* 해당 선택자의 요소에 마우스 커서를 올렸을 때 적용 */
+
+    /* :클래스 -> 의사(pseudo) 클래스 */
+    /* pseudo: 가짜, 유사한 */
+    h1:hover {
+      color: red;
+      /* 문자 꾸미기: underline 밑줄 */
+      text-decoration: underline;
+      font-size: 3rem;
+    }
+
+    /* 선택자:active */
+    /* 해당 선택자 요소에 클릭 했을 때 적용 */
+    h1:active {
+      color: blue;
+      background-color: green;
+    }
+
+    h1 {
+      /* cursor: pointer 클릭할 수 있는 요소처럼(손가락) */
+      cursor: pointer;
+      /* 더블클릭하면 단어 선택 해제 */
+      user-select: none;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>여기를 클릭하세요</h1>
+</body>
+
+</html>
