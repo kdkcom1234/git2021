@@ -1,0 +1,46 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    /* 선택자::before */
+    /* before는 컨텐트 앞쪽 영역 */
+    ul>li::before {
+      /* before 영역에 넣을 내용 */
+      content: "✔";
+      margin-right: 0.5rem;
+      color: green;
+      padding: 0.125rem;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    ul>li::after {
+      content: "😁";
+    }
+
+    ul>li {
+      /* 높이 */
+      height: 2rem;
+      /* 줄 높이 */
+      line-height: 2rem;
+    }
+
+    /* li에 hover를 하면 before 걸림 */
+  </style>
+</head>
+
+<body>
+  <h1>할 일</h1>
+  <ul>
+    <li>HTML 태그 복습하기</li>
+    <li>CSS 실험하고 연습하기</li>
+  </ul>
+</body>
+
+</html>
