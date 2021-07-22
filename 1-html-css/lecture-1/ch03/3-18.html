@@ -1,0 +1,42 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    * {
+      /* 태그 크기를 쉽게 가늠하게 함 */
+      box-sizing: border-box;
+    }
+
+    .box {
+      margin: 10px;
+      padding: 10px;
+      width: 250px;
+      height: 250px;
+      border: 5px solid black;
+    }
+
+    .one {
+      background-color: red;
+      /* html 기본(default) */
+      box-sizing: content-box;
+    }
+
+    .two {
+      background-color: orange;
+      /* width/height가 border포함 안쪽 영역의 크기 */
+      /* box-sizing: border-box; */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box one">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores, at nihil veritatis nesciunt
+    architecto sit
+    eligendi unde magni consequatur nisi ipsam quaerat molestiae sapiente eum quidem reiciendis accusamus ab quis.</div>
+  <div class="box two">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores, at nihil veritatis nesciunt
+    architecto sit
+    eligendi unde magni consequatur nisi ipsam quaerat molestiae sapiente eum quidem reiciendis accusamus ab quis.</div>
+</body>
+
+</html>
