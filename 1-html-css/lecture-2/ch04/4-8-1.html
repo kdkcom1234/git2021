@@ -1,0 +1,149 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    header,
+    .banner,
+    nav,
+    article,
+    footer,
+    aside {
+      background-color: burlywood;
+    }
+
+    body {
+      /* width: 700px; */
+      /* margin: 0 auto; */
+      margin: 0;
+    }
+
+    div.wrapper {
+      width: 700px;
+      margin: 0 auto;
+    }
+
+    nav {
+      /* 스크롤영역 밖일 때는 원래 배열방식 */
+      /* 스크롤영역 안일 때는 fixed */
+      position: sticky;
+      top: 0.5rem;
+      z-index: 9999;
+    }
+
+    nav ul {
+      padding: 0;
+      text-align: center;
+    }
+
+    nav li {
+      display: inline-block;
+      margin-left: 2rem;
+    }
+
+    nav li:first-child {
+      margin-left: 0;
+    }
+
+    article {
+      /* 전체크기 - 마진오늘쪽 - aside 크기 */
+      /* width: calc(100% - 1rem - 200px); */
+      float: left;
+      /* margin-right: 1rem; */
+      margin-bottom: 1rem;
+    }
+
+    section {
+      /* 스크롤 안쪽으로 들어왔을 때만 마진값을 적용 */
+      scroll-margin-top: 8rem;
+    }
+
+    aside {
+      width: 200px;
+      left: calc(((100% - 700px)/2 + 700px + 1rem));
+      position: fixed;
+      top: 4rem;
+    }
+
+    footer {
+      /* 플로팅이 끝나 다음요소에는 clear를 해줘야함 */
+      clear: both;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+      <h1>Header</h1>
+    </header>
+    <nav>
+      <h1>Nav</h1>
+      <ul>
+        <li><a href="#menu-1">Menu1</a></li>
+        <li><a href="#menu-2">Menu2</a></li>
+        <li><a href="#menu-3">Menu3</a></li>
+      </ul>
+    </nav>
+    <article>
+      <section id="menu-1">
+        <h2>Menu1</h2>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sint eius perspiciatis molestias nam pariatur quo
+          itaque consequatur doloribus corrupti magni consequuntur accusamus, repellat voluptas non exercitationem illum
+          vitae nostrum nisi!</p>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sint eius perspiciatis molestias nam pariatur quo
+          itaque consequatur doloribus corrupti magni consequuntur accusamus, repellat voluptas non exercitationem illum
+          vitae nostrum nisi!</p>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sint eius perspiciatis molestias nam pariatur quo
+          itaque consequatur doloribus corrupti magni consequuntur accusamus, repellat voluptas non exercitationem illum
+          vitae nostrum nisi!</p>
+      </section>
+      <section id="menu-2">
+        <h2>Menu2</h2>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sint eius perspiciatis molestias nam pariatur quo
+          itaque consequatur doloribus corrupti magni consequuntur accusamus, repellat voluptas non exercitationem illum
+          vitae nostrum nisi!</p>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sint eius perspiciatis molestias nam pariatur quo
+          itaque consequatur doloribus corrupti magni consequuntur accusamus, repellat voluptas non exercitationem illum
+          vitae nostrum nisi!</p>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sint eius perspiciatis molestias nam pariatur quo
+          itaque consequatur doloribus corrupti magni consequuntur accusamus, repellat voluptas non exercitationem illum
+          vitae nostrum nisi!</p>
+      </section>
+      <section id="menu-3">
+        <h2>Menu3</h2>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sint eius perspiciatis molestias nam pariatur quo
+          itaque consequatur doloribus corrupti magni consequuntur accusamus, repellat voluptas non exercitationem illum
+          vitae nostrum nisi!</p>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sint eius perspiciatis molestias nam pariatur quo
+          itaque consequatur doloribus corrupti magni consequuntur accusamus, repellat voluptas non exercitationem illum
+          vitae nostrum nisi!</p>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sint eius perspiciatis molestias nam pariatur quo
+          itaque consequatur doloribus corrupti magni consequuntur accusamus, repellat voluptas non exercitationem illum
+          vitae nostrum nisi!</p>
+      </section>
+    </article>
+    <footer>
+      <h3>Footer</h3>
+      <address>그린컴퓨터학원강남 - 서울 강남구 논현동</address>
+    </footer>
+  </div>
+  <aside>
+    <h1>Aside</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sollicitudin id ligula vitae auctor. Proin
+      rhoncus urna et lectus dapibus, egestas vestibulum ex sodales. Pellentesque eros diam, pellentesque nec
+      vehicula
+      non, ornare vel sapien.</p>
+  </aside>
+</body>
+
+</html>
