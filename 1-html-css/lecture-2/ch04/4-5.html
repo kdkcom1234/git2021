@@ -1,0 +1,63 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    p {
+      width: 200px;
+      /* height: 150px; */
+      border: 3px solid black;
+      margin-bottom: 100px;
+    }
+
+    p:nth-child(1) {
+      /* 컨텐트크기가 요소크기보다 크면 숨김 */
+      overflow: hidden;
+    }
+
+    p:nth-child(2) {
+      /* 컨텐트크기가 요소크기보다 크면 스크롤 생성 */
+      overflow: scroll;
+    }
+
+    p:nth-child(3) {
+      /* 컨텐트크기가 요소크기보다 크면 스크롤 생성 */
+      overflow-y: scroll;
+    }
+
+    p:nth-child(4) {
+      /* 컨텐트크기가 요소크기보다 크면 스크롤 생성 */
+      overflow-y: auto;
+    }
+
+    p:nth-child(5) {
+      /* 단어(빈공간) 단위로 밑으로 꺽어서 내리지 않음 */
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  </style>
+</head>
+
+<body>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum praesentium illum eaque, nobis accusamus vel
+    vero in molestias. Rerum voluptatibus autem reprehenderit omnis. Perferendis ipsa odio vitae dolorem fuga
+    asperiores!</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum praesentium illum eaque, nobis accusamus vel
+    vero in molestias. Rerum voluptatibus autem reprehenderit omnis. Perferendis ipsa odio vitae dolorem fuga
+    asperiores!</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum praesentium illum eaque, nobis accusamus vel
+    vero in molestias. Rerum voluptatibus autem reprehenderit omnis. Perferendis ipsa odio vitae dolorem fuga
+    asperiores!</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum praesentium illum eaque, nobis accusamus vel
+    vero in molestias. Rerum voluptatibus autem reprehenderit omnis. Perferendis ipsa odio vitae dolorem fuga
+    asperiores!</p>
+  <p title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum praesentium illum eaque, nobis accusamus vel
+  vero in molestias. Rerum voluptatibus autem reprehenderit omnis. Perferendis ipsa odio vitae dolorem fuga
+  asperiores!">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum praesentium illum eaque, nobis
+    accusamus vel
+    vero in molestias. Rerum voluptatibus autem reprehenderit omnis. Perferendis ipsa odio vitae dolorem fuga
+    asperiores!</p>
+</body>
+
+</html>

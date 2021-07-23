@@ -1,0 +1,61 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      height: 2000px;
+      margin: 0;
+    }
+
+    .wrapper {
+      /* 부모요소에 relative를 걸면 자식의 absolute를 부모 기준으로 시작 */
+      position: relative;
+      border: 1px solid black;
+      /* 자식 요소가 absolute이면 컨텐츠 높이가 사라짐 */
+      /* 별도로 높이값을 주어야함 */
+      height: 300px;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      /* 부모(relative) 기준 절대 위치 */
+      position: absolute;
+    }
+
+    .red {
+      background-color: red;
+      /* 왼쪽부터 좌표 */
+      left: 10px;
+      /* 위에서부터 좌표 */
+      top: 10px;
+
+    }
+
+    .green {
+      background-color: green;
+      left: 50px;
+      top: 50px;
+    }
+
+    .blue {
+      background-color: blue;
+      left: 90px;
+      top: 90px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>고정 위치입니다.</h1>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio fugit enim dolor nesciunt aliquid praesentium rerum
+    modi id iusto corporis eligendi, quis rem esse perspiciatis repellendus adipisci molestias fuga necessitatibus.</p>
+  <div class="wrapper">
+    <div class="box red"></div>
+    <div class="box green"></div>
+    <div class="box blue"></div>
+  </div>
+</body>
+
+</html>

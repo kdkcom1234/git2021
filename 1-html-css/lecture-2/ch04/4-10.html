@@ -1,0 +1,35 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    .box {
+      width: 100px;
+      height: 200px;
+      border: 1px solid black;
+    }
+
+    .box:nth-child(1) {
+      /* inline형식은 너비/높이를 지정할 수 없음 */
+      display: inline;
+    }
+
+    .box:nth-child(2) {
+      /* inline과 같이 옆으로 붙음 */
+      /* block과 같이 너비/높이를 지정할 수 있다. */
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </div>
+
+  <div class="box">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </div>
+</body>
+
+</html>

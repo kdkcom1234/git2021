@@ -1,0 +1,52 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      height: 2000px;
+      margin: 0;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      /* 문서의 기준 절대 위치 */
+      /* 기본은 태그 위치 */
+      position: absolute;
+    }
+
+    .red {
+      background-color: red;
+      /* 왼쪽부터 좌표 */
+      left: 10px;
+      /* 위에서부터 좌표 */
+      top: 10px;
+      /* 크기가 클수록 위에서 보임 */
+      z-index: 100;
+    }
+
+    .green {
+      background-color: green;
+      left: 50px;
+      top: 50px;
+      z-index: 10;
+    }
+
+    .blue {
+      background-color: blue;
+      left: 90px;
+      top: 90px;
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>고정 위치입니다.</h1>
+  <div class="box red"></div>
+  <div class="box green"></div>
+  <div class="box blue"></div>
+</body>
+
+</html>
