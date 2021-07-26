@@ -1,0 +1,54 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      height: 2000px;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      /* absolute: 절대적인 */
+      /* 특정위치에 요소를 배치할 수 있음 */
+      position: absolute;
+    }
+
+    .red {
+      background-color: red;
+      left: 10px;
+      top: 10px;
+
+      /* z-index 값이 크면 클 수록 다른 요소보다 위에 있음 */
+      /* 예시) 팝업창: 9999 */
+      /* 회색 영역: 9990 */
+      z-index: 100;
+    }
+
+    .green {
+      background-color: green;
+      left: 50px;
+      top: 50px;
+
+      z-index: 500;
+    }
+
+    .blue {
+      background-color: blue;
+      left: 90px;
+      top: 90px;
+
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>고정 위치입니다.</h1>
+  <div class="box red"></div>
+  <div class="box green"></div>
+  <div class="box blue"></div>
+</body>
+
+</html>
