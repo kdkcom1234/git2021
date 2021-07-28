@@ -1,0 +1,68 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    .container {
+      display: flex;
+      margin: 20px 0px;
+      padding: 10px;
+      border: 1px solid red;
+      /* flex-direction: column; */
+    }
+
+    .container.start {
+      align-items: flex-start;
+    }
+
+    .container.end {
+      align-items: flex-end;
+    }
+
+    .container.center {
+      align-items: center;
+    }
+
+    .item {
+      border: 1px solid black;
+      /* padding: 10px; */
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 기본은 교차축으로 늘어남 -->
+  <div class="container" style="height: 100px;">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+
+  <!-- align-items: flex-start; -->
+  <!-- 교차축 시작지점으로 정렬 -->
+  <div class="container start" style="height: 100px;">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+
+  <!-- align-items: flex-end; -->
+  <!-- 교차축 끝지점으로 정렬 -->
+  <div class="container end" style="height: 100px;">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+
+  <!-- align-items: center; -->
+  <!-- 교차축 끝지점으로 정렬 -->
+  <div class="container center" style="height: 100px;">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+
+</body>
+
+</html>

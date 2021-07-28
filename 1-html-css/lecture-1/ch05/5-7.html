@@ -1,0 +1,46 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    .container {
+      display: flex;
+      margin: 20px 0px;
+      border: 1px solid red;
+    }
+
+    .item {
+      border: 1px solid black;
+      flex-basis: 100px;
+      text-align: center;
+    }
+
+    .item.shrink {
+      flex-shrink: 1;
+    }
+
+    .item.first {
+      flex-shrink: 2;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 100px 부족함, 아이템들을 균등하게 줄임-->
+  <div class="container" style="width: 200px;">
+    <div class="item shrink">1</div>
+    <div class="item shrink">2</div>
+    <div class="item shrink">3</div>
+  </div>
+  <!-- 100px 부족 공간, 2:1:1 -->
+  <div class="container" style="width: 200px;">
+    <!-- flex-shrink: 2 -->
+    <div class="item first">1</div>
+    <!-- flex-shrink: 1 -->
+    <div class="item shrink">2</div>
+    <!-- flex-shrink: 1 -->
+    <div class="item shrink">3</div>
+  </div>
+</body>
+
+</html>
