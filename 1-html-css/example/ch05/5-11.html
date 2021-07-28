@@ -13,7 +13,6 @@
     /* small */
     @media (min-width: 576px) {
       nav ul {
-        display: flex;
         flex-direction: row;
         justify-content: space-evenly;
       }
@@ -21,6 +20,12 @@
 
     /* medium */
     @media (min-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        position: sticky;
+        top: 80px;
+      }
+
       body {
         width: 700px;
         margin: 0 auto;
@@ -35,12 +40,12 @@
         float: left;
         width: 500px;
       }
+    }
 
-      nav ul {
-        flex-direction: column;
-        position: sticky;
-        top: 80px;
-      }
+    header,
+    nav,
+    article {
+      background-color: burlywood;
     }
   </style>
 </head>
