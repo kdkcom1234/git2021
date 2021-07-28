@@ -1,0 +1,35 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width; initial-scale=1">
+  <style>
+    .wrapper {
+      width: 300px;
+      height: 450px;
+      display: grid;
+      gap: 20px;
+      /* 2열 3행 배치 */
+      grid-template-columns: 1fr 1fr;
+      /* grid-template-rows: 1fr 1fr 1fr; */
+      /* grid-template-rows: repeat(3, 1fr); */
+      grid-template-rows: 1fr 2fr 1fr;
+    }
+
+    .wrapper>div {
+      background-color: burlywood;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+  </div>
+</body>
+
+</html>
