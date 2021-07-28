@@ -1,0 +1,180 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width; initial-scale=1">
+  <style>
+    header,
+    nav,
+    .banner,
+    nav,
+    article,
+    aside,
+    footer {
+      background-color: blanchedalmond;
+      border: 1px solid burlywood;
+    }
+
+    header {
+      grid-area: header;
+    }
+
+    nav {
+      grid-area: nav;
+    }
+
+    .banner {
+      grid-area: banner;
+    }
+
+    article {
+      grid-area: content;
+    }
+
+    aside {
+      grid-area: sidebar;
+    }
+
+    footer {
+      grid-area: footer;
+    }
+
+    /* small */
+    body {
+      display: grid;
+      gap: 20px;
+      grid-template-areas:
+        "header"
+        "nav"
+        "banner"
+        "content"
+        "sidebar"
+        "footer";
+    }
+
+    @media (min-width: 576px) {
+      nav ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+      }
+    }
+
+    /* medium */
+    @media (min-width: 768px) {
+      body {
+        width: 700px;
+        margin: 0 auto;
+        grid-template-columns: 2fr 5fr;
+        grid-template-areas:
+          "header   header"
+          "banner   banner"
+          "nav      nav"
+          "sidebar  content"
+          "footer   footer"
+        ;
+      }
+
+      nav ul {
+        justify-content: space-evenly;
+      }
+
+      aside {
+        position: sticky;
+        top: 1rem;
+        height: fit-content;
+      }
+    }
+
+    /* large */
+    @media (min-width: 1200px) {
+      body {
+        width: 1200px;
+        margin: 0 auto;
+        grid-template-columns: 3fr 7fr 2fr;
+        grid-template-areas:
+          "header header  header"
+          "banner banner  banner"
+          "nav    content sidebar"
+          "footer footer  footer"
+        ;
+      }
+
+      nav {
+        position: sticky;
+        top: 1rem;
+        height: fit-content;
+      }
+
+      nav ul {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header style="text-align: center;">The header</header>
+  <nav>
+    <ul>
+      <li><a href="">Nav 1</a></li>
+      <li><a href="">Nav 2</a></li>
+      <li><a href="">Nav 3</a></li>
+    </ul>
+  </nav>
+  <div class="banner" style="text-align: center;">Advertising</div>
+  <article>
+    <h1>Main article area</h1>
+    <p>In this layout, we display the areas in source order for any screen less that 500 pixels wide. We go to a two
+      column layout, and then to a three column layout by redefining the grid, and the placement of items on the grid.
+    </p>
+    <h1>Main article area</h1>
+    <p>In this layout, we display the areas in source order for any screen less that 500 pixels wide. We go to a two
+      column layout, and then to a three column layout by redefining the grid, and the placement of items on the grid.
+    </p>
+    <h1>Main article area</h1>
+    <p>In this layout, we display the areas in source order for any screen less that 500 pixels wide. We go to a two
+      column layout, and then to a three column layout by redefining the grid, and the placement of items on the grid.
+    </p>
+    <h1>Main article area</h1>
+    <p>In this layout, we display the areas in source order for any screen less that 500 pixels wide. We go to a two
+      column layout, and then to a three column layout by redefining the grid, and the placement of items on the grid.
+    </p>
+    <h1>Main article area</h1>
+    <p>In this layout, we display the areas in source order for any screen less that 500 pixels wide. We go to a two
+      column layout, and then to a three column layout by redefining the grid, and the placement of items on the grid.
+    </p>
+    <h1>Main article area</h1>
+    <p>In this layout, we display the areas in source order for any screen less that 500 pixels wide. We go to a two
+      column layout, and then to a three column layout by redefining the grid, and the placement of items on the grid.
+    </p>
+    <h1>Main article area</h1>
+    <p>In this layout, we display the areas in source order for any screen less that 500 pixels wide. We go to a two
+      column layout, and then to a three column layout by redefining the grid, and the placement of items on the grid.
+    </p>
+    <h1>Main article area</h1>
+    <p>In this layout, we display the areas in source order for any screen less that 500 pixels wide. We go to a two
+      column layout, and then to a three column layout by redefining the grid, and the placement of items on the grid.
+    </p>
+    <h1>Main article area</h1>
+    <p>In this layout, we display the areas in source order for any screen less that 500 pixels wide. We go to a two
+      column layout, and then to a three column layout by redefining the grid, and the placement of items on the grid.
+    </p>
+    <h1>Main article area</h1>
+    <p>In this layout, we display the areas in source order for any screen less that 500 pixels wide. We go to a two
+      column layout, and then to a three column layout by redefining the grid, and the placement of items on the grid.
+    </p>
+    <h1>Main article area</h1>
+    <p>In this layout, we display the areas in source order for any screen less that 500 pixels wide. We go to a two
+      column layout, and then to a three column layout by redefining the grid, and the placement of items on the grid.
+    </p>
+    <h1>Main article area</h1>
+    <p>In this layout, we display the areas in source order for any screen less that 500 pixels wide. We go to a two
+      column layout, and then to a three column layout by redefining the grid, and the placement of items on the grid.
+    </p>
+  </article>
+  <aside>Sidebar</aside>
+  <footer>The footer</footer>
+</body>
+
+</html>

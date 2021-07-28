@@ -1,0 +1,87 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width; initial-scale=1">
+  <style>
+    /* x-small: 모바일 세로 */
+    nav ul {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      list-style: none;
+    }
+
+    /* small: 모바일 가로화면, 태블릿(저렴한) 세로화면 */
+    @media (min-width: 576px) {
+      nav ul {
+        flex-direction: row;
+        justify-content: space-evenly;
+      }
+    }
+
+    /* medium: 태블릿(저렴한) 가로화면, 태블릿 세로화면 이상 */
+    @media (min-width: 768px) {
+      body {
+        width: 700px;
+        margin: 0 auto;
+      }
+
+      header {
+        margin-bottom: 1rem;
+      }
+
+      nav {
+        float: left;
+        width: 200px;
+      }
+
+      article {
+        float: left;
+        width: calc(100% - 200px - 1rem);
+        margin-left: 1rem;
+      }
+
+      nav ul {
+        flex-direction: column;
+        position: sticky;
+        top: 3rem;
+      }
+    }
+
+    header,
+    nav,
+    article {
+      background-color: burlywood;
+    }
+  </style>
+</head>
+
+<body>
+  <header>The header</header>
+  <nav>
+    <ul>
+      <li>Menu 1</li>
+      <li>Menu 2</li>
+      <li>Menu 3</li>
+    </ul>
+  </nav>
+  <article>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti earum, fugit vel dolor magnam sint vitae ipsam
+      alias iste adipisci veritatis! Eum unde libero autem ullam, a earum consequatur voluptates.</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti earum, fugit vel dolor magnam sint vitae ipsam
+      alias iste adipisci veritatis! Eum unde libero autem ullam, a earum consequatur voluptates.</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti earum, fugit vel dolor magnam sint vitae ipsam
+      alias iste adipisci veritatis! Eum unde libero autem ullam, a earum consequatur voluptates.</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti earum, fugit vel dolor magnam sint vitae ipsam
+      alias iste adipisci veritatis! Eum unde libero autem ullam, a earum consequatur voluptates.</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti earum, fugit vel dolor magnam sint vitae ipsam
+      alias iste adipisci veritatis! Eum unde libero autem ullam, a earum consequatur voluptates.</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti earum, fugit vel dolor magnam sint vitae ipsam
+      alias iste adipisci veritatis! Eum unde libero autem ullam, a earum consequatur voluptates.</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti earum, fugit vel dolor magnam sint vitae ipsam
+      alias iste adipisci veritatis! Eum unde libero autem ullam, a earum consequatur voluptates.</p>
+  </article>
+</body>
+
+</html>
