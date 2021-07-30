@@ -56,6 +56,18 @@
 . git log
  : commit 이력(히스토리)를 보는 명령어  
 
+. git remote add 원격저장소이름 원격저장소주소
+ : 원격 저장소 정보를 추가
+
+. git push
+ : 로컬 저장소의 버전파일을 원경 저장소로 보내기
+  -> 원격저장소를 최초로 추가했을 때 추가적인 작업이 필요함
+     : git push -u 원격저장소이름 브랜치명
+     : git push -u origin master
+       -> -u(--set-upstream) 로컬저장소에서 원격 저장소로 업로드 허용
+
+. 일반적인 작업의 흐름
+ : 소스작성 -> git status(확인) -> git add . -> git commit -m "메시지" -> git push
 
 
 3. 로컬저장소 생성(javascript) -> 코드 생성 -> 원격저장소 올림
