@@ -1,0 +1,35 @@
+. 소프트웨어의 구성요소(artifacts, 인공물, 산출물)
+  - 문서
+  - 소스코드
+  - 배포시스템
+
+. 산출물들에 대해서 여러사람이 공동으로 작업을 함
+. 산출물들은 계속 변화되고, 다른버전을 가진다.
+
+. 소프트웨어 형상관리(software configuration management)
+  - 버전관리의 상위내용
+    version control
+
+. 여러사람이 같은 산출물에 대해서 작업하는 것에 대한 충돌 제어
+. 작업중 이전버전으로 회귀해야 할 수도 있음
+. 현재버전은 고정시키고 다른버전을 작업하고 싶음
+  - develop(개발버전)
+  - develop v2
+  - production(배포버전)
+
+. 소스코드 버전 저장소를 Repository라고 함
+. git, 리눅스와 함께 탄생 91년에, 최근에 많이 사용하게 되었음
+  - SVN(Subversion): 중앙 집중적인 버전 관리 방식
+  - Git: 분산형 버전 관리 방식
+
+. git: 로컬저장소(local repository), 원격저장소(remote repository)
+  - 로컬저장소: 개발자의 PC
+  - 원격저장소: 
+       : Gitlab(회사프로젝트)
+       : Bitbucket(협업도구통합)
+       : Github.com(오픈소스)
+
+. working directgory: 작업공간, 실제소스코드로 개발하는 곳
+. staging area: 버전관리 저장소에 반영할 코드목록
+. local repo: 버전관리 저장소
+                     
