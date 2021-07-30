@@ -1,0 +1,61 @@
+
+// GIT 사용 시나리오
+--------------------------------------------------------------
+1. 제 강의소스를 본인 컴퓨터에 복사
+
+. git: 로컬저장소(local repository), 원격저장소(remote repository)
+  - 로컬저장소: 개발자의 PC
+  - 원격저장소:
+     : Gitlab(회사프로젝트)
+     : Bitbucket(Jira, Trello 통합)
+     : Github.com(오픈소스)
+
+. public repository(공개), private repository(내부)
+
+. local repository: 버전관리 저장소
+. working directory: 작업공간, 실제소스코드로 개발하는 곳
+
+. git clone 원격저장소주소
+ : 원격 저장소의 정보 및 버전 파일로 로컬 저장소 및 작업공간 생성
+
+. git remote -v
+ : origin  https://github.com/kdkcom1234/git2021.git (fetch)
+ : origin  https://github.com/kdkcom1234/git2021.git (push)
+   -> 원격저장소이름 원격저장소주소
+   -> fetch 받아옴, push 보냄(올림)
+
+. git pull
+ : 원격저장소에서 버전파일을 받고 작업공간에 소스코드를 병합
+ : git fetch + git merge
+
+   -> fetch: 원격저장소의 버전파일을 로컬저장소로 받음
+   -> merge: 로컬저장소의 버전파일과 작업공간의 소스코드를 합침
+
+-----------------------------------------------------------------
+2. html-css -> 로컬저장소 생성 -> 원격저장소 올림
+
+. git init(initialization: 초기화)
+ : 로컬저장소를 초기화하여 생성
+
+. git status
+ : 로컬 저장소와 작업공간을 비교하여 변동사항을 보여줌
+ : untracked files - 로컬 저장소와 연결이 안 된 작업공간 파일
+                      (새로 생성된 파일)
+
+. git add 파일목록
+ : git add .(변동사항(추가/수정/삭제)이 있는 전체파일)
+ : 변동사항이 있는 작업공간의 소스코드를 스테이징 영역에 올림
+
+. git config --global user.email "kdkcom1234@gmail.com"
+. git config --global user.name "Daekeun Ko"
+  : 소스코드를 변경한 사람의 대한 정보
+
+. git commit -m "메시지" (first commit)
+ : 로컬 저장소에 스테이징 영역 목록을 반영
+
+. git log
+ : commit 이력(히스토리)를 보는 명령어  
+
+
+
+3. 로컬저장소 생성(javascript) -> 코드 생성 -> 원격저장소 올림
