@@ -1,0 +1,39 @@
+<html>
+
+<body>
+  <script>
+    // /: 나누기
+
+    // 1. 문자열을 숫자로 변환
+    // 수학연산(+제외)을 시도하면 문자를 숫자로 변환함
+    // console.log("6" / "2");
+    // console.log(typeof ("6" / "2"))
+
+    // Infinity
+    // console.log("6" / "0");
+    // console.log(typeof ("6" / "0"))
+
+    // NaN
+    // console.log("abc" / "2");
+    // console.log(typeof ("abc" / "2"))
+
+    // 2. 문자열 숫자로 변환
+    let num;  // 할당하지 않음, undefined
+
+    console.log(Number("2"));       // 숫자 2
+
+    console.log(Number(undefined)); // NaN
+    console.log(Number(num));       // NaN
+
+    console.log(Number(null));      // 0
+
+    console.log(Number(true));      // 1
+    console.log(Number(false));     // 0
+
+    // 앞뒤 공백을 제거하여 숫자로 변환함
+    console.log(Number("    123    ")); // 123
+    console.log(Number("    a12    ")); // NaN
+  </script>
+</body>
+
+</html>
