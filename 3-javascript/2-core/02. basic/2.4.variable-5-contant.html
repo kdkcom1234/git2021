@@ -1,0 +1,40 @@
+<html>
+
+<body>
+  <script>
+    // 변수(variable): 변화가능하다.
+    // 변수: 이름이 있는 메모리공간
+    // 메모리공간의 값은 변경가능함.
+    let user = 'kdkcom';
+    let admin = 'hong';
+    console.log(admin);
+    admin = 'kim';
+    console.log(admin);
+    admin = user;
+    console.log(admin);
+
+    // 값의 변경이 불가능한 케이스 <- 값을 고정해서 사용하고 싶음
+    // PI값(3.141592)
+    // 서버주소(api.naver.com)
+
+    // 상수(contant): 변경이 불가능한 변수
+    // 한번 대입하면 변경 불가능함.
+    const PI = 3.141592;  // 특정값을 손으로 쳐서 넣는 경우
+    // PI = 3.14;  // error
+
+    // 상수의 경우 주로 관례적으로 대문자_대문자_대문자
+    // snake-case 중에서 대문자 표기
+    // 단어_단어_단어 : snake-case
+    // snake-case: 소문자_소문자_소문자, 대문자_대문자_대문자
+    const SERVER_ADDRESS = 'api.naver.com';
+
+    // 웹피이지 로딩되는데 걸리는 시간
+    // 프로그램적으로 값을 넣은 후 변경이 안 되는 변수
+    // 일반적인 변수 형식으로 이름을 만듦
+    const pageLoadTime;
+    pageLoadTime = 2000; // 2000ms
+
+  </script>
+</body>
+
+</html>

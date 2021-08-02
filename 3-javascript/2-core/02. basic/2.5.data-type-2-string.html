@@ -1,0 +1,45 @@
+<html>
+
+<body>
+  <div class="box"></div>
+  <script>
+    // 문자를 넣을 때
+    // double-quote(쌍따옴표, 큰따옴표)
+    // 문자 자료 형식
+    // string(문자열 -> 문자가 여러개야)
+
+    // 문자 개수 상관없이 string type
+    let str = "Hello";
+    console.log(typeof str);
+    let char = 'H';
+    console.log(typeof char);
+
+    // single-quote(단따옴표, 작은따옴표)
+    let hello = 'Hi';
+    console.log(typeof hello);
+
+    // back-quote(역따옴표, 1옆에 물결(~))
+    // 문자를 결합할 때 사용함.
+    // ${변수명}
+    // template literal
+    let phrase = `-- ${hello} JavaScript --`;
+    console.log(typeof phrase);
+    console.log(phrase);
+
+    // 주로 자바스크립트에서는 '' 작은 따옴표를 사용
+    const div = document.createElement("div");
+    let className = 'name';
+    div.innerHTML = `
+      <span class="${className}"></span>
+    `;
+
+    // 밑으로 내려서 쓸 수 있음.
+    const lineStr = `
+    제목입니다.
+    내용입니다.
+    `;
+
+  </script>
+</body>
+
+</html>
