@@ -2,21 +2,25 @@
 
 <body>
   <script>
-    console.log("" + 1 + 0);  // ?
-    console.log("" - 1 + 0);  // ?
-    console.log(true + false);  // ?
-    console.log(6 / "3"); // ?
-    console.log("2" * "3"); // ?
-    console.log(4 + 5 + "px"); // ?
-    console.log("$" + 4 + 5); // ?
-    console.log("4" - 2); // ?
-    console.log("4px" - 2); // ?
-    console.log(7 / 0); // ?
-    console.log("  -9  " + 5); // ?
-    console.log("  -9  " - 5); // ?
-    console.log(null + 1); // ?
-    console.log(undefined + 1); // ?
-    console.log(" \t \n" - 2); // ?
+
+    // + 있는데, 문자열이 꼈있음. 문자열 결합 될거라고 생각하고 앞에서부터 계산
+    // -, / , * 수학연산으로 계산될거임
+
+    console.log("" + 1 + 0);    // "10", 문자열 결합
+    console.log("" - 1 + 0);    // -1, 빈 값은 0 - 1 + 0
+    console.log(true + false);  // 1, true는 1, false는 0
+    console.log(6 / "3");       // 2, 숫자로 변환하여 연산
+    console.log("2" * "3");     // 6, 숫자로 변환하여 연산
+    console.log(4 + 5 + "px");  // "9px", 4+5는 숫자 연산 + "px"은 문자열 결합
+    console.log("$" + 4 + 5);   // "$45", 문자열 결합
+    console.log("4" - 2);       // 2, "4"를 숫자로 변환
+    console.log("4px" - 2);     // NaN, 숫자가 아닌 값과 연산
+    console.log(7 / 0);         // Infinity, 0으로 나눌때는 Infinity
+    console.log("  -9  " + 5);  // "  -9  5", 문자열 결합
+    console.log("  -9  " - 5);  // -14, 앞뒤 빈공간을 제거하고 연산
+    console.log(null + 1);      // 1, null은 0 0 + 1
+    console.log(undefined + 1); // NaN, undefined는 NaN
+    console.log(" \t \n" - 2);  // -2, 빈문자열(\t:탭(2칸~8칸))은 0 - 2
   </script>
 </body>
 
