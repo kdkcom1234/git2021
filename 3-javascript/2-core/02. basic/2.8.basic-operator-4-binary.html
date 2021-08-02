@@ -1,0 +1,26 @@
+<html>
+
+<body>
+  <script>
+    // +: 문자열 결합
+    let s = "my" + "string";
+    console.log(s); // "mystring";
+
+    // +: 문자열과 숫자의 결합
+    let sn = "1", n = 2;
+    console.log(sn + n);    // 12, 문자열
+    console.log(n + sn);    // 21, 문자열
+    // 2 + 2 + "1" -> 4 + "1"
+    console.log(n + n + sn);// 41, 문자열
+
+    // +: 문자열과 불린의 결합
+    console.log("false" + true);  // false, true 문자열
+    console.log("" + true); // true, 문자열
+
+    // -, /: 문자열을 숫자로 변환하여 계산
+    console.log(n - sn);  // 1, 숫자
+    console.log(n / sn);  // 2, 숫자
+  </script>
+</body>
+
+</html>
