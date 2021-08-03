@@ -1,0 +1,20 @@
+<html>
+
+<body>
+  <script>
+    let firstName;
+    let lastName = null;
+    let nickName = "바이올렛";
+
+    // ||: true, false로만 -> 기본값(0, ""), 빈값(undefined, null)의 차이를 구분하기 어려움
+
+    // null이나 undefined가 아닌 첫 번째 피연산자
+    // nullish-coalescing-operator - ES2020
+    console.log(firstName ?? lastName ?? nickName ?? "익명의 사용자"); // 바이올렛
+
+    let result = alert(1);
+    console.log(result);
+  </script>
+</body>
+
+</html>

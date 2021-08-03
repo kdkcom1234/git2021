@@ -1,0 +1,56 @@
+<html>
+
+<body>
+  <script>
+    // 논리 연산자(logical operator)
+
+    // 일반적인 프로그래밍
+    // ||(or), 논리합: 
+    // 피연산자 둘 중에 하나만 true면 true 그 외에는 false;
+    console.log(false || false);  // false
+    console.log(true || false);   // true
+    console.log(false || true);   // true
+    console.log(true || true);    // true
+
+    console.log("-----------");
+
+    // 자바스크립트의 ||(or) 연산
+    // "", 0, undefined, null, NaN == false
+    // 왼쪽 항이 true로 판별되면 왼쪽 항을 반환
+    // 왼쪽 항이 false로 판별되면 오른쪽 항을 반환
+
+    // short-circuit evaluation, lazy evaluation
+    // 짧게 평가한다, 게으르게 평가한다.
+    // 왼쪽 항만 true/false인지 평가한다.
+
+    // false || false -> false
+    // false || true -> true
+    // 왼쪽 항이 false로 판별되어 오른쪽 항을 반환
+    console.log("" || 0);         // 0
+
+    let a = "" || 0;
+    console.log(a);               // 0
+
+    // true || ... -> true
+    // 왼쪽 항이 true로 판별되어 왼쪽 항을 반환
+    console.log(1 || "a");        // 1
+
+    let b = 1 || "a";
+    console.log(b);               // 1
+
+    console.log(undefined || "b") // "b"
+
+    let c;
+    // let c = 0;
+    // let c = "";
+    // 일반적인 조건문
+    if (typeof c == "undefined" || c === null || c === 0 || c === "") {
+      alert('c의 값은 할당되지 않았거나 기본값이군요.');
+    }
+    // short-circuit 응용
+    // 앞의 값이 false로 판별되면 뒤에 값을 실행
+    c || alert('c의 값은 할당되지 않았거나 기본값이군요.');
+  </script>
+</body>
+
+</html>

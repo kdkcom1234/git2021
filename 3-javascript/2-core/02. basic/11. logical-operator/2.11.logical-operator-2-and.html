@@ -1,0 +1,56 @@
+<html>
+
+<body>
+  <script>
+    // 논리 연산자(logical operator)
+
+    // 일반적인 프로그래밍
+    // &&(and), 논리곱: 
+    // 둘 중에 하나만 false이면 false, 그 외에는 true
+    console.log(false && false);  // false
+    console.log(true && false);   // false
+    console.log(false && true);   // false
+    console.log(true && true);    // true
+
+    console.log("-----------");
+
+    // 자바스크립트의 &&(and) 연산, ampersand 2개
+    // "", 0, undefined, null, NaN == false
+    // 왼쪽 항이 true로 판별되면 오른쪽 항을 반환
+    // 왼쪽 항이 false로 판별되면 왼쪽 항을 반환
+
+    // short-circuit evaluation, lazy evaluation
+    // 짧게 평가한다, 게으르게 평가한다.
+    // 왼쪽 항만 true/false인지 평가한다.
+
+    // false && ... -> false
+    // 왼쪽 항이 false로 판별되어 왼쪽 항을 반환
+    console.log("" && 0);         // ""
+
+    let a = "" && 0;
+    console.log(a);               // ""
+
+    // true && false ... -> false
+    // true && true ... -> true
+    // 왼쪽 항이 true로 판별되어 오른쪽 항을 반환
+    console.log(1 && "a");        // "a"
+
+    let b = 1 && "a";
+    console.log(b);               // "a"
+
+    console.log(undefined && "b") // undefined
+
+    let c = 1;
+    // let c = 0;
+    // let c = "";
+    // 일반적인 조건문
+    if (typeof c !== "undefined" && c !== null && c !== 0 && c !== "") {
+      alert('값이 설정되어 있군요!');
+    }
+    // short-circuit 응용
+    // 앞의 값이 true로 판별되면 뒤에 값을 실행
+    c && alert('값이 설정되어 있군요!');
+  </script>
+</body>
+
+</html>
