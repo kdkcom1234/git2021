@@ -2,7 +2,11 @@
 
 <body>
   <script>
-
+    alert(alert(1) || 2 || alert(3));
+    // 1단계: alert(1)
+    // 2단계: alert(1) || 2     -> 2              
+    // 3단계: 2 || alert(3)     -> 2
+    // 4단계: alert(2)          
   </script>
 </body>
 
