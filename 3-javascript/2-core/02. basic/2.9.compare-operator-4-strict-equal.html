@@ -1,0 +1,31 @@
+<html>
+
+<body>
+  <script>
+    // ==, 자동으로 형변환한 후 비교함
+    // 숫자가 우선순위에 있음
+    console.log('1' == 1);  // true
+    console.log(true == '1'); // true
+    console.log(true == '0'); // false
+
+    console.log("-------------");
+
+    // ===, strict(엄격한) equal
+    // 자동 형변환을 하지 않고 비교함
+    // 문자열 '1'과 숫자 1
+    console.log('1' === 1); // false
+    console.log(1 === 1); // true
+    console.log(true === '1'); // false
+    console.log(true === '0'); // false
+
+    // 초급자들은 strict equal을 사용
+    // 아예 회사에서 === 이것만 써야되는 경우도 있음
+
+    console.log("-------------");
+
+    console.log(null == undefined); // true
+    console.log(null === undefined);  // false
+  </script>
+</body>
+
+</html>
