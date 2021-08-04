@@ -1,0 +1,22 @@
+<html>
+
+<body>
+  <script>
+    let sum = 0;
+
+    while (true) {
+      // 빈값: "", 취소: null
+      // +"", +null -> Number -> 0
+      let value = +prompt("숫자를 입력하세요.", '');
+
+      // !value -> value 값이 false이면(NaN, 0)
+      // break 구문이 실행되면 밑에 있는 구문 및 반복문은 더이상 실행 안되고 반복문 탈출
+      if (!value) break;
+
+      sum += value;
+    }
+    alert('합계: ' + sum);
+  </script>
+</body>
+
+</html>
