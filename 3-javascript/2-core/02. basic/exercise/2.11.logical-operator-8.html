@@ -2,7 +2,12 @@
 
 <body>
   <script>
-
+    if (-1 || 0) alert('first');
+    // if (-1) alert('first');      // 뜸
+    if (-1 && 0) alert('second');
+    // if (0) alert('second');      // 안 뜸
+    if (null || -1 && 1) alert('third');
+    // if (1) alert('third');  // 뜸
   </script>
 </body>
 
