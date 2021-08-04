@@ -1,7 +1,15 @@
 <html>
 
 <body>
-  <script></script>
+  <script>
+    function checkAge(age) {
+      if (age > 18) {
+        return true;  // return하면 이후 코드는 실행 안 됨. if-else 중첩이 줄어들 수 있음
+      }
+      // ...
+      return confirm('보호자의 동의를 받으셨나요?');
+    }
+  </script>
 </body>
 
 </html>

@@ -1,7 +1,24 @@
 <html>
 
 <body>
-  <script></script>
+  <script>
+    // function checkAge(age) {
+    //   if (age > 18) {
+    //     return true;
+    //   } else {
+    //     return confirm('보호자의 동의를 받으셨나요?');
+    //   }
+    // }
+    function checkAge(age) {
+      // return age > 18 || confirm('보호자의 동의를 받으셨나요');
+      return age > 18 ? true : confirm('보호자의 동의를 받으셨나요');
+    }
+
+    console.log(checkAge(19));  // true
+    console.log(checkAge(18));  // confirm 결과에 따라서 다름
+    console.log(checkAge(17));  // confirm 결과에 따라서 다름
+
+  </script>
 </body>
 
 </html>
