@@ -1,0 +1,44 @@
+<html>
+
+<body>
+  <script>
+    sayHi("John"); // Hello, John
+
+    function sayHi(name) {
+      alert(`Hello, ${name}`);
+    }
+  </script>
+  <script>
+    // Hoisting(끌어올리다)
+    // 뒤에 선언이 있고, 앞에서 사용을 하면 
+    // 선언을 내부적으로 허용범위 최상단으로 끌어 올려줌
+
+    // 자바스크립 엔진이 호이스팅한 결과
+    function sayHi(name) {
+      alert(`Hello, ${name}`);
+    }
+
+    sayHi("John"); // Hello, John
+  </script>
+
+  <script>
+    sayHi("John"); // 오류 발생
+
+    let sayHi = function (name) {
+      alert(`Hello, ${name}`);
+    };
+  </script>
+
+  <script>
+    // 자바스크립 엔진이 호이스팅한 결과
+    let sayHi;
+
+    sayHi("John"); // 오류 발생, 함수인지 아닌지 모름
+
+    sayHi = function (name) {
+      alert(`Hello, ${name}`);
+    };
+  </script>
+</body>
+
+</html>

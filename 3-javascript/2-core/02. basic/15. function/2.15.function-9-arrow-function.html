@@ -1,0 +1,49 @@
+<html>
+
+<body>
+  <script>
+    // 함수 선언식
+    function sum(a, b) {
+      return a + b;
+    }
+
+    sum(1, 2);
+  </script>
+
+  <script>
+    // 함수 표현식
+    let sum = function (a, b) {
+      return a + b;
+    }
+
+    sum(1, 2);
+  </script>
+
+  <script>
+    // 화살표 함수(arrow function)
+    // 현재는 아주 많이 쓰는 함수 선언 표현식
+
+    // let 변수 = (매개변수) => { ... 구문 }
+    // {...} 중괄호 구문이 생략되면 해당구문의 값이 return 값이 됨
+    let sum1 = (a, b) => a || b;
+    // 중괄호를 이용해서 리턴을 사용함
+    let sum2 = (a, b) => {
+      // ...
+      // ...
+      return a + b;
+    };
+
+
+    function logic0(a, b) {
+      if (typeof a == "undefined" || a == null || a == "") {
+        return b;
+      } else {
+        return a;
+      }
+    }
+
+    let logic1 = (a, b) => a || b;
+  </script>
+</body>
+
+</html>
