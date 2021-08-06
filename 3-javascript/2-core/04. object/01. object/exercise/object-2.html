@@ -3,7 +3,19 @@
 <body>
   <script>
     // isEmpty 함수 만들기
-    // undefined 는 할당이 안 되어있다는 말
+    // 객체에 프로퍼티가 하나도 없는 경우 true, 
+    // 그렇지 않은 경우 false
+    function isEmpty(obj) {
+      // 속성 개수 만큼 반복
+      // 이 반복문이 실행된다면 속성이 있다는 얘기
+      for (let prop in obj) {
+        return false;
+      }
+
+      // 속성이 없다면 반복문은 스킵되고 true를 반환
+      return true;
+    }
+
     let schedule = {};  // 비어 있는 객체
     console.log(schedule);
     alert(isEmpty(schedule)); // true

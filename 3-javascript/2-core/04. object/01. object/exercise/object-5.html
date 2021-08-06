@@ -3,8 +3,23 @@
 <body>
   <script>
     // multiplyNumeric 함수 만들기
+    // 속성 값이 숫자인 경우 두배로 만들어 반환
+    function multiplyNumeric(obj) {
+      // 변환
+      // 객체에 모든 속성값을 탐색
+      for (let prop in obj) {
+        // prop -> width, height, title
+        // 속성 값이 숫자인지 확인
+        if (typeof obj[prop] == "number") {
+          // 원래 값에 두배를 해서 대입
+          // obj[prop] = obj[prop] * 2;
+          obj[prop] *= 2;
+        }
+      }
 
-    // 함수 호출 전
+      return obj;
+    }
+
     let menu = {
       width: 200,
       height: 300,
