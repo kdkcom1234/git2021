@@ -1,0 +1,36 @@
+<html>
+
+<body>
+  <script>
+    let ladder = {
+      step: 0,
+      up() {
+        this.step++;
+        return this;
+      },
+      down() {
+        this.step--;
+        return this;
+      },
+      showStep: function () { // 사다리에서 몇 번째 단에 올라와 있는지 보여줌
+        alert(this.step);
+      }
+    };
+
+    ladder.up();
+    ladder.up();
+    ladder.down();
+    ladder.showStep(); // 1    
+
+    // 함수를 실행하면 반환 값으로 치환 된다.
+    ladder.up() // == ladder(this)
+
+    ladder
+      .up() // ladder.up()의 반환값이 ladder 객체
+      .up()
+      .down() // ladder.down()의 반환값이 ladder 객체
+      .showStep();
+  </script>
+</body>
+
+</html>
