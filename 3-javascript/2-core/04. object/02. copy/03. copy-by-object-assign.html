@@ -1,0 +1,23 @@
+<html>
+
+<body>
+  <script>
+    let user = {
+      name: "John",
+      age: 30
+    };
+
+    // Object.assign(복사할대상객체, 복사할원본객체);
+    // 복사된 대상객체가 반환(return)
+    let admin = Object.assign({}, user);
+
+    // 이제 admin은 완전히 독립적인 복제본이 되었습니다.
+    admin.name = "Pete"; // admin의 데이터를 변경합니다.
+
+    console.log(admin);
+
+    alert(user.name); // 기존 객체에는 여전히 John이 있습니다.   
+  </script>
+</body>
+
+</html>

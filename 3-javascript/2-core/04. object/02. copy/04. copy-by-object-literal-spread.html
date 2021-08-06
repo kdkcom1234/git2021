@@ -1,0 +1,27 @@
+<html>
+
+<body>
+  <script>
+    let user = {
+      name: "John",
+      age: 30
+    };
+
+    // spread(나열) 연산자를 활용한 object literal 표현식
+    // 객체를 복사
+
+    // let admin = {} -> 새로운 객체 생성
+    // { ...user } -> 새로운 객체에 모든 속성과 값을 나열함
+    // let admin = { name: user.name, age: user.age };
+    let admin = { ...user };
+
+    // 이제 admin은 완전히 독립적인 복제본이 되었습니다.
+    admin.name = "Pete"; // admin의 데이터를 변경합니다.
+
+    console.log(admin);
+
+    alert(user.name); // 기존 객체에는 여전히 John이 있습니다. 
+  </script>
+</body>
+
+</html>
