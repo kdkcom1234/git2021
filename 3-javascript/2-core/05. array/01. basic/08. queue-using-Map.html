@@ -1,0 +1,61 @@
+<html>
+
+<body>
+  <script>
+    // 데이터를 순차적으로 밀어넣고, 들어간 순서대로 꺼내야 함
+
+    // 대기열(queue): FIFO(First In First Out)
+    // 큐에 요소 추가: enqueue
+    // 큐에 요소 추출: dequeue
+
+    // ["hong", "john", "donald", "kim", "lee"]
+
+    // 맵(Map): key-value 형태의 자료 구조, key를 문자말고 다른 것 가능
+    // 연관 배열(associative array) 형식 중 하나이다.
+    let queue = new Map();
+    let head = 0; // 가장 앞쪽 key를 저장하는 변수
+    let tail = 0; // 가장 뒤쪽 key를 저장하는 변수
+
+    // queue에 요소(item) 추가(enqueue), tail위치에 넣음
+    // Map에 tail값을 키(key로 요소(item)를 만듦
+    queue.set(tail++, "hong");  // 맵.set(키, 값)
+    console.log(queue);
+    queue.set(tail++, "john");
+    console.log(queue);
+    queue.set(tail++, "donald");
+    console.log(queue);
+    queue.set(tail++, "kim");
+    console.log(queue);
+    queue.set(tail++, "lee");
+    console.log(queue);
+
+    // queue에서 요소 꺼내기(dequeue), 
+    // head위치에서 조회하고 key 삭제
+    console.log(queue.get(head)); // map.get(key) 0, hong
+    queue.delete(head++);     // 0, queue.delete(0);
+    console.log(queue);
+
+    console.log(queue.get(head)); // 1, john
+    queue.delete(head++);     // 1, queue.delete(1);
+    console.log(queue);
+
+    console.log(queue.get(head)); // 2
+    queue.delete(head++);     // 2
+    console.log(queue);
+
+    console.log(queue.get(head));
+    queue.delete(head++);
+    console.log(queue);
+
+    console.log(queue.get(head));
+    queue.delete(head++);
+    console.log(queue);
+
+    // 키 값에 따라서 정렬하지 않음, 추가한 순서대로만 만들어짐
+
+    // 큐 크기 구하기
+    console.log(queue.size);
+  </script>
+</body>
+
+</html>

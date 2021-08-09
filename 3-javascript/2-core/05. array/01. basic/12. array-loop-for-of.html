@@ -1,0 +1,27 @@
+<html>
+
+<body>
+  <script>
+    let arr = [
+      { id: 1, name: "hong" },
+      { id: 2, name: "john" },
+      { id: 3, name: "donald" },
+      { id: 4, name: "kim" },
+      { id: 5, name: "lee" },
+    ];
+
+    // for (요소변수 of 배열)
+    // 요소개수만큼 반복
+    // 요소변수에는 각 반복에 맞는 요소가 대입
+    for (let elm of arr) {
+      // 해당 요소
+      console.log(elm);
+      // 해당 요소가 몇번재 인덱스 인지?
+      // 배열.indexOf(요소)
+      console.log(arr.indexOf(elm));
+    }
+
+  </script>
+</body>
+
+</html>
