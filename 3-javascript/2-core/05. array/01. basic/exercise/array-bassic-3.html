@@ -1,0 +1,19 @@
+<html>
+
+<body>
+  <script>
+    let arr = ["a", "b", { id: 1, name: "john" }, 1];
+
+    arr.push(function () {
+      console.log(this);
+    })
+
+    // arr.push(() => {
+    //   console.log(this);
+    // })
+
+    arr[4](); // ?    
+  </script>
+</body>
+
+</html>

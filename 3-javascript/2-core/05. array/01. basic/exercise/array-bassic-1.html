@@ -1,0 +1,23 @@
+<html>
+
+<body>
+  <script>
+    let fruits = ["사과", "배", "오렌지"];
+    console.log(typeof fruits);
+
+    // 배열을 '복사'한 후, push 메서드를 이용해 새로운 값을 추가합니다.
+    // 참조만 복사
+    // let shoppingCart = fruits;
+
+    // 새로운 배열 복사, spread(나열 연산자)
+    // let 새로운배열 = [...기존배열]
+    let shoppingCart = [...fruits];
+    shoppingCart.push("바나나");
+
+    // fruits에 어떤 값이 들어 있을까요?
+    console.log(fruits);
+    console.log(shoppingCart);
+  </script>
+</body>
+
+</html>

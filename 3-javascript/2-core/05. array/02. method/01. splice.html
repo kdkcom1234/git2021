@@ -1,0 +1,34 @@
+<html>
+
+<body>
+  <script>
+    // 1. 배열의 요소를 지우고 싶다.
+    let arr = ["I", "go", "home"];
+
+    // delete arr[1]; // "go"를 삭제합니다. // 중간에 구멍이 생김
+
+    // 요소 삭제: 배열.splice(시작위치, 삭제할개수)
+    // 배열.splice(시작위치): 위치부터 마지막 요소까지 삭제    
+    // 배열의 크기가 변경됨
+
+    // 삭제한 요소를 반환함
+    let deletedItems = arr.splice(1, 1);
+    console.log(deletedItems)
+
+    // 해당 위치부터 마지막까지 삭제
+    // arr.splice(1);
+
+
+    // 2. 특정 위치에 목록을 추가할 수 있음.
+    // 배열.splice(위치, 0, 추가할 목록)
+    // arr.splice(1, 0, "study", "javascript")
+
+    // 배열 spread 연산을 함수의 매개변수로 사용하면
+    // 각각의 요소를 매개변수를 등록해줌
+    arr.splice(1, 0, ...["study", "javascript"])
+
+    console.log(arr);
+  </script>
+</body>
+
+</html>

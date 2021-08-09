@@ -1,0 +1,46 @@
+<html>
+
+<body>
+  <script>
+    function getMaxSubSum(arr) {
+      let max = 0;  // 최대 근접 합산 값
+      let temp = 0; // 부분 근접 합산 값
+
+      // 예) [1, -2, 3, 4, -9, 6]
+      for (let item of arr) {
+        temp += item; // 부분 합산 값 계산
+
+        // 현재 부분 합산 값이 최대 합산 값보다 크면 최대값으로
+        if (temp > max) {
+          max = temp;
+        }
+
+        // 현재 부분 합산 값이 0보다 작으면 부분 합산 값을 0으로
+        if (temp < 0) {
+          temp = 0;
+        }
+      }
+
+      // O(n)의 복잡도
+
+      return max;
+    }
+
+    let test = [
+      [1, -2, 3, 4, -9, 6], // 7
+      [-1, 2, 3, -9],       // 5
+      [2, -1, 2, 3, -9],    // 6
+      [-1, 2, 3, -9, 11],   // 11
+      [-2, -1, 1, 2],       // 3
+      [100, -9, 2, -3, 5],  // 100
+      [1, 2, 3],             // 6
+      [-1, -2, -3],         //0
+    ];
+
+    for (let elm of test) {
+      console.log(getMaxSubSum(elm));
+    }
+  </script>
+</body>
+
+</html>

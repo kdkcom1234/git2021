@@ -1,0 +1,19 @@
+<html>
+
+<body>
+  <script>
+    let arr = ["t", "e", "s", "t"];
+
+    // e,s (인덱스가 1인 요소부터 인덱스가 3인 요소까지를 복사(인덱스가 3인 요소는 제외))
+    // 원래 배열이 잘라지는게 아니고 잘린 배열을 반환하는 것임    
+    let slice = arr.slice(1, 3)
+    console.log(slice);
+
+    // s,t (인덱스가 -2인 요소부터 제일 끝 요소까지를 복사)
+    console.log(arr.slice(-2));
+
+    console.log(arr);
+  </script>
+</body>
+
+</html>

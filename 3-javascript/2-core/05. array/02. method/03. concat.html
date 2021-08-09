@@ -1,0 +1,24 @@
+<html>
+
+<body>
+  <script>
+    // concat(concatenation, 합치기)
+
+    let arr = [1, 2];
+
+    // arr의 요소 모두와 [3,4]의 요소 모두를 한데 모은 새로운 배열이 만들어집니다.
+    // 결합한 새로운 배열 반환
+    let concatedArr = arr.concat([3, 4])
+    console.log(concatedArr); // 1,2,3,4
+
+    // arr의 요소 모두와 [3,4]의 요소 모두, [5,6]의 요소 모두를 모은 새로운 배열이 만들어집니다.
+    console.log(arr.concat([3, 4], [5, 6])); // 1,2,3,4,5,6
+
+    // arr의 요소 모두와 [3,4]의 요소 모두, 5와 6을 한데 모은 새로운 배열이 만들어집니다.
+    console.log(arr.concat([3, 4], 5, 6)); // 1,2,3,4,5,6    
+
+    console.log(arr);
+  </script>
+</body>
+
+</html>
