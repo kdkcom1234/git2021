@@ -1,0 +1,26 @@
+<html>
+
+<body>
+  <script>
+    let arr = ["Bilbo", "Gandalf", "Nazgul"];
+
+    // map: 동일한 크기의 변형된 배열을 반환
+    // map(함수): 함수의 반환값이 새로운 배열의 요소
+
+    // let lengths = arr.map(item => item.length);
+    let lengths = arr.map((item, index) =>
+      // 반환 값이 새로운 배열의 요소
+      ({ id: index + 1, name: item })
+    );
+
+    // [
+    //   { id: 1, name: "Bilbo" },
+    //   { id: 2, name: "Gandalf" },
+    //   { id: 3, name: "Nazgul" },
+    // ]
+
+    console.log(lengths);
+  </script>
+</body>
+
+</html>

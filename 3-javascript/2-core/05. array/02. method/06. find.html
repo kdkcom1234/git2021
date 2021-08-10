@@ -1,0 +1,27 @@
+<html>
+
+<body>
+  <script>
+    // find() 메서드는 주어진 판별 함수를 만족하는 첫 번째 요소의 값을 반환합니다. 
+    // 그런 요소가 없다면 undefined를 반환합니다.    
+    const array1 = [5, 12, 8, 130, 44];
+
+    const found = array1.find(element => element > 10);
+    console.log(found); // expected output: 12
+
+    let users = [
+      { id: 1, name: "John" },
+      { id: 2, name: "Pete" },
+      { id: 3, name: "Mary" }
+    ];
+
+    // 배열.find(판별함수)
+    // 판별함수의 반환값이 true인 첫 번째 요소를 반환
+    let user = users.find(item => item.id == 1);
+
+    console.log(user.name); // John
+
+  </script>
+</body>
+
+</html>

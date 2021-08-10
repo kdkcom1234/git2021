@@ -1,0 +1,29 @@
+<html>
+
+<body>
+  <script>
+    let arr = [1, 0, false];
+
+    alert(arr.indexOf(0)); // 1
+    alert(arr.indexOf(false)); // 2
+
+    // 해당 요소가 배열에 없으면 -1
+    alert(arr.indexOf('a')); // -1
+
+    if (arr.indexOf('a') > -1) {
+      console.log("존재 함")
+    } else {
+      console.log("존재하지 않음")
+    }
+
+    alert(arr.includes(1)); // true
+
+    if (arr.includes('a')) {
+      console.log("존재 함")
+    } else {
+      console.log("존재하지 않음")
+    }
+  </script>
+</body>
+
+</html>

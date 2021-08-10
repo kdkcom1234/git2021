@@ -1,0 +1,24 @@
+<html>
+
+<body>
+  <script>
+    let users = [
+      { id: 1, name: "John" },
+      { id: 2, name: "Pete" },
+      { id: 3, name: "Mary" }
+    ];
+
+    // 배열.filter(판별함수)
+    // 판별함수의 반환값이 true인 요소들을 모두 반환
+
+    let someUsers = users.filter(item => item.id < 3);
+
+    // 조건에 맞는 요소가 1개라도 배열 구조로 나옴
+    // let someUsers = users.filter(item => item.id < 2);
+    // someUsers[0]  // 하나의 요소에 대해서 접근
+
+    console.log(someUsers);
+  </script>
+</body>
+
+</html>
