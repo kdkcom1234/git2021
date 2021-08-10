@@ -4,7 +4,7 @@
   <script>
 
     const min = 1;
-    const max = 100000;
+    const max = 1000;
     let arr = []
     for (let i = min; i <= max; i++) {
       arr.push(Math.trunc(Math.random() * (max - min) + min));
@@ -36,6 +36,8 @@
           arr[j + 1] = temp;    // 앞의 변수값을 저장한 임시변수를 뒤에 변수에 저장
         }
       }
+
+      // 시간복잡도가 O(n^2)
     }
     let endTime = new Date().getTime();
 

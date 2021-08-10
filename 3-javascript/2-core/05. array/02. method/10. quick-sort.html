@@ -3,7 +3,7 @@
 <body>
   <script>
     const min = 1;
-    const max = 100000;
+    const max = 1000;
     let arr = []
     for (let i = min; i <= max; i++) {
       arr.push(Math.trunc(Math.random() * (max - min) + min));
@@ -45,6 +45,8 @@
 
       // 시간복잡도
       // O(n.log.n)
+
+      // 공간복잡도가 높아짐 -> 메모리 공간을 더 많이 사용함
     }
 
     let startTime = new Date().getTime();
