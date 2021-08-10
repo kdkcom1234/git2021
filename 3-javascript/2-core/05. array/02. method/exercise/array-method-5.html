@@ -1,0 +1,19 @@
+<html>
+
+<body>
+  <script>
+    function copySorted(arr) {
+      let copy = [...arr];
+      return copy.sort((a, b) => a.localeCompare(b));
+    }
+
+    let arr = ["HTML", "JavaScript", "CSS"];
+
+    let sorted = copySorted(arr);
+
+    console.log(sorted); // CSS, HTML, JavaScript
+    console.log(arr); // HTML, JavaScript, CSS (no changes)
+  </script>
+</body>
+
+</html>

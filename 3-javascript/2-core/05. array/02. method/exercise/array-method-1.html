@@ -1,0 +1,21 @@
+<html>
+
+<body>
+  <script>
+    function camelize(str) {
+      let strArr = str.split("-");
+
+      let result = strArr.reduce((acc, item, index) =>
+        acc + (index == 0 ? item : item[0].toUpperCase() + item.substr(1))
+      )
+
+      return result;
+    }
+
+    console.log(camelize("background-color"))
+    console.log(camelize("list-style-image"))
+    console.log(camelize("-webkit-transition"))
+  </script>
+</body>
+
+</html>

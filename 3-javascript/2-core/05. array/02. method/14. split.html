@@ -1,0 +1,23 @@
+<html>
+
+<body>
+  <script>
+
+    let names = 'Bilbo, Gandalf, Nazgul';
+
+    // 구분자(delemitter)
+    // 문자열.split(구분자)
+    // 반환값은 문자열 배열
+    let arr = names.split(', ');
+    console.log(arr);
+
+    for (let name of arr) {
+      console.log(`${name}에게 보내는 메시지`);
+    }
+
+    let str = "test";
+    console.log(str.split('')); // t,e,s,t    
+  </script>
+</body>
+
+</html>

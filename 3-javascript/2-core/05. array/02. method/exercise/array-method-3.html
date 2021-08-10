@@ -1,0 +1,22 @@
+<html>
+
+<body>
+  <script>
+    function filterRangeInPlace(arrParm, min, max) {
+      let result = arrParm.filter(item => item >= min && item <= max);
+
+      arrParm.forEach((item, index) => {
+        if (result.indexOf(item)) {
+          arrParm.splice(index, 1)
+        }
+      })
+    }
+
+    let arr = [5, 3, 8, 1];
+
+    filterRangeInPlace(arr, 1, 4); // 1과 4 사이에 있지 않은 요소는 모두 제거함
+    console.log(arr); // [3, 1]
+  </script>
+</body>
+
+</html>

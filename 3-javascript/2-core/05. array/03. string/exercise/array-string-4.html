@@ -1,0 +1,23 @@
+<html>
+
+<body>
+  <script>
+
+    function extractCurrencyValue(str) {
+      let result = "";
+
+      for (let char of str) {
+        if (!isNaN(+char)) {
+          result += char;
+        }
+      }
+
+      return +result;
+    }
+
+    console.log(extractCurrencyValue('$120'));
+    console.log(extractCurrencyValue('$120') === 120);
+  </script>
+</body>
+
+</html>

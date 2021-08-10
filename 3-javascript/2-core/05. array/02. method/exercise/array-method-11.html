@@ -1,0 +1,20 @@
+<html>
+
+<body>
+  <script>
+    function getAverageAge(arr) {
+      let result = arr.reduce((sum, item) => sum + item.age, 0);
+      return Math.trunc(result / arr.length);
+    }
+
+    let john = { name: "John", age: 25 };
+    let pete = { name: "Pete", age: 30 };
+    let mary = { name: "Mary", age: 29 };
+
+    let arr = [john, pete, mary];
+
+    console.log(getAverageAge(arr)); // (25 + 30 + 29) / 3 = 28
+  </script>
+</body>
+
+</html>

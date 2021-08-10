@@ -1,0 +1,23 @@
+<html>
+
+<body>
+  <script>
+    let arr = [1, 2, 3, 4, 5];
+
+    // reduce 스타일
+    // 배열.reduce((누산변수, 현재요소변수, 현재인덱스변수) => 
+    //              { return 계산식 }, 누산변수의 초기값)
+    // let result = arr.reduce((sum, current) => sum + current, 0);
+
+    // for-of 스타일
+    let sum = 0;
+    for (let current of arr) {
+      sum += current;
+    }
+    let result = sum;
+
+    console.log(result); // 15
+  </script>
+</body>
+
+</html>

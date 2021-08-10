@@ -1,0 +1,45 @@
+<html>
+
+<body>
+  <script>
+    const min = 1;
+    const max = 100000;
+    let arr = []
+    for (let i = min; i <= max; i++) {
+      arr.push(Math.trunc(Math.random() * (max - min) + min));
+    }
+
+    // let arr = [15, 1, 2];
+
+    // 배열.sort(비교함수)
+    // 비교함수의 반환값은 0보다 작거나, 0 또는 0보다 큰 수
+
+    // 비교식은 왼쪽값 기준으로 생각
+
+    let startTime = new Date().getTime();
+
+    // arr.sort((a, b) => {
+    //   // 0보다 작은 경우, a를 b보다 낮은 인덱스로 정렬. 즉, a가 먼저옴.
+    //   // 작은 값을 앞쪽에 오게함
+    //   // 앞에 것이 작으면 음수
+    //   if (a < b) return -1;
+    //   // 0을 반환하면 a와 b를 서로에 대해 변경하지 않음
+    //   // 서로 같으면 0
+    //   if (a == b) return 0;
+    //   // 0보다 큰 경우, a를 b보다 높은 인덱스로 정렬. 즉, a가 뒤에옴.
+    //   // 큰 값을 뒤에 오게함
+    //   // 앞의 것이 크면 양수
+    //   if (a > b) return 1;
+    // });
+
+    // 배열 내부의 요소가 숫자면
+    arr.sort((a, b) => a - b);
+
+    let endTime = new Date().getTime();
+    console.log(`${(endTime - startTime) / 1000}초`)
+
+    console.log(arr);  // 1, 2, 15      
+  </script>
+</body>
+
+</html>
