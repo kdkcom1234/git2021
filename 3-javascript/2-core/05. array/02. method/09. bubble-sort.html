@@ -1,0 +1,47 @@
+<html>
+
+<body>
+  <script>
+
+    const min = 1;
+    const max = 100000;
+    let arr = []
+    for (let i = min; i <= max; i++) {
+      arr.push(Math.trunc(Math.random() * (max - min) + min));
+    }
+    // console.log(arr);
+
+    // let arr = [5, 1, 3, 7, 9, 2];
+    // sort -> [1, 2, 3, 5, 7, 9];
+
+    // bubble-sort: 반복문이 2개
+
+    // 외부반복문은 남은 요소들 중 가장 큰 숫자를 찾는 것임
+    // 외부반복문의 반복 횟수는 n-1회, i=0; i<n-1; i++
+    // i=0; i<n-1; i++ -> n-1회 반복을 한다.
+
+    // n == arr.length
+
+    let startTime = new Date().getTime();
+    for (let i = 0; i < arr.length - 1; i++) {
+
+      // 내부반복문은 요소들의 크기 비교를 하고 위치 변경 작업
+      // 내부반복문의 반복 횟수는 (n-1) - i, j=0; j<(n-1) - i; j++      
+      for (let j = 0; j < (arr.length - 1) - i; j++) {
+
+        // 앞의 요소가 뒤에 요소보다 크면 위치 변경 실행
+        if (arr[j] > arr[j + 1]) {
+          let temp = arr[j];    // 앞의 변수를 임시변수에 저장
+          arr[j] = arr[j + 1];  // 뒤의 변수를 앞의 변수에 저장
+          arr[j + 1] = temp;    // 앞의 변수값을 저장한 임시변수를 뒤에 변수에 저장
+        }
+      }
+    }
+    let endTime = new Date().getTime();
+
+    console.log(`${(endTime - startTime) / 1000}초`)
+    console.log(arr);
+  </script>
+</body>
+
+</html>
