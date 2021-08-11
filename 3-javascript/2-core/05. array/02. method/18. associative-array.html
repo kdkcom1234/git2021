@@ -1,0 +1,49 @@
+<html>
+
+<body>
+  <script>
+
+    // id == 6인 데이터를 조회?
+    // 이진탐색 O(logn) -> 항이8개면 평균적으로 3번 탐색 2^3 == 8
+    // 4 -> 6
+    let arr = [
+      { id: 1, name: 'kim' },
+      { id: 2, name: 'lee' },
+      { id: 3, name: 'park' },
+      // { id: 4, name: 'hong' }, 중간에 집어넣야 한다면, arr.splice(3,0, {...})
+      // 뒤에 데이터들이 밀어서 뒤로감
+      { id: 5, name: 'john' },
+      { id: 6, name: 'donald' },
+      { id: 7, name: 'pete' },
+      { id: 8, name: 'kang' },
+    ]
+
+    // associative array(연관배열)
+    // map(java), dictionary(python), object(javascript)
+
+    // 특정 값으로 데이터를 검색해야한다면 연관 배열 형태의 데이터구조(key-value)
+    let map = {
+      1: { id: 1, name: 'kim' },
+      2: { id: 2, name: 'lee' },
+      3: { id: 3, name: 'park' },
+      // 4: { id: 4, name: 'hong' }, 중간에 집어넣야 한다면, map[4] = {...}
+      // 속성값은 순차적으로 들어가 있지 않음, 특정위치에 바로 넣을 수 있음.
+      5: { id: 5, name: 'john' },
+      6: { id: 6, name: 'donald' },
+      7: { id: 7, name: 'pete' },
+      8: { id: 8, name: 'kang' },
+    }
+
+    // 연관배열의 탐색 연산 복잡도 O(1)
+    map[6]; // { id: 6, name: "donald"}
+
+    // 연관배열의 추가 연산 복잡도 O(1), 빈 메모리 공간 아무데나 끼어 넣음
+    map[4] = { id: 4, name: 'hong' }
+
+    // 사용자id, 게시글번호, 고객번호, 고객연락처 탐색해야함
+    // 원래 데이터 구조를 연관배열로 만듦
+
+  </script>
+</body>
+
+</html>

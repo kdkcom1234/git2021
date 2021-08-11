@@ -1,0 +1,40 @@
+<html>
+
+<body>
+  <script>
+    // 이분탐색(binary search). 정렬된 배열에 대해서만 가능함
+    // 이분탐색에 최적화된 자료구조 -> 이분탐색트리
+    // **중간 값을 기준으로 찾을 범위를 좁혀감.
+
+    let arr = [1, 4, 6, 10, 12, 15, 20];
+    let searchItem = 2;
+
+    // 찾을 인덱스 범위(초깃값은 0 ~ 배열끝)
+    let maxIndex = arr.length - 1;  // 탐색 범위의 최대 인덱스
+    let minIndex = 0;               // 탐색 범위의 최소 인덱스
+
+    // 최대 인덱스와 최소 인덱스가 같거나 역전됨(못찾음)
+    while (maxIndex >= minIndex) {
+      // 중간 인덱스, (탐색 범위의 최대 인덱스 + 최소 인덱스)/2
+      let middleIndex = Math.floor((maxIndex + minIndex) / 2);
+
+      // 중간값보다 크면, 탐색범위의 최소 인덱스를 중간값보다 크게 함
+      if (searchItem > arr[middleIndex]) {
+        minIndex = middleIndex + 1;
+      }
+      // 중간값보다 작으면, 탐색범위의 최대 인덱스를 중간값보다 작게 함
+      else if (searchItem < arr[middleIndex]) {
+        maxIndex = middleIndex - 1;
+      }
+      // 중간값과 같으면 반복문 종료
+      else {
+        console.log(`${middleIndex}: ${arr[middleIndex]}을(를) 찾았습니다.`);
+        break;
+      }
+    }
+
+    console.log(`최대인덱스: ${maxIndex}, 최소인덱스: ${minIndex}`)
+  </script>
+</body>
+
+</html>
