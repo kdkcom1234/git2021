@@ -3,8 +3,11 @@
 <body>
   <script>
     function checkSpam(str) {
+      // 탐색할 문자열을 모두 소문자로 변환
       let strLower = str.toLowerCase();
-      for (let keyword of ["viagra", "xxx"]) {
+
+      // 문자열에 아래의 키워드가 포함되어있는지
+      for (let keyword of ['viagra', 'xxx']) {
         if (strLower.includes(keyword)) {
           return true;
         }
@@ -13,9 +16,9 @@
       return false;
     }
 
-    console.log(checkSpam('buy ViAgRA now'))
-    console.log(checkSpam('free xxxxx'))
-    console.log(checkSpam("innocent rabbit"))
+    console.log(checkSpam('buy ViAgRA now'));
+    console.log(checkSpam('free xxxxx'));
+    console.log(checkSpam("innocent rabbit"));
   </script>
 </body>
 

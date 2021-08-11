@@ -3,22 +3,36 @@
 <body>
   <script>
     function unique(arr) {
-
-      let result = [];
-      for (let item of arr) {
-        if (!result.includes(item)) {
-          result.push(item);
-        }
-      }
-
-      return result;
+      return [...new Set(arr)];
     }
 
     let strings = ["Hare", "Krishna", "Hare", "Krishna",
       "Krishna", "Krishna", "Hare", "Hare", ":-O"
     ];
 
-    console.log(unique(strings)); // Hare, Krishna, :-O
+    // console.log(unique(strings)); // ['Hare', 'Krishna', ':-O']
+
+    // Set 중복이 없이 저장 가능함.
+    // let set = new Set();
+    // set.add("lee");
+    // set.add("hong");
+    // set.add("lee");
+    // set.add("kim");
+
+    // for (let value of set) {
+    //   console.log(value);
+    // }
+    // console.log(set.size);
+
+    // new Set(배열)
+    let set1 = new Set(strings);
+    for (let value of set1) {
+      console.log(value);
+    }
+    console.log(set1.size);
+
+    // Set을 배열로 변환
+    console.log([...set1]);
   </script>
 </body>
 

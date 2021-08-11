@@ -2,21 +2,96 @@
 
 <body>
   <script>
-    function shuffle(arr) {
-
+    // 랜덤 정렬
+    function shuffle(array) {
+      array.sort((a, b) => {
+        // console.log(Math.random() * 2 - 1)
+        return Math.trunc(Math.random() * 3) - 1
+        // return Math.trunc(Math.random() * 3) - 1
+      })
     }
+
+    // 음수, 0, 양수
+    // sort((a,b) => -1/0/1): 무작위로 나오면 될 듯?
+
+    // 0 ~ 1 사이 무작위 숫자, 1을 미포함
+    Math.random();
+
+    // 0 ~ 3 사이 무작위 숫자, 3은 미포함
+    // 0 ~ 2.xxxx
+    Math.random() * 3
+    // 0, 1, 2
+    Math.trunc(Math.random() * 3) - 1
+
+
+    // -1 ~ 1 사이의 무작위 숫자, 1은 미포함
+    Math.random() * 2 - 1
+
+    // -1 ~ 1 사이의 무작위 숫자
+    Math.trunc(Math.random() * 3) - 1
+    // console.log(Math.trunc(Math.random() * 3) - 1);
 
     let arr = [1, 2, 3];
 
-    shuffle(arr);
-    // arr = [3, 2, 1]
+    // // 특정 시간 주기 별로 실행
+    // let timer = setInterval(() => {
+    //   shuffle(arr);
+    //   console.log(arr);
+    // }, 1000);
 
     shuffle(arr);
-    // arr = [2, 1, 3]
+    console.log(arr);
 
     shuffle(arr);
-    // arr = [3, 1, 2]
-    // ...
+    console.log(arr);
+
+    shuffle(arr);
+    console.log(arr);
+
+    shuffle(arr);
+    console.log(arr);
+
+    shuffle(arr);
+    console.log(arr);
+
+    shuffle(arr);
+    console.log(arr);
+
+    shuffle(arr);
+    console.log(arr);
+
+    // // 특정 시간 이후에 실행
+    // setTimeout(() => {
+    //   // setInerval로 만들 타이머 객체를 없앰
+    //   clearInterval(timer);
+    // }, 10000)
+
+    // Math.random 범위 숫자 뽑기
+    // 2 ~ 10범위의 임의의 수를 뽑아야함
+    // 0 ~ 8 -> +2 -> 2 ~ 10  
+
+    // 1. 0 ~ 8, 8 미포함
+    Math.random() * 8
+
+    // 2. 2 ~ 10, 10 미포함
+    Math.random() * 8 + 2
+
+    // min ~ max 사이의 랜덤 숫자 구하기, max 불포함
+    // Math.random() * 범위크기 + 최소위치
+    // 범위크기 = max - min
+    // 최소위치 = min
+    // Math.random() * (max-min) + min
+
+    // min ~ max 사이의 랜덤 숫자 구하기, max 포함
+    // Math.random() * 범위크기 + 최소위치
+    // 범위크기 = (max+1) - min
+    // 최소위치 = min
+    // 정수값만 가능함, 소수점 자리를 날림
+    // 예를들어, 2~10, 2~9.xxxxx
+    //           2~11, 2~10.xxxxxx
+    //           소숫점자리를 자름, 2~10
+
+    // Math.trunc(Math.random() * (max+1-min)) + min
   </script>
 </body>
 

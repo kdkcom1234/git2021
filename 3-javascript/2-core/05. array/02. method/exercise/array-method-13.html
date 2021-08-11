@@ -2,12 +2,13 @@
 
 <body>
   <script>
-
     function groupById(arr) {
+      // 빈 객체 생성
       let result = {};
 
       for (let item of arr) {
-        console.log(item.name)
+        // { john: {id:'john' ...} }
+        // id와 같은 이름의 속성을 생성하고 값으로 객체를 넣음
         result[item.id] = item;
       }
 
@@ -21,9 +22,7 @@
     ];
 
     let usersById = groupById(users);
-
     console.log(usersById);
-
   </script>
 </body>
 

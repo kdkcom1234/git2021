@@ -6,11 +6,17 @@
     let pete = { name: "Pete", age: 30 };
     let mary = { name: "Mary", age: 28 };
 
+    // let userObject = { john, pete, mary }
+    // console.log(userObject);    
     let users = [john, pete, mary];
+    console.log(users);
+    // 0: {name: "John", age: 25}
+    // 1: {name: "Pete", age: 30}  
+    // 2: {name: "Mary", age: 28}    
 
-    let names = users.map(item => item.name)
-
-    console.log(names); // John, Pete, Mary
+    // map함수는 배열크기와 동일하고 요소가 변형된 배열을 생성
+    let names = users.map(item => item.name);
+    console.log(names); // ["John", "Pete", "Mary"]
   </script>
 </body>
 

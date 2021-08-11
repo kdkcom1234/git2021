@@ -2,20 +2,34 @@
 
 <body>
   <script>
-    function filterRangeInPlace(arrParm, min, max) {
-      let result = arrParm.filter(item => item >= min && item <= max);
+    function filterRangeInPlace(arrParm, a, b) {
 
-      arrParm.forEach((item, index) => {
-        if (result.indexOf(item)) {
-          arrParm.splice(index, 1)
+      // 매개변수의 참조를 변경시키는 것은 안 되는 상황
+      // arrParm = arr.filter(item => item >= a && item <= b);
+      // console.log("--in function--")
+      // console.log(arrParm);
+
+      // 사이에 포함되지 않는 숫자들만 필터링
+      let result = arrParm.filter(item => item < a || item > b);
+      // console.log(result);
+
+      // 포함되지 않는 숫자들을 반복
+      for (let item of result) {
+        // 입력받은 배열에서 해당 숫자가 있으면
+        if (arrParm.includes(item)) {
+          // 입력 받은 배열에서 해당 숫자를 제거
+          arrParm.splice(arrParm.indexOf(item), 1);
         }
-      })
+      }
+
+      console.log("--in function--")
+      console.log(arrParm);
     }
 
     let arr = [5, 3, 8, 1];
-
-    filterRangeInPlace(arr, 1, 4); // 1과 4 사이에 있지 않은 요소는 모두 제거함
-    console.log(arr); // [3, 1]
+    filterRangeInPlace(arr, 1, 4);
+    console.log("--out function--")
+    console.log(arr);
   </script>
 </body>
 

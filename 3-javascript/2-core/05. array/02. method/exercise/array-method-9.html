@@ -2,17 +2,18 @@
 
 <body>
   <script>
-    function sortByAge(arr) {
-      arr.sort((a, b) => a.age - b.age);
+    function sortByAge(users) {
+      arr.sort((a, b) => a.age - b.age)
     }
 
     let john = { name: "John", age: 25 };
     let pete = { name: "Pete", age: 30 };
-    let mary = { name: "Mary", age: 28 };
+    let mary = { name: "Iary", age: 28 };
 
     let arr = [pete, john, mary];
 
     sortByAge(arr);
+    console.log(arr);
 
     // now: [john, mary, pete]
     console.log(arr[0].name); // John

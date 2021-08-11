@@ -2,13 +2,17 @@
 
 <body>
   <script>
+    // 정렬을 하는데 기존 배열을 고치면 안 됨
+    // 배열.sort는 기존배열을 변경함
     function copySorted(arr) {
+      // 매개변수로 받은 배열을 복제
       let copy = [...arr];
-      return copy.sort((a, b) => a.localeCompare(b));
+      // 문자열 순서대로 정렬
+      return copy.sort();
+      // return copy.sort((a, b) => a.localeCompare(b));
     }
 
     let arr = ["HTML", "JavaScript", "CSS"];
-
     let sorted = copySorted(arr);
 
     console.log(sorted); // CSS, HTML, JavaScript

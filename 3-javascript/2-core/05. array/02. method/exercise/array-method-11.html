@@ -3,17 +3,23 @@
 <body>
   <script>
     function getAverageAge(arr) {
-      let result = arr.reduce((sum, item) => sum + item.age, 0);
-      return Math.trunc(result / arr.length);
+      let sum = 0;
+      for (let item of arr) {
+        sum += item.age;
+      }
+
+      // return sum / arr.length;
+      return Math.trunc(sum / arr.length);  // 소숫점 자르기
+      // return Math.floor(sum / arr.length);  // 내림
+      // return Math.round(sum / arr.length);  // 반올림
     }
 
     let john = { name: "John", age: 25 };
     let pete = { name: "Pete", age: 30 };
     let mary = { name: "Mary", age: 29 };
 
-    let arr = [john, pete, mary];
-
-    console.log(getAverageAge(arr)); // (25 + 30 + 29) / 3 = 28
+    let users = [john, pete, mary];
+    console.log(getAverageAge(users));
   </script>
 </body>
 

@@ -2,19 +2,34 @@
 
 <body>
   <script>
+    // 케밥케이스 문자열을 카멜케이스 문자열로
     function camelize(str) {
+      // - 구분자로 문자열 나눠서 배열화
       let strArr = str.split("-");
+      console.log(strArr);
 
-      let result = strArr.reduce((acc, item, index) =>
+      // 첫번째 반복
+      // acc = ""
+      // item = "background"
+      // index = 0
+      // acc = acc + "background"
+
+      // 두번째 반복
+      // acc = "background"
+      // item = "color"
+      // index = 1
+      // acc = acc + "Color"
+
+      // 최종 반환값
+      // acc = "backgroundColor"
+      return strArr.reduce((acc, item, index) =>
         acc + (index == 0 ? item : item[0].toUpperCase() + item.substr(1))
-      )
-
-      return result;
+        , "")
     }
 
-    console.log(camelize("background-color"))
-    console.log(camelize("list-style-image"))
-    console.log(camelize("-webkit-transition"))
+    console.log(camelize("background-color"));
+    console.log(camelize("list-style-image"));
+    console.log(camelize("-webkit-transition"));
   </script>
 </body>
 
