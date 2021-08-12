@@ -38,6 +38,43 @@
 
     <input type="submit" value="Search!">
   </form>
+
+  <script>
+    const table = document.querySelector("#age-table");
+    // console.log(table);
+
+    const lables = table.querySelectorAll("label");
+    // console.log(lables);
+
+    const td = table.querySelector("td");
+    // console.log(td);
+
+    const form = document.querySelector('form[name="search"]')
+    // console.log(form);
+
+    // 2개의 폼을 선택
+    const forms = document.querySelectorAll('form')
+    // console.log(forms);
+
+    // 첫번째 input만 배열에 넣음
+    const firstInputs = [];
+    for (let form of forms) {
+      firstInputs.push(form.querySelector("input"));
+    }
+    // console.log(firstInputs);
+
+    // 마지막 input만 배열에 넣음
+    const lastInputs = [];
+    for (let form of forms) {
+      // 각 폼에 있는 전체 input 목록
+      const inputs = form.querySelectorAll("input")
+      // 거기서 마지막꺼만
+      lastInputs.push(inputs[inputs.length - 1]);
+    }
+    console.log(lastInputs);
+
+
+  </script>
 </body>
 
 </html>
