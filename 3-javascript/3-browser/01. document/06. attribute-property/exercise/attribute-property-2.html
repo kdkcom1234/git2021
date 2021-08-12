@@ -1,0 +1,32 @@
+<html>
+
+<body>
+  <a name="list">the list</a>
+  <ul>
+    <li><a href="http://google.com">http://google.com</a></li>
+    <li><a href="/tutorial">/tutorial.html</a></li>
+    <li><a href="local/path">local/path</a></li>
+    <li><a href="ftp://ftp.com/my.zip">ftp://ftp.com/my.zip</a></li>
+    <li><a href="http://nodejs.org">http://nodejs.org</a></li>
+    <li><a href="http://internal.com/test">http://internal.com/test</a></li>
+  </ul>
+
+  <script>
+    const links = document.querySelectorAll("ul a");
+    // console.log(links);
+
+    for (let link of links) {
+      // link.href로 하면 서버 주소가 붙음
+      // getAttribute로 해야 입력된 값만 받아옴
+      const href = link.getAttribute("href");
+      console.log(href);
+
+      if (href.includes("://") && !href.includes("http://internal.com")) {
+        link.style.color = "orange";
+      }
+    }
+
+  </script>
+</body>
+
+</html>
