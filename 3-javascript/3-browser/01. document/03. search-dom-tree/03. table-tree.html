@@ -1,0 +1,24 @@
+<html>
+
+<body>
+  <table>
+    <tr>
+      <td>일</td>
+      <td>이</td>
+    </tr>
+    <tr>
+      <td>삼</td>
+      <td>사</td>
+    </tr>
+  </table>
+  <script>
+    // 테이블을 가져옴
+    const table = document.body.children[0];
+
+    // '이'가 적힌 td를 가져옴(첫 번째 줄, 두 번째 칸)
+    let td = table.rows[0].cells[1];
+    td.style.backgroundColor = "red"; // 강조    
+  </script>
+</body>
+
+</html>
