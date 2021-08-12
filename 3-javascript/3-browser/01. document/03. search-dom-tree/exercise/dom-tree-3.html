@@ -41,6 +41,20 @@
     </tbody>
   </table>
   <script>
+    // tbody 변수가 실행되기 전까지는 table인지, tbody, div, ul인지 모름
+    const tbody = document.body.children[0].children[0];
+    console.log(tbody);
+    console.log(tbody.rows);
+    console.log(tbody.rows.length);
+
+    // tbody의 rows(행들)에 대해서 반복문을 수행
+    for (let i = 0; i < tbody.rows.length; i++) {
+      // tbody.rows[0].cells[0].style.backgroundColor = "red";
+      // tbody.rows[1].cells[1].style.backgroundColor = "red";
+      // tbody.rows[2].cells[2].style.backgroundColor = "red";
+      // ...
+      tbody.rows[i].cells[i].style.backgroundColor = "red";
+    }
 
   </script>
 </body>
