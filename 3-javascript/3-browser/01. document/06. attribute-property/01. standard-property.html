@@ -1,0 +1,34 @@
+<html>
+
+<body>
+  <div id="box" something="what" style="height: 500px; background-color: green;">
+
+  </div>
+  <script>
+    const box = document.querySelector("#box");
+
+    // 표준 속성은 property로 전환됨
+    console.log(box.id); // box
+    console.log(box["id"]); // box
+
+    // 속성값 변경하기
+    setTimeout(() => {
+      box.id = "div-box";
+    }, 2000)
+
+    console.log(box.style); // CSS.....
+
+    // 비표준 속성은 프로퍼티로 전환되지 않습니다.
+    console.log(box.something); // undefined
+
+    // 속성 가져오기
+    console.log(box.getAttribute("something")); // what
+
+    // 속성 변경하기
+    setTimeout(() => {
+      box.setAttribute("something", "why")
+    }, 2000)
+  </script>
+</body>
+
+</html>

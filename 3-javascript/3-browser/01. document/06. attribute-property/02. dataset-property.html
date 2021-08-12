@@ -1,0 +1,18 @@
+<html>
+
+<body>
+  <!-- data-??: 데이터 속성 -->
+  <!-- 태그에 데이터 값을 넣어서 나중에 써먹을 용도 -->
+  <!-- 화면에 안보이는 영역에 값을 넣어두기 위함 -->
+  <div id="box" data-about="Elephants">
+    코끼리는 뿌우~~~~~~
+  </div>
+  <script>
+    const div = document.querySelector("#box");
+
+    // DOM: dataset.about -> Element: data-about 
+    console.log(div.dataset.about);
+  </script>
+</body>
+
+</html>
