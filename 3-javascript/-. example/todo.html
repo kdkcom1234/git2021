@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <title>할 일 관리</title>
+</head>
+
+<body style="width: 500px;" class="mx-auto">
+  <h2 class="text-center my-5">할 일 관리</h2>
+
+  <!-- Optional JavaScript; choose one of the two! -->
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+    crossorigin="anonymous"></script>
+
+  <form id="form-input" class="d-flex" onsubmit="return false">
+    <!-- 입력 예시를 보여줌 -->
+    <input id="txt-memo" type="text" class="form-control me-2" placeholder="할 일 ...">
+    <button id="btn-add" type="button" class="btn btn-primary text-nowrap">추가</button>
+  </form>
+  <ul id="ul-list" class="list-group list-group-flush mt-3">
+  </ul>
+
+  <script>
+    /* 요소 선택 부분 */
+    const txtMemo = document.querySelector("#txt-memo");
+    const btnAdd = document.querySelector("#btn-add");
+    const ulList = document.querySelector("#ul-list");
+    const formInput = document.querySelector("#form-input");
+
+    /* 이벤트 등록 부분 */
+    // 입력박스에 키보드 이벤트 추가
+    txtMemo.addEventListener("keyup", (event) => {
+      // 엔터키를 입력했을 때만 화면에 추가하도록 함
+      if (event.keyCode == 13) {
+        txtMemo.blur(); // 입력박스의 포커스를 초기화
+        add(event);
+      }
+    });
+
+    // 버튼에 이벤트 추가
+    btnAdd.addEventListener("click", add);
+
+    // ul 태그에 이벤트 추가
+    ulList.addEventListener("click", remove);
+
+
+    /* 이벤트 처리 부분 */
+    // 목록 추가 이벤트 함수
+    function add(event) {
+      // console.log(event);
+      // console.log(event.target);
+      console.log(txtMemo.value);
+
+      // 빈 값일 때 에러 메시지 처리
+      if (!txtMemo.value) {
+        const alertDiv = /*html*/`
+          <div class="alert alert-danger alert-dismissible my-2" role="alert" id="liveAlert">
+            입력값을 입력해주세요.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>    
+          `;
+        formInput.insertAdjacentHTML("afterend", alertDiv);
+
+        return;
+      }
+
+      // 생성할 템플릿 문자열
+      // 삭제 버튼에 remove라는 임의의 클래스를 넣음
+      const li = /*html*/`
+        <li class="list-group-item">
+          <button class="btn btn-outline-secondary btn-sm remove">삭제</button>          
+          ${txtMemo.value}
+        </li>
+        `
+
+      // ul 요소에 추가
+      ulList.insertAdjacentHTML("afterbegin", li);
+
+      // form 내부 요소의 입력값을 초기화
+      formInput.reset();
+    }
+
+    // 목록 삭제 이벤트 함수
+    function remove(event) {
+      // 이벤트를 발생시킨 요소의 class에 remove가 있으면
+      if (event.target.className.includes("remove")) {
+        // 삭제버튼
+        const btnRemove = event.target;
+        // 삭제버튼의 부모 노드인 li
+        const li = btnRemove.parentNode;
+        li.remove();
+      }
+    }
+  </script>
+</body>
+
+</html>
