@@ -6,13 +6,17 @@
   <script>
     // Add JavaScript to the button to make 
     // <div id="text"> disappear when we click it.
+
+    // 1. 제어하려는 요소 선택
     const btn = document.querySelector("#hider");
     const div = document.querySelector("#text");
 
-    btn.addEventListener("click",)
+    // 2. 이벤트 리스너를 부착
+    btn.addEventListener("click", hide)
 
+    // 3. 이벤트를 처리할 코드를 함수로 작성
     function hide() {
-
+      div.hidden = true;
     }
   </script>
 </body>
