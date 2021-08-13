@@ -1,0 +1,30 @@
+<html>
+
+<body>
+  <style>
+    .alert {
+      padding: 15px;
+      border: 1px solid #d6e9c6;
+      border-radius: 4px;
+      color: #3c763d;
+      background-color: #dff0d8;
+    }
+  </style>
+  <div id="container">
+
+  </div>
+
+  <script>
+    const container = document.querySelector("#container");
+
+    let div = document.createElement('div');
+    div.className = "alert";
+    div.innerHTML = "<strong>안녕하세요!</strong> 중요 메시지를 확인하셨습니다.";
+
+    setTimeout(() => container.append(div), 1000);
+    // setTimeout(() => div.remove(), 5000);  // node 삭제
+    setTimeout(() => div.outerHTML = "", 3000); // 본인 태그를 빈값으로
+  </script>
+</body>
+
+</html>
