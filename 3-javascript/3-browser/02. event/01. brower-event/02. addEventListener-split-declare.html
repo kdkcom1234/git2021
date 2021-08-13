@@ -1,0 +1,27 @@
+<html>
+
+<body>
+  <button id="elem">클릭해 주세요.</button>
+  <button id="elem1">클릭해 주세요.</button>
+  <button id="elem2">클릭해 주세요.</button>
+  <script>
+    // 변수 선언부
+    const elem = document.querySelector("#elem");
+    const elem1 = document.querySelector("#elem1");
+    const elem2 = document.querySelector("#elem2");
+
+    // 이벤트 리스너 등록부
+    elem.addEventListener("click", click);
+    elem1.addEventListener("click", click);
+    elem2.addEventListener("click", click);
+
+    // 함수 선언부: 실제 이벤트가 처리되는 부분
+    function click(event) {
+      console.log(event);
+      // console.log(this);  // button
+      alert("클릭");
+    }
+  </script>
+</body>
+
+</html>
