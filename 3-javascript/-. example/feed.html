@@ -75,7 +75,10 @@
           if (file.type.includes("image")) {
             media = /*html*/`<img src=${dataUrl} class="card-img-top">`;
           } else {
-            media = /*html*/`<video src=${dataUrl} class="card-img-top" controls></video>`
+            media = /*html*/`
+              <video class="card-img-top" controls>
+                <source src=${dataUrl} type="video/mp4"></source>
+              </video>`
           }
 
           add();
