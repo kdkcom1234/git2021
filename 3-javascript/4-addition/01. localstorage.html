@@ -1,0 +1,24 @@
+<html>
+
+<body>
+  <script>
+    setTimeout(() => {
+      // 로컬스토리지에 저장
+      // localStorage.setItem(키, 값)
+      // key/값은 항상 문자열 또는 문자열로 변환가능한 값
+
+      // 저장하면 사용자가 저장공간을 삭제할 때까지 남아있음
+      localStorage.setItem("name", "John")
+
+      // 로컬스토리에서 값을 읽어 오기
+      // localStorage.getItem(키)
+      const name = localStorage.getItem("name");
+      console.log(name);
+    }, 3000)
+
+
+
+  </script>
+</body>
+
+</html>

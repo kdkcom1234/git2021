@@ -1,0 +1,44 @@
+<html>
+
+<body>
+  <script>
+
+    const obj = { id: 1, name: "john", fn: () => { alert("??") } };
+    const arr = [
+      { id: 1, name: "john" },
+      { id: 2, name: "lee" },
+      { id: 3, name: "kimm" },
+    ]
+
+    // 객체/배열 -> 문자열
+    // JSON.stringify(객체/배열)
+    // JSON: JavaScript Object Notation, 자바스크립 객체구조 표현법(문자열)
+    // 속성에 함수가 있다면 제거됨
+    const objStr = JSON.stringify(obj);
+    const arrStr = JSON.stringify(arr);
+
+    // console.log(objStr);
+    // console.log(arrStr);
+
+    // 문자열 -> 객체/배열
+    // JSON.parse(JSON문자열)
+    const objStrCvt = JSON.parse(objStr);
+    const arrStrCvt = JSON.parse(arrStr);
+
+    // console.log(objStrCvt);
+    // console.log(arrStrCvt);
+
+    // 로컬스토리지는 문자열로만 저장가능
+    // 객체/배열을 -> 문자열
+    localStorage.setItem("obj", JSON.stringify(obj));
+    localStorage.setItem("arr", JSON.stringify(arr));
+
+    // 꺼내서 쓸때는 문자열 -> 객체
+    const storedObj = JSON.parse(localStorage.getItem("obj"));
+    const storedArr = JSON.parse(localStorage.getItem("arr"));
+    console.log(storedObj);
+    console.log(storedArr);
+  </script>
+</body>
+
+</html>
