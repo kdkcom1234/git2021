@@ -17,10 +17,12 @@
     integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
     crossorigin="anonymous"></script>
 
-  <form id="form-input" class="d-flex flex-wrap mt-5" onsubmit="return false;">
+  <form id="form-input" class="mt-5" onsubmit="return false;">
     <textarea id="txt-post" class="form-control mb-1" placeholder="Leave a post here"></textarea>
-    <input type="file" class="form-control me-1" accept="image/png, image/jpeg, video/mp4">
-    <button id="btn-add" class="btn btn-primary" type="button">ADD</button>
+    <div class="d-flex">
+      <input type="file" class="form-control me-1" accept="image/png, image/jpeg, video/mp4">
+      <button id="btn-add" class="btn btn-primary text-nowrap" type="button">입력</button>
+    </div>
   </form>
   <div id="div-list" class="mt-3">
 
@@ -34,10 +36,32 @@
 
     btnAdd.addEventListener("click", () => {
 
-      console.log(fileInput.files[0]);
-      const file = fileInput.files[0];
+      let isEmpty;
+
+      if (txtPost.value == "" && fileInput.files.length == 0) {
+        isEmpty = true;
+      }
+
+      // 빈 값일 때 에러 메시지 처리
+      if (isEmpty) {
+        const alertDiv = /*html*/`
+          <div class="alert alert-danger alert-dismissible my-2" role="alert">
+            입력값을 입력해주세요.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>    
+          `;
+        formInput.insertAdjacentHTML("afterend", alertDiv);
+
+        return;
+      }
+
+      // 빈 값이 아니면 alert창 지움
+      document.querySelectorAll(".alert").forEach(item => item.remove());
 
       let media = "";
+
+      console.log(fileInput.files[0]);
+      const file = fileInput.files[0];
 
       if (file) {
         const reader = new FileReader();
@@ -62,11 +86,11 @@
 
       function add() {
         const card = `
-          <div class="card">
+          <div class="card mt-1">
             ${media}
             <div class="card-body">
               <p class="card-text">${txtPost.value}</p>
-              <a href="#" class="btn btn-outline-secondary btn-sm float-end remove">REMOVE</a>
+              <a href="#" class="link-secondary fs-6 float-end remove">REMOVE</a>
             </div>
           </div>      
           `
@@ -78,7 +102,12 @@
       }
     })
 
-
+    divList.addEventListener("click", (event) => {
+      if (event.target.className.includes("remove")) {
+        const card = event.target.closest(".card")
+        card.remove();
+      }
+    })
 
   </script>
 </body>
