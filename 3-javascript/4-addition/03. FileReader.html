@@ -46,7 +46,7 @@
         if (file.type.includes("image")) {
           elm = /*html*/`<img src=${dataUrl} width="500">`;
         } else {
-          elm = /*html*/`<video src=${dataUrlt} width="500" controls>`
+          elm = /*html*/`<video src=${dataUrlt} width="500" controls></video>`
         }
 
         div.innerHTML = elm;
