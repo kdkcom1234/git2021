@@ -18,7 +18,7 @@
     crossorigin="anonymous"></script>
 
   <form id="form-input" class="mt-5" onsubmit="return false;">
-    <textarea id="txt-post" class="form-control mb-1" placeholder="Leave a post here"></textarea>
+    <textarea rows="5" id="txt-post" class="form-control mb-1" placeholder="Leave a post here"></textarea>
     <div class="d-flex">
       <input type="file" class="form-control me-1" accept="image/png, image/jpeg, video/mp4">
       <button id="btn-add" class="btn btn-primary text-nowrap" type="button">입력</button>
@@ -93,7 +93,7 @@
             ${media}
             <div class="card-body">
               <p class="card-text">${txtPost.value}</p>
-              <a href="#" class="link-secondary fs-6 float-end remove">REMOVE</a>
+              <a href="#" class="link-secondary fs-6 float-end remove">삭제</a>
             </div>
           </div>      
           `
