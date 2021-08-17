@@ -1,25 +1,29 @@
 <html>
 
 <body>
-  <textarea id="txt-memo" placeholder="Write Here"></textarea>
-  <button id="btn-clear">clear</button>
-
+  <textarea placeholder="Write here"></textarea>
+  <button>clear</button>
   <script>
-    const txtMemo = document.querySelector("#txt-memo");
-    const btnClear = document.querySelector("#btn-clear");
+    const txt = document.querySelector("textarea");
+    const btn = document.querySelector("button");
     const storageKey = "memo";
 
-    txtMemo.addEventListener("keyup", (event) => {
-      console.log(event.target.value);
-      localStorage.setItem(storageKey, event.target.value);
+    // 텍스트에리어에 입력할 때마다 이벤트 처리
+    txt.addEventListener("keyup", () => {
+      // console.log(txt.value);
+      // 로컬 스토리지에 저장
+      localStorage.setItem(storageKey, txt.value);
     })
 
-    btnClear.addEventListener("click", () => {
-      txtMemo.value = "";
+    // clear 버튼을 클릭했을 때 텍스트에리어 및 로컬 스토리지 값 삭제
+    btn.addEventListener("click", () => {
+      txt.value = "";
       localStorage.removeItem(storageKey);
     })
 
-    txtMemo.value = localStorage.getItem("memo");
+    // 스크립트 실행될 때 스토리지 값 가져오기
+    // 페이지 로딩이 됐을 때(스크립트가 가장 하단에 있다는 전제하에)
+    txt.value = localStorage.getItem(storageKey);
   </script>
 </body>
 
