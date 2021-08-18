@@ -1,0 +1,122 @@
+-------------------- 화면구현
+
+-- 개발환경 준비
+1. node.js 설치
+https://nodejs.org/ko/
+
+2. typescript 개발환경 설치
+npm install -g typescript
+npm install -g ts-node
+npm install -g @types/node
+
+3. code runner extension 설치
+
+
+-- Typescript
+1. Function 매개변수 타입
+  -> sum, capitalize
+2. Variable 매개변수 타입
+  -> number, string, boolean
+3. 타입 추론
+  -> 초깃값 대입
+4. interface
+  -> 구조화된 타입 형식의 선언
+  -> ?, optional
+
+
+-- Typescript로 React 컴포넌트 다루기
+
+1. create-react-app typescript 템플릿으로 앱 생성
+https://create-react-app.dev/docs/adding-typescript/
+
+npx create-react-app myworkspace --template typescript
+cd myworkspace
+npm start
+
+
+0. 프로젝트 구조
+index.tsx
+/public
+App.tsx
+npm run build
+npm install -g server
+
+
+1. JSX, Function Component
+
+2. props
+  -> Header 컴포넌트
+  -> (실습) Button 컴포넌트
+
+3. state
+  -> 숫자데이터 Counter 컴포넌트
+  -> (실습) Calculator, prompt 입력값 2개 및 연산자
+  -> 배열데이터 Generator 컴포넌트
+  -> (실습) AccountManager, prompt로 입력값(+/-) 입출금 목록표시 및 합계 표시
+
+4. ref, useRef
+  -> Hello 컴포넌트
+  -> (실습) CalculatorRef, ref로 입력값 2개 및 연산자 받고 연산
+
+-- Bootstrap 사용
+1. 설치
+npm install bootstrap @popperjs/core
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+2. 컴포넌트 사용
+ - Counter Button
+
+3. 테마변경
+npm install node-sass
+App.scss
+@import "~bootstrap/scss/bootstrap";
+
+4. Sass
+- 변수
+
+-- 실전 컴포넌트 제작
+1. todo application
+2. 실습 contact
+3. 실습 feed
+
+
+-- React Router 기초
+npm install react-router-dom
+
+1. react-router-dom, switch, route
+-> todo, contact, feed 페이지 나누기
+
+2. SPA 개념, lazy-loading
+-> component
+    - Todo
+    - Contact
+    - Feed
+
+
+-------------------- 응용SW기초기술활용
+
+-- Component 렌더링 범위
+1. Todo 컴포넌트 분리
+  - Todo, TodoForm, TodoList, TodoListItem
+2. 실습 Contact 컴포넌트 분리
+
+-- Redux 기초
+1. Todo 데이터 공유, 라우터 이동시에도 상태값 유지
+2. Contact 실습
+
+-- React Router 및 Redux 심화
+1. Router 매개변수, article(게시판)
+   -> 작성컴포넌트, 목록컴포넌트, 수정 컴포넌트
+2. 컴포넌트간 상태 공유, article Redux
+3. 전역 상태 공유 profile 상태 및 페이지, profile 정보를 feed에 공유
+
+
+------------------ 인터페이스 구현
+1. Redux Saga
+2. Axios
+3. Chart
+
+
+------------------ 통합구현
+1. Profile
+2. Authentication/Authorization
