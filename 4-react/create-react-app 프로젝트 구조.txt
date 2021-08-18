@@ -1,0 +1,41 @@
+. /node_modules: javascript 라이브러리
+ - npm install로 설치하면 설치되는 위치
+
+. package.json
+ - 앱 설명
+ - 사용하는 라이브러리 목록
+ - 실행 스크립트 
+
+. .gitignore
+ - git으로 형상관리 제외할 항목
+ - /node_modules 제외
+   -> 설치할 라이브러리는 
+      형상관리를 하지 않음
+   -> npm install 
+     :package.json, lock.json 
+      파일을보고 추가 모듈을 설치함
+
+
+코드 -> 컴파일 -> 이진언어(컴퓨터)
+
+코드(ts) -> 컴파일 -> 중간언어(js) -> 브라우저
+코드(js) -> 컴파일 -> 중간언어(js) -> 브라우저
+
+. npm start
+: 개발모드로 프로젝트(코드여러개)를 실행함
+  -> 코드를 수정할 때마다 서버를 재기동함
+: react-scripts start
+
+. npm run build
+: 배포용으로 프로젝트를 필드함
+
+. /build
+: 실제로 상용 서비스에 사용할 빌드된 파일
+  -> 빌드: 소스코드 여러개를 컴파일 연결(linking)
+
+---------------------------------------------
+. create-react-app 프로젝트의 실행구조
+1. /public/index.html을 로딩함
+2. /src/index.tsx를 로딩함
+3. App컴포넌트(최상위컴포넌트)를 
+   id가 root인 요소에 렌더링함
