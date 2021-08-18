@@ -1,0 +1,8 @@
+. typescript
+  - https://react-etc.vlpt.us/06.typescript-basic.html
+. create-react-app 프로젝트 구조, 실행
+. JSX, Virtual DOM
+  - https://ko.reactjs.org/docs/introducing-jsx.html
+  - https://medium.com/sjk5766/virtual-dom%EC%97%90-%EB%8C%80%ED%95%B4-7222d752ee65
+  - https://ko.reactjs.org/docs/faq-internals.html
+. Function Component
