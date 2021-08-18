@@ -83,6 +83,10 @@
 
           add();
         }
+		
+		reader.onprogress = (e) => {
+			console.log(e);
+		}
       } else {
         add();
       }
