@@ -35,12 +35,6 @@ npm start
 
 
 0. 프로젝트 구조
-index.tsx
-/public
-App.tsx
-npm run build
-npm install -g server
-
 
 1. JSX, Function Component
 
