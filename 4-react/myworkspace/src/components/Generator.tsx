@@ -13,6 +13,16 @@ import { useState } from "react";
 // Virtual DOM 요소와 관련된
 // state 또는 prop를 조작
 
+// 세부 컴포넌트
+const ListItem = ({ key, num }: { key: number; num: number }) => {
+  const color = num < 0 ? "red" : "green";
+  return (
+    <li key={key} style={{ color: color }}>
+      {num}
+    </li>
+  );
+};
+
 const Generator = () => {
   // useState<타입>
   // state의 타입을 지정해줄 수 있음
@@ -69,9 +79,22 @@ const Generator = () => {
           // 세미콜론(;)을 한번만 쓸 수 있는 코드
           // map: 기존 배열크기와 동일하나 요소가 변경된 배열을 반환
           // 숫자배열 -> JSX배열로 변환
-          numbers.map((num, index) => (
-            <li key={index}>{num}</li>
-          ))
+          numbers.map(
+            (num, index) => (
+              // 세부 컴포넌트로 분리하여 처리
+              <ListItem key={index} num={num} />
+            )
+            // // 조건부 렌더링(conditional rendering)
+            // num < 0 ? (
+            //   <li style={{ color: "red" }} key={index}>
+            //     {num}
+            //   </li>
+            // ) : (
+            //   <li style={{ color: "green" }} key={index}>
+            //     {num}
+            //   </li>
+            // )
+          )
         }
       </ul>
     </div>
