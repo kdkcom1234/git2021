@@ -48,7 +48,8 @@ npm start
   -> 숫자데이터 Counter 컴포넌트
   -> (실습) Calculator, prompt 입력값 2개 및 연산자
   -> 배열데이터 Generator 컴포넌트
-  -> (실습) AccountManager, prompt로 입력값(+/-) 입출금 목록표시 및 합계 표시
+  -> (실습) AccountManager, 출금/입금 버튼 클릭 -> prompt로 값입력
+          ul>li로 입출금 목록표시 합계 금액을 우측에 표시
 
 4. ref, useRef
   -> Hello 컴포넌트
