@@ -1,6 +1,8 @@
 import Header from "./components/Header";
 import Button from "./components/Button";
 import Counter from "./components/Counter";
+import Calculator from "./components/Calculator";
+import Generator from "./components/Generator";
 
 // React == 컴포넌트 개발 라이브러리
 function App() {
@@ -25,6 +27,8 @@ function App() {
       <Button variant={"warning"} text={"Delete"} />
 
       <Counter />
+      <Calculator />
+      <Generator />
     </div>
   );
 }

@@ -54,6 +54,7 @@ npm start
 4. ref, useRef
   -> Hello 컴포넌트
   -> (실습) CalculatorRef, ref로 입력값 2개 및 연산자 받고 연산
+  -> (실습) AccountManagerRef, ref로 변경
 
 -- Bootstrap 사용
 1. 설치
