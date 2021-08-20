@@ -24,11 +24,11 @@ $dark: #212529;
 
 // 4. Include any optional Bootstrap CSS as needed
 @import "../node_modules/bootstrap/scss/utilities";
-@import "../node_modules/bootstrap/scss/helpers";
 /* ---------------------------------------------- */
 // Layout & Components
 @import "../node_modules/bootstrap/scss/buttons";
 /* ---------------------------------------------- */
+@import "../node_modules/bootstrap/scss/helpers";
 
 // 5. Optionally include utilities API last to generate classes based on the Sass map in `_utililies.scss`
 @import "../node_modules/bootstrap/scss/utilities/api";
