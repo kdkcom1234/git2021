@@ -6,11 +6,14 @@ import Generator from "./components/Generator";
 import AccountManager from "./components/AccountManagerRef";
 import Hello from "./components/Hello";
 
+import "./App.scss";
+
 // React == 컴포넌트 개발 라이브러리
 function App() {
   return (
     // main container
     <div style={{ width: "500px", margin: "0 auto" }}>
+      <button className="btn btn btn-primary">Primary</button>
       {/* JSX 내부에서 주석 달기 */}
       {/* 재사용하지 않는 컴포넌트 */}
       {/* <h1 style={{ color: "red" }}>Hello React with Typescript !</h1> */}
