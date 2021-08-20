@@ -14,13 +14,9 @@ import { useState } from "react";
 // state 또는 prop를 조작
 
 // 세부 컴포넌트
-const ListItem = ({ key, num }: { key: number; num: number }) => {
+const ListItem = ({ num }: { num: number }) => {
   const color = num < 0 ? "red" : "green";
-  return (
-    <li key={key} style={{ color: color }}>
-      {num}
-    </li>
-  );
+  return <li style={{ color: color }}>{num}</li>;
 };
 
 const Generator = () => {
@@ -80,10 +76,11 @@ const Generator = () => {
           // map: 기존 배열크기와 동일하나 요소가 변경된 배열을 반환
           // 숫자배열 -> JSX배열로 변환
           numbers.map(
-            (num, index) => (
+            (num, index) => {
               // 세부 컴포넌트로 분리하여 처리
-              <ListItem key={index} num={num} />
-            )
+              // console.log(index);
+              return <ListItem key={index} num={num} />;
+            }
             // // 조건부 렌더링(conditional rendering)
             // num < 0 ? (
             //   <li style={{ color: "red" }} key={index}>
