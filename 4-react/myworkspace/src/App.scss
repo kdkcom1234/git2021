@@ -15,6 +15,11 @@ $danger: #e74c3c;
 $warning: #f39c12;
 $light: #f8f9fa;
 $dark: #212529;
+
+$border-radius: 0;
+// $btn-border-radius: 0;
+// $btn-border-radius-sm: 0;
+// $btn-border-radius-lg: 0;
 /* ------------------------------------------------------ */
 
 // 3. Include remainder of required Bootstrap stylesheets
@@ -27,6 +32,7 @@ $dark: #212529;
 /* ---------------------------------------------- */
 // Layout & Components
 @import "../node_modules/bootstrap/scss/buttons";
+@import "../node_modules/bootstrap/scss/card";
 /* ---------------------------------------------- */
 @import "../node_modules/bootstrap/scss/helpers";
 

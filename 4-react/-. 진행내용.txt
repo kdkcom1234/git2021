@@ -60,18 +60,19 @@ npm start
 -- Bootstrap 사용
 1. 설치
 npm install bootstrap @popperjs/core
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-2. 컴포넌트 사용
- - Counter Button
-
-3. 테마변경
 npm install node-sass
+
+2. 테마변경
 App.scss
 @import "~bootstrap/scss/bootstrap";
+...
+
+3. 컴포넌트 사용
+ - Button, Card
 
 4. Sass
 - 변수
+
 
 
 -- React Router 기초
