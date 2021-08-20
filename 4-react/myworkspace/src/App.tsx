@@ -3,6 +3,7 @@ import Button from "./components/Button";
 import Counter from "./components/Counter";
 import Calculator from "./components/Calculator";
 import Generator from "./components/Generator";
+import AccountManager from "./components/AccountManager";
 
 // React == 컴포넌트 개발 라이브러리
 function App() {
@@ -29,6 +30,7 @@ function App() {
       <Counter />
       <Calculator />
       <Generator />
+      <AccountManager />
     </div>
   );
 }
