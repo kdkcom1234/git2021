@@ -1,9 +1,10 @@
 import Header from "./components/Header";
 import Button from "./components/Button";
 import Counter from "./components/Counter";
-import Calculator from "./components/Calculator";
+import Calculator from "./components/CalculatorRef";
 import Generator from "./components/Generator";
-import AccountManager from "./components/AccountManager";
+import AccountManager from "./components/AccountManagerRef";
+import Hello from "./components/Hello";
 
 // React == 컴포넌트 개발 라이브러리
 function App() {
@@ -31,6 +32,7 @@ function App() {
       <Calculator />
       <Generator />
       <AccountManager />
+      <Hello />
     </div>
   );
 }
