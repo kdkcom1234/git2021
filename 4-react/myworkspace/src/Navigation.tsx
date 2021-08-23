@@ -24,6 +24,9 @@ const Navigation = () => {
       <li>
         <Link to="/bootstrap">BootStrap</Link>
       </li>
+      <li>
+        <Link to="/todo">Todo</Link>
+      </li>
     </ul>
   );
 };

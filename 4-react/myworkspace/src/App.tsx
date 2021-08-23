@@ -24,6 +24,7 @@ const Generator = lazy(() => import("./components/Generator"));
 const AccountManager = lazy(() => import("./components/AccountManagerRef"));
 const Components = lazy(() => import("./components/Components"));
 const BootStrap = lazy(() => import("./components/Bootstrap"));
+const Todo = lazy(() => import("./components/Todo"));
 
 // React == 컴포넌트 개발 라이브러리
 function App() {
@@ -52,6 +53,7 @@ function App() {
               <Route path="/generator" component={Generator} />
               <Route path="/account-manager" component={AccountManager} />
               <Route path="/bootstrap" component={BootStrap} />
+              <Route path="/todo" component={Todo} />
             </Switch>
           </Suspense>
         </main>
