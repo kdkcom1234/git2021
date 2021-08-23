@@ -25,13 +25,14 @@ const AccountManager = lazy(() => import("./components/AccountManagerRef"));
 const Components = lazy(() => import("./components/Components"));
 const BootStrap = lazy(() => import("./components/Bootstrap"));
 const Todo = lazy(() => import("./components/Todo"));
+const Feed = lazy(() => import("./components/Feed"));
 
 // React == 컴포넌트 개발 라이브러리
 function App() {
   return (
     <Router>
       {/* main container */}
-      <div style={{ width: "900px" }} className="mx-auto">
+      <div style={{ width: "700px" }} className="mx-auto">
         <nav
           style={{ width: "200px", height: "100vh", top: "20px" }}
           className="position-fixed"
@@ -54,6 +55,7 @@ function App() {
               <Route path="/account-manager" component={AccountManager} />
               <Route path="/bootstrap" component={BootStrap} />
               <Route path="/todo" component={Todo} />
+              <Route path="/feeds" component={Feed} />
             </Switch>
           </Suspense>
         </main>
