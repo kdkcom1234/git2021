@@ -17,7 +17,7 @@ import Home from "./components/Home";
 
 // Lazy-Loading 처리
 // 컴포넌트를 방문하는 시점에 로딩함
-// const Todo = lazy(() => import("./components/Todo"));
+const Todo = lazy(() => import("./components/Todo"));
 const Feed = lazy(() => import("./components/Feed"));
 
 // React == 컴포넌트 개발 라이브러리
@@ -34,9 +34,9 @@ function App() {
             <li>
               <Link to="/">Home</Link>
             </li>
-            {/* <li>
+            <li>
               <Link to="/todo">Todo</Link>
-            </li> */}
+            </li>
             <li>
               <Link to="/feeds">Feeds</Link>
             </li>
@@ -51,7 +51,7 @@ function App() {
 
               {/* 해당 경로에 대해서 로딩할 컴포넌트 목록을 작성 */}
               <Route path="/" component={Home} exact />
-              {/* <Route path="/todo" component={Todo} /> */}
+              <Route path="/todo" component={Todo} />
               <Route path="/feeds" component={Feed} />
             </Switch>
           </Suspense>
