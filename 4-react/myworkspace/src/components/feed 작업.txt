@@ -13,8 +13,8 @@ id, content, dataUrl, createTime
 2. textarea, input file ref 객체 만들면 됨
 3. textarea value, input file 데이터로 FeedState 객체 생성
    -> FileReader 생성하고 readDataUrl로 dataUrl 생성
-   -> feed
-4. immer > setFeedList(product(state => {state.unshift(feed)});
+      -> feed
+4. immer > unshift(feed)
 
 // 삭제
 1. 삭제 버튼에 onClick 이벤트 함수 만듦 del(index)
