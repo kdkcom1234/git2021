@@ -101,6 +101,7 @@ npm install @types/react-router-dom
 
 -- Feed 수정 모드
 1. Modal Popup 이용
+  - props - down, event - up
 
 
 -- Profile 컴포넌트 제작
