@@ -17,7 +17,7 @@ import Home from "./components/Home";
 
 // Lazy-Loading 처리
 // 컴포넌트를 방문하는 시점에 로딩함
-const Todo = lazy(() => import("./components/Todo"));
+const Todo = lazy(() => import("./components/todo/Todo"));
 const Feed = lazy(() => import("./components/Feed"));
 
 // React == 컴포넌트 개발 라이브러리

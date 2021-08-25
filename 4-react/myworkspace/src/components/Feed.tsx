@@ -109,9 +109,7 @@ const Feed = () => {
                   alt={item.content}
                 />
               ) : (
-                <video className="card-img-top" controls>
-                  <source src={item.dataUrl} type="video/mp4"></source>
-                </video>
+                <video className="card-img-top" controls src={item.dataUrl} />
               ))}
             <div className="card-body">
               <p className="card-text">{item.content}</p>
@@ -126,7 +124,7 @@ const Feed = () => {
                 <a
                   href="#!"
                   onClick={(e) => {
-                    e.preventDefault();
+                    e.preventDefault(); // 기본 동작 방지
                     del(item.id);
                   }}
                   className="link-secondary fs-6 text-nowrap"
