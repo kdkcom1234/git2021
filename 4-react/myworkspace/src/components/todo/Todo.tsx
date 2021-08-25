@@ -4,7 +4,6 @@ import produce from "immer";
 import TodoEditModal from "./TodoEditModal";
 // ./type.ts/js/tsx가 없으면, ./type/index.ts/js/tsx 로딩함
 import { TodoState } from "./type";
-import { iteratorSymbol } from "immer/dist/internal";
 
 const getTimeString = (unixtime: number) => {
   // Locale: timezone, currency 등
