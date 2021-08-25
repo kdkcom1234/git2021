@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import GrayLayer from "../base/GrayLayer";
 import { TodoState } from "./type";
 
 // { 함수속성 }
