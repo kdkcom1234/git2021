@@ -98,21 +98,16 @@ npm install @types/react-router-dom
 
 
 -------------------- 응용SW기초기술활용
--- Home 컴포넌트 Grid 처리 -------------
-App.scss
-@import "../node_modules/bootstrap/scss/containers";
-@import "../node_modules/bootstrap/scss/grid";
 
-Home.tsx
- <div className="container">
-   <div className="row">
-     <div className="col">Chart</div>
-     <div className="col-6">Feeds</div>
-     <div className="col">Todo</div>
-   </div>
- </div>
+-- Feed 수정 모드
+1. Modal Popup 이용
 
 
+-- Profile 컴포넌트 제작
+1. 헤더에 이름, 섬네일 보여주기
+  - select profile
+2. 클릭 시에 팝업으로 Edit 모드 들어가기
+  - select profile, dipatch save
 
 -- Redux 기초
 -- Redux 환경구성 및 초기 셋업 ---------------------------------
@@ -121,26 +116,35 @@ npm install @reduxjs/toolkit react-redux
 2. configureStore로 store 생성
 3. Provider를 컨테이너 컴포넌로 감싸주고 store을 넣어줌
 
--- 각 slice 마다 처리 ---------------------------------
+-- 각 slice 마다 처리(profile, todo, feed) ---------------------------------
 4. slice를 생성
   -> state type 선언, initial state 선언, reducer 선언
 5. state type, action creator 및 reducer를 export 함
 6. store에 reducer를 넣어줌
 
--- 각 component 마다 처리 -------------------------------
+-- 각 component 마다 처리(Profile, Todo, Feed) -------------------------------
 7. useSelector로 필요한 state 가져오기
 8. useDispatch로 state 변경 실행하기
 
+-- Todo, Feed 프로필 처리
+1. Todo에 추가할 때 프로필 이름 표시하기
+ - select profile
+2. (실습) Feed에 추가할 때 헤더 부분에 프로필 이름, 이미지 표시하기
+ - select profile
 
--- 컴포넌트 분리 삽입
-1. Todo, TodoList 분리 및 Home 컴포넌트에 TodoList 삽입
-2. (실습) Feed, FeedList 분리 및 Home 컴포넌트에 Feed 삽입
+
+-- (선택) Home 컴포넌트 Grid 처리 -------------
+
+-- (선택) Todo, Feed 컴포넌트 분리
+1. Todo, TodoItem 분리 및 Home 컴포넌트에 TodoItem 삽입
+2. (실습) Feed, FeedItem 분리 및 Home 컴포넌트에 Feed 삽입
 
 
--- React Router 심화 및 Redux
-1. Router 매개변수, article(게시판)
+-- (필수) React Router 심화 및 Redux
+1. Router 매개변수, Photos(이미지, 그리드)
    -> 작성컴포넌트, 목록컴포넌트, 수정 컴포넌트
-2. 컴포넌트간 상태 공유, article Redux
+2. (실습) Forum(게시판, 테이블)
+
 
 
 ------------------ 인터페이스 구현
