@@ -2,27 +2,25 @@ import { useRef, useState } from "react";
 // import { lorem, penguin, robot } from "../common/data";
 // import { getTimeString } from "../common/lib/string";
 
-interface FeedState {
+interface PhotoState {
   id: number;
-  content?: string | undefined;
+  title?: string | undefined;
   dataUrl?: string | undefined;
   fileType?: string | undefined;
   createTime: number;
-  modifyTime?: number;
-  isEdit?: boolean;
 }
 
 const getTimeString = (unixtime: number) => {
   // Locale: timezone, currency 등
   // js에서는 브라우저의 정보를 이용함
   const dateTime = new Date(unixtime);
-  return `${dateTime.toLocaleDateString()} ${dateTime.toLocaleTimeString()}`;
+  return dateTime.toLocaleDateString();
 };
 
-const Feed = () => {
-  const [feedList, setFeedList] = useState<FeedState[]>([]);
+const Photo = () => {
+  const [photoList, setPhotoList] = useState<PhotoState[]>([]);
 
-  const textRef = useRef<HTMLTextAreaElement>(null);
+  const textRef = useRef<HTMLInputElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -45,28 +43,28 @@ const Feed = () => {
   };
 
   const post = (dataUrl: string | undefined, fileType: string | undefined) => {
-    const feed: FeedState = {
-      id: feedList.length > 0 ? feedList[0].id + 1 : 1,
+    const feed: PhotoState = {
+      id: photoList.length > 0 ? photoList[0].id + 1 : 1,
       // optional chaning
-      content: textRef.current?.value,
+      title: textRef.current?.value,
       dataUrl: dataUrl,
       fileType: fileType,
       createTime: new Date().getTime(),
     };
 
-    setFeedList([feed, ...feedList]);
+    setPhotoList([feed, ...photoList]);
 
     // 입력값 초기화
     formRef.current?.reset();
   };
 
   const del = (id: number) => {
-    setFeedList(feedList.filter((item) => item.id !== id));
+    setPhotoList(photoList.filter((item) => item.id !== id));
   };
 
   return (
     <>
-      <h2 className="text-center my-5">Feeds</h2>
+      <h2 className="text-center my-5">Photos</h2>
       <form
         className="mt-5"
         onSubmit={(e) => {
@@ -74,17 +72,18 @@ const Feed = () => {
         }}
         ref={formRef}
       >
-        <textarea
+        <input
+          type="text"
           className="form-control mb-1"
-          placeholder="Leave a post here"
+          placeholder="Title of image..."
           ref={textRef}
-          style={{ height: "15vh" }}
-        ></textarea>
+          style={{ boxSizing: "border-box" }}
+        ></input>
         <div className="d-flex">
           <input
             type="file"
             className="form-control me-1"
-            accept="image/png, image/jpeg, video/mp4"
+            accept="image/png, image/jpeg"
             ref={fileRef}
           />
           <button
@@ -98,27 +97,16 @@ const Feed = () => {
           </button>
         </div>
       </form>
-      <div className="mt-3">
-        {feedList.map((item) => (
+      <div className="mt-3 d-flex flex-wrap">
+        {photoList.map((item, index) => (
           <div className="card mt-1" key={item.id}>
-            {item.fileType &&
-              (item.fileType?.includes("image") ? (
-                <img
-                  src={item.dataUrl}
-                  className="card-img-top"
-                  alt={item.content}
-                />
-              ) : (
-                <video className="card-img-top" controls src={item.dataUrl} />
-              ))}
+            <img src={item.dataUrl} className="card-img-top" alt={item.title} />
             <div className="card-body">
-              <p className="card-text">{item.content}</p>
+              <p className="card-text">{item.title}</p>
               <div className="d-flex">
                 <div className="w-100">
                   <span className="text-secondary">
-                    {getTimeString(
-                      item.modifyTime ? item.modifyTime : item.createTime
-                    )}
+                    {getTimeString(item.createTime)}
                   </span>
                 </div>
                 <a
@@ -140,4 +128,4 @@ const Feed = () => {
   );
 };
 
-export default Feed;
+export default Photo;

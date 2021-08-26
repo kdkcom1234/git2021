@@ -3,7 +3,7 @@ import produce from "immer";
 
 import TodoEditModal from "./TodoEditModal";
 // ./type.ts/js/tsx가 없으면, ./type/index.ts/js/tsx 로딩함
-import { TodoState } from "./type";
+import { TodoItemState } from "./type";
 
 const getTimeString = (unixtime: number) => {
   // Locale: timezone, currency 등
@@ -14,7 +14,7 @@ const getTimeString = (unixtime: number) => {
 
 const Todo = () => {
   console.log("--todowithmodal--");
-  const [todoList, setTodoList] = useState<TodoState[]>([
+  const [todoList, setTodoList] = useState<TodoItemState[]>([
     { id: 2, memo: "Typescript", createTime: new Date().getTime() },
     { id: 1, memo: "React State 연습", createTime: new Date().getTime() },
   ]);
@@ -27,7 +27,7 @@ const Todo = () => {
   const ulRef = useRef<HTMLUListElement>(null);
 
   const add = () => {
-    const todo: TodoState = {
+    const todo: TodoItemState = {
       id: todoList.length > 0 ? todoList[0].id + 1 : 1,
       memo: inputRef.current?.value,
       createTime: new Date().getTime(),
@@ -54,16 +54,16 @@ const Todo = () => {
 
   // 컴포넌트가 업데이트 되도 유지시킬 수 있는 변수
   // 수정할 todo객체
-  const editItem = useRef<TodoState>({ id: 0, memo: "", createTime: 0 });
+  const editItem = useRef<TodoItemState>({ id: 0, memo: "", createTime: 0 });
 
-  const edit = (item: TodoState) => {
+  const edit = (item: TodoItemState) => {
     // 수정할 todo객체
     editItem.current = item;
     // 모달 팝업을 보여주기
     setIsEdit(true);
   };
 
-  const save = (editItem: TodoState) => {
+  const save = (editItem: TodoItemState) => {
     console.log(editItem);
     setTodoList(
       produce((state) => {

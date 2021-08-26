@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { TodoState } from "./type";
+import { TodoItemState } from "./type";
 
 // { 함수속성 }
 // 함수속성의 타입: (매개변수타입) => 리턴타입
@@ -7,16 +7,16 @@ import { TodoState } from "./type";
 // 자식컴포넌트에서 이벤트가 발생하면 prop으로 받은 함수를 실행
 
 interface ModalProp {
-  item: TodoState;
+  item: TodoItemState;
   onClose: () => void; // 콜백함수
-  onSave: (editItem: TodoState) => void; // 콜백함수
+  onSave: (editItem: TodoItemState) => void; // 콜백함수
 }
 
 const TodoEditModal = ({ item, onClose, onSave }: ModalProp) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const save = () => {
-    const todo: TodoState = {
+    const todo: TodoItemState = {
       id: item.id,
       memo: inputRef.current?.value, // 수정된 입력값
       createTime: item.createTime,

@@ -19,8 +19,9 @@ npm install -g @types/node
   -> number, string, boolean
 3. 타입 추론
   -> 초깃값 대입
+  -> 함수 반환값
 4. interface
-  -> 구조화된 타입 형식의 선언
+  -> 구조화된 타입의 선언
   -> ?, optional
 5. generic
 6. any
@@ -133,18 +134,10 @@ npm install @reduxjs/toolkit react-redux
 2. (실습) Feed에 추가할 때 헤더 부분에 프로필 이름, 이미지 표시하기
  - select profile
 
-
--- (선택) Home 컴포넌트 Grid 처리 -------------
-
--- (선택) Todo, Feed 컴포넌트 분리
-1. Todo, TodoItem 분리 및 Home 컴포넌트에 TodoItem 삽입
-2. (실습) Feed, FeedItem 분리 및 Home 컴포넌트에 Feed 삽입
-
-
--- (필수) React Router 심화 및 Redux
+-- React Router 심화 및 Redux
 1. Router 매개변수, Photos(이미지, 그리드)
    -> 작성컴포넌트, 목록컴포넌트, 수정 컴포넌트
-2. (실습) Forum(게시판, 테이블)
+2. (실습) Contacts(연락처(이름, 전화번호, 이메일, 메모), 테이블)
 
 
 
