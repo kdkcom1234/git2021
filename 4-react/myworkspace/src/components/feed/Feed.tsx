@@ -38,7 +38,10 @@ const Feed = () => {
 
       reader.onload = () => {
         post(reader.result?.toString(), file.type);
+        console.log("1");
       };
+
+      console.log("2");
     } else {
       post(undefined, undefined);
     }

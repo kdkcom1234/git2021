@@ -17,7 +17,7 @@ import Home from "./components/Home";
 
 // Lazy-Loading 처리
 // 컴포넌트를 방문하는 시점에 로딩함
-const Todo = lazy(() => import("./components/todo/TodoConatiner"));
+const Todo = lazy(() => import("./components/todo/Todo"));
 const Feed = lazy(() => import("./components/feed/Feed"));
 const Photo = lazy(() => import("./components/Photo"));
 
