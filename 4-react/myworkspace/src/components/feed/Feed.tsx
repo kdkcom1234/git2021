@@ -34,12 +34,15 @@ const Feed = () => {
     if (fileRef.current?.files?.length) {
       const file = fileRef.current?.files[0];
       const reader = new FileReader();
-      reader.readAsDataURL(file);
 
+      // 로딩이 끝났을 때 처리될 함수를 선언
       reader.onload = () => {
         post(reader.result?.toString(), file.type);
         console.log("1");
       };
+
+      // read하라고 실행 한거임
+      reader.readAsDataURL(file);
 
       console.log("2");
     } else {
