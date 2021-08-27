@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Suspense, lazy } from "react";
 
 import Home from "./domain/Home";
+import Profile from "./domain/profile/Profile";
 
 // SPA(Single Page Application)
 // : 페이지 파일이 1개, index.html
@@ -27,7 +28,9 @@ function App() {
     <Router>
       {/* main container */}
       <div className="mx-auto">
-        <header className="app-bar bg-primary shadow">App Bar</header>
+        <header className="app-bar d-flex justify-content-end bg-primary shadow">
+          <Profile />
+        </header>
         <nav className="drawer-menu position-fixed bg-light shadow-sm">
           <h3 className="ms-2">MY WORKSPACE</h3>
           <ul>
