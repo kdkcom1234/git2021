@@ -71,7 +71,7 @@ const Feed = () => {
   };
 
   return (
-    <>
+    <div style={{ width: "40vw" }} className="mx-auto">
       <h2 className="text-center my-5">Feeds</h2>
       <form
         className="mt-5"
@@ -142,7 +142,7 @@ const Feed = () => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
