@@ -131,9 +131,17 @@ const Todo = () => {
 
   const save = (id: number, index: number) => {
     console.log(ulRef.current);
+    console.log(index);
 
     // ul 밑에 있는 입력박스중에서 index번째 입력박스만 선택
-    const input = ulRef.current?.querySelectorAll("input")[index];
+    // 버그: item index와 input index가 일치하지 않음, input박스는 안 열렸을 수도 있기 때문
+    // const input = ulRef.current?.querySelectorAll("input")[index];
+
+    // 2021.08.28 버그 수정
+    // ul > li[index] 밑에 input박스를 찾음
+    const input = ulRef.current?.querySelectorAll("li")[index].querySelector("input");
+    // console.log(li);
+    console.log(input);
 
     // immer 없이 map함수로 새로운 배열을 반환 후 변경
     // setTodoList(
