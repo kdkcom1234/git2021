@@ -64,7 +64,7 @@ const Profile = () => {
 
     // {
     // type:"profile/saveProfile",
-    // payload:{ image: url, username: inputRef.current?.value }
+    // payload:{ image, username }
     // }
 
     // 2. action을 dispatcher에 보냄
