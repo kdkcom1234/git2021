@@ -1,5 +1,4 @@
-Flux: 클라이언트 사이트 데이터 관리 아키텍처(큰규모 구조)
-                                디자인(작은규모 구조)
+Flux: 클라이언트 데이터 관리 아키텍처(큰규모 구조)
       -> 추상적인, 이론적인, 원리적인
       -> View는 Store를 조회
       -> View에서 Action객체를 Dispatcher 넘기면
@@ -8,7 +7,7 @@ Flux: 클라이언트 사이트 데이터 관리 아키텍처(큰규모 구조)
 Redux: Flux 패턴을 라이브러리(js/ts) 만들어 놓은 것
   -> ActionCreator: 액션객체를 생성하는 함수
   -> Action: type(명령), payload매개변수) 구조의 객체
-  -> Dispatcher: 액션 객체를 받아서 액션 타입에 맞는 리듀서를 실행(리덕스 자체적으로 구현됨)
+  -> Dispatcher: 액션 객체를 받아서 액션 타입에 맞는 리듀서를 실행
   -> Reducer: 기존 state와 액션의 페이로드로 state를 변경하는 함수
 
 React-Redux: React에서 Redux를 쓸 수 있게 만들어 놓은 것
