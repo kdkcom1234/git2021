@@ -113,7 +113,7 @@ const Todo = () => {
     <div style={{ width: "40vw" }} className="mx-auto">
       <h2 className="text-center my-5">할 일 관리</h2>
       {/* profile 정보 확인용 */}
-      <div>
+      {/* <div>
         <img
           src={profile.image}
           width={150}
@@ -121,7 +121,7 @@ const Todo = () => {
           alt={profile.username}
         />
         <span>{profile.username}</span>
-      </div>
+      </div> */}
       {/* isEdit state가 true일 때만 Modal 창이 보임 */}
       {isEdit && (
         <TodoEditModal

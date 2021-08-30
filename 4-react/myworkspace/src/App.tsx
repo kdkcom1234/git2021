@@ -31,7 +31,7 @@ function App() {
       <Router>
         {/* main container */}
         <div className="mx-auto">
-          <header className="app-bar d-flex justify-content-end bg-primary shadow">
+          <header className="app-bar position-fixed d-flex justify-content-end bg-primary shadow">
             <Profile />
           </header>
           <nav className="drawer-menu position-fixed bg-light shadow-sm">

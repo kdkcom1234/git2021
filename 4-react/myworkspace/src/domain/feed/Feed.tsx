@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 // import { lorem, penguin, robot } from "../common/data";
 // import { getTimeString } from "../common/lib/string";
 
-interface FeedState {
+interface FeedItemState {
   id: number;
   content?: string | undefined;
   dataUrl?: string | undefined;
@@ -20,7 +20,7 @@ const getTimeString = (unixtime: number) => {
 };
 
 const Feed = () => {
-  const [feedList, setFeedList] = useState<FeedState[]>([]);
+  const [feedList, setFeedList] = useState<FeedItemState[]>([]);
 
   const textRef = useRef<HTMLTextAreaElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
@@ -51,7 +51,7 @@ const Feed = () => {
   };
 
   const post = (dataUrl: string | undefined, fileType: string | undefined) => {
-    const feed: FeedState = {
+    const feed: FeedItemState = {
       id: feedList.length > 0 ? feedList[0].id + 1 : 1,
       // optional chaning
       content: textRef.current?.value,

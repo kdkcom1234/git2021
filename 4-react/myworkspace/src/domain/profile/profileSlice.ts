@@ -24,6 +24,8 @@ export const profileSlice = createSlice({
   initialState, // state 초기값
   // state 변경함수 목록
   reducers: {
+    // action type: profile/saveProfile에 해당하는 reducer 함수
+    // slice명/redcuer함수명
     // 함수명: (기존state변수명, action변수명) => { state 변경처리 }
     saveProfile: (state, action: PayloadAction<ProfileState>) => {
       // action ==
