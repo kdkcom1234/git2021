@@ -1,0 +1,71 @@
+pwd(print workind directory)
+: 현재 작업 디렉토리 출력
+
+mkdir(make directory)
+: 디렉토리(폴더) 생성
+: mkdir 디렉토리명
+
+ls(list)
+: 디렉토리의 파일 목록을 표시
+: ls -al: 전체파일 목록을 상세하게 표시(list all long)
+  목록에서 가장 앞에 d표시되어있는 파일 directory
+: . -> 현재 디렉토리
+: .. -> 부모 디렉토리
+
+clear
+: 화면 지우기
+
+cd(change directory)
+: 디렉토리 이동
+: cd 이동할디렉터리명
+: 절대경로(absolute path), 루트경로부터 도착지까지를 적는 표기법
+: 상대경로(relative path), 현재경로에서의 상대위치를 적는 표기법
+  .. : 부모 디렉토리
+    .: 현재 디렉토리
+: 홈 디렉토리로 이동
+  -> cd ~, cd
+
+
+-- vi editor
+입력모드(i)
+명령줄모드(esc)
+저장 및 나가기(:w, :q, :wq!)
+H(왼쪽)J(아래쪽)K(위쪽)L(오른쪽) 또는 방향키
+yy(yank): 한줄 복사
+p(paste): 한줄 붙이기
+dd(delete): 한줄 삭제
+검색: /검색어 엔터 -> n 검색어의 다음 위치로 이동
+                         -> N 검색어의 이전 위치로 이동
+
+rm(remove)
+: 파일 삭제
+: rm 파일명
+
+cp(copy)
+: 파일 복사
+: cp 원래파일경로 대상파일경로
+
+mv(move)
+: 파일 이동 또는 파일명 변경
+: mv 원래파일경로 대상파일경로
+
+rmdir(remove directory)
+: 디렉터리 삭제
+: rmdir 디렉터리명
+  -> 디렉터리 내부에 아무것도 없을 때만
+: rm -rf 디렉터리명
+  -> 디렉터리 하위 디렉터리 및 파일 포함
+  -> -rf(recursive force)
+
+
+-- 패키지관리(apt)
+sudo apt update: 최신 패키지 저장소 주소로 업데이트
+sudo apt install 패키지명: 패키지 설치
+-> sudo apt install default-jre ex) 자바 설치
+-> sudo(관리자 권한으로 실행)
+sudo apt remove 패키지명: 패지키 삭제, 설정파일은 놔 둠
+sudo apt purge 패키지명: 패키지 삭제, 설정파일도 삭제
+
+
+
+
