@@ -54,14 +54,21 @@ const Profile = () => {
     // action creator의 반환 객체로 dispatch하는 방법
     // dispatch(액션함수(페이로드));
     // 액션함수(페이로드) => 액션객체 {type, payload}
-    dispatch(saveProfile({ image: url, username: inputRef.current?.value }));
+    // dispatch(saveProfile({ image: url, username: inputRef.current?.value }));
 
-    // action 객체를 바로 dispatch하는 방법
-    // dispatch(액션객체)
-    // dispatch({
-    //   type: "profile/saveProfile",
-    //   payload: { image: url, username: inputRef.current?.value },
-    // });
+    // 1. action creator로 액션 객체 생성
+    const action = saveProfile({
+      image: url,
+      username: inputRef.current?.value,
+    });
+
+    // {
+    // type:"profile/saveProfile",
+    // payload:{ image: url, username: inputRef.current?.value }
+    // }
+
+    // 2. action을 dispatcher에 보냄
+    dispatch(action);
 
     setIsEdit(false);
   };
