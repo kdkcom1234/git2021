@@ -18,6 +18,7 @@ const TodoEditModal = ({ item, onClose, onSave }: ModalProp) => {
   const save = () => {
     const todo: TodoItemState = {
       id: item.id,
+      username: item.username,
       memo: inputRef.current?.value, // 수정된 입력값
       createTime: item.createTime,
     };

@@ -107,6 +107,9 @@ const Feed = () => {
       <div className="mt-3">
         {feedList.map((item) => (
           <div className="card mt-1" key={item.id}>
+            <div className="card-header">
+              Feed 작성한 profile이미지, 사용자명
+            </div>
             {item.fileType &&
               (item.fileType?.includes("image") ? (
                 <img

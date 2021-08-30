@@ -4,19 +4,44 @@ import produce from "immer";
 import TodoEditModal from "./TodoEditModal";
 // ./type.ts/js/tsx가 없으면, ./type/index.ts/js/tsx 로딩함
 import { TodoItemState } from "./type";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 const getTimeString = (unixtime: number) => {
+  // 1초: 1000
+  // 1분: 60 * 1000
+  // 1시간: 60 * 60 * 1000
+  // 1일: 24 * 60 * 60 * 1000
+  const day = 24 * 60 * 60 * 1000;
+
   // Locale: timezone, currency 등
   // js에서는 브라우저의 정보를 이용함
   const dateTime = new Date(unixtime);
-  return `${dateTime.toLocaleDateString()} ${dateTime.toLocaleTimeString()}`;
+
+  // 현재시간보다 24시간 이전이면 날짜를 보여주고
+  // 현재시간보다 24시간 미만이면 시간을 보여줌
+  return unixtime - new Date().getTime() >= day
+    ? dateTime.toLocaleDateString()
+    : dateTime.toLocaleTimeString();
 };
 
 const Todo = () => {
-  console.log("--todowithmodal--");
+  // profile state를 가져옴 + state가 변경되면 컴포넌트를 업데이트(diff+render)함
+  const profile = useSelector((state: RootState) => state.profile);
+
   const [todoList, setTodoList] = useState<TodoItemState[]>([
-    { id: 2, memo: "Typescript", createTime: new Date().getTime() },
-    { id: 1, memo: "React State 연습", createTime: new Date().getTime() },
+    {
+      id: 2,
+      memo: "Typescript",
+      username: profile.username,
+      createTime: new Date().getTime(),
+    },
+    {
+      id: 1,
+      memo: "React State 연습",
+      username: profile.username,
+      createTime: new Date().getTime(),
+    },
   ]);
 
   // 수정 팝업을 띄울지 아닐지
@@ -30,6 +55,7 @@ const Todo = () => {
     const todo: TodoItemState = {
       id: todoList.length > 0 ? todoList[0].id + 1 : 1,
       memo: inputRef.current?.value,
+      username: profile.username,
       createTime: new Date().getTime(),
     };
     setTodoList(
@@ -54,7 +80,12 @@ const Todo = () => {
 
   // 컴포넌트가 업데이트 되도 유지시킬 수 있는 변수
   // 수정할 todo객체
-  const editItem = useRef<TodoItemState>({ id: 0, memo: "", createTime: 0 });
+  const editItem = useRef<TodoItemState>({
+    id: 0,
+    memo: "",
+    username: profile.username,
+    createTime: 0,
+  });
 
   const edit = (item: TodoItemState) => {
     // 수정할 todo객체
@@ -81,6 +112,16 @@ const Todo = () => {
   return (
     <div style={{ width: "40vw" }} className="mx-auto">
       <h2 className="text-center my-5">할 일 관리</h2>
+      {/* profile 정보 확인용 */}
+      <div>
+        <img
+          src={profile.image}
+          width={150}
+          height={100}
+          alt={profile.username}
+        />
+        <span>{profile.username}</span>
+      </div>
       {/* isEdit state가 true일 때만 Modal 창이 보임 */}
       {isEdit && (
         <TodoEditModal
@@ -121,7 +162,7 @@ const Todo = () => {
             <div className="w-100">
               <span className="me-1">{item.memo}</span>
               <span style={{ fontSize: "0.75rem" }}>
-                - {getTimeString(item.createTime)}
+                - {item.username}, {getTimeString(item.createTime)}
               </span>
             </div>
             <button
