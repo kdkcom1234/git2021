@@ -45,8 +45,11 @@ EC2 보안그룹: 80포트
 
 2. 빌드하고 업로드하기
   - npm run build
-  - WinSCP 설치 및 putty 설정 가져오기(ppk 파일을 2버전으로 변경해야함)
   - build 디렉토리에 모든 파일을 /home/ubuntu/web/myworkspace 디렉토리로 업로드
+  scp -i "myworkspace.pem" -r ./build/* ubuntu@ec2주소:/home/ubuntu/web/myworkspace
+  - 기존 파일 삭제
+  ssh -i "myworkspace.pem" ubuntu@ec2주소 "sudo rm -rf /home/ubuntu/web/myworkspace/*"
+
 
 3. 배포 확인
   - EC2 퍼블릭 도메인 주소로 접속한다.

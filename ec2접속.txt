@@ -1,0 +1,6 @@
+// ssh 접속
+ssh -i "myworkspace.pem" ubuntu@ec2-52-79-178-68.ap-northeast-2.compute.amazonaws.com
+// 파일 업로드
+scp -i "myworkspace.pem" -r ./build/* ubuntu@ec2-52-79-178-68.ap-northeast-2.compute.amazonaws.com:/home/ubuntu/web/myworkspace
+// 파일  삭제
+ssh -i "myworkspace.pem" ubuntu@ec2-52-79-178-68.ap-northeast-2.compute.amazonaws.com "sudo rm -rf /home/ubuntu/web/myworkspace/*"
