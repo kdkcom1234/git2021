@@ -36,6 +36,7 @@ sudo systemctl stop nginx
 sudo systemctl start nginx
 sudo systemctl status nginx
 
+
 // 네트워크 보안 설정
 EC2 보안그룹: 80포트
 
@@ -45,6 +46,8 @@ EC2 보안그룹: 80포트
   - npm run build
   - build 디렉토리에 모든 파일을 /home/ubuntu/web/myworkspace 디렉토리로 업로드
   scp -i "myworkspace.pem" -r ./build/* ubuntu@ec2주소:/home/ubuntu/web/myworkspace
+    -> package.json scripts deploy로 등록
+    -> npm run deploy
   - 기존 파일 삭제
   ssh -i "myworkspace.pem" ubuntu@ec2주소 "sudo rm -rf /home/ubuntu/web/myworkspace/*"
 
@@ -52,6 +55,6 @@ EC2 보안그룹: 80포트
 3. 배포 확인
   - EC2 퍼블릭 도메인 주소로 접속한다.
 
-4. nginX 로그확인
-   ls /var/log/nginx
-   tail -f /var/log/nginx/error.log
+4. nginX 접속로그확인
+   tail -f /var/log/nginx/access.log
+   
