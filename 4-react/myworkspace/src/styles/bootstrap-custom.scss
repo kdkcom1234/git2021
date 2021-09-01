@@ -41,8 +41,12 @@ $border-radius-sm: 0;
 @import "~bootstrap/scss/close";
 @import "~bootstrap/scss/modal";
 @import "~bootstrap/scss/dropdown";
+@import "~bootstrap/scss/tables";
 /* ---------------------------------------------- */
 @import "~bootstrap/scss/helpers";
 
 // 5. Optionally include utilities API last to generate classes based on the Sass map in `_utililies.scss`
 @import "~bootstrap/scss/utilities/api";
+
+// Icon
+@import "~bootstrap-icons/font/bootstrap-icons.css";

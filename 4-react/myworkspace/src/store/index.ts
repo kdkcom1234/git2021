@@ -1,5 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { enableMapSet } from "immer";
+
 import profileReducer from "../domain/profile/profileSlice";
+import photoReducer from "../domain/photo/photoSlice";
+
+// immer 객체에 Map을 사용하기
+enableMapSet();
 
 // global state(전역 상태) 저장소 만듦
 // global state: profile, todo, contact .... 여러개 state가 있음
@@ -10,6 +16,8 @@ export const store = configureStore({
     // state이름: reducer이름
     // profile state 처리하는 reducer를 등록
     profile: profileReducer,
+    // photos state 처리하는 reducer를 등록
+    photo: photoReducer,
   },
   devTools: true, // 개발툴 사용여부
 });
