@@ -22,7 +22,7 @@ import Profile from "./domain/profile/Profile";
 // 컴포넌트를 방문하는 시점에 로딩함
 const Todo = lazy(() => import("./domain/todo/Todo"));
 const Feed = lazy(() => import("./domain/feed/Feed"));
-const Photo = lazy(() => import("./domain/Photo"));
+const Photo = lazy(() => import("./domain/photo/Photo"));
 
 // React == 컴포넌트 개발 라이브러리
 function App() {

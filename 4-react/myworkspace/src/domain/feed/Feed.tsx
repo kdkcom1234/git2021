@@ -1,9 +1,13 @@
 import { useRef, useState } from "react";
-// import { lorem, penguin, robot } from "../common/data";
-// import { getTimeString } from "../common/lib/string";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+
+import style from "./Feed.module.scss";
 
 interface FeedItemState {
   id: number;
+  username: string | undefined;
+  profileImage: string | undefined;
   content?: string | undefined;
   dataUrl?: string | undefined;
   fileType?: string | undefined;
@@ -20,6 +24,8 @@ const getTimeString = (unixtime: number) => {
 };
 
 const Feed = () => {
+  const profile = useSelector((state: RootState) => state.profile);
+
   const [feedList, setFeedList] = useState<FeedItemState[]>([]);
 
   const textRef = useRef<HTMLTextAreaElement>(null);
@@ -53,6 +59,8 @@ const Feed = () => {
   const post = (dataUrl: string | undefined, fileType: string | undefined) => {
     const feed: FeedItemState = {
       id: feedList.length > 0 ? feedList[0].id + 1 : 1,
+      profileImage: profile.image,
+      username: profile.username,
       // optional chaning
       content: textRef.current?.value,
       dataUrl: dataUrl,
@@ -107,8 +115,12 @@ const Feed = () => {
       <div className="mt-3">
         {feedList.map((item) => (
           <div className="card mt-1" key={item.id}>
-            <div className="card-header">
-              Feed 작성한 profile이미지, 사용자명
+            <div className="card-header d-flex">
+              <div
+                className={`${style.thumb} me-1`}
+                style={{ backgroundImage: `url(${item.profileImage})` }}
+              ></div>
+              <span>{item.username}</span>
             </div>
             {item.fileType &&
               (item.fileType?.includes("image") ? (
