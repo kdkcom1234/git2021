@@ -1,0 +1,33 @@
+0. Typescript
+- variable/parameter/return Type
+- Type Inference
+- Interface
+- Generic
+- any 
+
+1. Sass
+- variable
+- import
+
+2. Component
+- Function Component, JSX
+- Props, State, Ref
+- useState, useRef
+- Array.map, Array.filter, Array.find, Array.findIndex
+- Immutable(불변성), Immer(produce)
+- event up-props down, action up-data down
+
+3. React Router
+- BrowserRouter, Suspense, Route
+- useHistory, useParam
+
+4. Redux
+- Global state의 필요성
+- Redux Toolkit
+- configureStore, Provider
+- slice, initialstate
+- reducer, state와 action 파라미터
+- action, action creator, action.type, action.payload
+- useDispatch, dispatch
+- Dispatcher
+
