@@ -1,21 +1,18 @@
 0. Typescript
 - variable/parameter/return Type
 - Type Inference
-- Interface
-- Generic
-- any 
+- Interface, Generic, any 
 
 1. Sass
-- variable
-- import
+- variable, import
 
 2. Component
 - Function Component, JSX
 - Props, State, Ref
 - useState, useRef
 - Array.map, Array.filter, Array.find, Array.findIndex
-- Immutable(불변성), Immer(produce)
-- event up-props down, action up-data down
+- Immutable(불변성), Immer(produce, draft)
+- event-up/props-down, action-up/data-down
 
 3. React Router
 - BrowserRouter, Suspense, Route
