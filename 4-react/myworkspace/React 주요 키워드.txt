@@ -20,6 +20,7 @@
 
 4. Redux
 - Global state의 필요성
+  - 컴포넌트 데이터 공유, 컴포넌트의 데이터 유지
 - Redux Toolkit
 - configureStore, Provider
 - slice, initialstate
