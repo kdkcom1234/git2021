@@ -19,7 +19,6 @@ interface PhotoState {
 }
 
 const initialState: PhotoState = {
-  // new Map([[key, value], [key, value], [key, value] ...])
   data: [
     {
       id: 5,
@@ -83,6 +82,7 @@ const photoSlice = createSlice({
     },
     modifyPhoto: (state, action: PayloadAction<PhotoItem>) => {
       const photo = action.payload;
+      // 기존 데이터를 id로 찾은 후 수정
       const item = state.data.find((item) => item.id === photo.id);
       if (item) {
         item.photoUrl = photo.photoUrl;
