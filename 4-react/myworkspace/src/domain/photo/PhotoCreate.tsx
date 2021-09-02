@@ -49,6 +49,7 @@ const PhotoCreate = () => {
 
         console.log(item);
 
+        // state에 데이터 추가
         // 1. addPhoto함수에서 Action 객체를 생성함
         //    -> {type:"photo/addPhoto", payload:item}
         // 2. Action 객체를 Dispatcher에 전달함
@@ -67,6 +68,8 @@ const PhotoCreate = () => {
         //   type: "photo/addPhoto",
         //   payload: item,
         // });
+
+        // 목록 화면으로 이동
         history.push("/photos");
       };
 
