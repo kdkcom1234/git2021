@@ -9,7 +9,7 @@ const PhotoEdit = () => {
   const history = useHistory();
 
   const photoItem = useSelector((state: RootState) =>
-    state.photo.data.get(+id)
+    state.photo.data.find((item) => item.id === +id)
   );
 
   const dispatch = useDispatch<AppDispatch>();

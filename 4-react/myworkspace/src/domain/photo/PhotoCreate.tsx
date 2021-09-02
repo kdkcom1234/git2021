@@ -20,13 +20,8 @@ const PhotoCreate = () => {
       const reader = new FileReader();
 
       reader.onload = () => {
-        let maxId: number | undefined = 1;
-        if (photoData.size) {
-          maxId = Array.from(photoData.values())[0].id;
-        }
-
         const item: PhotoItem = {
-          id: maxId ? maxId + 1 : 1,
+          id: photoData.length ? photoData[0].id + 1 : 1,
           profileUrl: profile.image ? profile.image : "",
           username: profile.username ? profile.username : "",
           title: title.current ? title.current.value : "",
