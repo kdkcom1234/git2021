@@ -23,8 +23,8 @@
 - Redux Toolkit
 - configureStore, Provider
 - slice, initialstate
-- reducer, state와 action 파라미터
-- action, action creator, action.type, action.payload
+- Reducer, state와 action 파라미터
+- Action(type, payload), Action Creator
 - useDispatch, dispatch
 - Dispatcher
 
