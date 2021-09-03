@@ -42,15 +42,24 @@ const Photo = () => {
               />
               <span>{item.username}</span>
             </div>
-            <img
-              src={item.photoUrl}
-              className="card-img-top"
+            {/* 컨텐트 wrapper -- 시작 */}
+            <div
               style={{ cursor: "pointer" }}
-              alt={item.title}
-            />
-            <div className="card-body">
-              <h5 className="card-title">{item.title}</h5>
+              onClick={() => {
+                // id값을 물고 이동해야함
+                history.push(`/photos/detail/${item.id}`);
+              }}
+            >
+              <img
+                src={item.photoUrl}
+                className="card-img-top"
+                alt={item.title}
+              />
+              <div className="card-body">
+                <h5 className="card-title">{item.title}</h5>
+              </div>
             </div>
+            {/* 컨텐트 wrapper -- 끝 */}
           </div>
         ))}
       </div>

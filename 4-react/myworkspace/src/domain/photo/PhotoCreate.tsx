@@ -43,6 +43,8 @@ const PhotoCreate = () => {
           title: titleInput.current ? titleInput.current.value : "",
           description: descTxta.current?.value,
           photoUrl: reader.result ? reader.result.toString() : "",
+          fileType: imageFile.type,
+          fileName: imageFile.name,
           // 시스템 값(작성일시, 수정일시, 수정한사람....)
           createdTime: new Date().getTime(),
         };

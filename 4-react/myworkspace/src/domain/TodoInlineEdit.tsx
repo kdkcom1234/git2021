@@ -139,7 +139,9 @@ const Todo = () => {
 
     // 2021.08.28 버그 수정
     // ul > li[index] 밑에 input박스를 찾음
-    const input = ulRef.current?.querySelectorAll("li")[index].querySelector("input");
+    const input = ulRef.current
+      ?.querySelectorAll("li")
+      [index].querySelector("input");
     // console.log(li);
     console.log(input);
 
