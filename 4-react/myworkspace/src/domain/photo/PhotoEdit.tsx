@@ -5,6 +5,7 @@ import { AppDispatch, RootState } from "../../store";
 import { modifyPhoto } from "./photoSlice";
 
 const PhotoEdit = () => {
+  // ------ 데이터를 가져오거나 변수를 선언하는 부분 --------
   const { id } = useParams<{ id: string }>();
 
   const photoItem = useSelector((state: RootState) =>
@@ -20,6 +21,7 @@ const PhotoEdit = () => {
   const descTxta = useRef<HTMLTextAreaElement>(null);
   const fileInput = useRef<HTMLInputElement>(null);
 
+  // ------ 이벤트에 대해서 처리하는 부분 --------
   const changeFile = () => {
     console.log("change");
     if (fileInput.current?.files?.length) {
