@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="sec07.exam05_slider_progressbar.RootController"
+	prefHeight="220.0" prefWidth="530.0" >
+   <children>
+ 		<StackPane layoutX="10.0" layoutY="10.0">
+		   <children>
+		      <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="360.0"  preserveRatio="false">
+		         <image><Image url="@media/audio.png" /></image>
+		      </ImageView>  
+		      <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="360.0" preserveRatio="false" />    
+		   </children>
+		</StackPane>
+		<Button fx:id="btnPlay" layoutX="385.0" layoutY="15.0" prefHeight="23.0" prefWidth="131.0" text="재생" />
+		<Button fx:id="btnPause" layoutX="385.0" layoutY="39.0" prefHeight="23.0" prefWidth="131.0" text="멈춤"/>      
+		<Button fx:id="btnStop" layoutX="385.0" layoutY="63.0" prefHeight="23.0" prefWidth="131.0" text="중지"/>	
+   
+		<Label layoutX="387.0" layoutY="101.0" text="시간" />
+		<ProgressBar fx:id="progressBar" layoutX="385.0" layoutY="121.0" prefHeight="18.0" prefWidth="98.0" progress="0.0" />
+		<ProgressIndicator fx:id="progressIndicator" layoutX="489.0" layoutY="112.0" prefHeight="47.0" prefWidth="31.0" progress="0.0" />      	
+		<Label fx:id="labelTime" alignment="CENTER" layoutX="386.0" layoutY="142.0" prefHeight="18.0" prefWidth="98.0" text="0/0 sec" />     
+		 
+		<Label layoutX="385.0" layoutY="169.0" text="소리" />
+		<Slider fx:id="sliderVolume" layoutX="385.0" layoutY="187.0" prefHeight="14.0" prefWidth="131.0"  showTickMarks="true"/>
+   </children>
+</AnchorPane>
