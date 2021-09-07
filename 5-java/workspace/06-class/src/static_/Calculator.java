@@ -22,6 +22,6 @@ public class Calculator {
 	}
 
 	static double getAreaCircle(int r) {
-		return r * r * pi;
+		return r * r * PI;
 	}
 }
