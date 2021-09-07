@@ -1,0 +1,13 @@
+. Sequence Diagram
+- 시퀀스, 순서
+- 객체간 메시지를 주고받는 흐름을 표현
+  : 메시지(데이터, 값, 변수, 객체)
+
+- Actor: 처리 주체
+  -> 사용자, 개발자, 관리자 .. 등
+- Lifeline: 상호작용하는 객체를 표현
+  표기법 > 객체명 : 타입명
+- Message: Actor 또는 객체간 주고받는 내용
+   - Create Message: 객체를 생성
+   - Reply Message: 처리 후 응답 메시지
+- Activiation: 객체가 처리중에 활성화된 시간을 표현
