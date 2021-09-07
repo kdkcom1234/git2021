@@ -1,0 +1,28 @@
+UML(Unified Modeling Lanaguage)
+: 통합적인 설계 언어
+: 국제 표준 지정, 설계 방법
+
+Forward Engineering
+: 설계 -> 코드
+
+Reverse Engineering
+: 코드 -> 설계
+
+
+// Class Diagram
+
+--- Class Diagram 예시
+Member class 객체를 MemberExample에서 생성(intantiation)
+: 클래스 - 구조
+: 객체, 인스턴스 - 구조로 만들어낸 것
+
+1. 클래스의 캡슐화(encapsulation)를 표현
+ - 캡슐화: 필드, 메서드로 클래스를 표현(자바)
+   -> 공학적인 일반화: 속성과 기능으로 구조를 만듦
+2. 클래스 간의 관계(relationship)를 표현
+ - Dependency(의존관계): 클래스 변동사항이 다른 클래스에 영향을 미침
+   -> 클래스를 변경하면 클래스를 가져다 쓰는 쪽에 영향을 미침
+   -> 자바(코드): 메서드에서 다른 클래스 객체를 생성해서 사용함
+ - 예) MemberExample이 Member 클래스에 의존성이 있음
+    -> Member클래스를 수정하면 MemberExample에 영향을 미칠 수 있음
+
