@@ -13,6 +13,7 @@ public class MemberServiceExample {
 
 		// 로그인 테스트 케이스 실행
 		boolean result = memberSerivce.login(member);
+//		boolean result = memberSerivce.login("hong", "12345");
 		if (result) {
 			System.out.println("로그인 되었습니다.");
 			// 로그아웃 테스트 케이스 실행
