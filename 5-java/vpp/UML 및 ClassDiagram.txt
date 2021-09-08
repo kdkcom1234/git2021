@@ -4,9 +4,11 @@ UML(Unified Modeling Lanaguage)
 
 Forward Engineering
 : 설계 -> 코드
+1. 애플리케이션 아키텍트가 개발자가 이해할 수 있도록 작성하는 언어
 
 Reverse Engineering
 : 코드 -> 설계
+2. 개발한/개발중인 애플리케이션을 구조를 처리흐름을 알기 쉽게 함
 
 
 // Class Diagram
@@ -31,5 +33,15 @@ Reverse Engineering
           매개변수로 받아서 사용
    - 의존 객체를 외부에서 생성해서 메서드 매개변수로 넣어줌
      -> 의존성 주입(Dependency Injection)
+ - Association(연관관계): 두개의 클래스가 관계가 있음??
+   - UML표기법은 ㅡ (그냥 줄), 탐색 방향에 따라서 ㅡ>, <ㅡ 화살표 처리
+   - 자바(코드): 클래스의 필드로 다른 클래스의 객체를 참조
+ - Aggregation(집합관계): 연관관계이면서 부분-전체(포함) 관계
+   - UML표기법 ㅡ◇ (다이아몬드 줄), 집합객체에 다이아몬드가 있음
+   - 자바(코드): 연관관계와 동일한데 논리적인 포함관계
+     예) AccountManager에서 Account 객체를 생성, 수정, 삭제
+     예) BankApplication에서 Account 객체 여러개를 조작함
+         -> Aggregation Root 객체
+     
 
 
