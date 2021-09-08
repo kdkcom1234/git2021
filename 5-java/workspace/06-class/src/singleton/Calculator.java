@@ -16,8 +16,6 @@ public class Calculator {
 //	private static Calculator calc = new Calculator();
 	private static Calculator calc;
 
-	private final double PI = 3.141592;
-
 	// 1. 기본생성자를 외부에서 접근 못하게함
 	private Calculator() {
 	}
@@ -30,6 +28,8 @@ public class Calculator {
 		}
 		return calc;
 	}
+
+	private final double PI = 3.141592;
 
 	public int plus(int a, int b) {
 		return a + b;
