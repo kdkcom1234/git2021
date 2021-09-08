@@ -5,9 +5,19 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class BankApplication {
+
+	// Map 여러가지 형태의 Map 가능한 타입(Inteface)
+	// = HashMap
+	// = HashTable
+	// = TreeMap
+	//
+	// 대입하는 자료구조에 따라서 같은 메서드를 호출하더라도
+	// 내부적인 처리방식이 다름
+
 	// 계좌목록 Map 객체
 	// Map<키타입, 값타입> 변수명 = new HashMap<키타입, 값타입>();
 	private static Map<String, Account> accounts = new HashMap<String, Account>();
+
 	private static Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) {

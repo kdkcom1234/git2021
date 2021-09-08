@@ -1,9 +1,9 @@
 package exam;
 
 public class Account {
-	private String ano;
-	private String owner;
-	private int balance;
+	private String ano; // 계좌번호
+	private String owner; // 소유자이름
+	private int balance; // 잔고금액
 
 	public Account(String ano, String owner, int balance) {
 		this.ano = ano;
