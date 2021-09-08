@@ -1,10 +1,18 @@
-package constructor;
+package constructor.sub;
 
 public class Student {
 
+	// default 접근 제한자
+	// 외부 패키지에서는 사용불가
 	String name;
-	int age;
-	int semester;
+
+	// public 접근 제한자
+	// 모든 패키지의 클래스에서 사용 가능함
+	public int age;
+
+	// protected 접근 제한자
+	// 외부 패키지에서 사용불가인데 이 클래스를 상속받아서(extends) 사용하면 사용가능
+	protected int semester;
 	String major;
 
 	// 오버로딩(Overloading)
@@ -56,6 +64,6 @@ public class Student {
 		this.major = major;
 	}
 
-	void joinCourse() {
+	protected void joinCourse() {
 	}
 }

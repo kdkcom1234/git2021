@@ -9,7 +9,7 @@ public class MemberServiceExample {
 		// 로그인 성공 케이스
 		// 테스트 데이터 생성
 		Member member = new Member("홍길동", "hong");
-		member.password = "12345";
+		member.setPassword("12345");
 
 		// 로그인 테스트 케이스 실행
 		boolean result = memberSerivce.login(member);
