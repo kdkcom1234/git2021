@@ -45,7 +45,7 @@ public class BankApplication {
 		System.out.println("프로그램 종료");
 	}
 
-	// 계좌생성하기
+	// 계좌생성하기(계좌추가하기)
 	private static void createAccount() {
 	}
 
@@ -53,11 +53,11 @@ public class BankApplication {
 	private static void accountList() {
 	}
 
-	// 예금하기
+	// 예금하기(필드값수정)
 	private static void deposit() {
 	}
 
-	// 출금하기
+	// 출금하기(필드값수정)
 	private static void withdraw() {
 	}
 }
