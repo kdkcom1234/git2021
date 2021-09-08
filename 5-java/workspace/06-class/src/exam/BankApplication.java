@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class BankApplication {
 	// 계좌목록 Map 객체
-	// Map<키타입, 값타입> 변수명 = new HashMap<String, Account>();
+	// Map<키타입, 값타입> 변수명 = new HashMap<키타입, 값타입>();
 	private static Map<String, Account> accounts = new HashMap<String, Account>();
 	private static Scanner scanner = new Scanner(System.in);
 
@@ -49,10 +49,5 @@ public class BankApplication {
 
 	// 출금하기
 	private static void withdraw() {
-	}
-
-	// Account 배열에서 ano와 동일한 Account 객체 찾기
-	private static Account findAccount(String ano) {
-		return null;
 	}
 }
