@@ -1,15 +1,15 @@
 package map;
 
 public class Member {
-	private String name;
 	private String id;
 	private String password;
+	private String name;
 	private int age;
 
-	public Member(String name, String id, String password, int age) {
-		this.name = name;
+	public Member(String id, String password, String name, int age) {
 		this.id = id;
 		this.password = password;
+		this.name = name;
 		this.age = age;
 	}
 
