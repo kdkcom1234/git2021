@@ -42,9 +42,15 @@ HTTP Request 해부
               -> HttpMessageConverter -> Object(Todo)
      {"memo":"테스트메모"}              -> Todo(memo="테스트메모")
      문자열                            ->  객체
-
+-----------------------------------------------------------
 HTTP Response 해부
 -> 응답을 주는 쪽의 정보구조를 파악
+  - HTTP Response Line
+    - Status Code: 처리된 결과에 따른 코드값
+       2xx: 정상처리
+       3xx: 컨텐츠 이동
+       4xx: 클라이언트 오류
+       5xx: 서버오류
   - HTTP Response Header
     - Content-Type: 응답을 보내는 데이터의 형식
      예) application/json
@@ -52,4 +58,4 @@ HTTP Response 해부
     예) {"id": 1, "memo": "test메모입니다.", "createdTime": 1631506649221}
   - Spring Controller에서 @ResponseBody 어노테이션에 의해 객체->JSON 자동 변환
     Todo(id=1, memo="테스트메모입니다"...) => {"id":1, "memo":"테스트메모입니다"...}
-  
+-----------------------------------------------------------
