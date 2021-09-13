@@ -1,0 +1,55 @@
+POST /todos  {"memo":"...."}
+GET /todos
+
+// REST
+1. 행위와 자원의URL로 자원에 접근방법을 표현
+  -> 자원(리소스, resource): *객체, 메서드, *테이블, 프로시저...
+     : /todos <- todos 객체에 접근하겠다. (todo목록에 접근하겠다.)
+  -> 행위(메서드, method): HTTP Method(GET, POST, PUT, PATCH, DELTE)
+     : 자원에 대해서 어떤 방식으로 접근하겠냐
+     : GET -> 리소스를 가져오겠다.
+     : POST -> 리소스에 추가하겠다.
+     : PUT -> 리소스를 수정하겠다.
+     : PATCH -> 리소스의 일부분을 수정하겠다.
+     : DELETE -> 리소스의 일부분을 삭제하겠다.
+
+예)
+POST /todos : todo목록에 todo 1건을 추가하겠다.
+GET /todos : todo목록을 가져오겠다.
+
+2. Client-Server 구조이다.
+-----------------------------------------------------------
+HTTP 프로토콜은 Request(요청) - Response(응답)
+ - 요청하는 쪽이 Client, 응답하는 쪽이 Server
+-----------------------------------------------------------
+HTTP Request 해부
+-> 요청하는 쪽의 정보구조를 파악
+ - HTTP Request Line
+   - HTTP메서드, 요청URL, HTTP버전
+     -> POST http://localhost:8080/todos HTTP/1.1
+ - HTTP Request Header
+   - Host: 응답을 받을 서버의 주소
+   - User-Agent: 요청을 보내는 클라이언트의 정보(OS, 브라우저) 
+   - Accept: 응답받을 데이터의 형식(파일에 대한 MIME Type, image/png.. */*)
+ - (옵션) HTTP Request Body
+   - 보내는 데이터를 넣는 부분
+   - JSON(Javascript Object Notation): JS객체 표기법
+      예) {"memo":"테스트메모", "key":"value"}
+   - application/x-www-form-urlencoded
+      예) memo=테스트메모&key=value
+   - Spring Controller에서 @RequestBody 어노테이션에 의해서 JSON->객체 자동 변환
+     JSON -> Dispatcher Servlet 
+              -> HttpMessageConverter -> Object(Todo)
+     {"memo":"테스트메모"}              -> Todo(memo="테스트메모")
+     문자열                            ->  객체
+
+HTTP Response 해부
+-> 응답을 주는 쪽의 정보구조를 파악
+  - HTTP Response Header
+    - Content-Type: 응답을 보내는 데이터의 형식
+     예) application/json
+  - HTTP Reponse Body
+    예) {"id": 1, "memo": "test메모입니다.", "createdTime": 1631506649221}
+  - Spring Controller에서 @ResponseBody 어노테이션에 의해 객체->JSON 자동 변환
+    Todo(id=1, memo="테스트메모입니다"...) => {"id":1, "memo":"테스트메모입니다"...}
+  
