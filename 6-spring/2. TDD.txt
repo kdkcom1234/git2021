@@ -1,0 +1,11 @@
+// TDD(Test Driven Development) 개발스타일 
+사용자 needs(user story) 
+-> 요구사항(requirement, backlog) 
+-> 설계(design, architecture) 
+    -> 코드stub(뼈대) -> 테스트케이스(유즈케이스)(코드) -> 구현 -> 테스트케이스 통과
+                       액터(수행자)
+                       이벤트흐름(처리절차)
+                       사전조건, 예상결과
+
+// 테스트
+애플리케이션/시스템의 품질을 측정할 수 있는 유일한 방법
