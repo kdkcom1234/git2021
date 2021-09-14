@@ -1,0 +1,43 @@
+// 테스트 커버리지
+statement coverage(구문 커버리지)
+- 메서드의 각 행들이 커버가 되는지에 대한 비율
+- 예) 회사기준이 75%
+
+branch coverage(분기 커버리지)
+- 조건문이 커버되는 비율
+- 예) 회사기준이 50% 이상
+
+** 최대한 쉬운코드들은 커버리지 100%를 만들어 놓는게 좋음
+
+// Jacoco gradle 플러그인으로 환경구성
+1. build.gralde 파일 수정
+plugins {
+	// 추가
+	// 커버리지 리포트용 플러그인
+	id 'jacoco'	
+}
+
+
+test {
+	// 추가
+	// report is always generated after tests run
+	finalizedBy jacocoTestReport 
+}
+
+// 추가
+jacocoTestReport {
+    // tests are required to run before generating the report
+    dependsOn test 
+}
+
+2. build.gradle 우클릭 > Gradle > Refresh Gradle Project
+
+3. lombok.config를 프로젝트 root에 생성
+lombok.addLombokGeneratedAnnotation = true
+
+4. Window > Show View > Other > Gradle > Gradle Tasks 추가
+
+5. Gradle Tasks > verification > test
+
+6. 프로젝트폴더 > build > reports > jacoco > test > html
+   - index.html 테스트 커버리지 리포트 보일 것임
