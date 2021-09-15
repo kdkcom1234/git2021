@@ -1,0 +1,12 @@
+https://developer.mozilla.org/ko/docs/Web/HTTP/CORS
+CORS(Cross Origin Resource Sharing)
+: 웹에 리소스(자원) 공유에 대한 표준 정책
+: 기본적으로 같은 프로토콜, 도메인, 포트의 리소스만 공유가 가능함
+: 프로토콜://도메인:포트
+: 예) https://www.naver.com <- https://www.naver.com
+                           X<- https://api.naver.com
+: 예) http://localhost:3000 X<- http://localhost:8080
+
+: 서버측에 Access-Control-Allow-Origin 헤더를 넣어서 처리해줘야함
+  -> CORS정책에 예외로 처리할 주소를 처리해줘야함
+ 
