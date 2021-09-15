@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import Alert from "../components/Alert";
+import Alert from "../../components/Alert";
 
 import produce from "immer";
 
-import api from "../api/todo";
+import api from "./todoApi";
 
 // state 1건에 대한 타입
 interface TodoItemState {
