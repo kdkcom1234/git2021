@@ -8,6 +8,6 @@ REACT_APP_API_BASE
 변수 타입 정의
 
 4. 백엔드 API호출 처리하는 코드 분리
-/src/domain/contact/contactApi.ts
+/src/features/contact/contactApi.ts
 
 5. 기존 컴포넌트의 코드를 async-await 및 API호출 하도록 변경
