@@ -26,6 +26,10 @@ const Photo = lazy(() => import("./features/photo/Photo"));
 const PhotoCreate = lazy(() => import("./features/photo/PhotoCreate"));
 const PhotoDetail = lazy(() => import("./features/photo/PhotoDetail"));
 const PhotoEdit = lazy(() => import("./features/photo/PhotoEdit"));
+const Contact = lazy(() => import("./features/contact/Contact"));
+const ContactCreate = lazy(() => import("./features/contact/ContactCreate"));
+const ContactDetail = lazy(() => import("./features/contact/ContactDetail"));
+const ContactEdit = lazy(() => import("./features/contact/ContactEdit"));
 
 // React == 컴포넌트 개발 라이브러리
 function App() {
@@ -52,6 +56,9 @@ function App() {
               <li>
                 <Link to="/photos">Photos</Link>
               </li>
+              <li>
+                <Link to="/contacts">Contacts</Link>
+              </li>
             </ul>
           </nav>
           <main className="content-container">
@@ -71,6 +78,10 @@ function App() {
                 {/* id라는 매개변수를 url 경로에 넘김, path parameter */}
                 <Route path="/photos/detail/:id" component={PhotoDetail} />
                 <Route path="/photos/edit/:id" component={PhotoEdit} />
+                <Route path="/contacts" component={Contact} exact />
+                <Route path="/contacts/create" component={ContactCreate} />
+                <Route path="/contacts/detail/:id" component={ContactDetail} />
+                <Route path="/contacts/edit/:id" component={ContactEdit} />
               </Switch>
             </Suspense>
           </main>

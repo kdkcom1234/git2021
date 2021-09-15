@@ -1,8 +1,8 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { AppDispatch, RootState } from "../../store";
-import { ContactItem, modifyContact } from "./contactSlice";
+import { modifyContact } from "./contactSlice";
 
 const ContactEdit = () => {
   // ------ 데이터를 가져오거나 변수를 선언하는 부분 --------

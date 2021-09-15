@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import profileReducer from "../features/profile/profileSlice";
 import photoReduer from "../features/photo/photoSlice";
+import contactReducer from "../features/contact/contactSlice";
 
 // global state(전역 상태) 저장소 만듦
 // global state: profile, todo, contact .... 여러개 state가 있음
@@ -13,6 +14,7 @@ export const store = configureStore({
     profile: profileReducer,
     // photo state를 처리하는 reducer를 등록
     photo: photoReduer,
+    contact: contactReducer,
   },
   devTools: true, // 개발툴 사용여부
 });
