@@ -9,8 +9,8 @@ import { Suspense, lazy } from "react";
 import { Provider } from "react-redux"; // react 앱에 redux store를 제공해줌
 import { store } from "./store"; // redux store
 
-import Home from "./domain/Home";
-import Profile from "./domain/profile/Profile";
+import Home from "./features/Home";
+import Profile from "./features/profile/Profile";
 
 // SPA(Single Page Application)
 // : 페이지 파일이 1개, index.html
@@ -20,12 +20,12 @@ import Profile from "./domain/profile/Profile";
 
 // Lazy-Loading 처리
 // 컴포넌트를 방문하는 시점에 로딩함
-const Todo = lazy(() => import("./domain/todo/TodoInlineEdit"));
-const Feed = lazy(() => import("./domain/feed/Feed"));
-const Photo = lazy(() => import("./domain/photo/Photo"));
-const PhotoCreate = lazy(() => import("./domain/photo/PhotoCreate"));
-const PhotoDetail = lazy(() => import("./domain/photo/PhotoDetail"));
-const PhotoEdit = lazy(() => import("./domain/photo/PhotoEdit"));
+const Todo = lazy(() => import("./features/todo/TodoInlineEdit"));
+const Feed = lazy(() => import("./features/feed/Feed"));
+const Photo = lazy(() => import("./features/photo/Photo"));
+const PhotoCreate = lazy(() => import("./features/photo/PhotoCreate"));
+const PhotoDetail = lazy(() => import("./features/photo/PhotoDetail"));
+const PhotoEdit = lazy(() => import("./features/photo/PhotoEdit"));
 
 // React == 컴포넌트 개발 라이브러리
 function App() {

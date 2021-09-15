@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import profileReducer from "../domain/profile/profileSlice";
-import photoReduer from "../domain/photo/photoSlice";
+import profileReducer from "../features/profile/profileSlice";
+import photoReduer from "../features/photo/photoSlice";
 
 // global state(전역 상태) 저장소 만듦
 // global state: profile, todo, contact .... 여러개 state가 있음
