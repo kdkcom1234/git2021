@@ -101,6 +101,24 @@
         li.remove();
       }
     }
+
+    // 스크립트 로딩되면 가장 마지막에 실행됨
+    fetch("http://localhost:8080/todos")
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        for (let item of data) {
+          const li = /*html*/`
+            <li class="list-group-item">
+              <button class="btn btn-outline-secondary btn-sm remove">삭제</button>          
+              ${item.memo}
+            </li>
+            `
+
+          // ul 요소에 추가
+          ulList.insertAdjacentHTML("afterbegin", li);
+        }
+      });
   </script>
 </body>
 
