@@ -3,8 +3,6 @@ import Alert from "../components/Alert";
 
 import produce from "immer";
 
-import api from "../api/todo";
-
 // state 1건에 대한 타입
 interface TodoItemState {
   id: number;
@@ -12,6 +10,13 @@ interface TodoItemState {
   createdTime: number;
   modifyTime?: number;
   isEdit?: boolean; // 수정모드인지 여부
+}
+
+// 서버로 부터 받아오는 데이터 1건에 대한 타입
+interface TodoItemReponse {
+  id: number;
+  memo: string;
+  createdTime: number;
 }
 
 const getTimeString = (unixtime: number) => {
@@ -35,29 +40,52 @@ const Todo = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const ulRef = useRef<HTMLUListElement>(null);
 
-  const fetchData = async () => {
-    // 백엔드에서 데이터 받아옴
-    const res = await api.fetch();
+  // useEffect: 특정조건일 때 작동하는 코드를 작성할 수 있게하는 React Hook
+  // React Hook: 클래스컴포넌트에서만 할 수 있었던 작업을 함수형 컴포넌트에서 사용할 수 있게함
+  // -> 클래스컴포넌트 state, 컴포넌트 라이프사이클을 처리할 수 있음(stateful)
+  // -> 함수형컴포넌트 다른컴포넌트로부터 받은 prop으로 화면에 렌더링만(stateless)
 
-    // axios에서 응답받은 데이터는 data속성에 들어가 있음
-    // 서버로부터 받은 데이터를 state 객체로 변환함
-    const todos = res.data.map((item) => ({
-      id: item.id,
-      memo: item.memo,
-      createdTime: item.createdTime,
-    })) as TodoItemState[];
+  // useEffect(이펙트를처리할함수, [의존변수])
+  // 의존변수의 값/참조가 바뀔때마나 함수가 처리됨
+  // ex) props가 바뀌거나 state가 바뀔때 추가적인 처리를 함.
 
-    setLoading(false); // 로딩중 여부 state 업데이트
-    setTodoList(todos); // todo state 업데이트
-
-    console.log("--2. await axios.get completed--");
-  };
-
+  // [] 의존변수목록이 빈 배열 -> 컴포넌트 렌더링되고 마운팅된후에 시점에 처리가됨
   useEffect(() => {
+    // 의존변수가 바뀔 때 처리되는 코드를 작성
+    // [] -> 컴포넌트 로딩 후에 바로 처리되는 코드
     console.log("--1. mounted--");
     // 백엔드에서 데이터를 받아올 것임
-    // ES8 style로 async-await 기법을 이용해서 데이터를 조회해옴
-    fetchData();
+    // ES6 style로 Promise 기법을 이용해서 데이터를 조회해옴
+    fetch("http://localhost:8080/todos")
+      // fetch 함수를 실행하고 네트워크 통신이 완료되면 then에 있는 함수(callback)를 실행함
+      // then에 있는 callback 함수의 매개변수로 처리 결과를 넘겨줌
+      // body가 json이면 js object(array)로 변환
+      .then((res) => res.json())
+      // 응답데이터를 js object(array)로 변환이 완료되면 다음 then에 있는 함수(callback)을 실행함
+      // then에 있는 callback 함수의 매개변수로 변환된 결과를 넘겨줌
+      // **서버에서 데이터를 받아오는 구조에 대한 interface를 별도로 정의하는 것이 좋음
+      .then((data: TodoItemReponse[]) => {
+        console.log("--2. fetch completed--");
+        console.log(data);
+
+        // 서버로부터 받은 데이터를 state 객체로 변환함
+        const todos = data.map((item) => ({
+          id: item.id,
+          memo: item.memo,
+          createdTime: item.createdTime,
+        })) as TodoItemState[];
+
+        setLoading(false); // 로딩중 여부 state 업데이트
+        setTodoList(todos); // todo state 업데이트
+
+        // 로딩중 표시까지
+        // setTimeout(() => {
+        //   setLoading(false); // 로딩중 여부 state 업데이트
+        //   setTodoList(todos); // todo state 업데이트
+        // }, 300);
+      });
+
+    console.log("--3. complete--");
   }, []);
 
   const add = (e: React.KeyboardEvent<HTMLInputElement> | null) => {

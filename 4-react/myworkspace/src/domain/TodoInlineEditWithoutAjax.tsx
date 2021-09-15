@@ -1,9 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Alert from "../components/Alert";
 
 import produce from "immer";
-
-import api from "../api/todo";
 
 // state 1건에 대한 타입
 interface TodoItemState {
@@ -34,31 +32,6 @@ const Todo = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const ulRef = useRef<HTMLUListElement>(null);
-
-  const fetchData = async () => {
-    // 백엔드에서 데이터 받아옴
-    const res = await api.fetch();
-
-    // axios에서 응답받은 데이터는 data속성에 들어가 있음
-    // 서버로부터 받은 데이터를 state 객체로 변환함
-    const todos = res.data.map((item) => ({
-      id: item.id,
-      memo: item.memo,
-      createdTime: item.createdTime,
-    })) as TodoItemState[];
-
-    setLoading(false); // 로딩중 여부 state 업데이트
-    setTodoList(todos); // todo state 업데이트
-
-    console.log("--2. await axios.get completed--");
-  };
-
-  useEffect(() => {
-    console.log("--1. mounted--");
-    // 백엔드에서 데이터를 받아올 것임
-    // ES8 style로 async-await 기법을 이용해서 데이터를 조회해옴
-    fetchData();
-  }, []);
 
   const add = (e: React.KeyboardEvent<HTMLInputElement> | null) => {
     // 이벤트 객체가 있을 때는 입력박스에서 엔터 입력
