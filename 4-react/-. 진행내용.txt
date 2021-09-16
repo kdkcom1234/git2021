@@ -145,11 +145,35 @@ npm install @reduxjs/toolkit react-redux
 
 
 ------------------ 인터페이스 구현
-1. Redux Saga
-2. Axios
-3. Chart
+1. useEffect, Fetch, Promise, async-await, Axios
+  - Todo, (실습)Contact
+
+2. Redux Saga, Generator
+  - Photo, (실습)Contact
+
+  // 기본 셋업
+  npm install redux-saga
+  - createMiddleware, store.middleware:[sagaMiddleware]
+  - rootSaga, sagaMiddleware.run(rootSaga);
+
+  // features별 saga 생성
+  - saga 생성 -> rootSaga > yield fork(saga);
+
+  // saga에서 처리할 actions 생성 및 처리할 함수 맵핑
+  - saga에 saga용 actionCreator 생성
+  - 처리할 함수(제너레이터) 생성
+   - API호출: call 
+   - 결과 데이터를 reducer에서 처리하도록함: put
+  - saga에서 take처리 take...(sagaActionCreater, 처리할함수)
+
+  // saga action을 dispatch
+  - 컴포넌트에서 dispatch(sagaActionCreater);
+  
+
+
+------------------ SQL활용
+1. Chart
 
 
 ------------------ 통합구현
-1. Profile
-2. Authentication/Authorization
+1. Authentication/Authorization

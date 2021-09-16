@@ -7,8 +7,6 @@ import { penguin } from "../../common/data";
 // 데이터구조를 interface로 만듦
 export interface PhotoItem {
   id: number;
-  profileUrl: string;
-  username: string;
   title: string;
   description?: string;
   photoUrl: string;
@@ -27,8 +25,6 @@ const initialState: PhotoState = {
   data: [
     {
       id: 5, // id는 숫자이거나, 증가되는 문자열
-      profileUrl: penguin,
-      username: "Daekeun Ko",
       title: "펭귄이",
       description: "세 마리 펭귄들의 대화",
       photoUrl: penguin,
@@ -38,8 +34,6 @@ const initialState: PhotoState = {
     },
     {
       id: 4,
-      profileUrl: penguin,
-      username: "Daekeun Ko",
       title: "펭귄이",
       description: "세 마리 펭귄들의 대화",
       photoUrl: penguin,
@@ -49,8 +43,6 @@ const initialState: PhotoState = {
     },
     {
       id: 3,
-      profileUrl: penguin,
-      username: "Daekeun Ko",
       title: "펭귄이",
       description: "세 마리 펭귄들의 대화",
       photoUrl: penguin,
@@ -60,8 +52,6 @@ const initialState: PhotoState = {
     },
     {
       id: 2,
-      profileUrl: penguin,
-      username: "Daekeun Ko",
       title: "펭귄이",
       description: "세 마리 펭귄들의 대화",
       photoUrl: penguin,
@@ -71,8 +61,6 @@ const initialState: PhotoState = {
     },
     {
       id: 1,
-      profileUrl: penguin,
-      username: "Daekeun Ko",
       title: "펭귄이",
       description: "세 마리 펭귄들의 대화",
       photoUrl: penguin,

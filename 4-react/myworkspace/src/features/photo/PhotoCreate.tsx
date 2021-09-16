@@ -12,8 +12,6 @@ const PhotoCreate = () => {
 
   // 포토 데이터 배열 가져오기
   const photoData = useSelector((state: RootState) => state.photo.data);
-  // 프로필 정보 가져오기
-  const profile = useSelector((state: RootState) => state.profile);
 
   // dispatch 함수 만들기
   const dispatch = useDispatch<AppDispatch>();
@@ -36,9 +34,6 @@ const PhotoCreate = () => {
         const item: PhotoItem = {
           // 기존데이터의 id 중에서 가장 큰 것 + 1
           id: photoData.length ? photoData[0].id + 1 : 1,
-          // 프로필 정보
-          profileUrl: profile.image ? profile.image : "",
-          username: profile.username ? profile.username : "",
           // 입력 정보
           title: titleInput.current ? titleInput.current.value : "",
           description: descTxta.current?.value,
