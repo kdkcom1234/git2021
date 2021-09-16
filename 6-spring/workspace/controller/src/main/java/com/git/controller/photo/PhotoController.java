@@ -61,8 +61,11 @@ public class PhotoController {
 									.createdTime(new Date().getTime())
 								.build();
 		
+		photos.put(currentId, photoItem);
+		
 		// 리소스 생성됨
 		res.setStatus(HttpServletResponse.SC_CREATED);
+		
 		
 		// 추가된 객체를 반환
 		return photoItem;
@@ -112,6 +115,6 @@ public class PhotoController {
 		photoItem.setFileType(photo.getFileType());
 		photoItem.setFileName(photo.getFileType());		
 		
-		return null;
+		return photoItem;
 	}
 }
