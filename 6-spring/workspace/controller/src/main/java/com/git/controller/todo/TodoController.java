@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 //@ResponseBody
 @RestController
 public class TodoController {
+	
 	// HashMap 정렬이 안 됨: get(key) -> O(1)
 	// ConcurrentSkipListMap 키 기준으로 정렬이 되었있음: get(key) -> O(logn)
 	private SortedMap<Long, Todo> todos = 
@@ -57,6 +58,13 @@ public class TodoController {
 			return null;
 		}
 		
+		// 태그들 다 지웠더니 빈문자열
+		String memo = getPlainText(todo.getMemo());
+		if(memo.isEmpty()) {
+			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			return null;
+		}		
+		
 		// id값을 생성
 		Long currentId = maxId.incrementAndGet();
 		
@@ -65,8 +73,8 @@ public class TodoController {
 		// html태그가 있으면 날려버림(script에서 문제가 발생함)
 		Todo todoItem = Todo.builder()
 								.id(currentId)
-//								.memo(todo.getMemo().replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", ""))
-								.memo(todo.getMemo())
+								.memo(memo)
+//								.memo(todo.getMemo())
 								.createdTime(new Date().getTime())
 							.build();
 		// todo 목록객체 추가
@@ -130,10 +138,20 @@ public class TodoController {
 			return null;
 		}		
 		
+		String memo = getPlainText(todo.getMemo());
+		if(memo.isEmpty()) {
+			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			return null;
+		}
+		
 		// 데이터 변경
-		findItem.setMemo(todo.getMemo());
+		findItem.setMemo(memo);
 		
 		return findItem;
 	}
 	
+	// html 태그를 제거하는 메서드
+	private String getPlainText(String text) {
+		return text.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
+	}
 }
