@@ -1,6 +1,8 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { RootState } from "../../store";
+import { AppDispatch, RootState } from "../../store";
+import { requestFetchPhotos } from "./photoSaga";
 
 const getTimeString = (unixtime: number) => {
   // 1초: 1000
@@ -24,11 +26,34 @@ const Photo = () => {
   // photo state 전체를 가져옴
   const photo = useSelector((state: RootState) => state.photo);
   const history = useHistory();
+  const dispatch = useDispatch<AppDispatch>();
+
+  // photo.isFetched를 가져올때와 바뀔때마다 실행됨
+  // **dispatch 객체는 위에서 생성된 후 바뀌지 않으므로
+  // **dispatch 객체에 따른 effect가 발생하지는 않음
+  useEffect(() => {
+    // console.log(dispatch);
+    // console.log(photo.isFetched);
+    // 데이터 fetch가 안되었으면 데이터를 받아옴
+    if (!photo.isFetched) {
+      // 서버에서 데이터를 받아오는 action을 디스패치함
+      dispatch(requestFetchPhotos());
+    }
+  }, [dispatch, photo.isFetched]);
 
   return (
     <div>
       <h2 className="text-center">Photos</h2>
       <div className="d-flex justify-content-end mb-2">
+        <button
+          className="btn btn-secondary me-2"
+          onClick={() => {
+            dispatch(requestFetchPhotos());
+          }}
+        >
+          <i className="bi bi-arrow-clockwise"></i>
+          새로고침
+        </button>
         <button
           className="btn btn-primary"
           onClick={() => {

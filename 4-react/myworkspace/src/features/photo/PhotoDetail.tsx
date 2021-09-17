@@ -9,7 +9,7 @@ const PhotoDetail = () => {
   // 타입에 따라서 처리를 다르게 하기위함
   // 객체지향 다형성(poly mophism): 같은 이름의 함수가 내부적으로 처리를 다르게 해줌
   const { id } = useParams<{ id: string }>();
-  console.log(id);
+  // console.log(id);
 
   // 타입 단언을 하지 않으면 추론에 의해서 PhotoItem | undefined 타입이 됨
   // 타입 단언을 하면 반환 형식을 정의할 수 있음
@@ -17,7 +17,7 @@ const PhotoDetail = () => {
     state.photo.data.find((item) => item.id === +id)
   ); // 반환형식을 타입 추론으로 처리
   // ) as PhotoItem; // 타입 단언 (type assertion)
-  console.log(photoItem);
+  // console.log(photoItem);
 
   const history = useHistory();
   const dispatch = useDispatch<AppDispatch>();
@@ -45,7 +45,11 @@ const PhotoDetail = () => {
             <tr>
               <th>이미지</th>
               <td>
-                <img src={photoItem.photoUrl} alt={photoItem.title} />
+                <img
+                  src={photoItem.photoUrl}
+                  alt={photoItem.title}
+                  width={"100%"}
+                />
               </td>
             </tr>
           </tbody>

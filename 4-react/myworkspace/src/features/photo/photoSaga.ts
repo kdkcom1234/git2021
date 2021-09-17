@@ -1,7 +1,7 @@
-import photoReducer, { addPhoto } from "./photoSlice";
+import photoReducer, { addPhoto, initialPhoto } from "./photoSlice";
 import { createAction, PayloadAction } from "@reduxjs/toolkit";
 import { PhotoItem } from "./photoSlice";
-import { call, put, takeEvery } from "@redux-saga/core/effects";
+import { call, put, takeEvery, takeLatest } from "@redux-saga/core/effects";
 import api, { PhotoItemRequest, PhotoItemResponse } from "./photoApi";
 import { AxiosResponse } from "axios";
 
@@ -17,7 +17,13 @@ export const requestAddPhoto = createAction<PhotoItem>(
   `${photoReducer.name}/requestAddPhoto`
 );
 
+// photo를 가져오는 action
+export const requestFetchPhotos = createAction(
+  `${photoReducer.name}/requestFetchPhotos`
+);
+
 /* ========= saga action을 처리하는 부분 =============== */
+
 // 서버에 POST로 데이터를 보내 추가하고, redux state를 변경
 function* addData(action: PayloadAction<PhotoItem>) {
   yield console.log("--addData--");
@@ -68,11 +74,41 @@ function* addData(action: PayloadAction<PhotoItem>) {
   yield put(addPhoto(photoItem));
 }
 
+// 서버에서 GET으로 데이터를 가저오고, redux state를 초기화
+function* fetchData() {
+  yield console.log("--fetchData--");
+
+  // 백엔드에서 데이터 받아오기
+  const result: AxiosResponse<PhotoItemResponse[]> = yield call(api.fetch);
+
+  // 응답데이터배열을 액션페이로드배열로 변환
+  // PhotoItemReponse[] => PhotoItem[]
+  const photos = result.data.map(
+    (item) =>
+      ({
+        id: item.id,
+        title: item.title,
+        description: item.description,
+        photoUrl: item.photoUrl,
+        fileType: item.fileType,
+        fileName: item.fileName,
+        createdTime: item.createdTime,
+      } as PhotoItem)
+  );
+
+  // state 초기화 reducer 실행
+  yield put(initialPhoto(photos));
+}
+
 /* ========= saga action을 감지(take)하는 부분 =============== */
 // photo redux state 처리와 관련된 saga action들을 감지(take)할 saga를 생성
 // saga는 generator 함수로 작성
 export default function* photoSaga() {
-  // dispatcher 동일한 타입의 액션은 모두 처리함
   // takeEvery(처리할액션, 액션을처리할함수)
+  // 동일한 타입의 액션은 모두 처리함
   yield takeEvery(requestAddPhoto, addData);
+
+  // takeLatest(처리할액션, 액션을처리할함수)
+  // 동일한 타입의 액션중에서 가장 마지막 액션만 처리, 이전 액션은 취소
+  yield takeLatest(requestFetchPhotos, fetchData);
 }

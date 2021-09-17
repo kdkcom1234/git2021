@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { penguin } from "../../common/data";
+// import { penguin } from "../../common/data";
 
 // - 목록조회: 4열 그리드화면으로 목록조회(프로필, 타이틀, 이미지)
 // - 사진추가: 추가버튼으로 제목, 설명, 이미지파일 선택 후 추가, 목록버튼
@@ -22,53 +22,7 @@ interface PhotoState {
 
 // photo state를 목록 -> array
 const initialState: PhotoState = {
-  data: [
-    {
-      id: 5, // id는 숫자이거나, 증가되는 문자열
-      title: "펭귄이",
-      description: "세 마리 펭귄들의 대화",
-      photoUrl: penguin,
-      fileType: "image/jpeg",
-      fileName: "penguin.jpg",
-      createdTime: new Date().getTime(),
-    },
-    {
-      id: 4,
-      title: "펭귄이",
-      description: "세 마리 펭귄들의 대화",
-      photoUrl: penguin,
-      fileType: "image/jpeg",
-      fileName: "penguin.jpg",
-      createdTime: new Date().getTime(),
-    },
-    {
-      id: 3,
-      title: "펭귄이",
-      description: "세 마리 펭귄들의 대화",
-      photoUrl: penguin,
-      fileType: "image/jpeg",
-      fileName: "penguin.jpg",
-      createdTime: new Date().getTime(),
-    },
-    {
-      id: 2,
-      title: "펭귄이",
-      description: "세 마리 펭귄들의 대화",
-      photoUrl: penguin,
-      fileType: "image/jpeg",
-      fileName: "penguin.jpg",
-      createdTime: new Date().getTime(),
-    },
-    {
-      id: 1,
-      title: "펭귄이",
-      description: "세 마리 펭귄들의 대화",
-      photoUrl: penguin,
-      fileType: "image/jpeg",
-      fileName: "penguin.jpg",
-      createdTime: new Date().getTime(),
-    },
-  ],
+  data: [],
   isFetched: false,
 };
 
@@ -110,10 +64,19 @@ const photoSlice = createSlice({
         photoItem.fileType = modifyItem.fileType;
       }
     },
+    // payload값으로 state를 초기화하는 reducer 필요함
+    initialPhoto: (state, action: PayloadAction<PhotoItem[]>) => {
+      const photos = action.payload;
+      // 백엔드에서 받아온 데이터
+      state.data = photos;
+      // 데이터를 받아옴으로 값을 남김
+      state.isFetched = true;
+    },
   },
 });
 
 // action creator 내보내기: action creator는 action객체를 반환하는 함수
-export const { addPhoto, removePhoto, modifyPhoto } = photoSlice.actions;
+export const { addPhoto, removePhoto, modifyPhoto, initialPhoto } =
+  photoSlice.actions;
 
 export default photoSlice.reducer;

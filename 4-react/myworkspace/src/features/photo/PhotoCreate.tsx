@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { AppDispatch, RootState } from "../../store";
 import { requestAddPhoto } from "./photoSaga";
 import { PhotoItem } from "./photoSlice";
-// import { addPhoto } from "./photoSlice";
+import { addPhoto } from "./photoSlice";
 
 const PhotoCreate = () => {
   // 입력 폼 ref 객체
