@@ -33,7 +33,9 @@ public class PhotoController {
 	}
 	
 	@PostMapping(value = "/photos")
-	public Photo addPhoto(@RequestBody Photo photo, HttpServletResponse res) {
+	public Photo addPhoto(@RequestBody Photo photo, HttpServletResponse res) throws InterruptedException {
+		
+		Thread.sleep(1000);	// 임시
 		
 		// 타이틀이 빈값
 		if(TextProcesser.isEmpyText(photo.getTitle())) {
