@@ -1,0 +1,33 @@
+<html>
+
+<body>
+  <button>generate</button>
+</body>
+<script>
+  function getNum(a) {
+    return a;
+  }
+
+  // function*(asterisk) 함수명
+  // 내부에 yield문이 있어야함
+  function* generateSequence() {
+    console.log("---generator 1---");
+    yield getNum(1);  // yield 식,함수호출, 결과값
+    console.log("---generator 2---");
+    yield getNum(2);
+    console.log("---generator 3---");
+    yield getNum(3);
+  }
+
+  // 제너레이터 객체를 얻어옴
+  let generator = generateSequence();
+
+  document.querySelector("button").addEventListener("click", () => {
+    // 제너레이터 객체의 next()를 호출하면 다음 yield 구문이 실행됨
+    const task = generator.next();
+    // {value: yield 식의 반환값, done: 다음 yield가 있는지 여부}
+    console.log(task)
+  })
+</script>
+
+</html>

@@ -51,7 +51,7 @@ function* addData(action: PayloadAction<PhotoItem>) {
   );
 
   // ------ 2. redux state를 변경함
-  // 백엔드에서 처리한 데이터 객채로 payload 객체를 생성
+  // 백엔드에서 처리한 데이터 객체로 state를 변경할 payload 객체를 생성
   const photoItem: PhotoItem = {
     id: result.data.id,
     title: result.data.title,

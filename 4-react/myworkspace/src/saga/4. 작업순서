@@ -1,0 +1,33 @@
+// 기본 셋업
+1. 라이브러리설치: npm install redux-saga
+2. redux store파일(/store/index.ts)에서 saga middleware를 생성
+  - const sagaMiddleware = createSagaMiddleware();
+3. redux store파일에서 store에 saga middleware를 넣어줌
+  - middleware:[sagaMiddleware]  
+4. rootSaga파일을 생성함(/saga/index.ts)
+  - export default function* rootSaga() {}
+5. redux store파일에서 saga middleware를 rootSaga로 run함
+  - sagaMiddleware.run(rootSaga)
+
+// 기능별(features)별 saga 셋업
+1. 기능명Saga 파일 만듦(/features/기능명/기능명Saga.ts)
+2. 기능별 saga파일에 saga action take용도의 generator 함수를 생성
+  - export default function* 기능명Saga() {}
+3. rootSaga 파일에서 해당 기능의 saga를 fork해야함
+  - yield fork(기능명Saga);
+4. 기능별 saga파일에 saga action creator를 생성
+  - export const saga액션명 = createAction<payload타입>(`${reducer.name}/saga액션명`);
+5. 기능별 saga파일에 saga action에 대해서 처리할 제너레이터 함수를 작성
+  - function* 처리함수명(action: PayloadAction<payload타입>) {}
+6. 기능별 saga파일에 take용도의 generator 함수에 take하도록 작성
+  - yield take...(saga액션생성자함수명, 처리함수명)
+
+// 기능별 saga 구현
+1. 기능별 saga파일에 saga action에 대해서 처리할 함수를 구현
+  - ex) 
+  - const result = yield call(api..., 매개변수...) // API로 서버연동
+  - yield put(redux액션생성자함수명(페이로드)) // redux action dispatch
+2. 컴포넌트에서 saga action을 dispatch
+  - dispatch(saga액션생성자함수명(페이로드));
+
+
