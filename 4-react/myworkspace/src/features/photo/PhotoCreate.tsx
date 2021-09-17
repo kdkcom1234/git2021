@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { AppDispatch, RootState } from "../../store";
+import { requestAddPhoto } from "./photoSaga";
 import { addPhoto, PhotoItem } from "./photoSlice";
 
 const PhotoCreate = () => {
@@ -20,10 +21,10 @@ const PhotoCreate = () => {
   const history = useHistory();
 
   const handleAddClick = () => {
-    console.log(titleInput.current?.value);
-    console.log(descTxta.current?.value);
+    // console.log(titleInput.current?.value);
+    // console.log(descTxta.current?.value);
     if (fileInput.current?.files?.length) {
-      console.log(fileInput.current.files[0]);
+      // console.log(fileInput.current.files[0]);
     }
 
     if (fileInput.current?.files?.length) {
@@ -44,7 +45,7 @@ const PhotoCreate = () => {
           createdTime: new Date().getTime(),
         };
 
-        console.log(item);
+        // console.log(item);
 
         // state에 데이터 추가
         // 1. addPhoto함수에서 Action 객체를 생성함
@@ -52,7 +53,12 @@ const PhotoCreate = () => {
         // 2. Action 객체를 Dispatcher에 전달함
         // 3. Dispatcher에서 Action.type에 맞는 리듀서 함수를 실행
         //    -> 기존 state와 action객체를 매개변수를 넣어주고 실행
-        dispatch(addPhoto(item));
+
+        /* ----- 기존 redux action ----- */
+        // dispatch(addPhoto(item));
+
+        /* ----- saga action으로 대체 ----- */
+        dispatch(requestAddPhoto(item));
 
         // ** action creator를 사용하지 않고 아래 방법으로도 가능함
         // type: slice이름/reducer함수이름

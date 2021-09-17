@@ -113,6 +113,7 @@ const photoSlice = createSlice({
   },
 });
 
+// action creator 내보내기: action creator는 action객체를 반환하는 함수
 export const { addPhoto, removePhoto, modifyPhoto } = photoSlice.actions;
 
 export default photoSlice.reducer;

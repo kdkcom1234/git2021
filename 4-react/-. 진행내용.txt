@@ -167,7 +167,7 @@ npm install @reduxjs/toolkit react-redux
   - saga에서 take처리 take...(sagaActionCreater, 처리할함수)
 
   // saga action을 dispatch
-  - 컴포넌트에서 dispatch(sagaActionCreater);
+  - 컴포넌트에서 dispatch(sagaActionCreator);
   
 
 

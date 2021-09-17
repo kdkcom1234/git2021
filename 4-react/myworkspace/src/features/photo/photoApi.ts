@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // 서버로 부터 받아오는 데이터 1건에 대한 타입
-interface PhotoItemResponse {
+export interface PhotoItemResponse {
   id: number;
   title: string;
   description: string;
@@ -11,7 +11,7 @@ interface PhotoItemResponse {
   createdTime: number;
 }
 
-interface PhotoItemRequest {
+export interface PhotoItemRequest {
   title: string;
   description?: string;
   photoUrl: string;
