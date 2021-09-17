@@ -1,0 +1,27 @@
+<html>
+
+<body>
+  <script>
+
+    function deletePost(id) {
+      return fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+        });
+    }
+
+    function* deletePostsGen() {
+      yield deletePost(1);
+      yield deletePost(2);
+    }
+
+    const gen = deletePostsGen();
+    const task = gen.next();
+    console.log(task.value);
+
+
+  </script>
+</body>
+
+</html>
