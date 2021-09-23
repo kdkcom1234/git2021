@@ -1,4 +1,9 @@
-import photoReducer, { addPhoto, initialPhoto } from "./photoSlice";
+import photoReducer, {
+  addPhoto,
+  initialCompleted,
+  initialPhoto,
+  removePhoto,
+} from "./photoSlice";
 import { createAction, PayloadAction } from "@reduxjs/toolkit";
 import { PhotoItem } from "./photoSlice";
 import { call, put, takeEvery, takeLatest } from "@redux-saga/core/effects";
@@ -26,6 +31,11 @@ export const requestFetchPhotos = createAction(
   `${photoReducer.name}/requestFetchPhotos`
 );
 
+// photo를 삭제하는 action
+export const requestRemovePhoto = createAction<number>(
+  `${photoReducer.name}/requestRemovePhoto`
+);
+
 /* ========= saga action을 처리하는 부분 =============== */
 
 // 서버에 POST로 데이터를 보내 추가하고, redux state를 변경
@@ -48,6 +58,8 @@ function* addData(action: PayloadAction<PhotoItem>) {
   // ------ 1. rest api에 post로 데이터 보냄
   // call(함수, 매개변수1, 매개변수2...) -> 함수를 호출함
 
+  // spinner 보여주기
+  yield put(startProgress());
   // 함수가 Promise를 반환하면, (비동기함수)
   // Saga 미들웨어에서 현재 yield에 대기상태로 있음
   // Promise가 resolve(처리완료)되면 다음 yield로 처리가 진행됨
@@ -59,6 +71,9 @@ function* addData(action: PayloadAction<PhotoItem>) {
     api.add,
     photoItemRequest
   );
+
+  // spinner 사라지게 하기
+  yield put(endProgress());
 
   // ------ 2. redux state를 변경함
   // 백엔드에서 처리한 데이터 객체로 state를 변경할 payload 객체를 생성
@@ -76,6 +91,9 @@ function* addData(action: PayloadAction<PhotoItem>) {
   // useDispatch로 dispatcher 만든 것은 컴포넌트에서만 가능
   // put이펙트를 사용함
   yield put(addPhoto(photoItem));
+
+  // completed 속성 삭제
+  yield put(initialCompleted());
 }
 
 // Redux 사이드 이펙트
@@ -92,6 +110,9 @@ function* fetchData() {
 
   // 백엔드에서 데이터 받아오기
   const result: AxiosResponse<PhotoItemResponse[]> = yield call(api.fetch);
+
+  // spinner 사라지게 하기
+  yield put(endProgress());
 
   // 응답데이터배열을 액션페이로드배열로 변환
   // PhotoItemReponse[] => PhotoItem[]
@@ -110,9 +131,31 @@ function* fetchData() {
 
   // state 초기화 reducer 실행
   yield put(initialPhoto(photos));
+}
+
+function* removeData(action: PayloadAction<number>) {
+  yield console.log("--removeData--");
+
+  // id값
+  const id = action.payload;
+
+  // spinner 보여주기
+  yield put(startProgress());
+
+  // rest api 연동
+  const result: AxiosResponse<boolean> = yield call(api.remove, id);
 
   // spinner 사라지게 하기
   yield put(endProgress());
+
+  // 반환 값이 true이면
+  if (result.data) {
+    // state 변경(1건삭제)
+    yield put(removePhoto(id));
+  }
+
+  // completed 속성 삭제
+  yield put(initialCompleted());
 }
 
 /* ========= saga action을 감지(take)하는 부분 =============== */
@@ -126,4 +169,7 @@ export default function* photoSaga() {
   // takeLatest(처리할액션, 액션을처리할함수)
   // 동일한 타입의 액션중에서 가장 마지막 액션만 처리, 이전 액션은 취소
   yield takeLatest(requestFetchPhotos, fetchData);
+
+  // 삭제처리
+  yield takeEvery(requestRemovePhoto, removeData);
 }

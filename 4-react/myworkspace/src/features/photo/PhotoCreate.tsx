@@ -1,10 +1,10 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { AppDispatch, RootState } from "../../store";
 import { requestAddPhoto } from "./photoSaga";
 import { PhotoItem } from "./photoSlice";
-import { addPhoto } from "./photoSlice";
+// import { addPhoto } from "./photoSlice";
 
 const PhotoCreate = () => {
   // 입력 폼 ref 객체
@@ -14,12 +14,25 @@ const PhotoCreate = () => {
 
   // 포토 데이터 배열 가져오기
   const photoData = useSelector((state: RootState) => state.photo.data);
+  // 추가 완료 여부
+  // 1. state 변경감지 및 값 가져오기
+  const isAddCompleted = useSelector(
+    (state: RootState) => state.photo.isAddCompleted
+  );
 
   // dispatch 함수 만들기
   const dispatch = useDispatch<AppDispatch>();
 
   // history 객체 가져오기
   const history = useHistory();
+
+  // isAddCompleted값이 변경되면 처리(처음 렌더링되는 시점에도 처리됨)
+  // 2. state가 변경되면 처리되는 함수
+  useEffect(() => {
+    console.log("--isAddCompleted 변경: " + isAddCompleted);
+    // true이면 화면이동
+    isAddCompleted && history.push("/photos");
+  }, [isAddCompleted, history, dispatch]);
 
   const handleAddClick = () => {
     // console.log(titleInput.current?.value);
@@ -73,8 +86,8 @@ const PhotoCreate = () => {
         //   payload: item,
         // });
 
-        // 목록 화면으로 이동
-        history.push("/photos");
+        // // 목록 화면으로 이동
+        // history.push("/photos");
       };
 
       reader.readAsDataURL(imageFile);
