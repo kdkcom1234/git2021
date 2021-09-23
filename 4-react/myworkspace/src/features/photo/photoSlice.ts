@@ -46,6 +46,8 @@ const photoSlice = createSlice({
     // completed 관련된 속성을 삭제함(undefined 상태)
     initialCompleted: (state) => {
       delete state.isAddCompleted;
+      delete state.isRemoveCompleted;
+      delete state.isModifyCompleted;
     },
     // payload로 id값을 받음
     // action: PayloadAction<number>
