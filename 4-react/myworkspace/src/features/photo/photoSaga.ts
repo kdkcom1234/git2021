@@ -4,6 +4,10 @@ import { PhotoItem } from "./photoSlice";
 import { call, put, takeEvery, takeLatest } from "@redux-saga/core/effects";
 import api, { PhotoItemRequest, PhotoItemResponse } from "./photoApi";
 import { AxiosResponse } from "axios";
+import {
+  endProgress,
+  startProgress,
+} from "../../components/progress/progressSlice";
 
 /* ========= saga action을 생성하는 부분 =============== */
 
@@ -74,9 +78,17 @@ function* addData(action: PayloadAction<PhotoItem>) {
   yield put(addPhoto(photoItem));
 }
 
+// Redux 사이드 이펙트
+// 1. api 연동
+// 2. 파일처리
+// 3. 처리중 메시지 보여주기/감추기
+// 4. 에러메시지 띄우기
 // 서버에서 GET으로 데이터를 가저오고, redux state를 초기화
 function* fetchData() {
   yield console.log("--fetchData--");
+
+  // spinner 보여주기
+  yield put(startProgress());
 
   // 백엔드에서 데이터 받아오기
   const result: AxiosResponse<PhotoItemResponse[]> = yield call(api.fetch);
@@ -98,6 +110,9 @@ function* fetchData() {
 
   // state 초기화 reducer 실행
   yield put(initialPhoto(photos));
+
+  // spinner 사라지게 하기
+  yield put(endProgress());
 }
 
 /* ========= saga action을 감지(take)하는 부분 =============== */
