@@ -2,6 +2,7 @@ import photoReducer, {
   addPhoto,
   initialCompleted,
   initialPhoto,
+  modifyPhoto,
   removePhoto,
 } from "./photoSlice";
 import { createAction, PayloadAction } from "@reduxjs/toolkit";
@@ -34,6 +35,11 @@ export const requestFetchPhotos = createAction(
 // photo를 삭제하는 action
 export const requestRemovePhoto = createAction<number>(
   `${photoReducer.name}/requestRemovePhoto`
+);
+
+// photo를 수정하는 action
+export const requestModifyPhoto = createAction<PhotoItem>(
+  `${photoReducer.name}/requestModifyPhoto`
 );
 
 /* ========= saga action을 처리하는 부분 =============== */
@@ -158,6 +164,51 @@ function* removeData(action: PayloadAction<number>) {
   yield put(initialCompleted());
 }
 
+function* modifyData(action: PayloadAction<PhotoItem>) {
+  yield console.log("--modifyData--");
+
+  // action의 payload로 넘어온 객체
+  const photoItemPayload = action.payload;
+
+  // rest api로 보낼 요청객체
+  const photoItemRequest: PhotoItemRequest = {
+    title: photoItemPayload.title,
+    description: photoItemPayload.description,
+    photoUrl: photoItemPayload.photoUrl,
+    fileType: photoItemPayload.fileType,
+    fileName: photoItemPayload.fileName,
+  };
+
+  // spinner 보여주기
+  yield put(startProgress());
+
+  const result: AxiosResponse<PhotoItemResponse> = yield call(
+    api.modify,
+    photoItemPayload.id,
+    photoItemRequest
+  );
+
+  // spinner 사라지게 하기
+  yield put(endProgress());
+
+  // 백엔드에서 처리한 데이터 객체로 state를 변경할 payload 객체를 생성
+  const photoItem: PhotoItem = {
+    id: result.data.id,
+    title: result.data.title,
+    description: result.data.description,
+    photoUrl: result.data.photoUrl,
+    fileType: result.data.fileType,
+    fileName: result.data.fileName,
+    createdTime: result.data.createdTime,
+  };
+
+  // state 변경
+  yield put(modifyPhoto(photoItem));
+
+  // completed 속성 삭제
+  yield put(initialCompleted());
+}
+
 /* ========= saga action을 감지(take)하는 부분 =============== */
 // photo redux state 처리와 관련된 saga action들을 감지(take)할 saga를 생성
 // saga는 generator 함수로 작성
@@ -172,4 +223,7 @@ export default function* photoSaga() {
 
   // 삭제처리
   yield takeEvery(requestRemovePhoto, removeData);
+
+  // 수정처리
+  yield takeEvery(requestModifyPhoto, modifyData);
 }

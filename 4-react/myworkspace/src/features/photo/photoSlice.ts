@@ -73,6 +73,7 @@ const photoSlice = createSlice({
         photoItem.fileName = modifyItem.fileName;
         photoItem.fileType = modifyItem.fileType;
       }
+      state.isModifyCompleted = true; // 변경 되었음을 표시
     },
     // payload값으로 state를 초기화하는 reducer 필요함
     initialPhoto: (state, action: PayloadAction<PhotoItem[]>) => {
