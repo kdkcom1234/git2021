@@ -1,4 +1,4 @@
-package com.git.controller.photo;
+package com.git.myworkspace.photo;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.git.controller.lib.TextProcesser;
+import com.git.myworkspace.lib.TextProcesser;
 
 @RestController
 public class PhotoController {
