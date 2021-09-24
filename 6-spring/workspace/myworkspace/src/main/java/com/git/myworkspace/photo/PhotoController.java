@@ -1,15 +1,12 @@
 package com.git.myworkspace.photo;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.SortedMap;
-import java.util.TreeMap;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,20 +20,25 @@ import com.git.myworkspace.lib.TextProcesser;
 @RestController
 public class PhotoController {
 
-	private SortedMap<Long, Photo> photos = Collections
-			.synchronizedSortedMap(new TreeMap<Long, Photo>(Collections.reverseOrder()));
-	private AtomicLong maxId = new AtomicLong();
+	private PhotoRepository repo;
+
+	// Autowired 어노테이션은 매개변수나 필드 타입에 맞는 객체를
+	// Spring에서 생성하여 주입하여줌(의존성 주입, 의존객체주입, DI, Dependency Injection)
+	// Repository 인터페이스 구조에 맞는 객체를 Spring에 생성하여 넣어줌
+	@Autowired
+	public PhotoController(PhotoRepository repo) {
+		this.repo = repo;
+	}
 
 	@GetMapping(value = "/photos")
 	public List<Photo> getPhotos() throws InterruptedException {
-		Thread.sleep(1000); // 임시적으로 2초 정지
-		return new ArrayList<Photo>(photos.values());
+		// repository.findAll();
+		// SELECT * FROM photo;
+		return repo.findAll();
 	}
 
 	@PostMapping(value = "/photos")
 	public Photo addPhoto(@RequestBody Photo photo, HttpServletResponse res) throws InterruptedException {
-		Thread.sleep(1000); // 임시
-
 		// 타이틀이 빈값
 		if (TextProcesser.isEmpyText(photo.getTitle())) {
 			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -49,21 +51,20 @@ public class PhotoController {
 			return null;
 		}
 
-		// id값을 생성
-		Long currentId = maxId.incrementAndGet();
-
 		// 객체 생성
-		Photo photoItem = Photo.builder().id(currentId).title(photo.getTitle())
+		Photo photoItem = Photo.builder().title(photo.getTitle())
 				.description(TextProcesser.getPlainText(photo.getDescription())).photoUrl(photo.getPhotoUrl())
 				.fileType(photo.getFileType()).fileName(photo.getFileType()).createdTime(new Date().getTime()).build();
 
-		photos.put(currentId, photoItem);
+		// repository.save(entity)
+		// insert into photo(...) values(...)
+		Photo photoSaved = repo.save(photoItem);
 
 		// 리소스 생성됨
 		res.setStatus(HttpServletResponse.SC_CREATED);
 
 		// 추가된 객체를 반환
-		return photoItem;
+		return photoSaved;
 	}
 
 	@DeleteMapping(value = "/photos/{id}")
@@ -71,14 +72,19 @@ public class PhotoController {
 		Thread.sleep(5000);
 
 		// id에 해당하는 객체가 없으면
-		Photo photo = photos.get(Long.valueOf(id));
-		if (photo == null) {
+		// Optional null-safe, 자바 1.8 나온 방식
+		// repository.findBy(id)
+		// select * from photo where id = ?;
+		Optional<Photo> photo = repo.findById(id);
+		if (photo.isEmpty()) {
 			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			return false;
 		}
 
 		// 삭제 수행
-		photos.remove(Long.valueOf(id));
+		// repository.deletebyId(id)
+		// delete from photo where id = ?
+		repo.deleteById(id);
 
 		return true;
 	}
@@ -87,11 +93,9 @@ public class PhotoController {
 	public Photo modifyPhotos(@PathVariable long id, @RequestBody Photo photo, HttpServletResponse res)
 			throws InterruptedException {
 
-		Thread.sleep(1000);
-
 		// id에 해당하는 객체가 없으면
-		Photo photoItem = photos.get(Long.valueOf(id));
-		if (photoItem == null) {
+		Optional<Photo> photoItem = repo.findById(id);
+		if (photoItem.isEmpty()) {
 			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			return null;
 		}
@@ -108,12 +112,21 @@ public class PhotoController {
 			return null;
 		}
 
-		photoItem.setTitle(photo.getTitle());
-		photoItem.setDescription(TextProcesser.getPlainText(photo.getDescription()));
-		photoItem.setPhotoUrl(photo.getPhotoUrl());
-		photoItem.setFileType(photo.getFileType());
-		photoItem.setFileName(photo.getFileType());
+		Photo photoToSave = photoItem.get();
 
-		return photoItem;
+		photoToSave.setTitle(photo.getTitle());
+		photoToSave.setDescription(TextProcesser.getPlainText(photo.getDescription()));
+		photoToSave.setPhotoUrl(photo.getPhotoUrl());
+		photoToSave.setFileType(photo.getFileType());
+		photoToSave.setFileName(photo.getFileName());
+
+		// repository.save(entity)
+		// id가 있으면 UPDATE, 없으면 INSERT
+		// UPDATE
+		// SET title=?, descript=?,......
+		// WHERE id = ?
+		Photo photoSaved = repo.save(photoToSave);
+
+		return photoSaved;
 	}
 }
