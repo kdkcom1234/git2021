@@ -53,6 +53,10 @@ const Pagination = ({
               : blockSize
           ).keys()
         )
+          // 현재 블록기준으로 페이지번호를 생성함
+          // 예) index = 0, 1, 2
+          //     currentBlock = 2, blockSize = 3
+          //     num = 6, 7, 8
           .map((index) => currentBlock * blockSize + index)
           .map((num) => (
             <li
