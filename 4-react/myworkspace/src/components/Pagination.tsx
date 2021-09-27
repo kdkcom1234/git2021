@@ -57,7 +57,9 @@ const Pages = ({
 // 페이지블럭 크기, 전체 페이지 개수
 const Pagination = ({ blockSize, totalPages, currentPage }: PaginationProp) => {
   // 현재 페이지 블럭번호
-  const [currentBlock, setCurrentBlock] = useState<number>(0);
+  const [currentBlock, setCurrentBlock] = useState<number>(
+    currentPage / blockSize
+  );
 
   console.log(`--totalPages: ${totalPages}`);
   console.log(`--blockSize: ${blockSize}`);
