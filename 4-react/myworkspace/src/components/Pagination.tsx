@@ -24,33 +24,6 @@ const Pagination = ({
   console.log(`--currentPage: ${currentPage}`);
   console.log(`--currentBlock: ${currentBlock}`);
 
-  interface PagesProps {
-    blockSize: number;
-    totalPages: number;
-    currentBlock: number;
-  }
-
-  const getPages = ({ blockSize, totalPages, currentBlock }: PagesProps) => {
-    let blocks: number[] = [];
-
-    let num = 0;
-    while (true) {
-      // 가장 마지막 블럭일 때
-      if (blocks.length > 0 && blocks[blocks.length - 1] === totalPages - 1)
-        break;
-
-      // 블럭이 다 만들어졌을 때
-      if (num === blockSize) break;
-
-      blocks.push(currentBlock * blockSize + num);
-      num++;
-    }
-
-    // console.log(blocks);
-
-    return blocks;
-  };
-
   return (
     <nav>
       <ul className="pagination">
@@ -71,25 +44,36 @@ const Pagination = ({
           </li>
         )}
         {/* 페이지 번호 영역 */}
-        {getPages({ blockSize, totalPages, currentBlock }).map((num) => (
-          <li
-            className={`page-item ${currentPage === num ? "active" : ""}`}
-            key={`page-${num}`}
-          >
-            <a
-              className="page-link"
-              onClick={(e) => {
-                e.preventDefault();
-                onPageChanged && onPageChanged(num);
-              }}
-              href="!#"
+        {/* 현재 블록 기준 남아있는 페이지가 블록사이즈보다 작으면 남아있는 페이지수 만큼 페이지번호를 만듦 */}
+        {/* 현재 블록 기준 남아있는 페이지가 블록사이즈보다 크거나 같으면 블록사이즈만큼 페이지번호 만듦 */}
+        {Array.from(
+          Array(
+            totalPages - currentBlock * blockSize < blockSize
+              ? totalPages - currentBlock * blockSize
+              : blockSize
+          ).keys()
+        )
+          .map((index) => currentBlock * blockSize + index)
+          .map((num) => (
+            <li
+              className={`page-item ${currentPage === num ? "active" : ""}`}
+              key={`page-${currentBlock * blockSize + num}`}
             >
-              {num + 1}
-            </a>
-          </li>
-        ))}
+              <a
+                className="page-link"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onPageChanged && onPageChanged(num);
+                }}
+                href="!#"
+              >
+                {num + 1}
+              </a>
+            </li>
+          ))}
         {/* NEXT 영역 */}
-        {totalPages > blockSize && currentBlock * blockSize !== totalPages - 1 && (
+        {/* 현재 블록 기준 남아있는 페이지가 블록사이즈보다 크면 NEXT 보임 */}
+        {totalPages - currentBlock * blockSize > blockSize && (
           <li className="page-item">
             <a
               className="page-link"
