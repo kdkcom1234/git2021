@@ -1,4 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
+interface PagesProps {
+  blockSize: number;
+  totalPages: number;
+  currentBlock: number;
+  currentPage: number;
+}
 
 interface PaginationProp {
   blockSize: number;
@@ -11,12 +18,7 @@ const Pages = ({
   totalPages,
   currentBlock,
   currentPage,
-}: {
-  blockSize: number;
-  totalPages: number;
-  currentBlock: number;
-  currentPage: number;
-}) => {
+}: PagesProps) => {
   let blocks: number[] = [];
 
   let num = 0;
@@ -64,7 +66,7 @@ const Pagination = ({ blockSize, totalPages, currentPage }: PaginationProp) => {
   return (
     <nav aria-label="Page navigation example">
       <ul className="pagination">
-        {currentBlock != 0 && (
+        {currentBlock !== 0 && (
           <li className="page-item">
             <a
               className="page-link"
