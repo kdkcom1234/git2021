@@ -1,0 +1,41 @@
+// 백엔드
+1. 백엔드 REST API 작성
+  : 페이징 처리되는 REST API
+  : page, size 매개변수 받음
+
+------
+(옵션) 페이지네이션 컴포넌트
+------
+
+// 프론트엔드
+1. Saga 생성
+  : action creator 생성
+  : action 처리 제너레이터 함수
+  : takeLatest(actionCreator, action처리)
+
+2. 목록 컴포넌트에서 페이징 처리 액션 호출
+  : page, size를 페이로드로 보냄
+
+3. API 호출 함수 작성
+  : 데이터 + 페이징 정보의 타입 작성
+  : page, size를 매개변수(쿼리스트링) 보냄
+  : ?page=0&size=2
+
+4. Saga에 action 처리 함수 구현1
+  : 사이드 이펙트 처리
+  : API 호출 및 결과값 체크
+
+5. Paging처리 Reducer 생성
+  : reducer에는 받은 페이로드 객체 처리
+    -> 데이터, 페이지관련 값
+
+5. Saga에 action 처리 함수 구현2
+  : API 호출 데이터를 페이로드 객체로 만듦
+  : 액션을 호출해서 reducer에 페이로드객체 넣어줌
+
+6. 컴포넌트에서 제대로 처리되는지 확인
+  : 컨텐트가 잘 나오는지
+  : 페이지네이션이 잘 나오는지
+
+
+

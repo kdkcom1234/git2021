@@ -1,20 +1,32 @@
 import photoReducer, {
   addPhoto,
   initialCompleted,
+  initialPagedPhoto,
   initialPhoto,
   modifyPhoto,
+  PhotoPage,
   removePhoto,
 } from "./photoSlice";
 import { createAction, nanoid, PayloadAction } from "@reduxjs/toolkit";
 import { PhotoItem } from "./photoSlice";
 import { call, put, takeEvery, takeLatest } from "@redux-saga/core/effects";
-import api, { PhotoItemRequest, PhotoItemResponse } from "./photoApi";
+import api, {
+  PhotoItemRequest,
+  PhotoItemResponse,
+  PhotoPagingReponse,
+} from "./photoApi";
 import { AxiosResponse } from "axios";
 import {
   endProgress,
   startProgress,
 } from "../../components/progress/progressSlice";
 import { addAlert } from "../../components/alert/alertSlice";
+
+/* ========= saga action Payload 타입 =============== */
+export interface PageRequest {
+  page: number;
+  size: number;
+}
 
 /* ========= saga action을 생성하는 부분 =============== */
 
@@ -31,6 +43,11 @@ export const requestAddPhoto = createAction<PhotoItem>(
 // photo를 가져오는 action
 export const requestFetchPhotos = createAction(
   `${photoReducer.name}/requestFetchPhotos`
+);
+
+// photo를 페이징으로 가져오는 action
+export const requestFetchPagingPhotos = createAction<PageRequest>(
+  `${photoReducer.name}/requestFetchPagingPhotos`
 );
 
 // photo를 삭제하는 action
@@ -157,6 +174,52 @@ function* fetchData() {
   yield put(initialPhoto(photos));
 }
 
+function* fetchPagingData(action: PayloadAction<PageRequest>) {
+  yield console.log("--fetchPagingData--");
+
+  const page = action.payload.page;
+  const size = action.payload.size;
+
+  // spinner 보여주기
+  yield put(startProgress());
+
+  // 백엔드에서 데이터 받아오기
+  const result: AxiosResponse<PhotoPagingReponse> = yield call(
+    api.fetchPaging,
+    page,
+    size
+  );
+
+  // spinner 사라지게 하기
+  yield put(endProgress());
+
+  // 받아온 페이지 데이터를 Payload 변수로 변환
+  const photoPage: PhotoPage = {
+    // 응답데이터배열을 액션페이로드배열로 변환
+    // PhotoItemReponse[] => PhotoItem[]
+    data: result.data.content.map(
+      (item) =>
+        ({
+          id: item.id,
+          title: item.title,
+          description: item.description,
+          photoUrl: item.photoUrl,
+          fileType: item.fileType,
+          fileName: item.fileName,
+          createdTime: item.createdTime,
+        } as PhotoItem)
+    ),
+    totalElements: result.data.totalElements,
+    totalPages: result.data.totalPages,
+    page: result.data.number,
+    pageSize: result.data.size,
+    isLast: result.data.last,
+  };
+
+  // state 초기화 reducer 실행
+  yield put(initialPagedPhoto(photoPage));
+}
+
 function* removeData(action: PayloadAction<number>) {
   yield console.log("--removeData--");
 
@@ -238,6 +301,7 @@ export default function* photoSaga() {
   // takeLatest(처리할액션, 액션을처리할함수)
   // 동일한 타입의 액션중에서 가장 마지막 액션만 처리, 이전 액션은 취소
   yield takeLatest(requestFetchPhotos, fetchData);
+  yield takeLatest(requestFetchPagingPhotos, fetchPagingData);
 
   // 삭제처리
   yield takeEvery(requestRemovePhoto, removeData);

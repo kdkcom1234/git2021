@@ -1,0 +1,17 @@
+ blockSize = 2 -> 
+  // state: currentBlock (초깃값0)
+  [0]:[0, 1], 
+  [1]:[2]
+ totalPages = 3
+
+
+[0]   1 2 next
+: 0번째 블락일 때 
+: prev 버튼 숨김
+
+[1]   prev 3
+: 0번째 블락이 아닐 때
+: prev 버튼 출력
+
+[공통]
+: 현재 블락의 가장 큰페이지가 totalPage -1이 아니면 next 출력

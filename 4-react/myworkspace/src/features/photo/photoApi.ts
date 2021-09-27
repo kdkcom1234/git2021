@@ -1,5 +1,14 @@
 import axios from "axios";
 
+export interface PhotoPagingReponse {
+  content: PhotoItemResponse[];
+  last: boolean;
+  totalElements: number;
+  totalPages: number;
+  size: number;
+  number: number;
+}
+
 // 서버로 부터 받아오는 데이터 1건에 대한 타입
 export interface PhotoItemResponse {
   id: number;
@@ -26,6 +35,11 @@ const photoApi = {
   // GET 요청URL HTTP/1.1
   fetch: () =>
     axios.get<PhotoItemResponse[]>(`${process.env.REACT_APP_API_BASE}/photos`),
+
+  fetchPaging: (page: number, size: number) =>
+    axios.get<PhotoPagingReponse>(
+      `${process.env.REACT_APP_API_BASE}/photos/paging?page=${page}&size=${size}`
+    ),
 
   // axios.post<응답타입>(요청URL, 요청객체(JSON바디));
   // POST 요청URL HTTP/1.1  {...}
