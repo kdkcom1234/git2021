@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import Pagination from "../../components/Pagination";
 import { AppDispatch, RootState } from "../../store";
 import { requestFetchPhotos } from "./photoSaga";
 
@@ -44,6 +45,7 @@ const Photo = () => {
   return (
     <div>
       <h2 className="text-center">Photos</h2>
+      {/* 버튼 */}
       <div className="d-flex justify-content-end mb-2">
         <button
           className="btn btn-secondary me-2"
@@ -64,6 +66,7 @@ const Photo = () => {
           추가
         </button>
       </div>
+      {/* 컨텐트 */}
       <div className="d-flex flex-wrap">
         {/* state 데이터 배열에 map함수로 출력 */}
         {photo.data.map((item, index) => (
@@ -99,6 +102,10 @@ const Photo = () => {
             {/* 컨텐트 wrapper -- 끝 */}
           </div>
         ))}
+      </div>
+      {/* 페이지네이션 */}
+      <div className="d-flex justify-content-center mt-4">
+        <Pagination blockSize={2} totalPages={3} currentPage={0} />
       </div>
     </div>
   );
