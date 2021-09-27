@@ -1,0 +1,13 @@
+// 마스터 사용자
+-- PostgreSQL     MySQL
+postgres          admin
+password123!	  password123!	
+
+. 스토리지 자동 조정 > 해제
+. 퍼블릭 액세스 > 예
+
+. 자동 백업 활성화 > 해제
+. 성능 개선 도우미 활성화 > 해제
+
+
+

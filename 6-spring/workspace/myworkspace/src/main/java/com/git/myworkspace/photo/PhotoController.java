@@ -7,12 +7,16 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.git.myworkspace.lib.TextProcesser;
@@ -34,7 +38,23 @@ public class PhotoController {
 	public List<Photo> getPhotos() throws InterruptedException {
 		// repository.findAll();
 		// SELECT * FROM photo;
-		return repo.findAll();
+		// 기본적으로 PK 순정렬(asc, ascending)되고 있는 상황
+		// 1 2 3 .....
+//		return repo.findAll();
+
+		// id컬럼 역정렬(clusted index)
+		// Sort.by("정렬컬럼").desceding() 역정렬
+		// Sort.by("정렬컬럼").ascending() 순정렬
+		return repo.findAll(Sort.by("id").descending());
+	}
+
+	// 예) 한페이지 2개, 1번째 페이지
+	// 예) GET /photos/paging?page=0&size=2
+	@GetMapping("/photos/paging")
+	public Page<Photo> getPhotosPaging(@RequestParam int page, @RequestParam int size) {
+		// findAll(Pageable page)
+		// findAll(PageRequest.of(page, size, Sort sort));
+		return repo.findAll(PageRequest.of(page, size, Sort.by("id").descending()));
 	}
 
 	@PostMapping(value = "/photos")
@@ -69,7 +89,7 @@ public class PhotoController {
 
 	@DeleteMapping(value = "/photos/{id}")
 	public boolean removePhotos(@PathVariable long id, HttpServletResponse res) throws InterruptedException {
-		Thread.sleep(5000);
+//		Thread.sleep(5000);
 
 		// id에 해당하는 객체가 없으면
 		// Optional null-safe, 자바 1.8 나온 방식

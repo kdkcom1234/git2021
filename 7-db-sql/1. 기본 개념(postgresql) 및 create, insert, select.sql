@@ -115,12 +115,16 @@ delete from photo where id = 1;
 
 
 -- 특정 데이터 수정
+-- update 테이블 
+-- set 컬럼명=값, 컬럼명=값
+-- where 조건식
+-- **where 조건이 없으면 전체 데이터가 수정되므로 조심
 update photo 
 set 
 	created_time=1632468387597, 
 	description='세마리의 펭귄입니다.', 
 	file_name=?, file_type=?, photo_url=?, title=? 
-where id=3
+where id=3;
 
 
 
