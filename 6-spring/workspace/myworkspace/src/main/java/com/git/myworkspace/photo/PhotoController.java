@@ -88,7 +88,7 @@ public class PhotoController {
 	}
 
 	@DeleteMapping(value = "/photos/{id}")
-	public boolean removePhotos(@PathVariable long id, HttpServletResponse res) throws InterruptedException {
+	public boolean removePhoto(@PathVariable long id, HttpServletResponse res) throws InterruptedException {
 //		Thread.sleep(5000);
 
 		// id에 해당하는 객체가 없으면
@@ -110,7 +110,7 @@ public class PhotoController {
 	}
 
 	@PutMapping(value = "/photos/{id}")
-	public Photo modifyPhotos(@PathVariable long id, @RequestBody Photo photo, HttpServletResponse res)
+	public Photo modifyPhoto(@PathVariable long id, @RequestBody Photo photo, HttpServletResponse res)
 			throws InterruptedException {
 
 		// id에 해당하는 객체가 없으면
