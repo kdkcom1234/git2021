@@ -38,12 +38,14 @@ interface PhotoState {
   isLast?: boolean;
 }
 
+const photoPageSize = localStorage.getItem("photo_page_size");
+
 // photo state를 목록 -> array
 const initialState: PhotoState = {
   data: [],
   isFetched: false,
   page: 0,
-  pageSize: 2,
+  pageSize: photoPageSize ? +photoPageSize : 2,
   totalPages: 0,
 };
 

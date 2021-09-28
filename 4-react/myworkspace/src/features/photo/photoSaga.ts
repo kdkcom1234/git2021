@@ -9,7 +9,13 @@ import photoReducer, {
 } from "./photoSlice";
 import { createAction, nanoid, PayloadAction } from "@reduxjs/toolkit";
 import { PhotoItem } from "./photoSlice";
-import { call, put, takeEvery, takeLatest } from "@redux-saga/core/effects";
+import {
+  call,
+  put,
+  select,
+  takeEvery,
+  takeLatest,
+} from "@redux-saga/core/effects";
 import api, {
   PhotoItemRequest,
   PhotoItemResponse,
@@ -21,6 +27,7 @@ import {
   startProgress,
 } from "../../components/progress/progressSlice";
 import { addAlert } from "../../components/alert/alertSlice";
+import { RootState } from "../../store";
 
 /* ========= saga action Payload 타입 =============== */
 export interface PageRequest {
@@ -102,6 +109,19 @@ function* addData(action: PayloadAction<PhotoItem>) {
     yield put(endProgress());
 
     // ------ 2. redux state를 변경함
+    // **2021-09-28- 페이징 처리 추가 로직
+    // 추가하기전에 현재 페이지의 가장 마지막 데이터를 삭제
+    // redux state 조회하기
+    const photoData: PhotoItem[] = yield select(
+      (state: RootState) => state.photo.data
+    );
+    // 현재 데이터가 있으면
+    if (photoData.length > 0) {
+      // 가장 마지막 요소의 id값을 가져오고 삭제함
+      const deleteId = photoData[photoData.length - 1].id;
+      yield put(removePhoto(deleteId));
+    }
+
     // 백엔드에서 처리한 데이터 객체로 state를 변경할 payload 객체를 생성
     const photoItem: PhotoItem = {
       id: result.data.id,
@@ -180,44 +200,57 @@ function* fetchPagingData(action: PayloadAction<PageRequest>) {
   const page = action.payload.page;
   const size = action.payload.size;
 
+  localStorage.setItem("photo_page_size", size.toString());
+
   // spinner 보여주기
   yield put(startProgress());
 
-  // 백엔드에서 데이터 받아오기
-  const result: AxiosResponse<PhotoPagingReponse> = yield call(
-    api.fetchPaging,
-    page,
-    size
-  );
+  try {
+    // 백엔드에서 데이터 받아오기
+    const result: AxiosResponse<PhotoPagingReponse> = yield call(
+      api.fetchPaging,
+      page,
+      size
+    );
 
-  // spinner 사라지게 하기
-  yield put(endProgress());
+    // spinner 사라지게 하기
+    yield put(endProgress());
 
-  // 받아온 페이지 데이터를 Payload 변수로 변환
-  const photoPage: PhotoPage = {
-    // 응답데이터배열을 액션페이로드배열로 변환
-    // PhotoItemReponse[] => PhotoItem[]
-    data: result.data.content.map(
-      (item) =>
-        ({
-          id: item.id,
-          title: item.title,
-          description: item.description,
-          photoUrl: item.photoUrl,
-          fileType: item.fileType,
-          fileName: item.fileName,
-          createdTime: item.createdTime,
-        } as PhotoItem)
-    ),
-    totalElements: result.data.totalElements,
-    totalPages: result.data.totalPages,
-    page: result.data.number,
-    pageSize: result.data.size,
-    isLast: result.data.last,
-  };
+    // 받아온 페이지 데이터를 Payload 변수로 변환
+    const photoPage: PhotoPage = {
+      // 응답데이터배열을 액션페이로드배열로 변환
+      // PhotoItemReponse[] => PhotoItem[]
+      data: result.data.content.map(
+        (item) =>
+          ({
+            id: item.id,
+            title: item.title,
+            description: item.description,
+            photoUrl: item.photoUrl,
+            fileType: item.fileType,
+            fileName: item.fileName,
+            createdTime: item.createdTime,
+          } as PhotoItem)
+      ),
+      totalElements: result.data.totalElements,
+      totalPages: result.data.totalPages,
+      page: result.data.number,
+      pageSize: result.data.size,
+      isLast: result.data.last,
+    };
 
-  // state 초기화 reducer 실행
-  yield put(initialPagedPhoto(photoPage));
+    // state 초기화 reducer 실행
+    yield put(initialPagedPhoto(photoPage));
+  } catch (e: any) {
+    // 에러발생
+    // spinner 사라지게 하기
+    yield put(endProgress());
+
+    // alert박스를 추가해줌
+    yield put(
+      addAlert({ id: nanoid(), variant: "danger", message: e.message })
+    );
+  }
 }
 
 function* removeData(action: PayloadAction<number>) {
@@ -239,10 +272,26 @@ function* removeData(action: PayloadAction<number>) {
   if (result.data) {
     // state 변경(1건삭제)
     yield put(removePhoto(id));
+  } else {
+    // alert박스를 추가해줌
+    yield put(
+      addAlert({
+        id: nanoid(),
+        variant: "danger",
+        message: "오류로 저장되지 않았습니다.",
+      })
+    );
   }
 
   // completed 속성 삭제
   yield put(initialCompleted());
+
+  // 현재 페이지 데이터를 다시 가져옴
+  // 현재 페이지와 사이즈 값을 읽어옴
+  const page: number = yield select((state: RootState) => state.photo.page);
+  const size: number = yield select((state: RootState) => state.photo.pageSize);
+
+  yield put(requestFetchPagingPhotos({ page, size }));
 }
 
 function* modifyData(action: PayloadAction<PhotoItem>) {

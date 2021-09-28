@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface PaginationProp {
   blockSize: number;
@@ -18,6 +18,12 @@ const Pagination = ({
   const [currentBlock, setCurrentBlock] = useState<number>(
     Math.floor(currentPage / blockSize)
   );
+
+  // sideEffect: ---
+  // currentPage가 바뀌면 currentBlock이 바뀌어야함
+  useEffect(() => {
+    setCurrentBlock(Math.floor(currentPage / blockSize));
+  }, [currentPage, blockSize]);
 
   console.log(`--totalPages: ${totalPages}`);
   console.log(`--blockSize: ${blockSize}`);
