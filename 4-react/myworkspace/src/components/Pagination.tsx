@@ -14,16 +14,8 @@ const Pagination = ({
   currentPage,
   onPageChanged,
 }: PaginationProp) => {
-  // 현재 페이지 블럭번호
-  const [currentBlock, setCurrentBlock] = useState<number>(
-    Math.floor(currentPage / blockSize)
-  );
-
-  // sideEffect: ---
-  // currentPage가 바뀌면 currentBlock이 바뀌어야함
-  useEffect(() => {
-    setCurrentBlock(Math.floor(currentPage / blockSize));
-  }, [currentPage, blockSize]);
+  // // 현재 페이지 블럭번호
+  let currentBlock = Math.floor(currentPage / blockSize);
 
   console.log(`--totalPages: ${totalPages}`);
   console.log(`--blockSize: ${blockSize}`);
@@ -40,7 +32,6 @@ const Pagination = ({
               className="page-link"
               onClick={(e) => {
                 e.preventDefault();
-                setCurrentBlock(currentBlock - 1);
                 onPageChanged && onPageChanged(currentBlock * blockSize - 1);
               }}
               href="!#"
@@ -89,7 +80,6 @@ const Pagination = ({
               className="page-link"
               onClick={(e) => {
                 e.preventDefault();
-                setCurrentBlock(currentBlock + 1);
                 onPageChanged &&
                   onPageChanged(currentBlock * blockSize + blockSize);
               }}

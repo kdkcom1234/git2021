@@ -1,0 +1,59 @@
+1. 배포 디렉터리 생성
+/home/ubuntu/app/myworkspace
+
+
+2. 프로젝트 루트에서 scp로 빌드파일 업로드
+scp -i "c:\keyfile\myworkspace.pem" -r ./build/libs/*.jar ubuntu@ec2-52-79-178-68.ap-northeast-2.compute.amazonaws.com:/home/ubuntu/app/myworkspace
+
+
+3. ec2 보안그룹에 인바운드 규칙으로 8080을 열어준다
+
+// 보안그룹(security group)
+white list 방법
+: 기본적으로 다 막아놓고
+: 필요한 것만 열어놓음
+
+// ACL(Access Control List)
+black list 방법
+: 기본적으로 다 열어놓고
+: 불필요한 애들은 막는다
+
+
+4. 백그라운드로 자바 실행
+nohup java -jar myworkspace-0.0.1-SNAPSHOT.jar &
+nohup 실행명령어 &
+-> nohup: no hang-up (접속을 끊어도 작동되게 함)
+-> &: background 실행 (쉘창 뒤에서 실행)
+
+
+5. 실행중인 프로세스 조회하기
+ps -ef | grep myworkspace
+
+-> ps(process): 실행중인 프로그램 목록 조회 명령어
+-> -ef: 시스템에서 실행중인 모든 프로세스(-e)를 자세하게(-f) 조회
+-- ps -ef: 전체 프로세스 목록조회
+-- grep 키워드 파일명: 파일의 특정키워드 검색
+
+-> |(pipe, 연결자): 앞의 명령의 출력을 뒤의 명령어의 입력으로 연결
+
+-> grep myworkspace 전체 프로세스 목록
+
+** ps -ef의 처리결과가 화면에 출력되지 않고 grep 명령어의 입력으로 넘어감
+
+
+6. 로그파일 조회하기
+tail 파일명
+: 파일의 뒤쪽 부분을 읽어옴(기본적으로10줄)
+
+tail -f 파일명
+: 파일의 뒤쪽을 읽고, 내용이 추가되는 것을 대기하고 있음
+: 내용이 추가되면 바로 출력함
+
+tail -f nohup.out
+: nohup 백그라운드 실행결과 지속적으로 nohup.out파일에 기록됨
+
+
+7. 실행 프로세스 종료하기
+kill -9 PID
+: 프로세스를 강제종료
+: 프로세스ID는 ps -ef의 두번째 필드에 있는 숫자

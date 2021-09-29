@@ -1,0 +1,18 @@
+gradle/maven
+== NPM
+의존성 관리 및 애플리케이션 빌드
+
+gradlew(배치파일)
+: gradle wrapper
+: gradle이 없으면 자동설치함
+
+gradlew build
+: 테스트코드까지 같이 실행함
+
+gradlew bootJar
+(./gradlew bootJar)
+: 실행파일만 생성함
+
+buid/libs/프로젝트명-버전명.jar 생성됨
+
+java -jar 프로젝트명-버전명.jar
