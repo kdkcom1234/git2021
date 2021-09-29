@@ -1,0 +1,5 @@
+// 배포파일 생성
+gradlew bootJar
+
+// 배포 스크립트 실행
+deploy

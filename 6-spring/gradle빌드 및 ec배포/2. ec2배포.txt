@@ -20,10 +20,13 @@ black list 방법
 
 
 4. 백그라운드로 자바 실행
-nohup java -jar myworkspace-0.0.1-SNAPSHOT.jar &
+nohup java -jar myworkspace-0.0.1-SNAPSHOT.jar > myworkspace.log &
 nohup 실행명령어 &
 -> nohup: no hang-up (접속을 끊어도 작동되게 함)
 -> &: background 실행 (쉘창 뒤에서 실행)
+-> 명령어 > 파일명: 명령어의 실행출력 결과가 해당 파일에 기록됨(덮어씌움)
+-> 명령어 >> 파일명: 명령어의 실행출력 결과가 해당 파일에 기록됨(뒤에붙임)
+   -> Redirection: 출력을 바꿈(화면->파일)
 
 
 5. 실행중인 프로세스 조회하기
@@ -49,8 +52,8 @@ tail -f 파일명
 : 파일의 뒤쪽을 읽고, 내용이 추가되는 것을 대기하고 있음
 : 내용이 추가되면 바로 출력함
 
-tail -f nohup.out
-: nohup 백그라운드 실행결과 지속적으로 nohup.out파일에 기록됨
+tail -f myworkspace.log
+: 백그라운드 실행결과 지속적으로 myworkspace.log파일에 기록됨
 
 
 7. 실행 프로세스 종료하기
