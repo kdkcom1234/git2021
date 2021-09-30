@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 interface PaginationProp {
   blockSize: number;
   totalPages: number;
