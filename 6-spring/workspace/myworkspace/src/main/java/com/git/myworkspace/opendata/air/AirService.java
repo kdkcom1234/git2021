@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -86,10 +85,8 @@ public class AirService {
 		/* ---------------------- 데이터 요청하고 XML 받아오기 끝 ----------------- */
 
 		/* ---------------------- XML -> JSON -> Object(Java) 시작 ----------------- */
-		// XML(문자열) -> JSON(객체)
-		JSONObject jsonObj = XML.toJSONObject(data);
-		// JSON(객체) -> JSON(문자열)
-		String json = jsonObj.toString(2);
+		// XML(문자열) -> JSON(문자열)
+		String json = XML.toJSONObject(data).toString(2);
 //		System.out.println(json);
 
 		// JSON(문자열) -> Java(object)
