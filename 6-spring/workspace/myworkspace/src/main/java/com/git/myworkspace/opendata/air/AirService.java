@@ -4,10 +4,13 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.json.JSONObject;
 import org.json.XML;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,13 @@ import com.google.gson.Gson;
 public class AirService {
 
 	private final String SERVICE_KEY = "8x9EEMlvpXLrqor89PreIVvrNAtT2rkM%2Be6FOns1GkNS6aQdSlFL0BpFU4e%2F5GoeKa9t1Y1ztK6wfP90DIO%2Ftw%3D%3D";
+
+	private AirSigunguHourRepository repo;
+
+	@Autowired
+	public AirService(AirSigunguHourRepository repo) {
+		this.repo = repo;
+	}
 
 	@SuppressWarnings("deprecation")
 
@@ -67,12 +77,26 @@ public class AirService {
 //		System.out.println(json);
 
 		// JSON(문자열) -> Java(object)
-		AirSiGunGuHourResponse response = new Gson().fromJson(json, AirSiGunGuHourResponse.class);
+		AirSigunguHourResponse response = new Gson().fromJson(json, AirSigunguHourResponse.class);
 		System.out.println(response);
 
-		// 강동구 데이터
-		AirSiGunGuHourResponse.Item item = response.getResponse().getBody().getItems().getItem().get(1);
-		System.out.println(item);
+//		// 강동구 데이터
+//		AirSigunguHourResponse.Item item = response.getResponse().getBody().getItems().getItem().get(1);
+//		System.out.println(item);
 		/* ---------------------- XML -> JSON -> Object(Java) 끝 ----------------- */
+
+		/* ---------------------- 응답 객체 -> 엔티티 시작 ----------------- */
+		List<AirSigunguHour> list = new ArrayList<AirSigunguHour>();
+		for (AirSigunguHourResponse.Item item : response.getResponse().getBody().getItems().getItem()) {
+			AirSigunguHour record = AirSigunguHour.builder().dataTime(item.getDataTime()).sidoName(item.getSidoName())
+					.cityName(item.getCityName()).pm10Value(item.getPm10Value()).pm25Value(item.getPm25Value()).build();
+
+			list.add(record);
+		}
+		/* ---------------------- 응답 객체 -> 엔티티 끝 ----------------- */
+
+		/* ---------------------- 엔티티객체 -> 리포지터리로 저장 시작 ----------------- */
+		repo.saveAll(list);
+		/* ---------------------- 엔티티객체 -> 리포지터리로 저장 끝 ----------------- */
 	}
 }

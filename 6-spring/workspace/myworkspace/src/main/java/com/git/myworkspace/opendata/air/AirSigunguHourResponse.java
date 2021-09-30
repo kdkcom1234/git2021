@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class AirSiGunGuHourResponse {
+public class AirSigunguHourResponse {
 	private Response response;
 
 	@Data
