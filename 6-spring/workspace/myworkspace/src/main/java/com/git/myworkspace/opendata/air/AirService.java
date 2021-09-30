@@ -31,13 +31,28 @@ public class AirService {
 		this.repo = repo;
 	}
 
-	@SuppressWarnings("deprecation")
-
 	// 시군구별 대기질 시간단위 조회
 	// 1시간마다 실행(js, setInterval)
 	// fixedRate: 가장 처음에 실행되고 간격별로 실행됨
 	@Scheduled(fixedRate = 1000 * 60 * 60 * 1)
-	public void requestAirSiGunGuHour() throws IOException {
+
+	// 정각 2시간마다 실행
+//	@Scheduled(cron = "0 0 */2 * * *")	
+
+	// 매시 30분에 실행, 1시 30분, 2시 30분
+	// 그 시간이 되어야만 실행됨
+	// cron="초 분 시 일 월 년"
+	// cron="0 30 * * * *"
+//	@Scheduled(cron = "0 30 * * * *")
+	public void requestAir() throws IOException {
+		String[] sidoNames = { "서울", "경기" };
+		for (String sidoName : sidoNames) {
+			requestAirSiGunGuHour(sidoName);
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	public void requestAirSiGunGuHour(String sido) throws IOException {
 		System.out.println(new Date().toLocaleString());
 
 		/* ---------------------- 데이터 요청하고 XML 받아오기 시작 ----------------- */
@@ -48,9 +63,9 @@ public class AirService {
 		builder.append("http://apis.data.go.kr/B552584"); // 호스트/게이트웨이
 		builder.append("/ArpltnStatsSvc"); // 서비스
 		builder.append("/getCtprvnMesureSidoLIst"); // 기능(시도-시군구별조회 예) 서울-강남구...중랑구)
-		builder.append("?sidoName=" + URLEncoder.encode("서울", "UTF-8")); // 서울만
+		builder.append("?sidoName=" + URLEncoder.encode(sido, "UTF-8")); // 시도(서울, 경기...)
 		builder.append("&searchCondition=HOUR"); // 1시간단위
-		builder.append("&pageNo=1&numOfRows=25"); // 서울의 구25개
+		builder.append("&pageNo=1&numOfRows=100"); // 시군구 개수
 		builder.append("&serviceKey=" + SERVICE_KEY); // 서비스키
 
 		System.out.println(builder.toString());
