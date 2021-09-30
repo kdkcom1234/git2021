@@ -32,9 +32,6 @@ public class AirService {
 	}
 
 	// 시군구별 대기질 시간단위 조회
-	// 1시간마다 실행(js, setInterval)
-	// fixedRate: 가장 처음에 실행되고 간격별로 실행됨
-	@Scheduled(fixedRate = 1000 * 60 * 60 * 1)
 
 	// 정각 2시간마다 실행
 //	@Scheduled(cron = "0 0 */2 * * *")	
@@ -44,6 +41,10 @@ public class AirService {
 	// cron="초 분 시 일 월 년"
 	// cron="0 30 * * * *"
 //	@Scheduled(cron = "0 30 * * * *")
+
+	// 1시간마다 실행(js, setInterval)
+	// fixedRate: 가장 처음에 실행되고 간격별로 실행됨
+	@Scheduled(fixedRate = 1000 * 60 * 60 * 1)
 	public void requestAir() throws IOException {
 		String[] sidoNames = { "서울", "경기" };
 		for (String sidoName : sidoNames) {
