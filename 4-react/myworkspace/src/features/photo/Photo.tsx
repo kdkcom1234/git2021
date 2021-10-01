@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Pagination from "../../components/Pagination";
 import { AppDispatch, RootState } from "../../store";
-import { requestFetchPhotos, requestFetchPagingPhotos } from "./photoSaga";
+import { requestFetchPagingPhotos } from "./photoSaga";
 
 const getTimeString = (unixtime: number) => {
   // 1초: 1000
@@ -92,7 +92,12 @@ const Photo = () => {
         <button
           className="btn btn-secondary me-2"
           onClick={() => {
-            dispatch(requestFetchPhotos());
+            dispatch(
+              requestFetchPagingPhotos({
+                page: photo.page,
+                size: photo.pageSize,
+              })
+            );
           }}
         >
           <i className="bi bi-arrow-clockwise"></i>

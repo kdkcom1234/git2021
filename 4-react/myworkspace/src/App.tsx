@@ -24,7 +24,7 @@ import AlertStack from "./components/alert/AlertStack";
 // 컴포넌트를 방문하는 시점에 로딩함
 const Todo = lazy(() => import("./features/todo/TodoInlineEdit"));
 const Feed = lazy(() => import("./features/feed/Feed"));
-const Photo = lazy(() => import("./features/photo/PhotoNext"));
+const Photo = lazy(() => import("./features/photo/Photo"));
 const PhotoCreate = lazy(() => import("./features/photo/PhotoCreate"));
 const PhotoDetail = lazy(() => import("./features/photo/PhotoDetail"));
 const PhotoEdit = lazy(() => import("./features/photo/PhotoEdit"));
