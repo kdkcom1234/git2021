@@ -19,141 +19,138 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 // REST API
-// REST ¹æ½ÄÀ¸·Î Á¢±ÙÇÒ ¼ö ÀÖ´Â ÀÎÅÍÆäÀÌ½º Á¦°øÇÏ´Â ÇÁ·Î±×·¥
+// REST ë°©ì‹ìœ¼ë¡œ ì ‘ê·¼í•  ìˆ˜ ìˆëŠ” ì¸í„°í˜ì´ìŠ¤ ì œê³µí•˜ëŠ” í”„ë¡œê·¸ë¨
 
 //@Controller
 //@ResponseBody
 @RestController
 public class TodoController {
-	
-	// HashMap Á¤·ÄÀÌ ¾È µÊ: get(key) -> O(1)
-	// ConcurrentSkipListMap Å° ±âÁØÀ¸·Î Á¤·ÄÀÌ µÇ¾úÀÖÀ½: get(key) -> O(logn)
-	private SortedMap<Long, Todo> todos = 
-			Collections.synchronizedSortedMap(new TreeMap<Long, Todo>(Collections.reverseOrder())) ;
-	// id°ª »ı¼º¿¡ »ç¿ëÇÒ º¯¼ö
+
+	// HashMap ì •ë ¬ì´ ì•ˆ ë¨: get(key) -> O(1)
+	// ConcurrentSkipListMap í‚¤ ê¸°ì¤€ìœ¼ë¡œ ì •ë ¬ì´ ë˜ì—ˆìˆìŒ: get(key) -> O(logn)
+	private SortedMap<Long, Todo> todos = Collections
+			.synchronizedSortedMap(new TreeMap<Long, Todo>(Collections.reverseOrder()));
+	// idê°’ ìƒì„±ì— ì‚¬ìš©í•  ë³€ìˆ˜
 	private AtomicLong maxId = new AtomicLong();
 
-	// todo ¸ñ·ÏÁ¶È¸
+	// todo ëª©ë¡ì¡°íšŒ
 	// GET /todos
 	@GetMapping(value = "/todos")
 	public List<Todo> getTodos() {
-		// ¸Ê °ª¸ñ·Ï
+		// ë§µ ê°’ëª©ë¡
 		return new ArrayList<Todo>(todos.values());
 	}
 
-	// todo 1°Ç Ãß°¡
-	// POST /todos {"memo":"Å×½ºÆ®ÀÔ´Ï´Ù"}
+	// todo 1ê±´ ì¶”ê°€
+	// POST /todos {"memo":"í…ŒìŠ¤íŠ¸ì…ë‹ˆë‹¤"}
 	@PostMapping(value = "/todos")
 	public Todo addTodo(@RequestBody Todo todo, HttpServletResponse res) {
 		System.out.println(todo);
-		// µ¥ÀÌÅÍ °ËÁõ ·ÎÁ÷
-		// ¸Ş¸ğ°ªÀÌ ¾øÀ¸¸é ¿¡·¯Ã³¸®ÇÔ
-		if(todo.getMemo() == null || todo.getMemo().isEmpty()) {
-			// Å¬¶óÀÌ¾ğÆ®¿¡¼­ ¸Ş¸ğ°ªÀÌ ¾øÀÌ º¸³»°Å³ª ºó°ªÀ¸·Î º¸³½ °ÍÀÓ
-			// Å¬¶óÀÌ¾ğÆ® ¿À·ù, 4xx
-			// ¿äÃ»°ªÀ» Àß¸øº¸³½ °ÍÀÓ - Bad Request (400)
+		// ë°ì´í„° ê²€ì¦ ë¡œì§
+		// ë©”ëª¨ê°’ì´ ì—†ìœ¼ë©´ ì—ëŸ¬ì²˜ë¦¬í•¨
+		if (todo.getMemo() == null || todo.getMemo().isEmpty()) {
+			// í´ë¼ì´ì–¸íŠ¸ì—ì„œ ë©”ëª¨ê°’ì´ ì—†ì´ ë³´ë‚´ê±°ë‚˜ ë¹ˆê°’ìœ¼ë¡œ ë³´ë‚¸ ê²ƒì„
+			// í´ë¼ì´ì–¸íŠ¸ ì˜¤ë¥˜, 4xx
+			// ìš”ì²­ê°’ì„ ì˜ëª»ë³´ë‚¸ ê²ƒì„ - Bad Request (400)
 			// res.setStatus(400);
-			
-			// Dispatcher ServletÀÌ »ı¼ºÇÑ ÀÀ´ä°´Ã¼¿¡ statusÄÚµå¸¦ ³Ö¾îÁÜ
+
+			// Dispatcher Servletì´ ìƒì„±í•œ ì‘ë‹µê°ì²´ì— statusì½”ë“œë¥¼ ë„£ì–´ì¤Œ
 			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
 		}
-		
-		// ÅÂ±×µé ´Ù Áö¿ü´õ´Ï ºó¹®ÀÚ¿­
+
+		// íƒœê·¸ë“¤ ë‹¤ ì§€ì› ë”ë‹ˆ ë¹ˆë¬¸ìì—´
 		String memo = getPlainText(todo.getMemo());
-		if(memo.isEmpty()) {
+		if (memo.isEmpty()) {
 			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
-		}		
-		
-		// id°ªÀ» »ı¼º
+		}
+
+		// idê°’ì„ ìƒì„±
 		Long currentId = maxId.incrementAndGet();
-		
-		// ÀÔ·Â¹ŞÀº µ¥ÀÌÅÍ·Î todo°´Ã¼¸¦ »ı¼º
-		// id°ª°ú »ı¼ºÀÏ½Ã´Â ¼­¹ö¿¡¼­ »ı¼ºÇÑ °ÍÀ¸·Î Ã³¸®ÇÔ
-		// htmlÅÂ±×°¡ ÀÖÀ¸¸é ³¯·Á¹ö¸²(script¿¡¼­ ¹®Á¦°¡ ¹ß»ıÇÔ)
-		Todo todoItem = Todo.builder()
-								.id(currentId)
-								.memo(memo)
+
+		// ì…ë ¥ë°›ì€ ë°ì´í„°ë¡œ todoê°ì²´ë¥¼ ìƒì„±
+		// idê°’ê³¼ ìƒì„±ì¼ì‹œëŠ” ì„œë²„ì—ì„œ ìƒì„±í•œ ê²ƒìœ¼ë¡œ ì²˜ë¦¬í•¨
+		// htmlíƒœê·¸ê°€ ìˆìœ¼ë©´ ë‚ ë ¤ë²„ë¦¼(scriptì—ì„œ ë¬¸ì œê°€ ë°œìƒí•¨)
+		Todo todoItem = Todo.builder().id(currentId).memo(memo)
 //								.memo(todo.getMemo())
-								.createdTime(new Date().getTime())
-							.build();
-		// todo ¸ñ·Ï°´Ã¼ Ãß°¡
+				.createdTime(new Date().getTime()).build();
+		// todo ëª©ë¡ê°ì²´ ì¶”ê°€
 		todos.put(currentId, todoItem);
-		
-		// ¸®¼Ò½º »ı¼ºµÊ
+
+		// ë¦¬ì†ŒìŠ¤ ìƒì„±ë¨
 		// res.setStatus(201);
 		res.setStatus(HttpServletResponse.SC_CREATED);
-		
+
 		System.out.println(todoItem);
-		
-		// Ãß°¡µÈ °´Ã¼¸¦ ¹İÈ¯
+
+		// ì¶”ê°€ëœ ê°ì²´ë¥¼ ë°˜í™˜
 		return todoItem;
 	}
-	
-	// todo 1°Ç »èÁ¦
-	// DELETE /todos/1 -> id°¡ 1ÀÎ Ç×¸ñÀ» »èÁ¦ÇØ¶ó
-	// id°ªÀÌ path variable·Î 
-	@DeleteMapping(value="/todos/{id}")
+
+	// todo 1ê±´ ì‚­ì œ
+	// DELETE /todos/1 -> idê°€ 1ì¸ í•­ëª©ì„ ì‚­ì œí•´ë¼
+	// idê°’ì´ path variableë¡œ
+	@DeleteMapping(value = "/todos/{id}")
 	public boolean removeTodo(@PathVariable long id, HttpServletResponse res) {
-		
-		// ÇØ´ç idÀÇ µ¥ÀÌÅÍ 1°ÇÀ» °¡Á®¿È
+
+		// í•´ë‹¹ idì˜ ë°ì´í„° 1ê±´ì„ ê°€ì ¸ì˜´
 		Todo todo = todos.get(Long.valueOf(id));
-		// ÇØ´ç idÀÇ µ¥ÀÌÅÍ°¡ ¾øÀ¸¸é
-		if(todo == null) {
+		// í•´ë‹¹ idì˜ ë°ì´í„°ê°€ ì—†ìœ¼ë©´
+		if (todo == null) {
 			// res.setStatus(404);
-			// NOT FOUND: ÇØ´ç °æ·Î¿¡ ¸®¼Ò½º°¡ ¾øÀ½
+			// NOT FOUND: í•´ë‹¹ ê²½ë¡œì— ë¦¬ì†ŒìŠ¤ê°€ ì—†ìŒ
 			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			return false;
 		}
-		
-		// »èÁ¦ ¼öÇà
+
+		// ì‚­ì œ ìˆ˜í–‰
 		todos.remove(Long.valueOf(id));
-		
+
 		return true;
 	}
-	
-	// todo 1°Ç ¼öÁ¤
+
+	// todo 1ê±´ ìˆ˜ì •
 	// PUT /todos/1 {"memo":"..."}
-	// id°ªÀÌ path variable·Î 
-	@PutMapping(value="/todos/{id}")	
+	// idê°’ì´ path variableë¡œ
+	@PutMapping(value = "/todos/{id}")
 	public Todo modifyTodo(@PathVariable long id, @RequestBody Todo todo, HttpServletResponse res) {
-		// ÇØ´ç idÀÇ µ¥ÀÌÅÍ 1°ÇÀ» °¡Á®¿È
+		// í•´ë‹¹ idì˜ ë°ì´í„° 1ê±´ì„ ê°€ì ¸ì˜´
 		Todo findItem = todos.get(Long.valueOf(id));
-		// ÇØ´ç idÀÇ µ¥ÀÌÅÍ°¡ ¾øÀ¸¸é
-		if(findItem == null) {
+		// í•´ë‹¹ idì˜ ë°ì´í„°ê°€ ì—†ìœ¼ë©´
+		if (findItem == null) {
 			// res.setStatus(404);
-			// NOT FOUND: ÇØ´ç °æ·Î¿¡ ¸®¼Ò½º°¡ ¾øÀ½
+			// NOT FOUND: í•´ë‹¹ ê²½ë¡œì— ë¦¬ì†ŒìŠ¤ê°€ ì—†ìŒ
 			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			return null;
 		}
-		
-		// µ¥ÀÌÅÍ °ËÁõ ·ÎÁ÷
-		// ¸Ş¸ğ°ªÀÌ ¾øÀ¸¸é ¿¡·¯Ã³¸®ÇÔ
-		if(todo.getMemo() == null || todo.getMemo().isEmpty()) {
-			// Å¬¶óÀÌ¾ğÆ®¿¡¼­ ¸Ş¸ğ°ªÀÌ ¾øÀÌ º¸³»°Å³ª ºó°ªÀ¸·Î º¸³½ °ÍÀÓ
-			// Å¬¶óÀÌ¾ğÆ® ¿À·ù, 4xx
-			// ¿äÃ»°ªÀ» Àß¸øº¸³½ °ÍÀÓ - Bad Request (400)
+
+		// ë°ì´í„° ê²€ì¦ ë¡œì§
+		// ë©”ëª¨ê°’ì´ ì—†ìœ¼ë©´ ì—ëŸ¬ì²˜ë¦¬í•¨
+		if (todo.getMemo() == null || todo.getMemo().isEmpty()) {
+			// í´ë¼ì´ì–¸íŠ¸ì—ì„œ ë©”ëª¨ê°’ì´ ì—†ì´ ë³´ë‚´ê±°ë‚˜ ë¹ˆê°’ìœ¼ë¡œ ë³´ë‚¸ ê²ƒì„
+			// í´ë¼ì´ì–¸íŠ¸ ì˜¤ë¥˜, 4xx
+			// ìš”ì²­ê°’ì„ ì˜ëª»ë³´ë‚¸ ê²ƒì„ - Bad Request (400)
 			// res.setStatus(400);
-			
-			// Dispatcher ServletÀÌ »ı¼ºÇÑ ÀÀ´ä°´Ã¼¿¡ statusÄÚµå¸¦ ³Ö¾îÁÜ
-			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-			return null;
-		}		
-		
-		String memo = getPlainText(todo.getMemo());
-		if(memo.isEmpty()) {
+
+			// Dispatcher Servletì´ ìƒì„±í•œ ì‘ë‹µê°ì²´ì— statusì½”ë“œë¥¼ ë„£ì–´ì¤Œ
 			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
 		}
-		
-		// µ¥ÀÌÅÍ º¯°æ
+
+		String memo = getPlainText(todo.getMemo());
+		if (memo.isEmpty()) {
+			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			return null;
+		}
+
+		// ë°ì´í„° ë³€ê²½
 		findItem.setMemo(memo);
-		
+
 		return findItem;
 	}
-	
-	// html ÅÂ±×¸¦ Á¦°ÅÇÏ´Â ¸Ş¼­µå
+
+	// html íƒœê·¸ë¥¼ ì œê±°í•˜ëŠ” ë©”ì„œë“œ
 	private String getPlainText(String text) {
 		return text.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
 	}

@@ -29,40 +29,40 @@ public class PhotoController {
 
 	@GetMapping(value = "/photos")
 	public List<Photo> getPhotos() throws InterruptedException {
-		Thread.sleep(1000); // ÀÓ½ÃÀûÀ¸·Î 2ÃÊ Á¤Áö
+		Thread.sleep(1000); // ì„ì‹œì ìœ¼ë¡œ 2ì´ˆ ì •ì§€
 		return new ArrayList<Photo>(photos.values());
 	}
 
 	@PostMapping(value = "/photos")
 	public Photo addPhoto(@RequestBody Photo photo, HttpServletResponse res) throws InterruptedException {
-		Thread.sleep(1000); // ÀÓ½Ã
+		Thread.sleep(1000); // ì„ì‹œ
 
-		// Å¸ÀÌÆ²ÀÌ ºó°ª
+		// íƒ€ì´í‹€ì´ ë¹ˆê°’
 		if (TextProcesser.isEmpyText(photo.getTitle())) {
 			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
 		}
 
-		// ÆÄÀÏURLÀÌ ºó°ª
+		// íŒŒì¼URLì´ ë¹ˆê°’
 		if (TextProcesser.isEmpyText(photo.getPhotoUrl())) {
 			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
 		}
 
-		// id°ªÀ» »ı¼º
+		// idê°’ì„ ìƒì„±
 		Long currentId = maxId.incrementAndGet();
 
-		// °´Ã¼ »ı¼º
+		// ê°ì²´ ìƒì„±
 		Photo photoItem = Photo.builder().id(currentId).title(photo.getTitle())
 				.description(TextProcesser.getPlainText(photo.getDescription())).photoUrl(photo.getPhotoUrl())
 				.fileType(photo.getFileType()).fileName(photo.getFileType()).createdTime(new Date().getTime()).build();
 
 		photos.put(currentId, photoItem);
 
-		// ¸®¼Ò½º »ı¼ºµÊ
+		// ë¦¬ì†ŒìŠ¤ ìƒì„±ë¨
 		res.setStatus(HttpServletResponse.SC_CREATED);
 
-		// Ãß°¡µÈ °´Ã¼¸¦ ¹İÈ¯
+		// ì¶”ê°€ëœ ê°ì²´ë¥¼ ë°˜í™˜
 		return photoItem;
 	}
 
@@ -70,14 +70,14 @@ public class PhotoController {
 	public boolean removePhotos(@PathVariable long id, HttpServletResponse res) throws InterruptedException {
 		Thread.sleep(5000);
 
-		// id¿¡ ÇØ´çÇÏ´Â °´Ã¼°¡ ¾øÀ¸¸é
+		// idì— í•´ë‹¹í•˜ëŠ” ê°ì²´ê°€ ì—†ìœ¼ë©´
 		Photo photo = photos.get(Long.valueOf(id));
 		if (photo == null) {
 			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			return false;
 		}
 
-		// »èÁ¦ ¼öÇà
+		// ì‚­ì œ ìˆ˜í–‰
 		photos.remove(Long.valueOf(id));
 
 		return true;
@@ -89,20 +89,20 @@ public class PhotoController {
 
 		Thread.sleep(1000);
 
-		// id¿¡ ÇØ´çÇÏ´Â °´Ã¼°¡ ¾øÀ¸¸é
+		// idì— í•´ë‹¹í•˜ëŠ” ê°ì²´ê°€ ì—†ìœ¼ë©´
 		Photo photoItem = photos.get(Long.valueOf(id));
 		if (photoItem == null) {
 			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			return null;
 		}
 
-		// Å¸ÀÌÆ²ÀÌ ºó°ª
+		// íƒ€ì´í‹€ì´ ë¹ˆê°’
 		if (TextProcesser.isEmpyText(photo.getTitle())) {
 			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
 		}
 
-		// ÆÄÀÏURLÀÌ ºó°ª
+		// íŒŒì¼URLì´ ë¹ˆê°’
 		if (TextProcesser.isEmpyText(photo.getPhotoUrl())) {
 			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;

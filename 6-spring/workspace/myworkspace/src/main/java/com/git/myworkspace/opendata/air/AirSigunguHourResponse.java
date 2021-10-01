@@ -32,8 +32,8 @@ public class AirSigunguHourResponse {
 
 	@Data
 	public class Item {
-		// OLAP Cube Çü½ÄÀ¸·Î µ¥ÀÌÅÍ
-		// Áö¿ª, Ä«Å×°í¸®, ½Ã°£, °ª
+		// OLAP Cube í˜•ì‹ìœ¼ë¡œ ë°ì´í„°
+		// ì§€ì—­, ì¹´í…Œê³ ë¦¬, ì‹œê°„, ê°’
 		// https://gccontent.blob.core.windows.net/gccontent/blogs/legacy/c1/2014/11/OLAP_cube-300x257.png
 		private String dataTime;
 		private String sidoName;
@@ -59,10 +59,10 @@ public class AirSigunguHourResponse {
 //		        "no2Value": "",
 //		        "pm10Value": "",
 //		        "pm25Value": "",
-//		        "cityName": "°­³²±¸",
+//		        "cityName": "ê°•ë‚¨êµ¬",
 //		        "cityNameEng": "Gangnam-gu",
 //		        "dataTime": "2021-09-30 12:00",
-//		        "sidoName": "¼­¿ï",
+//		        "sidoName": "ì„œìš¸",
 //		        "coValue": "",
 //		        "o3Value": "",
 //		        "khaiValue": "",

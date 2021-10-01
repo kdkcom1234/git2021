@@ -16,17 +16,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 
-// Spring Data JPA(Java Persistence API, ÀÚ¹Ù ¿µ¼ÓÈ­ API)
-// ¿µ¼ÓÈ­: ÈÖ¹ß¼º µ¥ÀÌÅÍ -> ºñÈÖ¹ß¼º ÀåÄ¡
-//           ÀÚ¹Ù °´Ã¼(RAM) -> Å×ÀÌºí ·¹ÄÚµå(ÆÄÀÏ³»ºÎÀÇ Æ¯Á¤°ª)
+// Spring Data JPA(Java Persistence API, ìžë°” ì˜ì†í™” API)
+// ì˜ì†í™”: íœ˜ë°œì„± ë°ì´í„° -> ë¹„íœ˜ë°œì„± ìž¥ì¹˜
+//           ìžë°” ê°ì²´(RAM) -> í…Œì´ë¸” ë ˆì½”ë“œ(íŒŒì¼ë‚´ë¶€ì˜ íŠ¹ì •ê°’)
 
 // ORM(Object Relational Mapping)
-// : °´Ã¼¸¦ Å×ÀÌºí°ú ¸ÊÇÎÇÑ °Í ¸»ÇÔ
-//  1. °´Ã¼ ÁöÇâÀ¸·Î °³¹ßÇÒ ¼ö ÀÖ°ÔÇÔ(¼ÒÇÁÆ®¿þ¾î°øÇÐ)
-//  2. Æ¯Á¤ DB¿¡ Á¾¼ÓµÇÁö ¾Ê°ÔÇÔ
+// : ê°ì²´ë¥¼ í…Œì´ë¸”ê³¼ ë§µí•‘í•œ ê²ƒ ë§í•¨
+//  1. ê°ì²´ ì§€í–¥ìœ¼ë¡œ ê°œë°œí•  ìˆ˜ ìžˆê²Œí•¨(ì†Œí”„íŠ¸ì›¨ì–´ê³µí•™)
+//  2. íŠ¹ì • DBì— ì¢…ì†ë˜ì§€ ì•Šê²Œí•¨
 
-// @Entity: Å×ÀÌºí°ú Å¬·¡½º¸¦ ¸ÊÇÎÇÔ
-// ±âº»¹æ¹ýÀº Photo(pascal-case) -> photo(snake-case)
+// @Entity: í…Œì´ë¸”ê³¼ í´ëž˜ìŠ¤ë¥¼ ë§µí•‘í•¨
+// ê¸°ë³¸ë°©ë²•ì€ Photo(pascal-case) -> photo(snake-case)
 
 @Entity
 public class Photo {

@@ -4,17 +4,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-// Dispatcher ServletÀÌ HTTP ¿äÃ»À» ¹Ş°í 
-// HTTP ¿äÃ» Á¤º¸¿¡ ¸Â´Â ÄÁÆ®·Ñ·¯ÀÇ ¸Ş¼­µå¸¦ ½ÇÇàÇÔ
+// Dispatcher Servletì´ HTTP ìš”ì²­ì„ ë°›ê³  
+// HTTP ìš”ì²­ ì •ë³´ì— ë§ëŠ” ì»¨íŠ¸ë¡¤ëŸ¬ì˜ ë©”ì„œë“œë¥¼ ì‹¤í–‰í•¨
 
-// Controller: HTTP ¿äÃ»¿¡ ´ëÇÑ ÀÀ´äÀ» Ã³¸®ÇÒ ¼ö ÀÖ´Â Å¬·¡½º
-// RestController: ControllerÀÎµ¥ ÀÀ´äÀ¸·Î µ¥ÀÌÅÍ °´Ã¼¸¸ Ã³¸®ÇÔ
+// Controller: HTTP ìš”ì²­ì— ëŒ€í•œ ì‘ë‹µì„ ì²˜ë¦¬í•  ìˆ˜ ìˆëŠ” í´ë˜ìŠ¤
+// RestController: Controllerì¸ë° ì‘ë‹µìœ¼ë¡œ ë°ì´í„° ê°ì²´ë§Œ ì²˜ë¦¬í•¨
 //@Controller
 //@ResponseBody
 @RestController
 public class HelloController {
-	
-	@RequestMapping(value="/hello", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public String hello() {
 		return "Hello, Spring Boot!";
 	}
