@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { AppDispatch, RootState } from "../../store";
-import { requestAddPhoto } from "./photoSaga";
+import { requestAddPhotoNext } from "./photoSaga";
 import { PhotoItem } from "./photoSlice";
 // import { addPhoto } from "./photoSlice";
 
@@ -72,7 +72,9 @@ const PhotoCreate = () => {
         // dispatch(addPhoto(item));
 
         /* ----- saga action으로 대체 ----- */
-        dispatch(requestAddPhoto(item));
+        // dispatch(requestAddPhoto(item)); // 전체조회
+        // dispatch(requestAddPhotoPaging(item)); // 넘버 페이징
+        dispatch(requestAddPhotoNext(item)); // 더보기 페이징
 
         // ** action creator를 사용하지 않고 아래 방법으로도 가능함
         // type: slice이름/reducer함수이름

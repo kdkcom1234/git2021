@@ -45,7 +45,7 @@ const initialState: PhotoState = {
   data: [],
   isFetched: false,
   page: 0,
-  pageSize: photoPageSize ? +photoPageSize : 2,
+  pageSize: photoPageSize ? +photoPageSize : 8,
   totalPages: 0,
 };
 
@@ -119,6 +119,19 @@ const photoSlice = createSlice({
       // 데이터를 받아옴으로 값을 남김
       state.isFetched = true;
     },
+    initialNextPhoto: (state, action: PayloadAction<PhotoPage>) => {
+      // 백엔드에서 받아온 데이터를 기존데이터 뒤로 합침
+      // 컨텐트
+      state.data = state.data.concat(action.payload.data);
+      // 페이징 데이터
+      state.totalElements = action.payload.totalElements;
+      state.totalPages = action.payload.totalPages;
+      state.page = action.payload.page;
+      state.pageSize = action.payload.pageSize;
+      state.isLast = action.payload.isLast;
+      // 데이터를 받아옴으로 값을 남김
+      state.isFetched = true;
+    },
   },
 });
 
@@ -130,6 +143,7 @@ export const {
   initialPhoto,
   initialCompleted,
   initialPagedPhoto,
+  initialNextPhoto,
 } = photoSlice.actions;
 
 export default photoSlice.reducer;
