@@ -66,19 +66,3 @@ function* saveTodo() {
 const gen = saveTodo();
 
 let task = task = gen.next() -> yield 첫번째 todoApi.modify(...)
-
-while(true) {
-  // Generator작업이 완료되었음
-  if(task.done == true || typeof task.value == "undefined") {
-    break;
-  }
-
-  // Promise가 resolve되었음(API통신이 완료되었음) 
-  if(task.value.state == "fullfilled") {
-    // 다음작업을 실행
-    task = gent.next()  -> 첫번째반복문 yield 두번째 userApi.add(...)
-                        -> 두번째반복문 yield 세번째 profileApi.modify(...)
-  } else {
-    continue;
-  }
-}
