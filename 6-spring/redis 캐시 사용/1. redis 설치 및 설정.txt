@@ -1,0 +1,35 @@
+-- 로컬에 설치
+https://github.com/microsoftarchive/redis/releases
+
+-- (옵션) p3x redis UI 설치
+https://www.electronjs.org/apps/p3x-redis-ui
+
+
+-- 원격에 설치 및 설정
+sudo apt-get update: 패키지관리자 버전정보 최신화
+sudo apt-get upgrade: 실제 새로운 버전의 패키지들 설치
+
+sudo apt-get install redis-server
+redis-server --version
+
+sudo vi /etc/redis/redis.conf
+
+maxmemory를 찾아 100M
+
+재시작
+sudo systemctl restart redis-server.service
+sudo systemctl status redis-server.service
+ps -ef | grep redis
+
+redis-cli
+
+
+-- 명령어
+// 최대 메모리 조회
+config get maxmemory
+// 키 목록 조회
+keys *
+// 키 데이터 조회
+get "캐시이름::키이름"
+// 키 삭제
+del "캐시이름::키이름"

@@ -1,0 +1,23 @@
+1. application.yml
+
+spring
+...
+...
+...
+  cache:
+    type: redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+
+2. cache config 클래스 파일 생성
+- configuration/RedisCacheConfig.java 참고
+
+3. 캐시처리
+- 캐시 처리할 반환객체있는 메서드의 @Cacheable 어노테이션 추가
+- @Cacheable(name="캐시이름", key="키이름")
+
+4. 캐시삭제
+- 캐시 삭제를 수행할 메서드에 @CacheEvict 어노테이션 추가
+- @CacheEvict (name="캐시이름", key="키이름")      // 특정 키만 삭제
+- @CacheEvict (name="캐시이름", allEntries=true) // 해당 캐시에 하위 키 전부 삭제
