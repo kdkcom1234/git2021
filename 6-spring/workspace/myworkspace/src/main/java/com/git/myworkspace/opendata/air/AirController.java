@@ -1,5 +1,6 @@
 package com.git.myworkspace.opendata.air;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +35,18 @@ public class AirController {
 	@Cacheable(value = cachName, key = "'all'")
 	@GetMapping(value = "/sido/current")
 	public List<AirSigunguHour> getAirSidoCurrent() {
-		return repo.findAll(PageRequest.of(0, 25, Sort.by("dataTime").descending())).toList();
+
+		// 시간값으로 역정렬, 시간값이 같다면 시도구군명으로 순정렬
+//		select * from air_sigungu_hour ash 
+//		order by data_time desc, city_name asc
+//		limit 25;		
+
+		// 여러개의 필드로 정렬
+		List<Order> orders = new ArrayList<Order>();
+		orders.add(new Order(Sort.Direction.DESC, "dataTime"));
+		orders.add(new Order(Sort.Direction.ASC, "cityName"));
+
+		return repo.findAll(PageRequest.of(0, 25, Sort.by(orders))).toList();
 	}
 
 	// 특정 구", "");의 최근 12개의 데이터를 조회
