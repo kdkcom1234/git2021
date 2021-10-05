@@ -1,5 +1,7 @@
 package com.git.myworkspace.photo;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,4 +17,15 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PhotoRepository extends JpaRepository<Photo, Long> {
+
+	// https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation
+
+	// where 컬럼 like '%키워드%';
+	// 해당 컬럼에 키워드가 포함되는 레코드를 조회
+
+	// SQL
+	// select * from photo where description like '%:description%';
+
+	// JPA
+	List<Photo> findByDescriptionContaining(String description);
 }

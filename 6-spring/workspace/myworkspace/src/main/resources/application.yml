@@ -20,3 +20,6 @@ spring:
   jpa:
     show-sql: true
     generate-ddl: true  # create SQL 명령어를 자동으로 수행함, auto-migration
+  cache:    type: redis
+  redis:    host: 127.0.0.1
+    port: 6379

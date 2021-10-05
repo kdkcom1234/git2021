@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -39,13 +40,16 @@ public class AirService {
 	// 그 시간이 되어야만 실행됨
 	// cron="초 분 시 일 월 년"
 	// cron="0 30 * * * *"
-//	@Scheduled(cron = "0 30 * * * *")
+	@Scheduled(cron = "0 30 * * * *")
 
 	// 1시간마다 실행(js, setInterval)
 	// fixedRate: 가장 처음에 실행되고 간격별로 실행됨
-	@Scheduled(fixedRate = 1000 * 60 * 60 * 1)
+//	@Scheduled(fixedRate = 1000 * 60 * 60 * 1)
+	// @CacheEvict(value="캐시이름", allEntries = true): 해당 캐시이름의 모든 키를 삭제
+	@CacheEvict(value = "air-current", allEntries = true)
 	public void requestAir() throws IOException {
-		String[] sidoNames = { "서울", "경기" };
+//		String[] sidoNames = { "서울", "경기" };
+		String[] sidoNames = { "서울" };
 		for (String sidoName : sidoNames) {
 			requestAirSiGunGuHour(sidoName);
 		}
