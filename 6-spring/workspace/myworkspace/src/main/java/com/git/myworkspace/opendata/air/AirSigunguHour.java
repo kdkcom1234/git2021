@@ -1,5 +1,6 @@
 package com.git.myworkspace.opendata.air;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -25,8 +26,10 @@ public class AirSigunguHour {
 	@Id
 	private String dataTime;
 	@Id
+	@Column(columnDefinition = "varchar(20) collate \"ko_KR.utf8\"")
 	private String sidoName; // 밀도가 커봤자 5%, 분포도가 커봤자 20, 인덱스 제외
 	@Id
+	@Column(columnDefinition = "varchar(20) collate \"ko_KR.utf8\"")
 	private String cityName;
 	// 값
 	private String pm10Value;
