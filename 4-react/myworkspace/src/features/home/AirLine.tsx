@@ -74,7 +74,7 @@ const AirLine = () => {
             <select
               className="form-select form-select-sm me-2"
               style={{ width: "110px" }}
-              onChange={(e) => {
+              onChange={() => {
                 getData();
               }}
               ref={cityRef}
