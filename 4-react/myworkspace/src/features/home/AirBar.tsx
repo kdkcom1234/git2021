@@ -18,8 +18,8 @@ const AirBar = () => {
         dataTime: string;
         sidoName: string;
         cityName: string;
-        pm10Value: string;
-        pm25Value: string;
+        pm10Value: number;
+        pm25Value: number;
       }[]
     >(`${process.env.REACT_APP_API_BASE}/opendata/air/sido/current`);
 
@@ -70,11 +70,11 @@ const AirBar = () => {
     const series = [
       {
         name: "PM10",
-        data: data.map((item) => +item.pm10Value),
+        data: data.map((item) => item.pm10Value),
       },
       {
         name: "PM2.5",
-        data: data.map((item) => +item.pm25Value),
+        data: data.map((item) => item.pm25Value),
       },
     ];
 
