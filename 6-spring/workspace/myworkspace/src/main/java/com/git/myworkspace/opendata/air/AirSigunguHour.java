@@ -32,6 +32,6 @@ public class AirSigunguHour {
 	@Column(columnDefinition = "varchar(20) collate \"ko_KR.utf8\"")
 	private String cityName;
 	// 값
-	private String pm10Value;
-	private String pm25Value;
+	private Integer pm10Value;
+	private Integer pm25Value;
 }
