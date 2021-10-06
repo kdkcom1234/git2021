@@ -106,8 +106,9 @@ public class AirService {
 		List<AirSigunguHour> list = new ArrayList<AirSigunguHour>();
 		for (AirSigunguHourResponse.Item item : response.getResponse().getBody().getItems().getItem()) {
 			AirSigunguHour record = AirSigunguHour.builder().dataTime(item.getDataTime()).sidoName(item.getSidoName())
-					.cityName(item.getCityName()).pm10Value(Integer.valueOf(item.getPm10Value()))
-					.pm25Value(Integer.valueOf(item.getPm25Value())).build();
+					.cityName(item.getCityName())
+					.pm10Value(item.getPm10Value().isEmpty() ? null : Integer.valueOf(item.getPm10Value()))
+					.pm25Value(item.getPm25Value().isEmpty() ? null : Integer.valueOf(item.getPm25Value())).build();
 
 			list.add(record);
 		}
