@@ -1,0 +1,15 @@
+-- management ui 활성화
+sudo rabbitmq-plugins enable rabbitmq_management
+
+-- 사용자 추가
+sudo rabbitmqctl add_user rabbitmq password123
+sudo rabbitmqctl set_user_tags rabbitmq administrator
+
+1. http://EC2서버주소:15672 접속
+2. rabbitmq / password123 으로 접속
+3. Admin 탭에서 rabbitmq 사용자를 선택하고 
+   Virtual Host '/'에 권한 추가
+
+** virtual host 경로는 아래와 같이 추가 가능
+https://www.rabbitmq.com/vhosts.html
+rabbitmqctl add_vhost qa1
