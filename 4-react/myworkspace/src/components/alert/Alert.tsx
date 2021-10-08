@@ -15,7 +15,7 @@ const Alert = ({ message, variant, onClose }: AlertProp) => {
       let count = 1;
       setInterval(() => {
         if (containerRef.current) {
-          console.log(count / 20);
+          // console.log(count / 20);
           containerRef.current.style.opacity = `${(20 - count) / 20}`;
           count++;
         }

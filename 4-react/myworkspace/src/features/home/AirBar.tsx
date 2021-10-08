@@ -43,8 +43,8 @@ const AirBar = () => {
           ({ value, seriesIndex }: { value: number; seriesIndex: number }) => {
             // seriesIndex: 0, PM10
             // seriesIndex: 1, PM2.5
-            console.log(value);
-            console.log(seriesIndex);
+            // console.log(value);
+            // console.log(seriesIndex);
 
             let color = "";
 
