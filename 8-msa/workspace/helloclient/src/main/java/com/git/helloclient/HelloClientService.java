@@ -2,7 +2,7 @@ package com.git.helloclient;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap
 import java.util.Map;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 @Service
 public class HelloClientService {
 
-	private Map<String, SseEmitter> emitters = new HashMap<String, SseEmitter>();
+	private Map<String, SseEmitter> emitters = new ConcurrentHashMap<String, SseEmitter>();
 
 	public void putEmitter(String clientId, SseEmitter emitter) {
 		this.emitters.put(clientId, emitter);
