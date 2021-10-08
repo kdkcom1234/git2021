@@ -16,6 +16,15 @@ public class HelloClientService {
 
 	public void putEmitter(String clientId, SseEmitter emitter) {
 		this.emitters.put(clientId, emitter);
+		System.out.println(emitters.size());
+	}
+
+	public SseEmitter getEmitter(String clientId) {
+		return this.emitters.get(clientId);
+	}
+
+	public void removeEmitter(String clientId) {
+		this.emitters.remove(clientId);
 	}
 
 	// 1번 -- 수신쪽은 본인 번호

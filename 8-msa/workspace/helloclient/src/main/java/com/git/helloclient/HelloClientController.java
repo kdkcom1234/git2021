@@ -27,7 +27,15 @@ public class HelloClientController {
 	public SseEmitter connectEvent(@PathVariable String clientId) {
 
 		// Event를 발생시키는 객체를 생성
-		SseEmitter emitter = new SseEmitter();
+
+		// 기존에 해당 clientId emitter 있으면 삭제
+		SseEmitter emitter = service.getEmitter(clientId);
+		if (emitter != null) {
+			service.removeEmitter(clientId);
+		}
+
+		// timeout 시간을 무한으로 처리, 클라이언트에서 다시 요청을 보내지 않음
+		emitter = new SseEmitter(-1L);
 
 		// 서비스 객체에 emitter 객체를 넘겨줌
 		service.putEmitter(clientId, emitter);
