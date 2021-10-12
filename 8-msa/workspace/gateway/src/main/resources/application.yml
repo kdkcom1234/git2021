@@ -7,7 +7,7 @@ spring:
       # 서비스별 경로 등록      routes:      - id: service1
         uri: lb://SERVICE-1
         predicates: # 조건식        - Path=/service-1/**
-        filters:        - RewritePath=/service-1/(?<path>.*),/$\{path}
+        filters: #/service-1/ 경로 제거        - RewritePath=/service-1/(?<path>.*),/$\{path}
     
 eureka:
   client:
