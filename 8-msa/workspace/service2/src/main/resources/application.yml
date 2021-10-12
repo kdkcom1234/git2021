@@ -1,0 +1,9 @@
+server:  port: 6060
+spring:
+  application:
+    name: service-2
+eureka:  client:    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhostmanagement:  endpoints:    web:      exposure:        include: "*"
+      

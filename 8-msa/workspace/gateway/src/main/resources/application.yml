@@ -1,0 +1,22 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: gateway
+  cloud:    gateway:
+      # 서비스별 경로 등록      routes:      - id: service1
+        uri: lb://SERVICE-1
+        predicates: # 조건식        - Path=/service-1/**
+        filters:        - RewritePath=/service-1/(?<path>.*),/$\{path}
+    
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
