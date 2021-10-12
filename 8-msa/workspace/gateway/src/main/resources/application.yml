@@ -1,6 +1,8 @@
 server:
   port: 8000
+  
 spring:
+  profiles:    active: default
   application:
     name: gateway
   cloud:    gateway:
@@ -30,3 +32,14 @@ management:
     web:
       exposure:
         include: "*"
+        
+        
+---
+spring:
+  profiles: dev
+eureka:
+  client:
+    service-url:
+      defaultZone: http://ec2-52-78-143-245.ap-northeast-2.compute.amazonaws.com:8761/eureka/
+  instance:
+    hostname: ec2-52-78-143-245.ap-northeast-2.compute.amazonaws.com
