@@ -4,11 +4,9 @@ spring:
   application:
     name: gateway
   cloud:    gateway:
-      # 서비스별 경로 등록      routes:      - id: service1
-        uri: lb://SERVICE-1
-        predicates: # 조건식        - Path=/service-1/**
-        filters: #/service-1/ 경로 제거        - RewritePath=/service-1/(?<path>.*),/$\{path}
-    
+      # service registry에 있는 서비스명으로 라우팅처리
+      # /service-1/** -> service-1물리주소/**
+      discovery:        locator:          enabled: true          lower-case-service-id: true
 eureka:
   client:
     service-url:
