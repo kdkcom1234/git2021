@@ -4,9 +4,21 @@ spring:
   application:
     name: gateway
   cloud:    gateway:
-      # service registry에 있는 서비스명으로 라우팅처리
-      # /service-1/** -> service-1물리주소/**
-      discovery:        locator:          enabled: true          lower-case-service-id: true
+    
+      # https://stackoverflow.com/questions/58714918/spring-cloud-gateway-auto-routing-with-eureka
+      
+      # http(s)://gateway주소/서비스명 
+      # -> http(s)://서비스명
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+              
+#      # 서비스별 경로 개별 등록#      routes:#      - id: service1
+#        uri: lb://SERVICE-1
+#        predicates: # 조건식#        - Path=/service-1/**
+#        filters: #/service-1/ 경로 제거#        - RewritePath=/service-1/(?<path>.*),/$\{path}
+    
 eureka:
   client:
     service-url:
