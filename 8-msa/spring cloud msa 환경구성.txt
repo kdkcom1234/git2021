@@ -1,0 +1,83 @@
+-- Service Registry(Eureka)
+// 의존성
+- EurekaServer
+
+// application.yml
+server:
+  port: 8761
+
+spring:
+  application:
+    name: registry #서비스명
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+
+// 어노테이션
+@EnableEurekaServer
+Application.java
+
+
+
+-- 각 서비스
+// 의존성
+- Eureka Discovery Client
+- Spring Boot Actuator
+- Spring Boot Web
+- Spring DevTools
+
+// application.yml
+server:
+  port: 5050
+spring:
+  application:
+    name: service-1
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
+
+-- API Gateway(Spring Cloud Gateway)
+// 의존성
+- Eureka Discovery Client
+- Spring Boot Actuator
+- Spring Boot Web
+- Spring DevTools
+- Gateway
+
+// application.yml
+server:
+  port: 8000
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      # service registry에 있는 서비스명으로 라우팅처리
+      # /service-1/** -> service-1물리주소/**
+      # https://stackoverflow.com/questions/58714918/spring-cloud-gateway-auto-routing-with-eureka
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
