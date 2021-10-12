@@ -3,5 +3,6 @@ server:
 
 spring:  application:    name: registry #서비스명
 eureka:
+  server:    renewal-percent-threshold: 0.85
   client:    register-with-eureka: false
     fetch-registry: false
