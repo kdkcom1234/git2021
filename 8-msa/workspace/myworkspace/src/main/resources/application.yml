@@ -1,0 +1,27 @@
+server:  port: 8080
+
+# yml(yaml, 야믈(야멀))
+# 시스템 설정에 사용하는 파일
+spring:  application:    name: myworkspace
+  datasource:    driver-class-name: org.postgresql.Driver  #postgresql
+#    driver-class-name: com.mysql.cj.jdbc.Driver #mysql
+    
+    # jdbc - java databse connector
+    # :postresql - 데이터베이스 엔진
+    # //url - 데이터베이스 주소
+    # :5432 - 데이터베이스 접속 포트
+    # /postgres - 접속할 데이터베이스
+    
+    url: jdbc:postgresql://database-1.cgp5lxuznsxk.ap-northeast-2.rds.amazonaws.com:5432/postgres?currentSchema=myworkspace
+#    url: jdbc:mysql://database-3.cgp5lxuznsxk.ap-northeast-2.rds.amazonaws.com:3306/myworkspace
+        
+    username: postgres #postgresql
+#    username: admin      #mysql 
+    
+    password: password123!
+  jpa:
+    show-sql: true
+    generate-ddl: true  # create SQL 명령어를 자동으로 수행함, auto-migration
+  cache:    type: redis
+  redis:    host: 127.0.0.1
+    port: 6379eureka:  client:    service-url:      defaultZone: http://localhost:8761/eureka/  instance:    hostname: localhost management:  endpoints:    web:      exposure:        include: "*"        ---spring:  profiles: deveureka:  client:    service-url:      # service registy 주소      defaultZone: http://ec2-52-78-143-245.ap-northeast-2.compute.amazonaws.com:8761/eureka/  instance:    # 본인이 원래 돌리고 있어서 인스턴스 주소      hostname: ec2-52-79-178-68.ap-northeast-2.compute.amazonaws.com                 
