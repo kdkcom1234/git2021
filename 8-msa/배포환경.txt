@@ -1,0 +1,1 @@
+1. service registry는 그대로 배포
