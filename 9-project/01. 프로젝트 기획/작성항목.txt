@@ -18,7 +18,7 @@
 3. 프로세스 흐름도
   - 사용자 역할별 페이지 이동 및 서비스간 데이터 흐름이 보이도록 작성
   - 역할(소비자, 사용자, 관리자, 판매자, 마케터 등)
-  - VP에 Activity Diagram으로 표현 가능(BPMN)
+  - Activity Diagram, Swimlane Flowchart, BPMN 등을 검색해보고 작성
 
 4. 프로젝트 일정(1주단위)
   - 0주~1주: 기획
