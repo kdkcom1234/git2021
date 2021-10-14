@@ -40,51 +40,29 @@ public class SignUpFilter implements WebFilter {
 		// /auth/signup 일때 login 및 profile 정보 생성
 		if (rootPath.equals("auth") && subPath.equals("signup")) {
 
-			ObjectMapper mapper = new ObjectMapper();
-
-//			System.out.println("--insert--");
-//			Mono<Login> login = template.insert(Login.class)
-//					.using(Login.builder().userId("kdkcom").password("1234").sessionId("1").build());
-//
-//			Mono<Profile> profile = template.insert(Profile.class)
-//					.using(Profile.builder().email("kdkcom1234@gmail.com").build());
-
-//			byte[] bytes = "Hello World".getBytes(StandardCharsets.UTF_8);
-//			DataBuffer buffer = res.bufferFactory().wrap(bytes);
 			res.setStatusCode(HttpStatus.CREATED);
 
-//			Mono<Login> login = template.insert(Login.class)
-//					.using(Login.builder().userId("kdkcom").password("1234").sessionId("1").build());
-//
-//			Mono<Profile> profile = template.insert(Profile.class)
-//					.using(Profile.builder().email("kdkcom1234@gmail.com").build());
-
 			return req.getBody().map(body -> {
-				SignUpRequest signup = new SignUpRequest();
+				SignUpRequest signUpReq = new SignUpRequest();
 				try {
-					signup = mapper.readValue(body.toString(StandardCharsets.UTF_8), SignUpRequest.class);
+					ObjectMapper mapper = new ObjectMapper();
+					signUpReq = mapper.readValue(body.toString(StandardCharsets.UTF_8), SignUpRequest.class);
 				} catch (JsonProcessingException e1) {
 					e1.printStackTrace();
 				}
-				return signup;
-			}).concatMap(signup -> template.insert(Login.class)
-					.using(Login.builder().userId(signup.getUserId()).password(signup.getPassword()).build())
-					.then(template.insert(Profile.class).using(Profile.builder().email(signup.getEmail()).build())))
-					.then();
-
-//			return req.getBody().doOnNext(body -> {
-//				System.out.println(body.toString(StandardCharsets.UTF_8));
-//
-//				try {
-//					SignUpRequest signup = mapper.readValue(body.toString(StandardCharsets.UTF_8), SignUpRequest.class);
-//				} catch (JsonProcessingException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//
-//			}).then(login).then(profile).then();
-
-//			return res.writeWith(Flux.just(buffer));
+				return signUpReq;
+			}).concatMap(signUpReq -> 
+				template
+				.insert(Login.class)
+				.using(Login.builder()
+						.userId(signUpReq.getUserId())
+						.password(signUpReq.getPassword()).build())
+					.then(template
+							.insert(Profile.class)
+							.using(Profile.builder()
+									.username(signUpReq.getUsername())
+									.email(signUpReq.getEmail()).build())))
+			.then();
 		}
 
 		return filterChain.filter(exchange);
