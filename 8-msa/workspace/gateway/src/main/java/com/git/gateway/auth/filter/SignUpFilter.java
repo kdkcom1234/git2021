@@ -39,29 +39,35 @@ public class SignUpFilter implements WebFilter {
 
 		// /auth/signup 일때 login 및 profile 정보 생성
 		if (rootPath.equals("auth") && subPath.equals("signup")) {
-
+			
+			// 201 상태코드 처리
 			res.setStatusCode(HttpStatus.CREATED);
-
-			return req.getBody().map(body -> {
+			
+			// Mono객체 리턴
+			return req.getBody()
+			.map(body -> {
 				SignUpRequest signUpReq = new SignUpRequest();
+				
 				try {
 					ObjectMapper mapper = new ObjectMapper();
 					signUpReq = mapper.readValue(body.toString(StandardCharsets.UTF_8), SignUpRequest.class);
 				} catch (JsonProcessingException e1) {
 					e1.printStackTrace();
 				}
-				return signUpReq;
-			}).concatMap(signUpReq -> 
+				return signUpReq;				
+			})
+			.concatMap(signUpReq -> 
 				template
-				.insert(Login.class)
-				.using(Login.builder()
+					.insert(Login.class)
+					.using(Login.builder()
 						.userId(signUpReq.getUserId())
 						.password(signUpReq.getPassword()).build())
-					.then(template
-							.insert(Profile.class)
-							.using(Profile.builder()
-									.username(signUpReq.getUsername())
-									.email(signUpReq.getEmail()).build())))
+			.then(
+				template
+					.insert(Profile.class)
+					.using(Profile.builder()
+						.username(signUpReq.getUsername())
+						.email(signUpReq.getEmail()).build())))
 			.then();
 		}
 
