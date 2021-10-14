@@ -4,7 +4,7 @@ plugins {
 	id 'java'
 }
 
-group = 'com.example'
+group = 'com.git'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
@@ -19,32 +19,18 @@ repositories {
 	mavenCentral()
 }
 
-ext {
-	set('springCloudVersion', "2020.0.4")
-}
-
 dependencies {
-	// postgresql reactive database connector
-    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
-    runtimeOnly 'io.r2dbc:r2dbc-postgresql'
-    
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
-	implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
-	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'io.r2dbc:r2dbc-postgresql'
+	runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 	
 	// lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
-}
-
-dependencyManagement {
-	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-	}
 }
 
 test {

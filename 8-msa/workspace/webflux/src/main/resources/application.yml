@@ -1,0 +1,15 @@
+server:
+  port: 5001
+
+
+#logging:
+#  level:#    '[org.springframework.r2dbc]': DEBUG
+
+spring:
+  profiles:    active: default
+  application:
+    name: gateway
+#  #r2dbc postgresql 접속 정보
+  r2dbc:    url: r2dbc:postgresql://database-1.cgp5lxuznsxk.ap-northeast-2.rds.amazonaws.com:5432/postgres?schema=auth
+    username: postgres
+    password: password123! 

@@ -1,10 +1,21 @@
 server:
   port: 8000
-  
+
+
+logging:
+  level:    '[org.springframework.r2dbc]': DEBUG
+
 spring:
   profiles:    active: default
   application:
     name: gateway
+#  #r2dbc postgresql 접속 정보
+  r2dbc:    url: r2dbc:postgresql://database-1.cgp5lxuznsxk.ap-northeast-2.rds.amazonaws.com:5432/postgres?schema=auth
+    username: postgres
+    password: password123! 
+  jpa:
+    show-sql: true
+    generate-ddl: true  # create SQL 명령어를 자동으로 수행함, auto-migration          
   cloud:    gateway:
     
       # https://stackoverflow.com/questions/58714918/spring-cloud-gateway-auto-routing-with-eureka
@@ -32,6 +43,8 @@ management:
     web:
       exposure:
         include: "*"
+  
+   
         
         
 ---

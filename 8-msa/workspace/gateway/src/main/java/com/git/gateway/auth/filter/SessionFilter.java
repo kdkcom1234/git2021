@@ -1,4 +1,4 @@
-package com.git.gateway.auth;
+package com.git.gateway.auth.filter;
 
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
