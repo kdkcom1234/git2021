@@ -12,6 +12,6 @@ public class TestController {
 	public String test(HttpServletRequest req) {
 		System.out.println(req.getHeader("session-profile"));
 		System.out.println("--service 1--");
-		return "1";
+		return "123";
 	}
 }

@@ -10,8 +10,8 @@ import java.time.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
-import org.springframework.data.redis.core.ReactiveHashOperations;
 import org.springframework.data.redis.core.ReactiveStringRedisTemplate;
+import org.springframework.data.redis.core.ReactiveValueOperations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -79,26 +79,21 @@ public class SignInFilter implements WebFilter {
 				
 				String sessionId = Hash.getSessionId(profile.getUserId());
 				
-				ReactiveHashOperations<String, String, String> record 
-					= redis.opsForHash();
+				// 생성한 sessionid로 변경
+				profile.setSessionId(sessionId);
 				
-				// Redis에 세션 정보를 생성
-				// 키 : 값(키 : 값 )				
-				record.put(sessionId, "id", String.valueOf(profile.getId())).subscribe();
-				record.put(sessionId, "userId", getNonNullValue(profile.getUserId())).subscribe();
-				record.put(sessionId, "username", getNonNullValue(profile.getUsername())).subscribe();
-				record.put(sessionId, "email", getNonNullValue(profile.getEmail())).subscribe();
-				record.put(sessionId, "role", getNonNullValue(profile.getRole())).subscribe();
-				record.put(sessionId, "img", getNonNullValue(profile.getImg())).subscribe();				
+				// 세션 생성
+				ReactiveValueOperations<String, String> record = redis.opsForValue();
+				record.set(sessionId, mashal(profile), Duration.ofHours(24)).subscribe();				
 				
-				// 키(세션)의 만료 시간 지정
-				redis.expire(sessionId, Duration.ofHours(24)).subscribe();
 				
 				// 프로필에 현재 세션Id 추가
 				db.update(Profile.class)
 					.matching(query(where("userId").is(profile.getUserId())))
 					.apply(update("sessionId", sessionId))
 				.subscribe();
+				
+				
 
 				// 응답처리, sessionId 반환
 				res.setStatusCode(HttpStatus.OK);
@@ -124,6 +119,19 @@ public class SignInFilter implements WebFilter {
 		}
 		
 		return signInReq;
+	}
+	
+	public String mashal(Profile profile) {
+		ObjectMapper mapper = new ObjectMapper();
+		String str = "";
+		
+		try {
+			str = mapper.writeValueAsString(profile);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return str;
 	}
 	
 	public String getNonNullValue(String str) {
