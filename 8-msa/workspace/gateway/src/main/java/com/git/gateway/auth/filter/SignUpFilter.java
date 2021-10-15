@@ -3,6 +3,7 @@ package com.git.gateway.auth.filter;
 import java.nio.charset.StandardCharsets;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -17,14 +18,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.git.gateway.auth.entity.Login;
 import com.git.gateway.auth.entity.Profile;
 import com.git.gateway.auth.request.SignUpRequest;
+import com.git.gateway.auth.util.Hash;
 
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Component
 public class SignUpFilter implements WebFilter {
 
 	@Autowired
-	private R2dbcEntityTemplate template;
+	private R2dbcEntityTemplate db;
 
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain filterChain) {
@@ -40,37 +43,54 @@ public class SignUpFilter implements WebFilter {
 		// /auth/signup 일때 login 및 profile 정보 생성
 		if (rootPath.equals("auth") && subPath.equals("signup")) {
 			
-			// 201 상태코드 처리
-			res.setStatusCode(HttpStatus.CREATED);
-			
-			// Mono객체 리턴
-			return req.getBody()
+			Flux<DataBuffer> result = req.getBody()
 			.map(body -> {
-				SignUpRequest signUpReq = new SignUpRequest();
+				SignUpRequest signUpReq = unmashal(body);
 				
-				try {
-					ObjectMapper mapper = new ObjectMapper();
-					signUpReq = mapper.readValue(body.toString(StandardCharsets.UTF_8), SignUpRequest.class);
-				} catch (JsonProcessingException e1) {
-					e1.printStackTrace();
-				}
-				return signUpReq;				
+				db
+				.insert(Login.class)
+				.using(Login.builder()
+					.userId(signUpReq.getUserId())
+					.password(Hash.getSha512Hex(signUpReq.getPassword()))
+					.build())
+				.subscribe();
+				
+				return signUpReq;
 			})
-			.concatMap(signUpReq -> 
-				template
-					.insert(Login.class)
-					.using(Login.builder()
-						.userId(signUpReq.getUserId())
-						.password(signUpReq.getPassword()).build())
-			.then(
-				template
-					.insert(Profile.class)
-					.using(Profile.builder()
-						.username(signUpReq.getUsername())
-						.email(signUpReq.getEmail()).build())))
-			.then();
+			.flatMap(signUpReq -> {
+				return db
+				.insert(Profile.class)
+				.using(Profile.builder()
+					.userId(signUpReq.getUserId())							
+					.username(signUpReq.getUsername())
+					.email(signUpReq.getEmail())
+					.role(signUpReq.getRole())
+					.img(signUpReq.getImg())
+					.build());				
+			})
+			.flatMap(profile -> {
+				res.setStatusCode(HttpStatus.CREATED);
+				DataBuffer buffer = res.bufferFactory().wrap("success".getBytes());	
+				
+				return Flux.just(buffer);
+			});
+			
+			return res.writeWith(result);	
 		}
 
 		return filterChain.filter(exchange);
+	}
+	
+	public SignUpRequest unmashal(DataBuffer body) {
+		ObjectMapper mapper = new ObjectMapper();
+		SignUpRequest req = new SignUpRequest();
+		try {
+			req = mapper.readValue(body.toString(StandardCharsets.UTF_8), SignUpRequest.class);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return req;
 	}
 }
