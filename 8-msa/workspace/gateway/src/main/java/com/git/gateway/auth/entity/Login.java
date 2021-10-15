@@ -17,5 +17,4 @@ public class Login {
 	private long id;
 	private String userId;
 	private String password;
-	private String sessionId;
 }

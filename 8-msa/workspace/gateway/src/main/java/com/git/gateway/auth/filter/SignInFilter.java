@@ -2,6 +2,7 @@ package com.git.gateway.auth.filter;
 
 import static org.springframework.data.relational.core.query.Criteria.where;
 import static org.springframework.data.relational.core.query.Query.query;
+import static org.springframework.data.relational.core.query.Update.update;
 
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
@@ -71,6 +72,11 @@ public class SignInFilter implements WebFilter {
 			})
 			.flatMap(profile -> {
 				
+				// 기존 세션이 있으면 삭제한다.
+				if(profile.getSessionId() != null) {
+					redis.delete(profile.getSessionId()).subscribe();
+				}
+				
 				String sessionId = Hash.getSessionId(profile.getUserId());
 				
 				ReactiveHashOperations<String, String, String> record 
@@ -86,7 +92,13 @@ public class SignInFilter implements WebFilter {
 				record.put(sessionId, "img", getNonNullValue(profile.getImg())).subscribe();				
 				
 				// 키(세션)의 만료 시간 지정
-				redis.expire(sessionId, Duration.ofHours(24)).subscribe();				
+				redis.expire(sessionId, Duration.ofHours(24)).subscribe();
+				
+				// 프로필에 현재 세션Id 추가
+				db.update(Profile.class)
+					.matching(query(where("userId").is(profile.getUserId())))
+					.apply(update("sessionId", sessionId))
+				.subscribe();
 
 				// 응답처리, sessionId 반환
 				res.setStatusCode(HttpStatus.OK);

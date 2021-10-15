@@ -20,4 +20,5 @@ public class Profile {
 	private String email;
 	private String role;
 	private String img;
+	private String sessionId;	
 }
