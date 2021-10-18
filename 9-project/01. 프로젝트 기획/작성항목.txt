@@ -2,7 +2,7 @@
  - 주제는 비즈니스 내용과 기술이 적절히 혼합된 형태의 한가지 문장으로 표현
  - 사용기술(차후 개발 완료후 추가적인 것은 보강한다)
    : 프레임워크 및 라이브러리
-    React, Spring Boot
+    React, Redux, Redus-Saga, ApexChart Spring Boot
    : 언어
     HTML5, Typescript, CSS3/SASS, Java
    : 미들웨어
@@ -11,6 +11,7 @@
     PostgreSQL, Redis
    : AWS
     EC2, RDS
+ - 동기, 선정 사유
    
 2. 사례 분석 2개 이상
   - 비즈니스 특징, 장/단점, 기술환경 등
