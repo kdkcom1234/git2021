@@ -44,34 +44,39 @@ public class SignUpFilter implements WebFilter {
 		if (rootPath.equals("auth") && subPath.equals("signup")) {
 			
 			Flux<DataBuffer> result = req.getBody()
-			.flatMap(body -> {
-				SignUpRequest signUpReq = unmashal(body);
-				
-				db
+			.map(body -> {
+				// 1. JSON 데이터를 객체화를
+				return unmashal(body);				
+			})
+			.flatMap(signUpReq -> {
+				// 2. login 및 profile 저장
+				return db
 				.insert(Login.class)
 				.using(Login.builder()
 					.userId(signUpReq.getUserId())
+					// 패스워드는 단방향 암호화로 만듦
 					.password(Hash.getSha512Hex(signUpReq.getPassword()))
 					.build())
-				.subscribe();
-				
-				return db
-				.insert(Profile.class)
-				.using(Profile.builder()
-					.userId(signUpReq.getUserId())							
-					.username(signUpReq.getUsername())
-					.email(signUpReq.getEmail())
-					.role(signUpReq.getRole())
-					.img(signUpReq.getImg())
-					.build());					
+				.then(db
+						.insert(Profile.class)
+						.using(Profile.builder()
+							.userId(signUpReq.getUserId())							
+							.username(signUpReq.getUsername())
+							.email(signUpReq.getEmail())
+							.role(signUpReq.getRole())
+							.img(signUpReq.getImg())
+							.build()));	
 			})
 			.flatMap(profile -> {
+				// 3. 응답 처리
 				res.setStatusCode(HttpStatus.CREATED);
 				DataBuffer buffer = res.bufferFactory().wrap("success".getBytes());	
 				
 				return Flux.just(buffer);
 			});
 			
+			// return getBody(loginInsert()).profileInsert().response().write()
+			// 현재코드(필터)에서 Mono 객체가 리턴하고 끝남
 			return res.writeWith(result);	
 		}
 

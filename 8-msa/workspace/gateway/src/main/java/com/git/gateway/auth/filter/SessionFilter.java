@@ -23,15 +23,19 @@ public class SessionFilter implements WebFilter {
 	public Mono<Void> filter(ServerWebExchange ex, WebFilterChain ch) {
 		ServerHttpRequest req = ex.getRequest();
 		
+		// 인증 세션
 		List<String> authHeader = req.getHeaders().get("authorization");
 		
 		if(authHeader != null && authHeader.get(0) != null) {
+			// 인증 세션에서 토큰값 얻기
 			String sessionId = authHeader.get(0).replace("Bearer: ", "");
 
+			// 토큰 값으로 레디스에 프로필 정보 조회
 			ReactiveValueOperations<String, String> record = redis.opsForValue();
 			
 			Mono<Void> result = record.get(sessionId)
 			.flatMap(profileJSON -> {
+				// 요청 헤더에 session-profile을 넣어줌
 				req.mutate().header("session-profile", profileJSON);
 				return ch.filter(ex);
 			});
