@@ -45,8 +45,10 @@ public class SignUpFilter implements WebFilter {
 			
 			Flux<DataBuffer> result = req.getBody()
 			// 1. Json 데이터를 객체화
+			// 스트림객체.map -> 그냥 일반 객체를 반환
 			.map(body -> unmashal(body))
-			// 2. login 및 profile 저장			
+			// 2. login 및 profile 저장	
+			// 스트림객체.flatMap -> 스트림 객체를 반환
 			.flatMap(signUpReq -> {
 				return db.insert(Login.class)
 					.using(Login.builder()

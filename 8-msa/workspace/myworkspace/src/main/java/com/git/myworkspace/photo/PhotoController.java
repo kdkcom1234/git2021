@@ -59,7 +59,7 @@ public class PhotoController {
 		// Sort.by("정렬컬럼").ascending() 순정렬
 //		return repo.findAll(Sort.by("id").descending());
 		
-		// 특정
+		// **특정 사용자의 데이터만 조회
 		return repo.findByUserId(Sort.by("id").descending(), profile.getUserId());
 	}
 
