@@ -50,15 +50,13 @@ public class SignUpFilter implements WebFilter {
 			})
 			.flatMap(signUpReq -> {
 				// 2. login 및 profile 저장
-				return db
-				.insert(Login.class)
-				.using(Login.builder()
-					.userId(signUpReq.getUserId())
-					// 패스워드는 단방향 암호화로 만듦
-					.password(Hash.getSha512Hex(signUpReq.getPassword()))
-					.build())
-				.then(db
-						.insert(Profile.class)
+				return db.insert(Login.class)
+					.using(Login.builder()
+						.userId(signUpReq.getUserId())
+						// 패스워드는 단방향 암호화로 만듦
+						.password(Hash.getSha512Hex(signUpReq.getPassword()))
+						.build())
+					.then(db.insert(Profile.class)
 						.using(Profile.builder()
 							.userId(signUpReq.getUserId())							
 							.username(signUpReq.getUsername())
