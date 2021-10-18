@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.git.myworkspace.lib.Session;
 import com.git.myworkspace.lib.TextProcesser;
 
 @RestController
@@ -35,7 +37,17 @@ public class PhotoController {
 	}
 
 	@GetMapping(value = "/photos")
-	public List<Photo> getPhotos() throws InterruptedException {
+	public List<Photo> getPhotos(HttpServletRequest req, HttpServletResponse res) {
+		System.out.println(req.getHeader("session-profile"));
+		Session.Profile profile = Session.getSessionProfile(req);		
+		
+		if(profile == null) {
+			// 401: 인증 필요
+			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return null;			
+		}
+				
+		
 		// repository.findAll();
 		// SELECT * FROM photo;
 		// 기본적으로 PK 순정렬(asc, ascending)되고 있는 상황
@@ -45,20 +57,42 @@ public class PhotoController {
 		// id컬럼 역정렬(clusted index)
 		// Sort.by("정렬컬럼").desceding() 역정렬
 		// Sort.by("정렬컬럼").ascending() 순정렬
-		return repo.findAll(Sort.by("id").descending());
+//		return repo.findAll(Sort.by("id").descending());
+		
+		// 특정
+		return repo.findByUserId(Sort.by("id").descending(), profile.getUserId());
 	}
 
 	// 예) 한페이지 2개, 1번째 페이지
 	// 예) GET /photos/paging?page=0&size=2
 	@GetMapping("/photos/paging")
-	public Page<Photo> getPhotosPaging(@RequestParam int page, @RequestParam int size) {
+	public Page<Photo> getPhotosPaging(@RequestParam int page, @RequestParam int size, HttpServletRequest req, HttpServletResponse res) {
+		System.out.println(req.getHeader("session-profile"));
+		Session.Profile profile = Session.getSessionProfile(req);		
+		
+		if(profile == null) {
+			// 401: 인증 필요
+			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return null;			
+		}
+						
+		
 		// findAll(Pageable page)
 		// findAll(PageRequest.of(page, size, Sort sort));
-		return repo.findAll(PageRequest.of(page, size, Sort.by("id").descending()));
+		return repo.findByUserId(PageRequest.of(page, size, Sort.by("id").descending()), profile.getUserId());
 	}
 
 	@PostMapping(value = "/photos")
-	public Photo addPhoto(@RequestBody Photo photo, HttpServletResponse res) throws InterruptedException {
+	public Photo addPhoto(@RequestBody Photo photo, HttpServletRequest req, HttpServletResponse res) throws InterruptedException {
+		System.out.println(req.getHeader("session-profile"));
+		Session.Profile profile = Session.getSessionProfile(req);
+		
+		if(profile == null) {
+			// 401: 인증 필요
+			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return null;			
+		}
+		
 		// 타이틀이 빈값
 		if (TextProcesser.isEmpyText(photo.getTitle())) {
 			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -72,9 +106,16 @@ public class PhotoController {
 		}
 
 		// 객체 생성
-		Photo photoItem = Photo.builder().title(photo.getTitle())
-				.description(TextProcesser.getPlainText(photo.getDescription())).photoUrl(photo.getPhotoUrl())
-				.fileType(photo.getFileType()).fileName(photo.getFileType()).createdTime(new Date().getTime()).build();
+		Photo photoItem = Photo.builder()
+				.title(photo.getTitle())
+				.description(TextProcesser.getPlainText(photo.getDescription()))
+				.photoUrl(photo.getPhotoUrl())
+				.fileType(photo.getFileType())
+				.fileName(photo.getFileName())
+				.createdTime(new Date().getTime())
+				.userId(profile.getUserId())
+				.build();
+				
 
 		// repository.save(entity)
 		// insert into photo(...) values(...)
@@ -88,14 +129,23 @@ public class PhotoController {
 	}
 
 	@DeleteMapping(value = "/photos/{id}")
-	public boolean removePhoto(@PathVariable long id, HttpServletResponse res) throws InterruptedException {
-//		Thread.sleep(5000);
+	public boolean removePhoto(@PathVariable long id, HttpServletRequest req, HttpServletResponse res) throws InterruptedException {
+		System.out.println(req.getHeader("session-profile"));
+		Session.Profile profile = Session.getSessionProfile(req);
+		
+		if(profile == null) {
+			// 401: 인증 필요
+			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return false;			
+		}		
+		
+		//		Thread.sleep(5000);
 
 		// id에 해당하는 객체가 없으면
 		// Optional null-safe, 자바 1.8 나온 방식
 		// repository.findBy(id)
 		// select * from photo where id = ?;
-		Optional<Photo> photo = repo.findById(id);
+		Optional<Photo> photo = repo.findByIdAndUserId(id, profile.getUserId());
 		if (photo.isEmpty()) {
 			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			return false;
@@ -110,11 +160,18 @@ public class PhotoController {
 	}
 
 	@PutMapping(value = "/photos/{id}")
-	public Photo modifyPhoto(@PathVariable long id, @RequestBody Photo photo, HttpServletResponse res)
+	public Photo modifyPhoto(@PathVariable long id, @RequestBody Photo photo, HttpServletRequest req, HttpServletResponse res)
 			throws InterruptedException {
-
-		// id에 해당하는 객체가 없으면
-		Optional<Photo> photoItem = repo.findById(id);
+		System.out.println(req.getHeader("session-profile"));
+		Session.Profile profile = Session.getSessionProfile(req);
+		
+		if(profile == null) {
+			// 401: 인증 필요
+			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return null;			
+		}		
+		
+		Optional<Photo> photoItem = repo.findByIdAndUserId(id, profile.getUserId());
 		if (photoItem.isEmpty()) {
 			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			return null;

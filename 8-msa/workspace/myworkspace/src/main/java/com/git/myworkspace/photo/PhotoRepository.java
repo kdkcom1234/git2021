@@ -1,7 +1,11 @@
 package com.git.myworkspace.photo;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -28,4 +32,9 @@ public interface PhotoRepository extends JpaRepository<Photo, Long> {
 
 	// JPA
 	List<Photo> findByDescriptionContaining(String description);
+	
+	Optional<Photo> findByIdAndUserId(long Id, String userId);
+	
+	List<Photo> findByUserId(Sort sort, String userId);
+	Page<Photo> findByUserId(Pageable page, String userId);
 }

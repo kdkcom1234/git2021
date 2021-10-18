@@ -44,7 +44,7 @@ public class SignUpFilter implements WebFilter {
 		if (rootPath.equals("auth") && subPath.equals("signup")) {
 			
 			Flux<DataBuffer> result = req.getBody()
-			.map(body -> {
+			.flatMap(body -> {
 				SignUpRequest signUpReq = unmashal(body);
 				
 				db
@@ -55,9 +55,6 @@ public class SignUpFilter implements WebFilter {
 					.build())
 				.subscribe();
 				
-				return signUpReq;
-			})
-			.flatMap(signUpReq -> {
 				return db
 				.insert(Profile.class)
 				.using(Profile.builder()
@@ -66,7 +63,7 @@ public class SignUpFilter implements WebFilter {
 					.email(signUpReq.getEmail())
 					.role(signUpReq.getRole())
 					.img(signUpReq.getImg())
-					.build());				
+					.build());					
 			})
 			.flatMap(profile -> {
 				res.setStatusCode(HttpStatus.CREATED);

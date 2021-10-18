@@ -43,4 +43,5 @@ public class Photo {
 	private String fileType;
 	private String fileName;
 	private long createdTime;
+	private String userId;
 }
