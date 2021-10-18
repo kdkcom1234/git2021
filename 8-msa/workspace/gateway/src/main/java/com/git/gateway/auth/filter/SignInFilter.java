@@ -55,9 +55,8 @@ public class SignInFilter implements WebFilter {
 			System.out.println("--signin--");
 			
 			Flux<DataBuffer> result = req.getBody()
-			.flatMap(body -> {
-				SignInRequest signInReq = unmashal(body);
-									
+			.map(body -> unmashal(body))
+			.flatMap(signInReq -> {	
 				return db.selectOne(query(
 						where("userId").is(signInReq.getUserId())
 						.and("password").is(Hash.getSha512Hex(signInReq.getPassword())))
@@ -74,27 +73,26 @@ public class SignInFilter implements WebFilter {
 				
 				// 기존 세션이 있으면 삭제한다.
 				if(profile.getSessionId() != null) {
+					// Flux나 Mono 객체는 subscribe를 해야 실행된다.
 					redis.delete(profile.getSessionId()).subscribe();
 				}
 				
+				// SessionId 생성
 				String sessionId = Hash.getSessionId(profile.getUserId());
 				
-				// 생성한 sessionid로 변경
+				// 현재 프로필 정보를 생성한 sessionid로 변경
 				profile.setSessionId(sessionId);
 				
-				// 세션 생성
+				// 세션(세션Id+프로필) 생성
 				ReactiveValueOperations<String, String> record = redis.opsForValue();
 				record.set(sessionId, mashal(profile), Duration.ofHours(24)).subscribe();				
 				
-				
-				// 프로필에 현재 세션Id 추가
+				// 데이터베이스 프로필에 현재 세션Id 추가
 				db.update(Profile.class)
 					.matching(query(where("userId").is(profile.getUserId())))
 					.apply(update("sessionId", sessionId))
 				.subscribe();
 				
-				
-
 				// 응답처리, sessionId 반환
 				res.setStatusCode(HttpStatus.OK);
 				DataBuffer buffer = res.bufferFactory().wrap(sessionId.getBytes());	

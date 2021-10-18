@@ -44,12 +44,10 @@ public class SignUpFilter implements WebFilter {
 		if (rootPath.equals("auth") && subPath.equals("signup")) {
 			
 			Flux<DataBuffer> result = req.getBody()
-			.map(body -> {
-				// 1. JSON 데이터를 객체화를
-				return unmashal(body);				
-			})
+			// 1. Json 데이터를 객체화
+			.map(body -> unmashal(body))
+			// 2. login 및 profile 저장			
 			.flatMap(signUpReq -> {
-				// 2. login 및 profile 저장
 				return db.insert(Login.class)
 					.using(Login.builder()
 						.userId(signUpReq.getUserId())
@@ -65,15 +63,15 @@ public class SignUpFilter implements WebFilter {
 							.img(signUpReq.getImg())
 							.build()));	
 			})
+			// 3. 응답 처리			
 			.flatMap(profile -> {
-				// 3. 응답 처리
 				res.setStatusCode(HttpStatus.CREATED);
 				DataBuffer buffer = res.bufferFactory().wrap("success".getBytes());	
 				
 				return Flux.just(buffer);
 			});
 			
-			// return getBody(loginInsert()).profileInsert().response().write()
+			// return insert(login.then(profile).response().write()
 			// 현재코드(필터)에서 Mono 객체가 리턴하고 끝남
 			return res.writeWith(result);	
 		}
