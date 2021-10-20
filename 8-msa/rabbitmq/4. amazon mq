@@ -1,0 +1,17 @@
+1. single instance 모드로 생성
+2. t3.micro 프리티어
+3. public access
+4. 비밀번호는 특수문자 포함
+
+5. 웹 콘솔 접속하여 queue 생성
+ - https://b-fbe158ed-c5c3-43c6-9206-a20542fdc336.mq.ap-northeast-2.amazonaws.com
+
+6. yml에 host 대신에 addresses로 변경(aws에 제공하는 url을 입력)
+server:
+  port: 8081
+spring:
+  rabbitmq:
+    addresses: amqps://b-fbe158ed-c5c3-43c6-9206-a20542fdc336.mq.ap-northeast-2.amazonaws.com:5671
+    username: rabbitmq
+    password: password123!
+    
