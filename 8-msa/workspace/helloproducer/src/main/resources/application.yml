@@ -3,6 +3,8 @@ server:
 spring:
   rabbitmq:
     # rabbitmq 서버주소
-    host: ec2-13-125-61-145.ap-northeast-2.compute.amazonaws.com
+    # amqp://username:password@host:5672
+    # host: ec2-13-125-61-145.ap-northeast-2.compute.amazonaws.com
+    addresses: amqps://b-a39b9099-87c3-40f8-bb60-285dfa15d12b.mq.ap-northeast-2.amazonaws.com:5671
     username: rabbitmq
-    password: password123
+    password: password123!
