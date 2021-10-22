@@ -24,6 +24,7 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.12.90'
 }
 
 test {
