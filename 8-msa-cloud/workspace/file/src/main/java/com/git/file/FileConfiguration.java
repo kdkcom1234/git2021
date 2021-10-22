@@ -22,7 +22,7 @@ public class FileConfiguration {
 
         String str = new String(resource.getInputStream().readAllBytes());
 
-        System.out.println(str);
+        System.out.println("aws access info:" + str);
 
         String accessId = str.split(" ")[0];
         String secretKey = str.split(" ")[1];
