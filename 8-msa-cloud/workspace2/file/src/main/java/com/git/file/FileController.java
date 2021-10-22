@@ -66,6 +66,7 @@ public class FileController {
         }
 
         client.deleteObject(BUCKET_NAME, objectKey);
+        System.out.println("--deleted--");
     }
 
     // OTP(One Time Password): secret + unique + time
