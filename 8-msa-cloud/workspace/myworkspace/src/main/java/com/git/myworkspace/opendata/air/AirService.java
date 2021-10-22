@@ -40,7 +40,7 @@ public class AirService {
 	// 그 시간이 되어야만 실행됨
 	// cron="초 분 시 일 월 년"
 	// cron="0 30 * * * *"
-	@Scheduled(cron = "0 30 * * * *")
+//	@Scheduled(cron = "0 30 * * * *")
 
 	// 1시간마다 실행(js, setInterval)
 	// fixedRate: 가장 처음에 실행되고 간격별로 실행됨

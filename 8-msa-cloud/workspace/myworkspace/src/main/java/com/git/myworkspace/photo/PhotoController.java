@@ -38,15 +38,15 @@ public class PhotoController {
 
 	@GetMapping(value = "/photos")
 	public List<Photo> getPhotos(HttpServletRequest req, HttpServletResponse res) {
-		System.out.println(req.getHeader("session-profile"));
-		Session.Profile profile = Session.getSessionProfile(req);		
-		
-		if(profile == null) {
-			// 401: 인증 필요
-			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return null;			
-		}
-				
+//		System.out.println(req.getHeader("session-profile"));
+//		Session.Profile profile = Session.getSessionProfile(req);
+//
+//		if(profile == null) {
+//			// 401: 인증 필요
+//			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//			return null;
+//		}
+//
 		
 		// repository.findAll();
 		// SELECT * FROM photo;
@@ -57,29 +57,31 @@ public class PhotoController {
 		// id컬럼 역정렬(clusted index)
 		// Sort.by("정렬컬럼").desceding() 역정렬
 		// Sort.by("정렬컬럼").ascending() 순정렬
-//		return repo.findAll(Sort.by("id").descending());
+		return repo.findAll(Sort.by("id").descending());
 		
 		// **특정 사용자의 데이터만 조회
-		return repo.findByUserId(Sort.by("id").descending(), profile.getUserId());
+//		return repo.findByUserId(Sort.by("id").descending(), profile.getUserId());
 	}
 
 	// 예) 한페이지 2개, 1번째 페이지
 	// 예) GET /photos/paging?page=0&size=2
 	@GetMapping("/photos/paging")
 	public Page<Photo> getPhotosPaging(@RequestParam int page, @RequestParam int size, HttpServletRequest req, HttpServletResponse res) {
-		System.out.println(req.getHeader("session-profile"));
-		Session.Profile profile = Session.getSessionProfile(req);		
-		
-		if(profile == null) {
-			// 401: 인증 필요
-			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return null;			
-		}
+//		System.out.println(req.getHeader("session-profile"));
+//		Session.Profile profile = Session.getSessionProfile(req);
+//
+//		if(profile == null) {
+//			// 401: 인증 필요
+//			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//			return null;
+//		}
 						
 		
 		// findAll(Pageable page)
 		// findAll(PageRequest.of(page, size, Sort sort));
-		return repo.findByUserId(PageRequest.of(page, size, Sort.by("id").descending()), profile.getUserId());
+
+		return repo.findAll(PageRequest.of(page, size, Sort.by("id").descending()));
+//		return repo.findByUserId(PageRequest.of(page, size, Sort.by("id").descending()), profile.getUserId());
 	}
 
 	@PostMapping(value = "/photos")

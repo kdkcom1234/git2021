@@ -35,7 +35,7 @@ public class CovidService {
 //	@Scheduled(cron = "0 5 10 * * *")
 
 // 샘플데이터
-	@Scheduled(fixedRate = 1000 * 60 * 60 * 1)
+//	@Scheduled(fixedRate = 1000 * 60 * 60 * 1)
 
 	// 가장 최신의 데이터를 불러와야 하니까 데이터가 맞물리지 않도록 기존 조회한 데이터 삭제
 	// 해당 캐시이름의 모든 키를 삭제, value = 캐시이름
