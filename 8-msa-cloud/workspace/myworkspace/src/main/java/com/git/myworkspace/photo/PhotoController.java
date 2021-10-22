@@ -85,15 +85,15 @@ public class PhotoController {
 	}
 
 	@PostMapping(value = "/photos")
-	public Photo addPhoto(@RequestBody Photo photo, HttpServletRequest req, HttpServletResponse res) throws InterruptedException {
-		System.out.println(req.getHeader("session-profile"));
-		Session.Profile profile = Session.getSessionProfile(req);
-		
-		if(profile == null) {
-			// 401: 인증 필요
-			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return null;			
-		}
+	public Photo addPhoto(@RequestBody Photo photo, HttpServletRequest req, HttpServletResponse res) {
+//		System.out.println(req.getHeader("session-profile"));
+//		Session.Profile profile = Session.getSessionProfile(req);
+//
+//		if(profile == null) {
+//			// 401: 인증 필요
+//			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//			return null;
+//		}
 		
 		// 타이틀이 빈값
 		if (TextProcesser.isEmpyText(photo.getTitle())) {
@@ -115,7 +115,7 @@ public class PhotoController {
 				.fileType(photo.getFileType())
 				.fileName(photo.getFileName())
 				.createdTime(new Date().getTime())
-				.userId(profile.getUserId())
+//				.userId(profile.getUserId())
 				.build();
 				
 
@@ -131,15 +131,15 @@ public class PhotoController {
 	}
 
 	@DeleteMapping(value = "/photos/{id}")
-	public boolean removePhoto(@PathVariable long id, HttpServletRequest req, HttpServletResponse res) throws InterruptedException {
-		System.out.println(req.getHeader("session-profile"));
-		Session.Profile profile = Session.getSessionProfile(req);
-		
-		if(profile == null) {
-			// 401: 인증 필요
-			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return false;			
-		}		
+	public boolean removePhoto(@PathVariable long id, HttpServletRequest req, HttpServletResponse res) {
+//		System.out.println(req.getHeader("session-profile"));
+//		Session.Profile profile = Session.getSessionProfile(req);
+//
+//		if(profile == null) {
+//			// 401: 인증 필요
+//			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//			return false;
+//		}
 		
 		//		Thread.sleep(5000);
 
@@ -147,7 +147,8 @@ public class PhotoController {
 		// Optional null-safe, 자바 1.8 나온 방식
 		// repository.findBy(id)
 		// select * from photo where id = ?;
-		Optional<Photo> photo = repo.findByIdAndUserId(id, profile.getUserId());
+		Optional<Photo> photo = repo.findById(id);
+//		Optional<Photo> photo = repo.findByIdAndUserId(id, profile.getUserId());
 		if (photo.isEmpty()) {
 			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			return false;
@@ -162,18 +163,17 @@ public class PhotoController {
 	}
 
 	@PutMapping(value = "/photos/{id}")
-	public Photo modifyPhoto(@PathVariable long id, @RequestBody Photo photo, HttpServletRequest req, HttpServletResponse res)
-			throws InterruptedException {
-		System.out.println(req.getHeader("session-profile"));
-		Session.Profile profile = Session.getSessionProfile(req);
-		
-		if(profile == null) {
-			// 401: 인증 필요
-			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			return null;			
-		}		
-		
-		Optional<Photo> photoItem = repo.findByIdAndUserId(id, profile.getUserId());
+	public Photo modifyPhoto(@PathVariable long id, @RequestBody Photo photo, HttpServletRequest req, HttpServletResponse res) {
+//		System.out.println(req.getHeader("session-profile"));
+//		Session.Profile profile = Session.getSessionProfile(req);
+//
+//		if(profile == null) {
+//			// 401: 인증 필요
+//			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//			return null;
+//		}
+		Optional<Photo> photoItem = repo.findById(id);
+//		Optional<Photo> photoItem = repo.findByIdAndUserId(id, profile.getUserId());
 		if (photoItem.isEmpty()) {
 			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			return null;
@@ -204,8 +204,6 @@ public class PhotoController {
 		// UPDATE
 		// SET title=?, descript=?,......
 		// WHERE id = ?
-		Photo photoSaved = repo.save(photoToSave);
-
-		return photoSaved;
+		return repo.save(photoToSave);
 	}
 }
