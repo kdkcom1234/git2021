@@ -1,0 +1,12 @@
+// 1. 소스 컴파일
+gradlew compileJava
+
+// 2. QClass 파일 생성 확인
+\build\generated\sources\annotationProcessor\java\main
+
+// 3. 이클립스 소스 경로 설정
+Project > Properties 
+> Java Build Path > Source 에
+\build\generated\sources\annotationProcessor\java\main을 추가
+
+
