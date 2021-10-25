@@ -1,0 +1,77 @@
+-------- SQL 응용 ----------------------------
+-- (필수)백엔드 빌드/배포(수동)
+
+. (필수)백엔드 외부 시스템 데이터 수집(연동)
+  - ETL(Extract Tranform Load)
+  - 공공데이터포털
+  - 한국환경공단_에어코리아_대기오염통계 현황
+    https://www.data.go.kr/data/15073855/openapi.do
+    -> (필수)시군구별 실시간 평균정보 조회: ApexChart
+    https://www.data.go.kr/data/15043378/openapi.do
+    -> (실습)코로나19 시·도발생 현황
+
+. (필수)SQL 검색조건, 데이터 캐싱 - 10/5(화)
+
+. (옵션)프론트엔드 데이터 시각화 - 10/6(수)
+  - 문자열/숫자 -> 그래프, 차트, 테이블
+  - ApexChart
+
+----------- 통합구현 ---------------------------
+
+-- (필수) 비동기 내부 시스템 연동 - 10/7(목) ~ 10/8(금)
+  - RabbitMq, Kafka, 1:1/1:N, 문자열/객체
+  - MQ 서버: 1개 구성
+
+-- (필수)MSA 환경 구성 - 10/12(화)
+  - API Gateway, Service Registry
+  - Gateway, Registry 서버: 1개 구성
+
+-- (옵션)
+메시지 전송: ajax -> controller -> service -> send queue
+메시지 수신:
+          eventsource -> controller -> service(emitter)
+          service -> receive queue -> emitter.send 
+
+
+-- (옵션)인증 및 세션, 권한 허가 처리 (백엔드만)
+  - 인증, 세션 처리, 권한 허가
+  - 인증 및 세션처리 서버: Gateway서버와 동일
+
+
+
+------------------------------------------------
+
+-- (옵션) 내부 시스템 연동(동기)
+  - Feign Client
+
+-- (옵션) 파일 처리
+  - Multipart File, S3, CloundFront
+
+-- (옵션)SQL 심화
+. 하위테이블 처리: photo, photo_comment
+. QueryDSL: typed query
+. 테이블관계: foreign key 제약조건, 
+           one-to-many, (order-line)        
+           many-to-many,(line-product)
+           aggregate root
+           , SQL join
+. 집계쿼리: group by, avg, max, min, sum
+
+-- (옵션) tailwind css;
+
+-- (옵션) styled components
+
+-- (옵션)인증 및 세션, 권한 허가 처리 (프론트엔드)
+  - 인증 토큰 쿠키, Header에 토큰 추가, 프로필 조회
+
+-- (옵션)그외 개발환경 구성
+  - 프론트엔드 서버: 1개
+    - 메인 80, 그외 8080, 8081
+
+-- (옵션) 통합배포
+  - jenkins, webhook, container(docker)
+
+-- (옵션) 외부시스템 인증 연동 
+  - Kakao OAuth2
+
+------------------------------------------------
