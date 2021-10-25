@@ -20,22 +20,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.git.myworkspace.lib.Session;
 import com.git.myworkspace.lib.TextProcesser;
 
 @RestController
 public class PhotoController {
 
 	private PhotoRepository repo;
+	private PhotoCommentRepository cmtRepo;	
 
 	// Autowired 어노테이션은 매개변수나 필드 타입에 맞는 객체를
 	// Spring에서 생성하여 주입하여줌(의존성 주입, 의존객체주입, DI, Dependency Injection)
 	// Repository 인터페이스 구조에 맞는 객체를 Spring에 생성하여 넣어줌
 	@Autowired
-	public PhotoController(PhotoRepository repo) {
+	public PhotoController(PhotoRepository repo, PhotoCommentRepository cmtRepo) {
 		this.repo = repo;
+		this.cmtRepo = cmtRepo;
 	}
-
+	
 	@GetMapping(value = "/photos")
 	public List<Photo> getPhotos(HttpServletRequest req, HttpServletResponse res) {
 //		System.out.println(req.getHeader("session-profile"));
@@ -206,4 +207,31 @@ public class PhotoController {
 		// WHERE id = ?
 		return repo.save(photoToSave);
 	}
+
+	// 포토 하위에 댓글 추가
+	// POST /photos/{photoId}/comments
+	// 예) POST /photos/1/comments {"content":"댓글 내용입니다"}
+	// id가 1인 photo에 하위 레코드 comment를 추가
+	@PostMapping(value="/photos/{photoId}/comments")
+	public PhotoComment addPhotoComment(@PathVariable long photoId, @RequestBody PhotoComment comment) {
+		// 값 검증 ...
+		// content가 빈값인지
+		// photoId 해당 데이터가 있는지 확인(FK(외래키) 제약조건으로 처리 가능)
+		
+		// 상위 테이블의 PK(id)를 넣어줌
+		comment.setPhotoId(photoId);
+		comment.setCreatedTime(new Date().getTime());
+		
+		// 저장하고 저장한 객체 리턴
+		return cmtRepo.save(comment);
+	}
+	
+	// 포토 하위에 댓글 목록 조회
+	// GET /photos/{photoId}/comments
+	@GetMapping(value="/photos/{photoId}/comments")
+	public List<PhotoComment> getCommments(@PathVariable long photoId) {
+		// select * from photo_comment where photo_id = :photoId
+		return cmtRepo.findByPhotoId(photoId);
+	}
+	
 }

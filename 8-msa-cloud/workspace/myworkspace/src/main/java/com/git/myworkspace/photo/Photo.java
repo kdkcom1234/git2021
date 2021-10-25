@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.Formula;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,9 +36,13 @@ public class Photo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String title;
-	// BLOB: binary large object
 	@Column(columnDefinition = "VARCHAR(1000)")
 	private String description;
+	
+	// 하위 레코드 개수
+	@Formula("(SELECT COUNT(1) FROM photo_comment cmt WHERE cmt.photo_id = id)")
+	private int commentCnt;
+	
 	// BLOB: binary large object
 	@Column(columnDefinition = "TEXT")
 	private String photoUrl;

@@ -31,25 +31,32 @@
 메시지 수신:
           eventsource -> controller -> service(emitter)
           service -> receive queue -> emitter.send 
+- 8-msa-cloud/helloclient, producer
 
 
 -- (옵션)인증 및 세션, 권한 허가 처리 (백엔드만)
   - 인증, 세션 처리, 권한 허가
   - 인증 및 세션처리 서버: Gateway서버와 동일
-
+- 8-msa-cloud/gateway, myworkspace
 
 
 ------------------------------------------------
 
 -- (옵션) 내부 시스템 연동(동기)
   - Feign Client
+  - 8-msa-cloud/service1,2
 
 -- (옵션) 파일 처리
   - Multipart File, S3, CloundFront
+  - 8-msa-cloud/file
 
 -- (옵션)SQL 심화
 . 하위테이블 처리: photo, photo_comment
+- 8-msa-cloud/myworkspace
+
 . QueryDSL: typed query
+- 8-msa-cloud/myworkspace
+
 . 테이블관계: foreign key 제약조건, 
            one-to-many, (order-line)        
            many-to-many,(line-product)
