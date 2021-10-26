@@ -52,6 +52,7 @@
 
 -- (옵션)SQL 심화
 . 하위테이블 처리: photo, photo_comment
+                SQL join
 - 8-msa-cloud/myworkspace
 
 . QueryDSL: typed query
@@ -59,13 +60,14 @@
 
 . 테이블관계: foreign key 제약조건, 
            one-to-many, (order-line)        
-           many-to-many,(line-product)
+           many-to-on,(line-product)
            aggregate root
-           , SQL join
+. 트랜잭션
+
 . 집계쿼리: group by, avg, max, min, sum
 
+-- (옵션) next.js
 -- (옵션) tailwind css;
-
 -- (옵션) styled components
 
 -- (옵션)인증 및 세션, 권한 허가 처리 (프론트엔드)

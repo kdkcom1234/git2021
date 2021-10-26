@@ -23,5 +23,5 @@ public class Product {
 	private String productCode;
 	private String productName;
 	private int price;
-	private int salesProductId; // 타 시스템에 받은 id값
+	private Integer salesProductId; // 타 시스템에 받은 id값
 }
