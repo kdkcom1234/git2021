@@ -1,10 +1,10 @@
-import Link from "next/link";
+import Navigation from "../components/Navigation";
 
 const About = () => {
   return (
     <div>
+      <Navigation />
       About Page
-      <Link href={"/profile"}>profile</Link>
     </div>
   );
 };
