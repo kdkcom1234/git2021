@@ -1,0 +1,58 @@
+//@import "~bootstrap/scss/bootstrap.scss"
+
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "~bootstrap/scss/functions";
+
+// 2. Include any default variable overrides here
+/* ------------------------------------------------------ */
+// bootstrap 변수를 수정해야한다면 이 위치에(bootstrap variables 위에)
+// https://coolors.co/306b34-1c5253-f3ffc6-c3eb78-b6174b
+$primary: #2c3e50;
+$secondary: #95a5a6;
+$success: #18bc9c;
+$info: #3498db;
+$danger: #e74c3c;
+$warning: #f39c12;
+$light: #f8f9fa;
+$dark: #212529;
+
+$border-radius: 0;
+$border-radius-lg: 0;
+$border-radius-sm: 0;
+// $btn-border-radius: 0;
+// $btn-border-radius-sm: 0;
+// $btn-border-radius-lg: 0;
+/* ------------------------------------------------------ */
+
+// 3. Include remainder of required Bootstrap stylesheets
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/root";
+
+// 4. Include any optional Bootstrap CSS as needed
+@import "~bootstrap/scss/utilities";
+/* ---------------------------------------------- */
+// Layout & Components
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/card";
+@import "~bootstrap/scss/forms";
+@import "~bootstrap/scss/list-group";
+@import "~bootstrap/scss/alert";
+@import "~bootstrap/scss/close";
+@import "~bootstrap/scss/modal";
+@import "~bootstrap/scss/dropdown";
+@import "~bootstrap/scss/tables";
+@import "~bootstrap/scss/spinners";
+@import "~bootstrap/scss/pagination";
+@import "~bootstrap/scss/navbar";
+/* ---------------------------------------------- */
+@import "~bootstrap/scss/helpers";
+
+// 5. Optionally include utilities API last to generate classes based on the Sass map in `_utililies.scss`
+@import "~bootstrap/scss/utilities/api";
+
+// Icon
+// npm instal bootstrap-icons
+@import "~bootstrap-icons/font/bootstrap-icons.css";
