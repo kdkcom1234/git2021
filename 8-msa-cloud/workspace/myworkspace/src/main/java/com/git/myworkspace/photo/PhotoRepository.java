@@ -7,8 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 // photo 테이블에 접근하는 객체
@@ -51,13 +49,14 @@ public interface PhotoRepository extends JpaRepository<Photo, Long> {
 //	@Query(value="SELECT p FROM photo p WHERE title like  ")
 	
 	
-	// 자동완성 안됨, 컴파일시점이아니라 실행시점(API호출) 에러 발생
-	// SQL native query
-	@Query(value="SELECT * FROM photo p "
-			+ "WHERE lower(p.title)  LIKE concat('%',lower(:keyword), '%') "
-			+ "		or lower(p.description)  LIKE concat('%',lower(:keyword), '%') "
-			+ "		or lower(p.file_name)  LIKE concat('%',lower(:keyword), '%') ", nativeQuery=true)	
-	List<Photo> findByKeyword(@Param("keyword") String keyword);
+//	// 자동완성 안됨, 컴파일시점이아니라 실행시점(API호출) 에러 발생
+//	// SQL native query
+//	@Query(value="SELECT * FROM photo p"
+//			+ " WHERE lower(p.title)  LIKE concat('%',lower(:keyword), '%') "
+//			+ " or lower(p.description)  LIKE concat('%',lower(:keyword), '%') "
+//			+ "	or lower(p.file_name)  LIKE concat('%',lower(:keyword), '%') "
+//			, nativeQuery=true)	
+//	List<Photo> findKeyword(@Param("keyword") String keyword);
 	
 	Optional<Photo> findByIdAndUserId(long Id, String userId);
 	

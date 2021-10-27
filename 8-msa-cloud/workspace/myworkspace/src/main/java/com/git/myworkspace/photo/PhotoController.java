@@ -70,7 +70,7 @@ public class PhotoController {
 	@GetMapping("/photos/search/{keyword}")
 	public List<Photo> getPhotosSearchByKeyword(@PathVariable String keyword){
 		return support.searchByKeyword(keyword);
-//		return repo.findByKeyword(keyword);
+//		return repo.findKeyword(keyword);
 //		return repo.findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseOrFileNameContainingIgnoreCase(keyword, keyword, keyword);
 	}
 	
