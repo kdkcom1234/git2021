@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 // photo 테이블에 접근하는 객체
@@ -32,6 +34,30 @@ public interface PhotoRepository extends JpaRepository<Photo, Long> {
 
 	// JPA
 	List<Photo> findByDescriptionContaining(String description);
+	
+	// SQL
+//	SELECT * FROM photo 
+//	WHERE lower(title)  LIKE concat('%',lower('penGuin'), '%') 
+//			or lower(description)  LIKE concat('%',lower('penGuin'), '%') 
+//			or lower(file_name)  LIKE concat('%',lower('penGuin'), '%');
+	
+	// 자동완성 안됨, 컴파일시점이아니라 실행시점(스프링시작) 에러 발생
+	// 단어가 5개이상 연결된 메서드 명은 쉽게 안 보임.
+	// JPA Query creation
+	List<Photo> findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseOrFileNameContainingIgnoreCase(String title, String description, String fileName);
+    
+	// 자동완성 안됨, 컴파일시점이아니라 실행시점(스프링시작) 에러 발생
+	// JPQL: Java Persistence Query Language
+//	@Query(value="SELECT p FROM photo p WHERE title like  ")
+	
+	
+	// 자동완성 안됨, 컴파일시점이아니라 실행시점(API호출) 에러 발생
+	// SQL native query
+	@Query(value="SELECT * FROM photo p "
+			+ "WHERE lower(p.title)  LIKE concat('%',lower(:keyword), '%') "
+			+ "		or lower(p.description)  LIKE concat('%',lower(:keyword), '%') "
+			+ "		or lower(p.file_name)  LIKE concat('%',lower(:keyword), '%') ", nativeQuery=true)	
+	List<Photo> findByKeyword(@Param("keyword") String keyword);
 	
 	Optional<Photo> findByIdAndUserId(long Id, String userId);
 	

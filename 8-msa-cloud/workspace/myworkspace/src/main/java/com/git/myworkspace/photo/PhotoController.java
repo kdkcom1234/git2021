@@ -28,13 +28,16 @@ public class PhotoController {
 	private PhotoRepository repo;
 	private PhotoCommentRepository cmtRepo;	
 
+	private PhotoRepositorySupport support;
+	
 	// Autowired 어노테이션은 매개변수나 필드 타입에 맞는 객체를
 	// Spring에서 생성하여 주입하여줌(의존성 주입, 의존객체주입, DI, Dependency Injection)
 	// Repository 인터페이스 구조에 맞는 객체를 Spring에 생성하여 넣어줌
 	@Autowired
-	public PhotoController(PhotoRepository repo, PhotoCommentRepository cmtRepo) {
+	public PhotoController(PhotoRepository repo, PhotoCommentRepository cmtRepo, PhotoRepositorySupport support) {
 		this.repo = repo;
 		this.cmtRepo = cmtRepo;
+		this.support = support;
 	}
 	
 	@GetMapping(value = "/photos")
@@ -64,6 +67,13 @@ public class PhotoController {
 //		return repo.findByUserId(Sort.by("id").descending(), profile.getUserId());
 	}
 
+	@GetMapping("/photos/search/{keyword}")
+	public List<Photo> getPhotosSearchByKeyword(@PathVariable String keyword){
+		return support.searchByKeyword(keyword);
+//		return repo.findByKeyword(keyword);
+//		return repo.findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseOrFileNameContainingIgnoreCase(keyword, keyword, keyword);
+	}
+	
 	// 예) 한페이지 2개, 1번째 페이지
 	// 예) GET /photos/paging?page=0&size=2
 	@GetMapping("/photos/paging")
