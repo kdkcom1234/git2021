@@ -1,3 +1,4 @@
+-- 이클립스 기반
 // 1. 소스 컴파일
 gradlew compileJava
 
