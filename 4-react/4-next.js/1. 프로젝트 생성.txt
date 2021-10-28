@@ -1,0 +1,2 @@
+npx create-next-app@latest --ts
+프로젝트명 입력

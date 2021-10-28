@@ -1,0 +1,14 @@
+// SASS 컴파일러
+npm install sass
+
+// BootStrap(React Bootrap 컴포넌트 포함)
+npm install react-bootstrap bootstrap @popperjs/core
+
+// 리덕스
+npm install @reduxjs/toolkit react-redux
+
+// 리덕스 사가
+npm install redux-saga
+
+// axios
+npm install axios

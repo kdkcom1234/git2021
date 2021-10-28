@@ -2,7 +2,7 @@ import Head from "next/head";
 
 import React from "react";
 import styles from "./layout.module.css";
-import Navbar from "./navbar";
+import AppBar from "./appbar";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -12,10 +12,10 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <>
       <Head>
-        <title>Layouts Example</title>
+        <title>Myworkspace</title>
       </Head>
       <header>
-        <Navbar />
+        <AppBar />
       </header>
       <main className={styles.main}>{children}</main>
     </>
