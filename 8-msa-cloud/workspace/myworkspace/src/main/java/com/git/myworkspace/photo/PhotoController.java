@@ -40,6 +40,11 @@ public class PhotoController {
 		this.support = support;
 	}
 	
+	@GetMapping(value = "/photos/{id}")
+	public Photo getPhoto(@PathVariable long id) {
+		return repo.findById(id).orElse(null);
+	}
+	
 	@GetMapping(value = "/photos")
 	public List<Photo> getPhotos(HttpServletRequest req, HttpServletResponse res) {
 //		System.out.println(req.getHeader("session-profile"));

@@ -15,8 +15,6 @@
     PostgreSQL, (Redis)
    : AWS
     EC2, RDS, Amazon MQ, (S3, Cloudfront)
-
-
  - 동기, 선정 사유
    
 2. 사례 분석 2개 이상

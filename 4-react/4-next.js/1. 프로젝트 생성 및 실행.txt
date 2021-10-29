@@ -1,0 +1,12 @@
+// 프로젝트 생성
+npx create-next-app@latest --ts
+프로젝트명 입력
+
+// 프로젝트 실행(개발모드)
+npm run dev
+
+// 프로젝트 빌드
+npm run build
+
+// 프로젝트 실행(프로덕션모드)
+npm start
