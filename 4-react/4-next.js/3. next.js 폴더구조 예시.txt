@@ -2,4 +2,26 @@
 
 /api: 서버호출 api
 /components: 레이아웃 및 공통 컴포넌트
-/
+/lib: 공통 처리 함수 및 변수
+/middleware: saga 미들웨어
+ /index.ts : 루트saga
+ /modules
+  /모듈.ts : saga모듈
+/pages: 페이지들(next.js에 기본 폴더 구조)
+ /_app.tsx (최상위 페이지 컨테이너, next.js 기본 파일, 전체 스타일 import)
+ /index.tsx (기본페이지, /경로)
+ /todo.tsx (/todo 경로에 로딩되는 페이지)
+ /about/index.tsx (/about 경로에 로딩되는 페이지)
+ /about/history.tsx (/about/history 경로에 로딩되는 페이지)
+ /photos/index.tsx (/photos 경로에 로딩되는 페이지)
+ /photods/create.tsx (/photos/create 경로에 로딩되는 페이지)
+ /photos/detail/[id].tsx (/photos/detail/[id] 경로에 로딩되는 페이지)
+ /photos/edit/[id].tsx (/photos/edit/[id] 경로에 로딩되는 페이지)
+/provider
+ /index.tsx : 루트reducer
+ /modules
+  /모듈.ts : reducer(slice) 모듈
+/public
+ /favicon.ico : 브라우저탭 및 즐겨찾기 아이콘
+/styles
+ /global.css : 전체 사이트의 스타일(next.js 기본)

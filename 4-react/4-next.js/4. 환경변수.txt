@@ -1,0 +1,4 @@
+.env.local
+.env.production
+
+변수명은 NEXT_PUBLIC_ 로 시작해야함
