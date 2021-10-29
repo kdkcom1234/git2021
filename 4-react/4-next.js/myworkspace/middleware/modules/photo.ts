@@ -4,6 +4,7 @@ import photoReducer, {
   initialNextPhoto,
   initialPagedPhoto,
   initialPhoto,
+  initialPhotoItem,
   modifyPhoto,
   PhotoPage,
   removePhoto,
@@ -23,11 +24,8 @@ import api, {
   PhotoPagingReponse,
 } from "../../api/photo";
 import { AxiosResponse } from "axios";
-// import {
-//   endProgress,
-//   startProgress,
-// } from "../../components/progress/progressSlice";
-// import { addAlert } from "../../components/alert/alertSlice";
+import { endProgress, startProgress } from "../../provider/modules/progress";
+import { addAlert } from "../../provider/modules/alert";
 import { RootState } from "../../provider";
 
 /* ========= saga action Payload 타입 =============== */
@@ -72,6 +70,11 @@ export const requestFetchPagingPhotos = createAction<PageRequest>(
 // 다음 페이지 photo를 가져오는 action
 export const requestFetchNextPhotos = createAction<PageRequest>(
   `${photoReducer.name}/requestFetchNextPhotos`
+);
+
+// 1건의 photo만 가져오는 action
+export const requestFetchPhotoItem = createAction<number>(
+  `${photoReducer.name}/requestFetchPhotoItem`
 );
 
 // photo를 삭제하는 action
@@ -119,7 +122,7 @@ function* addDataPaging(action: PayloadAction<PhotoItem>) {
     // call(함수, 매개변수1, 매개변수2...) -> 함수를 호출함
 
     // spinner 보여주기
-    // yield put(startProgress());
+    yield put(startProgress());
     // 함수가 Promise를 반환하면, (비동기함수)
     // Saga 미들웨어에서 현재 yield에 대기상태로 있음
     // Promise가 resolve(처리완료)되면 다음 yield로 처리가 진행됨
@@ -133,7 +136,7 @@ function* addDataPaging(action: PayloadAction<PhotoItem>) {
     );
 
     // spinner 사라지게 하기
-    // yield put(endProgress());
+    yield put(endProgress());
 
     // ------ 2. redux state를 변경함
     // **2021-09-28- 페이징 처리 추가 로직
@@ -168,18 +171,18 @@ function* addDataPaging(action: PayloadAction<PhotoItem>) {
     // completed 속성 삭제
     yield put(initialCompleted());
 
-    // // alert박스를 추가해줌
-    // yield put(
-    //   addAlert({ id: nanoid(), variant: "success", message: "저장되었습니다." })
-    // );
+    // alert박스를 추가해줌
+    yield put(
+      addAlert({ id: nanoid(), variant: "success", message: "저장되었습니다." })
+    );
   } catch (e: any) {
     // 에러발생
     // spinner 사라지게 하기
-    // yield put(endProgress());
+    yield put(endProgress());
     // alert박스를 추가해줌
-    // yield put(
-    //   addAlert({ id: nanoid(), variant: "danger", message: e.message })
-    // );
+    yield put(
+      addAlert({ id: nanoid(), variant: "danger", message: e.message })
+    );
   }
 }
 
@@ -205,7 +208,7 @@ function* addDataNext(action: PayloadAction<PhotoItem>) {
     // call(함수, 매개변수1, 매개변수2...) -> 함수를 호출함
 
     // spinner 보여주기
-    // yield put(startProgress());
+    yield put(startProgress());
     // 함수가 Promise를 반환하면, (비동기함수)
     // Saga 미들웨어에서 현재 yield에 대기상태로 있음
     // Promise가 resolve(처리완료)되면 다음 yield로 처리가 진행됨
@@ -219,7 +222,7 @@ function* addDataNext(action: PayloadAction<PhotoItem>) {
     );
 
     // spinner 사라지게 하기
-    // yield put(endProgress());
+    yield put(endProgress());
 
     // ------ 2. redux state를 변경함
     // 백엔드에서 처리한 데이터 객체로 state를 변경할 payload 객체를 생성
@@ -242,17 +245,17 @@ function* addDataNext(action: PayloadAction<PhotoItem>) {
     yield put(initialCompleted());
 
     // alert박스를 추가해줌
-    // yield put(
-    //   addAlert({ id: nanoid(), variant: "success", message: "저장되었습니다." })
-    // );
+    yield put(
+      addAlert({ id: nanoid(), variant: "success", message: "저장되었습니다." })
+    );
   } catch (e: any) {
     // 에러발생
     // spinner 사라지게 하기
-    // yield put(endProgress());
+    yield put(endProgress());
     // alert박스를 추가해줌
-    // yield put(
-    //   addAlert({ id: nanoid(), variant: "danger", message: e.message })
-    // );
+    yield put(
+      addAlert({ id: nanoid(), variant: "danger", message: e.message })
+    );
   }
 }
 
@@ -266,13 +269,13 @@ function* fetchData() {
   yield console.log("--fetchData--");
 
   // spinner 보여주기
-  // yield put(startProgress());
+  yield put(startProgress());
 
   // 백엔드에서 데이터 받아오기
   const result: AxiosResponse<PhotoItemResponse[]> = yield call(api.fetch);
 
   // spinner 사라지게 하기
-  // yield put(endProgress());
+  yield put(endProgress());
 
   // 응답데이터배열을 액션페이로드배열로 변환
   // PhotoItemReponse[] => PhotoItem[]
@@ -302,7 +305,7 @@ function* fetchPagingData(action: PayloadAction<PageRequest>) {
   localStorage.setItem("photo_page_size", size.toString());
 
   // spinner 보여주기
-  // yield put(startProgress());
+  yield put(startProgress());
 
   try {
     // 백엔드에서 데이터 받아오기
@@ -313,7 +316,7 @@ function* fetchPagingData(action: PayloadAction<PageRequest>) {
     );
 
     // spinner 사라지게 하기
-    // yield put(endProgress());
+    yield put(endProgress());
 
     // 받아온 페이지 데이터를 Payload 변수로 변환
     const photoPage: PhotoPage = {
@@ -345,9 +348,9 @@ function* fetchPagingData(action: PayloadAction<PageRequest>) {
     // spinner 사라지게 하기
     // yield put(endProgress());
     // alert박스를 추가해줌
-    // yield put(
-    //   addAlert({ id: nanoid(), variant: "danger", message: e.message })
-    // );
+    yield put(
+      addAlert({ id: nanoid(), variant: "danger", message: e.message })
+    );
   }
 }
 
@@ -358,7 +361,7 @@ function* fetchNextData(action: PayloadAction<PageRequest>) {
   const size = action.payload.size;
 
   // spinner 보여주기
-  // yield put(startProgress());
+  yield put(startProgress());
 
   try {
     // 백엔드에서 데이터 받아오기
@@ -369,7 +372,7 @@ function* fetchNextData(action: PayloadAction<PageRequest>) {
     );
 
     // spinner 사라지게 하기
-    // yield put(endProgress());
+    yield put(endProgress());
 
     // 받아온 페이지 데이터를 Payload 변수로 변환
     const photoPage: PhotoPage = {
@@ -399,12 +402,27 @@ function* fetchNextData(action: PayloadAction<PageRequest>) {
   } catch (e: any) {
     // 에러발생
     // spinner 사라지게 하기
-    // yield put(endProgress());
+    yield put(endProgress());
     // alert박스를 추가해줌
-    // yield put(
-    //   addAlert({ id: nanoid(), variant: "danger", message: e.message })
-    // );
+    yield put(
+      addAlert({ id: nanoid(), variant: "danger", message: e.message })
+    );
   }
+}
+
+// 1건의 데이터만 조회
+function* fetchDataItem(action: PayloadAction<number>) {
+  yield console.log("--fetchDataItem--");
+
+  const id = action.payload;
+
+  // 백엔드에서 데이터 받아오기
+  const result: AxiosResponse<PhotoItemResponse> = yield call(api.get, id);
+
+  const photo = result.data;
+
+  // state 초기화 reducer 실행
+  yield put(initialPhotoItem(photo));
 }
 
 function* removeDataPaging(action: PayloadAction<number>) {
@@ -414,13 +432,13 @@ function* removeDataPaging(action: PayloadAction<number>) {
   const id = action.payload;
 
   // spinner 보여주기
-  // yield put(startProgress());
+  yield put(startProgress());
 
   // rest api 연동
   const result: AxiosResponse<boolean> = yield call(api.remove, id);
 
   // spinner 사라지게 하기
-  // yield put(endProgress());
+  yield put(endProgress());
 
   // 반환 값이 true이면
   if (result.data) {
@@ -428,13 +446,13 @@ function* removeDataPaging(action: PayloadAction<number>) {
     yield put(removePhoto(id));
   } else {
     // alert박스를 추가해줌
-    // yield put(
-    //   addAlert({
-    //     id: nanoid(),
-    //     variant: "danger",
-    //     message: "오류로 저장되지 않았습니다.",
-    //   })
-    // );
+    yield put(
+      addAlert({
+        id: nanoid(),
+        variant: "danger",
+        message: "오류로 저장되지 않았습니다.",
+      })
+    );
   }
 
   // completed 속성 삭제
@@ -455,13 +473,13 @@ function* removeDataNext(action: PayloadAction<number>) {
   const id = action.payload;
 
   // spinner 보여주기
-  // yield put(startProgress());
+  yield put(startProgress());
 
   // rest api 연동
   const result: AxiosResponse<boolean> = yield call(api.remove, id);
 
   // spinner 사라지게 하기
-  // yield put(endProgress());
+  yield put(endProgress());
 
   // 반환 값이 true이면
   if (result.data) {
@@ -469,13 +487,13 @@ function* removeDataNext(action: PayloadAction<number>) {
     yield put(removePhoto(id));
   } else {
     // alert박스를 추가해줌
-    // yield put(
-    //   addAlert({
-    //     id: nanoid(),
-    //     variant: "danger",
-    //     message: "오류로 저장되지 않았습니다.",
-    //   })
-    // );
+    yield put(
+      addAlert({
+        id: nanoid(),
+        variant: "danger",
+        message: "오류로 저장되지 않았습니다.",
+      })
+    );
   }
 
   // completed 속성 삭제
@@ -498,7 +516,8 @@ function* modifyData(action: PayloadAction<PhotoItem>) {
   };
 
   // // spinner 보여주기
-  // yield put(startProgress());
+  yield put(startProgress());
+  console.log("--sprinner--");
 
   const result: AxiosResponse<PhotoItemResponse> = yield call(
     api.modify,
@@ -507,7 +526,7 @@ function* modifyData(action: PayloadAction<PhotoItem>) {
   );
 
   // // spinner 사라지게 하기
-  // yield put(endProgress());
+  yield put(endProgress());
 
   // 백엔드에서 처리한 데이터 객체로 state를 변경할 payload 객체를 생성
   const photoItem: PhotoItem = {
@@ -539,6 +558,9 @@ export default function* photoSaga() {
 
   // takeLatest(처리할액션, 액션을처리할함수)
   // 동일한 타입의 액션중에서 가장 마지막 액션만 처리, 이전 액션은 취소
+
+  // 1건의 데이터만 조회
+  yield takeEvery(requestFetchPhotoItem, fetchDataItem);
   yield takeLatest(requestFetchPhotos, fetchData);
   yield takeLatest(requestFetchPagingPhotos, fetchPagingData);
   yield takeLatest(requestFetchNextPhotos, fetchNextData);

@@ -6,6 +6,11 @@ import { requestAddPhotoPaging } from "../../middleware/modules/photo";
 import { PhotoItem } from "../../provider/modules/photo";
 // import { addPhoto } from "./photoSlice";
 
+import Progress from "../../components/progress";
+import AlertStack from "../../components/alert/alertStack";
+
+import Layout from "../../components/layout";
+
 const PhotoCreate = () => {
   // 입력 폼 ref 객체
   const titleInput = useRef<HTMLInputElement>(null);
@@ -97,62 +102,70 @@ const PhotoCreate = () => {
   };
 
   return (
-    <div style={{ width: "40vw" }} className="mx-auto">
-      <h2 className="text-center">Photo Create</h2>
-      <form>
-        <table className="table">
-          <tbody>
-            <tr>
-              <th>제목</th>
-              <td>
-                <input className="form-control" type="text" ref={titleInput} />
-              </td>
-            </tr>
-            <tr>
-              <th>설명</th>
-              <td>
-                <textarea
-                  className="form-control"
-                  style={{ height: "40vh" }}
-                  ref={descTxta}
-                ></textarea>
-              </td>
-            </tr>
-            <tr>
-              <th>이미지</th>
-              <td>
-                <input
-                  className="form-control"
-                  type="file"
-                  accept="image/*"
-                  ref={fileInput}
-                />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </form>
-      <div>
-        <button
-          className="btn btn-secondary float-start"
-          onClick={() => {
-            router.push("/photos");
-          }}
-        >
-          <i className="bi bi-grid-3x3-gap me-1"></i>
-          목록
-        </button>
-        <button
-          className="btn btn-primary float-end"
-          onClick={() => {
-            handleAddClick();
-          }}
-        >
-          <i className="bi bi-check" />
-          저장
-        </button>
-      </div>
-    </div>
+    <Layout>
+      <section style={{ width: "40vw" }} className="mx-auto">
+        <Progress />
+        <AlertStack />
+        <h2 className="text-center">Photo Create</h2>
+        <form>
+          <table className="table">
+            <tbody>
+              <tr>
+                <th>제목</th>
+                <td>
+                  <input
+                    className="form-control"
+                    type="text"
+                    ref={titleInput}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <th>설명</th>
+                <td>
+                  <textarea
+                    className="form-control"
+                    style={{ height: "40vh" }}
+                    ref={descTxta}
+                  ></textarea>
+                </td>
+              </tr>
+              <tr>
+                <th>이미지</th>
+                <td>
+                  <input
+                    className="form-control"
+                    type="file"
+                    accept="image/*"
+                    ref={fileInput}
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+        <div>
+          <button
+            className="btn btn-secondary float-start"
+            onClick={() => {
+              router.push("/photos");
+            }}
+          >
+            <i className="bi bi-grid-3x3-gap me-1"></i>
+            목록
+          </button>
+          <button
+            className="btn btn-primary float-end"
+            onClick={() => {
+              handleAddClick();
+            }}
+          >
+            <i className="bi bi-check" />
+            저장
+          </button>
+        </div>
+      </section>
+    </Layout>
   );
 };
 

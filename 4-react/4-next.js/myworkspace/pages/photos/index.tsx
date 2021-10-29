@@ -27,10 +27,13 @@ const Photo = () => {
     if (!photo.isFetched) {
       // 서버에서 데이터를 받아오는 action을 디스패치함
       // dispatch(requestFetchPhotos());
+
+      const photoPageSize = localStorage.getItem("photo_page_size");
+
       dispatch(
         requestFetchPagingPhotos({
           page: 0,
-          size: photo.pageSize,
+          size: photoPageSize ? +photoPageSize : photo.pageSize,
         })
       );
     }
@@ -61,17 +64,21 @@ const Photo = () => {
     <Layout>
       <section>
         <h2 className="text-center">Photos</h2>
+        {(!photo.isFetched || photo.data.length === 0) && (
+          <div className="text-center my-5">데이터가 없습니다.</div>
+        )}
         {/* 버튼 */}
         <div className="d-flex justify-content-end mb-2">
           <select
             className="form-select form-select-sm me-2"
             style={{ width: "60px" }}
+            value={photo.pageSize}
             onChange={(e) => {
               handlePageSizeChanged(e);
             }}
           >
             {[2, 4, 8, 12].map((size) => (
-              <option value={size} selected={photo.pageSize === size}>
+              <option key={`select-${size}`} value={size}>
                 {size}
               </option>
             ))}
@@ -103,39 +110,41 @@ const Photo = () => {
         {/* 컨텐트 */}
         <div className="d-flex flex-wrap">
           {/* state 데이터 배열에 map함수로 출력 */}
-          {photo.data.map((item, index) => (
-            <div
-              key={`photo-item-${index}`}
-              className="card"
-              style={{
-                width: "calc((100% - 3rem) / 4)",
-                marginLeft: index % 4 === 0 ? "0" : "1rem",
-                marginTop: index > 3 ? "1rem" : "0",
-              }}
-            >
-              {/* 컨텐트 wrapper -- 시작 */}
+          {photo.isFetched &&
+            photo.data.length > 0 &&
+            photo.data.map((item, index) => (
               <div
-                style={{ cursor: "pointer" }}
-                onClick={() => {
-                  // id값을 물고 이동해야함
-                  router.push(`/photos/detail/${item.id}`);
+                key={`photo-item-${index}`}
+                className="card"
+                style={{
+                  width: "calc((100% - 3rem) / 4)",
+                  marginLeft: index % 4 === 0 ? "0" : "1rem",
+                  marginTop: index > 3 ? "1rem" : "0",
                 }}
               >
-                <img
-                  src={item.photoUrl}
-                  className="card-img-top"
-                  alt={item.title}
-                />
-                <div className="card-body">
-                  <h5 className="card-title">{item.title}</h5>
-                  <h6 className="text-muted">
-                    {getTimeString(item.createdTime)}
-                  </h6>
+                {/* 컨텐트 wrapper -- 시작 */}
+                <div
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    // id값을 물고 이동해야함
+                    router.push(`/photos/detail/${item.id}`);
+                  }}
+                >
+                  <img
+                    src={item.photoUrl}
+                    className="card-img-top"
+                    alt={item.title}
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">{item.title}</h5>
+                    <h6 className="text-muted">
+                      {getTimeString(item.createdTime)}
+                    </h6>
+                  </div>
                 </div>
+                {/* 컨텐트 wrapper -- 끝 */}
               </div>
-              {/* 컨텐트 wrapper -- 끝 */}
-            </div>
-          ))}
+            ))}
         </div>
         {/* 페이지네이션 */}
         <div className="d-flex justify-content-center mt-4">

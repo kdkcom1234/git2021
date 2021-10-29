@@ -2,8 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 // import profileReducer from "../features/profile/profileSlice";
 import photoReduer from "./modules/photo";
 // import contactReducer from "../features/contact/contactSlice";
-// import progressReducer from "../components/progress/progressSlice";
-// import alertReducer from "../components/alert/alertSlice";
+import progressReducer from "./modules/progress";
+import alertReducer from "./modules/alert";
 
 // 최상위 사가
 import rootSaga from "../middleware";
@@ -26,8 +26,8 @@ export const store = configureStore({
     // photo state를 처리하는 reducer를 등록
     photo: photoReduer,
     // contact: contactReducer,
-    // progress: progressReducer,
-    // alert: alertReducer,
+    progress: progressReducer,
+    alert: alertReducer,
   },
   // redux store(dispatcher)에 미들웨어 적용
   // middleware는 여러개 사용할 수 있음, [defaultMiddlware, sagaMiddleware, thunkMiddlware]

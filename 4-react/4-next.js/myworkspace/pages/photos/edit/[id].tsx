@@ -5,31 +5,18 @@ import { AppDispatch, RootState } from "../../../provider";
 import { requestModifyPhoto } from "../../../middleware/modules/photo";
 import { PhotoItem } from "../../../provider/modules/photo";
 import photoApi, { PhotoItemResponse } from "../../../api/photo";
-import { GetServerSideProps } from "next";
 
-interface PhotoEditProp {
-  id: string;
-  photo: PhotoItemResponse;
-}
+import Layout from "../../../components/layout";
 
-const PhotoEdit = ({ id, photo }: PhotoEditProp) => {
+const PhotoEdit = () => {
   const router = useRouter();
 
-  // SSR 속성으로 받은 객체
-  let photoItem: PhotoItemResponse | PhotoItem | undefined = photo;
-  // console.log(photoItem);
+  const id = router.query.id as string;
 
-  // SSR로 속성으로 받은 객체가 없음
-  if (!photoItem) {
-    // CSR로 받은 매개변수
-    // /photos/detail/[id]
-    id = router.query.id as string;
-    console.log(id);
-    // Redux 스토어에서 꺼냄
-    photoItem = useSelector((state: RootState) =>
-      state.photo.data.find((item) => item.id === +id)
-    );
-  }
+  const photoItem = useSelector((state: RootState) =>
+    state.photo.data.find((item) => item.id === +id)
+  );
+  // console.log(photoItem);
 
   const isModifyCompleted = useSelector(
     (state: RootState) => state.photo.isModifyCompleted
@@ -82,10 +69,10 @@ const PhotoEdit = ({ id, photo }: PhotoEditProp) => {
           // reducer로 state 수정 및 목록으로 이동
           saveItem(item);
 
-          // SSR 상태로 redux store가 없다면
-          if (!isModifyCompleted) {
-            router.push("/photos");
-          }
+          // // SSR 상태로 redux store가 없다면
+          // if (!isModifyCompleted) {
+          //   router.push("/photos");
+          // }
         }
       };
 
@@ -113,83 +100,75 @@ const PhotoEdit = ({ id, photo }: PhotoEditProp) => {
   };
 
   return (
-    <div style={{ width: "40vw" }} className="mx-auto">
-      <h2 className="text-center">Photo Edit</h2>
-      <form>
-        <table className="table">
-          <tbody>
-            <tr>
-              <th>제목</th>
-              <td>
-                <input
-                  className="form-control"
-                  type="text"
-                  defaultValue={photoItem?.title}
-                  ref={titleInput}
-                />
-              </td>
-            </tr>
-            <tr>
-              <th>설명</th>
-              <td>
-                <textarea
-                  className="form-control"
-                  style={{ height: "40vh" }}
-                  defaultValue={photoItem?.description}
-                  ref={descTxta}
-                ></textarea>
-              </td>
-            </tr>
-            <tr>
-              <th>이미지</th>
-              <td>
-                <img src={url} alt={photoItem?.title} />
-                <input
-                  className="form-control"
-                  type="file"
-                  accept="image/*"
-                  ref={fileInput}
-                  onChange={() => {
-                    changeFile();
-                  }}
-                />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </form>
-      <div>
-        <button
-          className="btn btn-secondary me-1 float-start"
-          onClick={() => {
-            router.push("/photos");
-          }}
-        >
-          <i className="bi bi-grid-3x3-gap me-1"></i>
-          목록
-        </button>
-        <button
-          className="btn btn-primary float-end"
-          onClick={() => {
-            handleSaveClick();
-          }}
-        >
-          <i className="bi bi-check" />
-          저장
-        </button>
-      </div>
-    </div>
+    <Layout>
+      <section style={{ width: "40vw" }} className="mx-auto">
+        <h2 className="text-center">Photo Edit</h2>
+        <form>
+          <table className="table">
+            <tbody>
+              <tr>
+                <th>제목</th>
+                <td>
+                  <input
+                    className="form-control"
+                    type="text"
+                    defaultValue={photoItem?.title}
+                    ref={titleInput}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <th>설명</th>
+                <td>
+                  <textarea
+                    className="form-control"
+                    style={{ height: "40vh" }}
+                    defaultValue={photoItem?.description}
+                    ref={descTxta}
+                  ></textarea>
+                </td>
+              </tr>
+              <tr>
+                <th>이미지</th>
+                <td>
+                  <img src={url} alt={photoItem?.title} />
+                  <input
+                    className="form-control"
+                    type="file"
+                    accept="image/*"
+                    ref={fileInput}
+                    onChange={() => {
+                      changeFile();
+                    }}
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+        <div>
+          <button
+            className="btn btn-secondary me-1 float-start"
+            onClick={() => {
+              router.push("/photos");
+            }}
+          >
+            <i className="bi bi-grid-3x3-gap me-1"></i>
+            목록
+          </button>
+          <button
+            className="btn btn-primary float-end"
+            onClick={() => {
+              handleSaveClick();
+            }}
+          >
+            <i className="bi bi-check" />
+            저장
+          </button>
+        </div>
+      </section>
+    </Layout>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const id = context.query.id as string;
-
-  // Fetch data from external API
-  const res = await photoApi.get(+id);
-
-  // Pass data to the page via props
-  return { props: { id, photo: res.data } };
 };
 
 export default PhotoEdit;

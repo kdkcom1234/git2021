@@ -98,6 +98,11 @@ const photoSlice = createSlice({
       }
       state.isModifyCompleted = true; // 변경 되었음을 표시
     },
+    initialPhotoItem: (state, action: PayloadAction<PhotoItem>) => {
+      const photo = action.payload;
+      // 백엔드에서 받아온 데이터
+      state.data = [{ ...photo }];
+    },
     // payload값으로 state를 초기화하는 reducer 필요함
     initialPhoto: (state, action: PayloadAction<PhotoItem[]>) => {
       const photos = action.payload;
@@ -141,6 +146,7 @@ export const {
   addPhoto,
   removePhoto,
   modifyPhoto,
+  initialPhotoItem,
   initialPhoto,
   initialCompleted,
   initialPagedPhoto,

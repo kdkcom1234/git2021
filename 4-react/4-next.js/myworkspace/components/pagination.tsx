@@ -15,10 +15,10 @@ const Pagination = ({
   // // 현재 페이지 블럭번호
   let currentBlock = Math.floor(currentPage / blockSize);
 
-  console.log(`--totalPages: ${totalPages}`);
-  console.log(`--blockSize: ${blockSize}`);
-  console.log(`--currentPage: ${currentPage}`);
-  console.log(`--currentBlock: ${currentBlock}`);
+  // console.log(`--totalPages: ${totalPages}`);
+  // console.log(`--blockSize: ${blockSize}`);
+  // console.log(`--currentPage: ${currentPage}`);
+  // console.log(`--currentBlock: ${currentBlock}`);
 
   return (
     <nav>
