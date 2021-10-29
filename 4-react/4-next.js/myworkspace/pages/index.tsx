@@ -7,6 +7,8 @@ import { getTimeString } from "../lib/string";
 import photoApi from "../api/photo";
 import { PhotoItemResponse } from "../api/photo";
 
+import Image from "next/image";
+
 interface IndexProp {
   photos: PhotoItemResponse[];
 }
@@ -40,6 +42,14 @@ const Index = ({ photos }: IndexProp) => {
                   router.push(`/photos/detail/${item.id}`);
                 }}
               >
+                {/* <Image
+                  src={item.photoUrl}
+                  className="card-img-top"
+                  alt={item.title}
+                  layout="responsive"
+                  width={220}
+                  height={150}
+                /> */}
                 <img
                   src={item.photoUrl}
                   className="card-img-top"
