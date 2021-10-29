@@ -1,0 +1,5 @@
+1. next.js react 개발 프레임워크
+2. SSR(server-side rendering)
+   SSG(static-site generation)
+   CSR(client-side rendering)
+   적절히 장점만 잘 살려서 사용할 수 있도록 되어있음

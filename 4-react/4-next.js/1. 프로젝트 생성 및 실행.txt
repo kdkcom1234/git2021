@@ -1,5 +1,5 @@
 // 프로젝트 생성
-npx create-next-app@latest --ts
+npx create-next-app@latest 프로젝트명 --ts
 프로젝트명 입력
 
 // 프로젝트 실행(개발모드)
