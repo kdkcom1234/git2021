@@ -4,16 +4,32 @@ import { useRouter } from "next/router";
 import { AppDispatch, RootState } from "../../../provider";
 import { requestModifyPhoto } from "../../../middleware/modules/photo";
 import { PhotoItem } from "../../../provider/modules/photo";
+import photoApi, { PhotoItemResponse } from "../../../api/photo";
+import { GetServerSideProps } from "next";
 
-const PhotoEdit = () => {
-  // ------ 데이터를 가져오거나 변수를 선언하는 부분 --------
+interface PhotoEditProp {
+  id: string;
+  photo: PhotoItemResponse;
+}
+
+const PhotoEdit = ({ id, photo }: PhotoEditProp) => {
   const router = useRouter();
-  // /photos/edit/[id]
-  const id = router.query.id as string;
 
-  const photoItem = useSelector((state: RootState) =>
-    state.photo.data.find((item) => item.id === +id)
-  );
+  // SSR 속성으로 받은 객체
+  let photoItem: PhotoItemResponse | PhotoItem | undefined = photo;
+  // console.log(photoItem);
+
+  // SSR로 속성으로 받은 객체가 없음
+  if (!photoItem) {
+    // CSR로 받은 매개변수
+    // /photos/detail/[id]
+    id = router.query.id as string;
+    console.log(id);
+    // Redux 스토어에서 꺼냄
+    photoItem = useSelector((state: RootState) =>
+      state.photo.data.find((item) => item.id === +id)
+    );
+  }
 
   const isModifyCompleted = useSelector(
     (state: RootState) => state.photo.isModifyCompleted
@@ -65,6 +81,11 @@ const PhotoEdit = () => {
 
           // reducer로 state 수정 및 목록으로 이동
           saveItem(item);
+
+          // SSR 상태로 redux store가 없다면
+          if (!isModifyCompleted) {
+            router.push("/photos");
+          }
         }
       };
 
@@ -159,6 +180,16 @@ const PhotoEdit = () => {
       </div>
     </div>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const id = context.query.id as string;
+
+  // Fetch data from external API
+  const res = await photoApi.get(+id);
+
+  // Pass data to the page via props
+  return { props: { id, photo: res.data } };
 };
 
 export default PhotoEdit;

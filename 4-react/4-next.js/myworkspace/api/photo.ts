@@ -31,6 +31,10 @@ export interface PhotoItemRequest {
 // 서버하고 데이터 연동하는 api처리 목록을 별도의 객체로 작성
 // process.env.변수명
 const photoApi = {
+  get: (id: number) =>
+    axios.get<PhotoItemResponse>(
+      `${process.env.NEXT_PUBLIC_API_BASE}/photos/${id}`
+    ),
   // axios.get<응답데이터의타입>(요청URL);
   // GET 요청URL HTTP/1.1
   fetch: () =>

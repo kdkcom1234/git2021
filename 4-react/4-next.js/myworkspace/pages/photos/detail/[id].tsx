@@ -5,20 +5,33 @@ import { AppDispatch, RootState } from "../../../provider";
 import { requestRemovePhotoPaging } from "../../../middleware/modules/photo";
 // import { removePhoto } from "./photoSlice";
 
-const PhotoDetail = () => {
+import photoApi, { PhotoItemResponse } from "../../../api/photo";
+import { PhotoItem } from "../../../provider/modules/photo";
+import { GetServerSideProps } from "next";
+
+interface PhotoDetailProp {
+  id: string;
+  photo: PhotoItemResponse;
+}
+
+const PhotoDetail = ({ id, photo }: PhotoDetailProp) => {
   const router = useRouter();
 
-  // /photos/detail/[id]
-  const id = router.query.id as string;
-  // console.log(id);
-
-  // 타입 단언을 하지 않으면 추론에 의해서 PhotoItem | undefined 타입이 됨
-  // 타입 단언을 하면 반환 형식을 정의할 수 있음
-  const photoItem = useSelector((state: RootState) =>
-    state.photo.data.find((item) => item.id === +id)
-  ); // 반환형식을 타입 추론으로 처리
-  // ) as PhotoItem; // 타입 단언 (type assertion)
+  // SSR 속성으로 받은 객체
+  let photoItem: PhotoItemResponse | PhotoItem | undefined = photo;
   // console.log(photoItem);
+
+  // SSR로 속성으로 받은 객체가 없음
+  if (!photoItem) {
+    // CSR로 받은 매개변수
+    // /photos/detail/[id]
+    id = router.query.id as string;
+    console.log(id);
+    // Redux 스토어에서 꺼냄
+    photoItem = useSelector((state: RootState) =>
+      state.photo.data.find((item) => item.id === +id)
+    );
+  }
 
   // 삭제 여부 감지 및 가져오기
   const isRemoveCompleted = useSelector(
@@ -29,7 +42,7 @@ const PhotoDetail = () => {
 
   useEffect(() => {
     isRemoveCompleted && router.push("/photos");
-  }, [isRemoveCompleted, history]);
+  }, [isRemoveCompleted, router]);
 
   const handDeleteClick = () => {
     // saga action으로 대체
@@ -105,6 +118,16 @@ const PhotoDetail = () => {
       </div>
     </div>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const id = context.query.id as string;
+
+  // Fetch data from external API
+  const res = await photoApi.get(+id);
+
+  // Pass data to the page via props
+  return { props: { id, photo: res.data } };
 };
 
 export default PhotoDetail;

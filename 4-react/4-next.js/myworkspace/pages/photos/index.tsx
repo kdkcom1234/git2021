@@ -59,7 +59,7 @@ const Photo = () => {
 
   return (
     <Layout>
-      <div>
+      <section>
         <h2 className="text-center">Photos</h2>
         {/* 버튼 */}
         <div className="d-flex justify-content-end mb-2">
@@ -146,7 +146,7 @@ const Photo = () => {
             onPageChanged={handlePageChanged}
           />
         </div>
-      </div>
+      </section>
     </Layout>
   );
 };
