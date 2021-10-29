@@ -1,0 +1,5 @@
+// myworkspace
+
+/api: 서버호출 api
+/components: 레이아웃 및 공통 컴포넌트
+/

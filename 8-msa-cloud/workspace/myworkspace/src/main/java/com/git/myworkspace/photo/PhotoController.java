@@ -148,6 +148,12 @@ public class PhotoController {
 
 	@DeleteMapping(value = "/photos/{id}")
 	public boolean removePhoto(@PathVariable long id, HttpServletRequest req, HttpServletResponse res) {
+//		try {
+//			Thread.sleep(2000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 //		System.out.println(req.getHeader("session-profile"));
 //		Session.Profile profile = Session.getSessionProfile(req);
 //
@@ -180,6 +186,12 @@ public class PhotoController {
 
 	@PutMapping(value = "/photos/{id}")
 	public Photo modifyPhoto(@PathVariable long id, @RequestBody Photo photo, HttpServletRequest req, HttpServletResponse res) {
+//		try {
+//			Thread.sleep(2000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 //		System.out.println(req.getHeader("session-profile"));
 //		Session.Profile profile = Session.getSessionProfile(req);
 //
