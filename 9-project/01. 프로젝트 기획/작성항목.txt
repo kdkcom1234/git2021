@@ -1,16 +1,22 @@
 1. 주제, 사용기술, 동기, 선정 사유
  - 주제는 비즈니스 내용과 기술이 적절히 혼합된 형태의 한가지 문장으로 표현
  - 사용기술(차후 개발 완료후 추가적인 것은 보강한다)
-   : 프레임워크 및 라이브러리
-    React, Redux-Saga, ApexChart Spring Boot
    : 언어
     HTML5, Typescript, CSS3/SASS, Java
+   : 프레임워크
+     Next.js, Spring Boot
+   : 프론트엔드 라이브러리
+    redux-toolkit, redux-saga, react-bootstrap (apexchart, react-google-maps)
+   : 백엔드 라이브러리
+    spring-cloud-gateway, eureka, (feign, querydsl, aws-sdk)
    : 미들웨어
     RabbitMQ, NginX,
    : 데이터베이스
-    PostgreSQL, Redis
+    PostgreSQL, (Redis)
    : AWS
-    EC2, RDS, Amazon MQ
+    EC2, RDS, Amazon MQ, (S3, Cloudfront)
+
+
  - 동기, 선정 사유
    
 2. 사례 분석 2개 이상
