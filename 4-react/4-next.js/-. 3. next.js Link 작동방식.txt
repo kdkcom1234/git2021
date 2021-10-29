@@ -1,0 +1,9 @@
+
+
+Link next/link
+
+<Link href="주소">내용</Link>
+<a href="/주소">내용</a> <- eventListener 달려있음
+
+// 사용자는 a태그 클릭 -> 이벤트리스너가 작동해서 JS로 컴포넌트를 로딩(CSR)
+// 검색봇은 href 링크 열기를 함 -> 해당 페이지로 이동되서 로딩이됨(SSR)

@@ -15,6 +15,7 @@ const PhotoDetail = () => {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
 
+  // /photos/detail/[id]
   const id = router.query.id as string;
   console.log(id);
 
