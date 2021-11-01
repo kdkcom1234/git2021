@@ -1,19 +1,25 @@
 package com.git.file;
 
+import static org.apache.commons.codec.digest.DigestUtils.sha256Hex;
+
+import java.io.IOException;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Date;
-
-import static org.apache.commons.codec.digest.DigestUtils.sha256Hex;
 
 @RestController
 public class FileController {
@@ -59,6 +65,7 @@ public class FileController {
 
     @DeleteMapping("/files/{objectKey}")
     public void deleteFile(@PathVariable String objectKey, HttpServletResponse res) {
+    	System.out.println(objectKey);
         // 버킷에 객체가 있는 확인
         if (!client.doesObjectExist(BUCKET_NAME, objectKey)) {
             res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
