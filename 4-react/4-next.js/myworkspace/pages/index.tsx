@@ -42,19 +42,19 @@ const Index = ({ photos }: IndexProp) => {
                   router.push(`/photos/detail/${item.id}`);
                 }}
               >
-                {/* <Image
+                <Image
                   src={item.photoUrl}
                   className="card-img-top"
                   alt={item.title}
                   layout="responsive"
                   width={220}
                   height={150}
-                /> */}
-                <img
+                />
+                {/* <img
                   src={item.photoUrl}
                   className="card-img-top"
                   alt={item.title}
-                />
+                /> */}
                 <div className="card-body">
                   <h5 className="card-title">{item.title}</h5>
                   <h6 className="text-muted">
