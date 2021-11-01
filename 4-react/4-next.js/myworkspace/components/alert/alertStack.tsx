@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../provider";
-import { Alert } from "react-bootstrap";
+import Alert from "./alert";
 import { removeAlert } from "../../provider/modules/alert";
 
 const AlertStack = () => {
@@ -18,13 +18,11 @@ const AlertStack = () => {
           <Alert
             key={`alert-${item.id}`}
             variant={item.variant}
+            message={item.message}
             onClose={() => {
               handleOnClose(item.id);
             }}
-            dismissible
-          >
-            {item.message}
-          </Alert>
+          />
         ))}
       </div>
     </div>
