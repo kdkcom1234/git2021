@@ -64,9 +64,6 @@ const Photo = () => {
     <Layout>
       <section>
         <h2 className="text-center">Photos</h2>
-        {(!photo.isFetched || photo.data.length === 0) && (
-          <div className="text-center my-5">데이터가 없습니다.</div>
-        )}
         {/* 버튼 */}
         <div className="d-flex justify-content-end mb-2">
           <select
@@ -108,6 +105,9 @@ const Photo = () => {
           </button>
         </div>
         {/* 컨텐트 */}
+        {(!photo.isFetched || photo.data.length === 0) && (
+          <div className="text-center my-5">데이터가 없습니다.</div>
+        )}
         <div className="d-flex flex-wrap">
           {/* state 데이터 배열에 map함수로 출력 */}
           {photo.isFetched &&

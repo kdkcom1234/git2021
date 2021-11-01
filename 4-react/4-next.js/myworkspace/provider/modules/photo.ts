@@ -111,6 +111,9 @@ const photoSlice = createSlice({
       // 데이터를 받아옴으로 값을 남김
       state.isFetched = true;
     },
+    addTotalpages: (state) => {
+      state.totalPages++;
+    },
     // payload값으로 state를 초기화하는 reducer 필요함
     initialPagedPhoto: (state, action: PayloadAction<PhotoPage>) => {
       // 백엔드에서 받아온 데이터
@@ -149,6 +152,7 @@ export const {
   initialPhotoItem,
   initialPhoto,
   initialCompleted,
+  addTotalpages,
   initialPagedPhoto,
   initialNextPhoto,
 } = photoSlice.actions;

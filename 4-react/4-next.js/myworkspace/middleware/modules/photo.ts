@@ -1,5 +1,6 @@
 import photoReducer, {
   addPhoto,
+  addTotalpages,
   initialCompleted,
   initialNextPhoto,
   initialPagedPhoto,
@@ -27,6 +28,8 @@ import { AxiosResponse } from "axios";
 import { endProgress, startProgress } from "../../provider/modules/progress";
 import { addAlert } from "../../provider/modules/alert";
 import { RootState } from "../../provider";
+import { dataUrlToFile } from "../../lib/string";
+import fileApi from "../../api/file";
 
 /* ========= saga action Payload 타입 =============== */
 export interface PageRequest {
@@ -108,21 +111,39 @@ function* addDataPaging(action: PayloadAction<PhotoItem>) {
     // action의 payload로 넘어온 객체
     const photoItemPayload = action.payload;
 
+    // spinner 보여주기
+    yield put(startProgress());
+
+    /* --- (추가로직) 2021-11-01 s3 업로드 처리 --- */
+    // 1. dataUrl -> file 변환
+    const file: File = yield call(
+      dataUrlToFile,
+      photoItemPayload.photoUrl,
+      photoItemPayload.fileName,
+      photoItemPayload.fileType
+    );
+
+    // 2. form data 객체 생성
+    const formFile = new FormData();
+    formFile.set("file", file);
+
+    // 3. multipart/form-data로 업로드
+    const fileUrl: AxiosResponse<string> = yield call(fileApi.upload, formFile);
+    /*-------------------------------------------------------- */
+
     // rest api로 보낼 요청객체
     const photoItemRequest: PhotoItemRequest = {
       title: photoItemPayload.title,
       // title: "", // 임시로 에러 유발(400)
       description: photoItemPayload.description,
-      photoUrl: photoItemPayload.photoUrl,
+      // photoUrl: photoItemPayload.photoUrl,
+      photoUrl: fileUrl.data, // 응답받은 Cloudfront URL로
       fileType: photoItemPayload.fileType,
       fileName: photoItemPayload.fileName,
     };
 
     // ------ 1. rest api에 post로 데이터 보냄
     // call(함수, 매개변수1, 매개변수2...) -> 함수를 호출함
-
-    // spinner 보여주기
-    yield put(startProgress());
     // 함수가 Promise를 반환하면, (비동기함수)
     // Saga 미들웨어에서 현재 yield에 대기상태로 있음
     // Promise가 resolve(처리완료)되면 다음 yield로 처리가 진행됨
@@ -145,11 +166,17 @@ function* addDataPaging(action: PayloadAction<PhotoItem>) {
     const photoData: PhotoItem[] = yield select(
       (state: RootState) => state.photo.data
     );
-    // 현재 데이터가 있으면
-    if (photoData.length > 0) {
-      // 가장 마지막 요소의 id값을 가져오고 삭제함
+
+    const photoPageSize: number = yield select(
+      (state: RootState) => state.photo.pageSize
+    );
+    // 현재 redux state에 데이터가 있으며, 페이지크기와 데이터 크기가 같으면
+    if (photoData.length > 0 && photoData.length == photoPageSize) {
+      // redux state의 가장 마지막 요소 삭제
       const deleteId = photoData[photoData.length - 1].id;
       yield put(removePhoto(deleteId));
+      // 전체 페이지 수를 증가
+      yield put(addTotalpages);
     }
 
     // 백엔드에서 처리한 데이터 객체로 state를 변경할 payload 객체를 생성
@@ -194,12 +221,33 @@ function* addDataNext(action: PayloadAction<PhotoItem>) {
     // action의 payload로 넘어온 객체
     const photoItemPayload = action.payload;
 
+    // spinner 보여주기
+    yield put(startProgress());
+
+    /* --- (추가로직) 2021-11-01 s3 업로드 처리 --- */
+    // 1. dataUrl -> file 변환
+    const file: File = yield call(
+      dataUrlToFile,
+      photoItemPayload.photoUrl,
+      photoItemPayload.fileName,
+      photoItemPayload.fileType
+    );
+
+    // 2. form data 객체 생성
+    const formFile = new FormData();
+    formFile.set("file", file);
+
+    // 3. multipart/form-data로 업로드
+    const fileUrl: AxiosResponse<string> = yield call(fileApi.upload, formFile);
+    /*-------------------------------------------------------- */
+
     // rest api로 보낼 요청객체
     const photoItemRequest: PhotoItemRequest = {
       title: photoItemPayload.title,
       // title: "", // 임시로 에러 유발(400)
       description: photoItemPayload.description,
-      photoUrl: photoItemPayload.photoUrl,
+      // photoUrl: photoItemPayload.photoUrl,
+      photoUrl: fileUrl.data,
       fileType: photoItemPayload.fileType,
       fileName: photoItemPayload.fileName,
     };
@@ -207,8 +255,6 @@ function* addDataNext(action: PayloadAction<PhotoItem>) {
     // ------ 1. rest api에 post로 데이터 보냄
     // call(함수, 매개변수1, 매개변수2...) -> 함수를 호출함
 
-    // spinner 보여주기
-    yield put(startProgress());
     // 함수가 Promise를 반환하면, (비동기함수)
     // Saga 미들웨어에서 현재 yield에 대기상태로 있음
     // Promise가 resolve(처리완료)되면 다음 yield로 처리가 진행됨
@@ -296,6 +342,7 @@ function* fetchData() {
   yield put(initialPhoto(photos));
 }
 
+// 숫자 페이징 목록 조회
 function* fetchPagingData(action: PayloadAction<PageRequest>) {
   yield console.log("--fetchPagingData--");
 
@@ -354,6 +401,7 @@ function* fetchPagingData(action: PayloadAction<PageRequest>) {
   }
 }
 
+// 더보기 목록 조회
 function* fetchNextData(action: PayloadAction<PageRequest>) {
   yield console.log("--fetchNextData--");
 
@@ -409,7 +457,6 @@ function* fetchNextData(action: PayloadAction<PageRequest>) {
     );
   }
 }
-
 // 1건의 데이터만 조회
 function* fetchDataItem(action: PayloadAction<number>) {
   yield console.log("--fetchDataItem--");
@@ -420,11 +467,13 @@ function* fetchDataItem(action: PayloadAction<number>) {
   const result: AxiosResponse<PhotoItemResponse> = yield call(api.get, id);
 
   const photo = result.data;
-
-  // state 초기화 reducer 실행
-  yield put(initialPhotoItem(photo));
+  if (photo) {
+    // state 초기화 reducer 실행
+    yield put(initialPhotoItem(photo));
+  }
 }
 
+// 삭제처리
 function* removeDataPaging(action: PayloadAction<number>) {
   yield console.log("--removeData--");
 
@@ -433,6 +482,19 @@ function* removeDataPaging(action: PayloadAction<number>) {
 
   // spinner 보여주기
   yield put(startProgress());
+
+  /* --- (추가로직) 2021-11-01 S3 파일 삭제 로직 추가 --- */
+  // redux state에서 id로
+  // object key 가져오기 예) https://배포Id.cloudfront.net/objectKey
+  const photoItem: PhotoItem = yield select((state: RootState) =>
+    state.photo.data.find((item) => item.id === id)
+  );
+  const urlArr = photoItem.photoUrl.split("/");
+  const objectKey = urlArr[urlArr.length - 1];
+
+  // file api 호출해서 s3에 파일 삭제
+  yield call(fileApi.remove, objectKey);
+  /* ------------------------------------------------- */
 
   // rest api 연동
   const result: AxiosResponse<boolean> = yield call(api.remove, id);
@@ -475,6 +537,19 @@ function* removeDataNext(action: PayloadAction<number>) {
   // spinner 보여주기
   yield put(startProgress());
 
+  /* --- (추가로직) 2021-11-01 S3 파일 삭제 로직 추가 --- */
+  // redux state에서 id로
+  // object key 가져오기 예) https://배포Id.cloudfront.net/objectKey
+  const photoItem: PhotoItem = yield select((state: RootState) =>
+    state.photo.data.find((item) => item.id === id)
+  );
+  const urlArr = photoItem.photoUrl.split("/");
+  const objectKey = urlArr[urlArr.length - 1];
+
+  // file api 호출해서 s3에 파일 삭제
+  yield call(fileApi.remove, objectKey);
+  /* ------------------------------------------------- */
+
   // rest api 연동
   const result: AxiosResponse<boolean> = yield call(api.remove, id);
 
@@ -500,24 +575,60 @@ function* removeDataNext(action: PayloadAction<number>) {
   yield put(initialCompleted());
 }
 
+// 수정처리
 function* modifyData(action: PayloadAction<PhotoItem>) {
   yield console.log("--modifyData--");
 
   // action의 payload로 넘어온 객체
   const photoItemPayload = action.payload;
 
+  // // spinner 보여주기
+  yield put(startProgress());
+
+  // 파일이 바뀌었으면 base64파일
+  let fileUrl = action.payload.photoUrl;
+  if (action.payload.photoUrl.startsWith("data")) {
+    /*--- (추가로직) 2021-11-01 S3 파일 삭제 로직 추가 --- */
+    // redux state에서 id로
+    // object key 가져오기 예) https://배포Id.cloudfront.net/objectKey
+    const photoItemFile: PhotoItem = yield select((state: RootState) =>
+      state.photo.data.find((item) => item.id === photoItemPayload.id)
+    );
+    const urlArr = photoItemFile.photoUrl.split("/");
+    const objectKey = urlArr[urlArr.length - 1];
+
+    // file api 호출해서 s3에 파일 삭제
+    yield call(fileApi.remove, objectKey);
+    /* --- ------------------------------------------------ */
+
+    /* --- (추가로직) 2021-11-01 s3 업로드 처리 --- */
+    // 1. dataUrl -> file 변환
+    const file: File = yield call(
+      dataUrlToFile,
+      photoItemPayload.photoUrl,
+      photoItemPayload.fileName,
+      photoItemPayload.fileType
+    );
+
+    // 2. form data 객체 생성
+    const formFile = new FormData();
+    formFile.set("file", file);
+
+    // 3. multipart/form-data로 업로드
+    const fileRes: AxiosResponse<string> = yield call(fileApi.upload, formFile);
+    fileUrl = fileRes.data;
+    /*-------------------------------------------------------- */
+  }
+
   // rest api로 보낼 요청객체
   const photoItemRequest: PhotoItemRequest = {
     title: photoItemPayload.title,
     description: photoItemPayload.description,
-    photoUrl: photoItemPayload.photoUrl,
+    // photoUrl: photoItemPayload.photoUrl,
+    photoUrl: fileUrl,
     fileType: photoItemPayload.fileType,
     fileName: photoItemPayload.fileName,
   };
-
-  // // spinner 보여주기
-  yield put(startProgress());
-  console.log("--sprinner--");
 
   const result: AxiosResponse<PhotoItemResponse> = yield call(
     api.modify,
