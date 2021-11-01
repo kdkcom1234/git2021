@@ -3,3 +3,9 @@
    SSG(static-site generation)
    CSR(client-side rendering)
    적절히 장점만 잘 살려서 사용할 수 있도록 되어있음
+
+   SSR: SEO 접근성 좋음, 초기 로딩속도가 상대적으로 빠름
+   CSR: 페이지간 이동이 빠름, UI/UX가 앱과 유사하게 개발할 수 있음
+  
+   /index.tsx -> SSR 처리됨
+   Link /todo -> /todo.tsx -> CSR 처리됨
