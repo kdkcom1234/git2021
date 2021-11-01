@@ -13,29 +13,31 @@ const AppBar = () => {
         </Navbar.Brand>
         <div className="d-flex justify-content-end me-3">
           <a className="text-light" href="/about">
-            ABOUT
+            ABOUT(Reload, SSR)
           </a>
           <Nav className="me-auto">
-            <Nav.Link>
-              <Link href="/">HOME</Link>
-            </Nav.Link>
-            <Nav.Link>
+            <Nav.Item className="me-3">
+              {/* next/link 안에 a태그를 주어서 스타일 먹인다 */}
+              {/* 변환된 태그 <a class="text-light" href="/">HOME</> */}
+              <Link href="/">
+                <a className="text-light">HOME</a>
+              </Link>
+            </Nav.Item>
+            <Nav.Item className="me-3">
               <Link href="/about">
-                <a href="/about" className="text-light">
-                  ABOUT
-                </a>
+                <a className="text-light">ABOUT(Lazy Load, CSR)</a>
               </Link>
-            </Nav.Link>
-            <Nav.Link>
+            </Nav.Item>
+            <Nav.Item className="me-3">
               <Link href="/todo">
-                <span className="text-light">TODO</span>
+                <a className="text-light">TODO</a>
               </Link>
-            </Nav.Link>
-            <Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
               <Link href="/photos">
-                <span className="text-light">PHOTO</span>
+                <a className="text-light">PHOTO</a>
               </Link>
-            </Nav.Link>
+            </Nav.Item>
           </Nav>
         </div>
       </Container>
