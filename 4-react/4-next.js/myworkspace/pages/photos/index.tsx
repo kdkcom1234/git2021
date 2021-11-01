@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import Pagination from "../../components/pagination";
 import { AppDispatch, RootState } from "../../provider";
-import { requestFetchPagingPhotos } from "../../middleware/modules/photo";
+import {
+  requestFetchNextPhotos,
+  requestFetchPagingPhotos,
+} from "../../middleware/modules/photo";
 
 import { getTimeString } from "../../lib/string";
 
@@ -30,8 +33,17 @@ const Photo = () => {
 
       const photoPageSize = localStorage.getItem("photo_page_size");
 
+      // 숫자 페이징
+      // dispatch(
+      //   requestFetchPagingPhotos({
+      //     page: 0,
+      //     size: photoPageSize ? +photoPageSize : photo.pageSize,
+      //   })
+      // );
+
+      // 더보기 페이징
       dispatch(
-        requestFetchPagingPhotos({
+        requestFetchNextPhotos({
           page: 0,
           size: photoPageSize ? +photoPageSize : photo.pageSize,
         })
@@ -147,14 +159,35 @@ const Photo = () => {
             ))}
         </div>
         {/* 페이지네이션 */}
-        <div className="d-flex justify-content-center mt-4">
+        {/* 숫자 페이징 */}
+        {/* <div className="d-flex justify-content-center mt-4">
           <Pagination
             blockSize={2} // 고정값
             totalPages={photo.totalPages}
             currentPage={photo.page}
             onPageChanged={handlePageChanged}
           />
-        </div>
+        </div> */}
+        {/* 더보기 페이징 */}
+        {!photo.isLast && (
+          <div className="d-flex justify-content-center mt-4">
+            <a
+              href="#!"
+              onClick={(e) => {
+                e.preventDefault(); // 기본 동작 방지
+                dispatch(
+                  requestFetchNextPhotos({
+                    page: photo.page + 1,
+                    size: photo.pageSize,
+                  })
+                );
+              }}
+              className="link-secondary fs-6 text-nowrap"
+            >
+              더보기
+            </a>
+          </div>
+        )}
       </section>
     </Layout>
   );

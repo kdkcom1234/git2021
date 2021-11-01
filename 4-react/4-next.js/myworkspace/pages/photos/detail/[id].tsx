@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { AppDispatch, RootState } from "../../../provider";
 import {
   requestFetchPhotoItem,
+  requestRemovePhotoNext,
   requestRemovePhotoPaging,
 } from "../../../middleware/modules/photo";
 // import { removePhoto } from "./photoSlice";
@@ -43,8 +44,8 @@ const PhotoDetail = () => {
   const handDeleteClick = () => {
     // saga action으로 대체
     // dispatch(requestRemovePhoto(+id)); // 전체 조회일 때
-    dispatch(requestRemovePhotoPaging(+id)); // 숫자 페이징일 때
-    // dispatch(requestRemovePhotoNext(+id)); // 더보기 페이징일 때
+    // dispatch(requestRemovePhotoPaging(+id)); // 숫자 페이징일 때
+    dispatch(requestRemovePhotoNext(+id)); // 더보기 페이징일 때
 
     // dispatch(removePhoto(+id)); // id값만 넣어서 삭제
     // history.push("/photos"); // 목록화면으로 이동
