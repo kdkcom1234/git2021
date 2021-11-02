@@ -34,15 +34,6 @@ const Photo = () => {
 
       const photoPageSize = localStorage.getItem("photo_page_size");
 
-      // 숫자 페이징
-      // dispatch(
-      //   requestFetchPagingPhotos({
-      //     page: 0,
-      //     size: photoPageSize ? +photoPageSize : photo.pageSize,
-      //   })
-      // );
-
-      // 더보기 페이징
       dispatch(
         requestFetchPagingPhotos({
           page: 0,
@@ -97,7 +88,7 @@ const Photo = () => {
             className="btn btn-secondary me-2"
             onClick={() => {
               dispatch(
-                requestFetchPagingPhotos({
+                requestFetchNextPhotos({
                   page: photo.page,
                   size: photo.pageSize,
                 })
