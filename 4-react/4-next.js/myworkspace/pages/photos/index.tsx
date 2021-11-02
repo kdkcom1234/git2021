@@ -44,7 +44,7 @@ const Photo = () => {
 
       // 더보기 페이징
       dispatch(
-        requestFetchNextPhotos({
+        requestFetchPagingPhotos({
           page: 0,
           size: photoPageSize ? +photoPageSize : photo.pageSize,
         })
