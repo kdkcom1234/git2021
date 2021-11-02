@@ -14,8 +14,8 @@ npm install
 // 빌드
 npm run build
 
-// 실행
-npm start
+// next 서버 실행
+nohup npm start &
 
 // nginx reverse proxy 적용
 (디폴트파일이 있다면) sudo rm /etc/nginx/sites-available/default
@@ -37,8 +37,15 @@ server {
 sudo ln -s /etc/nginx/sites-available/프로젝트명.conf /etc/nginx/sites-enabled/프로젝트명.conf
 
 
-/* - 변동 사항 ---- */
+/* - 변동 사항 발생후 다시 시작 ---- */
+// 기존 프로세스 종료
+ps -ef | grep node
+kill -9 프로세스 번호
+
+// git에서 변경 소스를 받고 빌드하기
 cd 프로젝트폴더
 git pull && npm run build
+
+// next서버 실행
 nohup npm start &
 
