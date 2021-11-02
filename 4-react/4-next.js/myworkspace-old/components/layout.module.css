@@ -1,0 +1,7 @@
+.main {
+  height: calc(100vh - 64px);
+}
+
+.main > section {
+  padding: 32px;
+}

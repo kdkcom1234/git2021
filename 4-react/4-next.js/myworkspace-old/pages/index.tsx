@@ -19,7 +19,9 @@ const Index = ({ photos }: IndexProp) => {
   return (
     <Layout>
       <section>
-        <p>{/* Recent Photos - <Link href="/photos">more..</Link> */}</p>
+        <p>
+          Recent Photos - <Link href="/photos">more..</Link>
+        </p>
         <div className="d-flex flex-wrap">
           {/* state 데이터 배열에 map함수로 출력 */}
           {photos.map((item, index) => (

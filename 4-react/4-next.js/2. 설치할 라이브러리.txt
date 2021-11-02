@@ -2,7 +2,7 @@
 npm install sass
 
 // BootStrap(React Bootrap 컴포넌트 포함)
-npm install react-bootstrap bootstrap @popperjs/core
+npm install react-bootstrap bootstrap @popperjs/core bootstrap-icons
 
 // 리덕스
 npm install @reduxjs/toolkit react-redux

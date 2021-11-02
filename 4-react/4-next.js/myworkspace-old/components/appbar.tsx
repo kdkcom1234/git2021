@@ -8,7 +8,7 @@ const AppBar = () => {
       <Container className="w-100">
         <Navbar.Brand className="ms-3">
           <Link href="/">
-            <a className="text-light">MYWORKSPACE</a>
+            <span className="text-light">MYWORKSPACE</span>
           </Link>
         </Navbar.Brand>
         <div className="d-flex justify-content-end me-3">
