@@ -44,7 +44,10 @@ const Index = ({ photos }: IndexProp) => {
                   src={item.photoUrl}
                   className="card-img-top"
                   alt={item.title}
+                  /* 이미지 크기에 맞게 가운데부분 노출 */
                   layout="responsive"
+                  objectFit="cover"
+                  /* ------------------------------- */
                   width={220}
                   height={150}
                 />

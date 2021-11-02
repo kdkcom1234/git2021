@@ -11,6 +11,7 @@ import {
 import { getTimeString } from "../../lib/string";
 
 import Layout from "../../components/layout";
+import Image from "next/image";
 
 const Photo = () => {
   // photo state 전체를 가져옴
@@ -142,11 +143,23 @@ const Photo = () => {
                     router.push(`/photos/detail/${item.id}`);
                   }}
                 >
-                  <img
+                  <Image
                     src={item.photoUrl}
                     className="card-img-top"
                     alt={item.title}
+                    /* 이미지 크기에 맞게 가운데부분 노출 */
+                    layout="responsive"
+                    objectFit="cover"
+                    /* ------------------------------- */
+                    width={220}
+                    height={150}
                   />
+
+                  {/* <img
+                    src={item.photoUrl}
+                    className="card-img-top"
+                    alt={item.title}
+                  /> */}
                   <div className="card-body">
                     <h5 className="card-title">{item.title}</h5>
                     <h6 className="text-muted">
