@@ -1,1 +1,1 @@
-ssh -i "c:\keyfile\mq.pem" ubuntu@ec2-13-125-61-145.ap-northeast-2.compute.amazonaws.com
+ssh -i "c:\keyfile\mq.pem" ubuntu@15.164.19.194

@@ -2,7 +2,7 @@ server:  port: 8080
 
 # yml(yaml, 야믈(야멀))
 # 시스템 설정에 사용하는 파일
-spring:  application:    name: myworkspace
+spring:  profiles:    active: default  application:    name: myworkspace
   datasource:    driver-class-name: org.postgresql.Driver  #postgresql
 #    driver-class-name: com.mysql.cj.jdbc.Driver #mysql
     
