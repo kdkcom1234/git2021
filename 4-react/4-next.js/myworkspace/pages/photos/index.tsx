@@ -89,7 +89,8 @@ const Photo = () => {
             onClick={() => {
               dispatch(
                 requestFetchPagingPhotos({
-                  page: photo.page,
+                  page: 0,
+                  // page: photo.page,
                   size: photo.pageSize,
                 })
               );
