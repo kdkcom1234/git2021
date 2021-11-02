@@ -1,10 +1,10 @@
 {
   "folders": [
-	{
-		"path": "4-react\\4-next.js\\myworkspace"
-	},
-	{
-		"path": "4-react\\2-create-react-app\\myworkspace"
-	}
-]
+    {
+      "path": "4-react\\4-next.js\\myworkspace"
+    },
+    {
+      "path": "4-react\\4-next.js\\myworkspace-old"
+    }
+  ]
 }

@@ -18,7 +18,9 @@ public class WebConfiguration implements WebMvcConfigurer {
 				// html문서에는 어디서 문서를 받아왔는지를 기록하고 있음
 				// 실제 통신은 브라우저 -> 서버
 				.allowedOrigins("http://localhost:3000", "http://127.0.0.1:5500/",
-						"http://ec2-52-79-178-68.ap-northeast-2.compute.amazonaws.com")
+						"http://15.164.54.22:3000", "http://15.164.54.22",
+						"http://ec2-15-164-54-22.ap-northeast-2.compute.amazonaws.com:3000", 
+						"http://ec2-15-164-54-22.ap-northeast-2.compute.amazonaws.com")
 				// 공유정책으로 허용할 HTTP메서드
 				.allowedMethods("*"); // 전체메서드를 허용(GET, POST, PUT....)
 	}
