@@ -39,12 +39,12 @@ sudo ln -s /etc/nginx/sites-available/프로젝트명.conf /etc/nginx/sites-enab
 
 /* - 변동 사항 발생후 다시 시작 ---- */
 // 기존 프로세스 종료
-ps -ef | grep node
-kill -9 프로세스 번호
+pkill -f node
 
 // git에서 변경 소스를 받고 빌드하기
 cd 프로젝트폴더
 git pull && npm run build
+
 
 // next서버 실행
 nohup npm start &
