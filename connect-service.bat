@@ -1,1 +1,1 @@
-ssh -i "c:\keyfile\myworkspace.pem" ubuntu@ec2-52-79-178-68.ap-northeast-2.compute.amazonaws.com
+ssh -i "c:\keyfile\myworkspace.pem" ubuntu@15.164.54.22
