@@ -88,7 +88,7 @@ const Photo = () => {
             className="btn btn-secondary me-2"
             onClick={() => {
               dispatch(
-                requestFetchNextPhotos({
+                requestFetchPagingPhotos({
                   page: photo.page,
                   size: photo.pageSize,
                 })
