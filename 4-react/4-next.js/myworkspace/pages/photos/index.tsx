@@ -8,6 +8,8 @@ import {
   requestFetchPagingPhotos,
 } from "../../middleware/modules/photo";
 
+import style from "../../styles/photo.module.css";
+
 import { getTimeString } from "../../lib/string";
 
 import Layout from "../../components/layout";
@@ -67,7 +69,7 @@ const Photo = () => {
   return (
     <Layout>
       <section>
-        <h2 className="text-center">Photos</h2>
+        <h2 className={`text-center ${style.header}`}>Photos</h2>
         {/* 버튼 */}
         <div className="d-flex justify-content-end mb-2">
           <select
