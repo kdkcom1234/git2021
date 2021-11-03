@@ -125,7 +125,7 @@ function* addDataPaging(action: PayloadAction<PhotoItem>) {
 
     // 2. form data 객체 생성
     const formFile = new FormData();
-    formFile.set("file", file);
+    formFile.set("file", file); // .set("키", 값);
 
     // 3. multipart/form-data로 업로드
     const fileUrl: AxiosResponse<string> = yield call(fileApi.upload, formFile);
@@ -136,7 +136,7 @@ function* addDataPaging(action: PayloadAction<PhotoItem>) {
       title: photoItemPayload.title,
       // title: "", // 임시로 에러 유발(400)
       description: photoItemPayload.description,
-      // photoUrl: photoItemPayload.photoUrl,
+      // photoUrl: photoItemPayload.photoUrl, // base64 dataURL
       photoUrl: fileUrl.data, // 응답받은 Cloudfront URL로
       fileType: photoItemPayload.fileType,
       fileName: photoItemPayload.fileName,

@@ -22,8 +22,8 @@ const dataUrlToFile = async (
   type: string
 ): Promise<File> => {
   const res: Response = await fetch(dataUrl);
-  const blob: Blob = await res.blob();
-  return new File([blob], fileName, { type });
+  const blob: Blob = await res.blob(); // 응답을 2진 데이터 객체로 변환
+  return new File([blob], fileName, { type }); // 비동기로 파일객체를 생성
 };
 
 export { getTimeString, dataUrlToFile };

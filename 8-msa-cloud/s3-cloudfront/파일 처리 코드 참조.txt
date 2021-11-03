@@ -1,0 +1,17 @@
+// 프론트엔드
+/4-react/4-next/myworkspace
+/api/fileApi.ts
+: 파일 추가/삭제 ajax 처리
+/middleware/modules/photo.ts
+: 파일 추가/삭제 API호출
+/env.local, env.production
+: 파일서버 주소
+/next.config.js
+: 이미지 도메인
+
+// 백엔드
+/8-msa-cloud/workspace/file
+/src.../FileController.java 
+: Bucket명, Distribution명
+/src.../WebConfiguration.java 
+: local주소와 프론트엔드서버 주소를 써줘야함(CORS)
