@@ -1,0 +1,14 @@
+1. 링크 걸기
+import Link from "next/lin"
+
+<Link href="/주소">
+ <a className="스타일클래스">링크텍스트</a>
+</Link>
+
+2. 스타일
+전체적으로 사용할 것은 globals.css, _app.tsx
+각기 페이지마다 또는 컴포넌트에서 사용할 것은
+/styles/모듈명.module.css
+// 사용
+import style from "../styles/모듈명.module.css"
+<h1 className={`style.클래스명`}
