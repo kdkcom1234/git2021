@@ -33,9 +33,14 @@ const AppBar = () => {
                 <a className="text-light">TODO</a>
               </Link>
             </Nav.Item>
-            <Nav.Item>
+            <Nav.Item className="me-5">
               <Link href="/photos">
                 <a className="text-light">PHOTO</a>
+              </Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Link href="/signin">
+                <a className="text-light">SIGN IN</a>
               </Link>
             </Nav.Item>
           </Nav>

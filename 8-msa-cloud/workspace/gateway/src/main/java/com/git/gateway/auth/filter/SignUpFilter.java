@@ -5,10 +5,12 @@ import java.nio.charset.StandardCharsets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
+import org.springframework.web.cors.reactive.CorsUtils;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
@@ -19,6 +21,7 @@ import com.git.gateway.auth.entity.Login;
 import com.git.gateway.auth.entity.Profile;
 import com.git.gateway.auth.request.SignUpRequest;
 import com.git.gateway.auth.util.Hash;
+import com.git.gateway.auth.util.WebFilterCors;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -26,6 +29,10 @@ import reactor.core.publisher.Mono;
 @Component
 public class SignUpFilter implements WebFilter {
 
+	private static final String ALLOWED_HEADERS = "x-requested-with, authorization, Content-Type, Content-Length, Authorization, credential, X-XSRF-TOKEN";
+	private static final String ALLOWED_METHODS = "GET, PUT, POST, DELETE, OPTIONS, PATCH";
+	private static final String ALLOWED_ORIGIN = "*";
+	
 	@Autowired
 	private R2dbcEntityTemplate db;
 
@@ -38,10 +45,18 @@ public class SignUpFilter implements WebFilter {
 		// 요청 경로 ex) /auth/signup
 		String rootPath = req.getPath().subPath(1, 2).toString(); // auth
 		String subPath = req.getPath().subPath(3, 4).toString(); // signup
-//		System.out.println(rootPath + ">" + subPath);
+		System.out.println(rootPath + ">" + subPath);
 
 		// /auth/signup 일때 login 및 profile 정보 생성
 		if (rootPath.equals("auth") && subPath.equals("signup")) {
+			
+			if (CorsUtils.isCorsRequest(req)) {
+				WebFilterCors.setCorsHeader(req, res);
+				if (req.getMethod() == HttpMethod.OPTIONS) {
+				    res.setStatusCode(HttpStatus.OK);
+				    return Mono.empty();
+				}
+			}				
 			
 			Flux<DataBuffer> result = req.getBody()
 			// 1. Json 데이터를 객체화
@@ -67,6 +82,7 @@ public class SignUpFilter implements WebFilter {
 			})
 			// 3. 응답 처리			
 			.flatMap(profile -> {
+				
 				res.setStatusCode(HttpStatus.CREATED);
 				DataBuffer buffer = res.bufferFactory().wrap("success".getBytes());	
 				

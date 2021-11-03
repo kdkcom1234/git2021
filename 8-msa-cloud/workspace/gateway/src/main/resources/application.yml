@@ -20,7 +20,10 @@ spring:
     host: 127.0.0.1
     port: 6379      
   cloud:    gateway:
-    
+#      globalcors:#        cors-configurations:#          '[/**]':
+#            allowedOrigins: "*"
+#            allowedHeaders: "*"
+#            allowedMethods: "*"
       # https://stackoverflow.com/questions/58714918/spring-cloud-gateway-auto-routing-with-eureka
       
       # http(s)://gateway주소/서비스명 
