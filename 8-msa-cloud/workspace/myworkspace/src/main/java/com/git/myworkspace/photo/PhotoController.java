@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.git.myworkspace.lib.Session;
 import com.git.myworkspace.lib.TextProcesser;
 
 @RestController
@@ -47,29 +48,25 @@ public class PhotoController {
 	
 	@GetMapping(value = "/photos")
 	public List<Photo> getPhotos(HttpServletRequest req, HttpServletResponse res) {
-//		System.out.println(req.getHeader("session-profile"));
-//		Session.Profile profile = Session.getSessionProfile(req);
-//
-//		if(profile == null) {
-//			// 401: 인증 필요
-//			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//			return null;
-//		}
-//
-		
-		// repository.findAll();
-		// SELECT * FROM photo;
-		// 기본적으로 PK 순정렬(asc, ascending)되고 있는 상황
-		// 1 2 3 .....
-//		return repo.findAll();
+		System.out.println(req.getHeader("session-profile"));
+		Session.Profile profile = Session.getSessionProfile(req);
+		System.out.println(profile);
 
-		// id컬럼 역정렬(clusted index)
-		// Sort.by("정렬컬럼").desceding() 역정렬
-		// Sort.by("정렬컬럼").ascending() 순정렬
-		return repo.findAll(Sort.by("id").descending());
+		if(profile == null) {
+			// 401: 인증 필요
+			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return null;
+		}
+		
+		if(!profile.getRole().equals("USER")) {
+			// 403: 권한 불충분
+			res.setStatus(HttpServletResponse.SC_FORBIDDEN);
+			return null;
+		}		
 		
 		// **특정 사용자의 데이터만 조회
-//		return repo.findByUserId(Sort.by("id").descending(), profile.getUserId());
+//		return repo.findAll(Sort.by("id").descending());		
+		return repo.findByUserId(Sort.by("id").descending(), profile.getUserId());
 	}
 
 	@GetMapping("/photos/search/{keyword}")
@@ -83,33 +80,44 @@ public class PhotoController {
 	// 예) GET /photos/paging?page=0&size=2
 	@GetMapping("/photos/paging")
 	public Page<Photo> getPhotosPaging(@RequestParam int page, @RequestParam int size, HttpServletRequest req, HttpServletResponse res) {
-//		System.out.println(req.getHeader("session-profile"));
-//		Session.Profile profile = Session.getSessionProfile(req);
-//
-//		if(profile == null) {
-//			// 401: 인증 필요
-//			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//			return null;
-//		}
-						
-		
-		// findAll(Pageable page)
-		// findAll(PageRequest.of(page, size, Sort sort));
+		System.out.println(req.getHeader("session-profile"));
+		Session.Profile profile = Session.getSessionProfile(req);
+		System.out.println(profile);
 
-		return repo.findAll(PageRequest.of(page, size, Sort.by("id").descending()));
-//		return repo.findByUserId(PageRequest.of(page, size, Sort.by("id").descending()), profile.getUserId());
+		if(profile == null) {
+			// 401: 인증 필요
+			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return null;
+		}
+		
+		if(!profile.getRole().equals("USER")) {
+			// 403: 권한 불충분
+			res.setStatus(HttpServletResponse.SC_FORBIDDEN);
+			return null;
+		}	
+
+		// **특정 사용자의 데이터만 조회
+//		return repo.findAll(PageRequest.of(page, size, Sort.by("id").descending()));
+		return repo.findByUserId(PageRequest.of(page, size, Sort.by("id").descending()), profile.getUserId());
 	}
 
 	@PostMapping(value = "/photos")
 	public Photo addPhoto(@RequestBody Photo photo, HttpServletRequest req, HttpServletResponse res) {
-//		System.out.println(req.getHeader("session-profile"));
-//		Session.Profile profile = Session.getSessionProfile(req);
-//
-//		if(profile == null) {
-//			// 401: 인증 필요
-//			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//			return null;
-//		}
+		System.out.println(req.getHeader("session-profile"));
+		Session.Profile profile = Session.getSessionProfile(req);
+		System.out.println(profile);
+
+		if(profile == null) {
+			// 401: 인증 필요
+			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return null;
+		}
+		
+		if(!profile.getRole().equals("USER")) {
+			// 403: 권한 불충분
+			res.setStatus(HttpServletResponse.SC_FORBIDDEN);
+			return null;
+		}		
 		
 		// 타이틀이 빈값
 		if (TextProcesser.isEmpyText(photo.getTitle())) {
@@ -131,7 +139,7 @@ public class PhotoController {
 				.fileType(photo.getFileType())
 				.fileName(photo.getFileName())
 				.createdTime(new Date().getTime())
-//				.userId(profile.getUserId())
+				.userId(profile.getUserId())	// 사용자Id 저장
 				.build();
 				
 
@@ -148,36 +156,31 @@ public class PhotoController {
 
 	@DeleteMapping(value = "/photos/{id}")
 	public boolean removePhoto(@PathVariable long id, HttpServletRequest req, HttpServletResponse res) {
-//		try {
-//			Thread.sleep(2000);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		System.out.println(req.getHeader("session-profile"));
-//		Session.Profile profile = Session.getSessionProfile(req);
-//
-//		if(profile == null) {
-//			// 401: 인증 필요
-//			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//			return false;
-//		}
-		
-		//		Thread.sleep(5000);
+		System.out.println(req.getHeader("session-profile"));
+		Session.Profile profile = Session.getSessionProfile(req);
+		System.out.println(profile);
 
-		// id에 해당하는 객체가 없으면
-		// Optional null-safe, 자바 1.8 나온 방식
-		// repository.findBy(id)
-		// select * from photo where id = ?;
-		Optional<Photo> photo = repo.findById(id);
-//		Optional<Photo> photo = repo.findByIdAndUserId(id, profile.getUserId());
+		if(profile == null) {
+			// 401: 인증 필요
+			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return false;
+		}
+		
+		if(!profile.getRole().equals("USER")) {
+			// 403: 권한 불충분
+			res.setStatus(HttpServletResponse.SC_FORBIDDEN);
+			return false;
+		}		
+		
+		// **특정 사용자의 데이터만 조회		
+//		Optional<Photo> photo = repo.findById(id);
+		Optional<Photo> photo = repo.findByIdAndUserId(id, profile.getUserId());
 		if (photo.isEmpty()) {
 			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			return false;
 		}
 
 		// 삭제 수행
-		// repository.deletebyId(id)
 		// delete from photo where id = ?
 		repo.deleteById(id);
 
@@ -186,22 +189,25 @@ public class PhotoController {
 
 	@PutMapping(value = "/photos/{id}")
 	public Photo modifyPhoto(@PathVariable long id, @RequestBody Photo photo, HttpServletRequest req, HttpServletResponse res) {
-//		try {
-//			Thread.sleep(2000);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		System.out.println(req.getHeader("session-profile"));
-//		Session.Profile profile = Session.getSessionProfile(req);
-//
-//		if(profile == null) {
-//			// 401: 인증 필요
-//			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//			return null;
-//		}
-		Optional<Photo> photoItem = repo.findById(id);
-//		Optional<Photo> photoItem = repo.findByIdAndUserId(id, profile.getUserId());
+		System.out.println(req.getHeader("session-profile"));
+		Session.Profile profile = Session.getSessionProfile(req);
+		System.out.println(profile);
+
+		if(profile == null) {
+			// 401: 인증 필요
+			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return null;
+		}
+		
+		if(!profile.getRole().equals("USER")) {
+			// 403: 권한 불충분
+			res.setStatus(HttpServletResponse.SC_FORBIDDEN);
+			return null;
+		}	
+		
+		// **특정 사용자의 데이터만 조회	
+//		Optional<Photo> photoItem = repo.findById(id);
+		Optional<Photo> photoItem = repo.findByIdAndUserId(id, profile.getUserId());
 		if (photoItem.isEmpty()) {
 			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			return null;
@@ -240,7 +246,24 @@ public class PhotoController {
 	// 예) POST /photos/1/comments {"content":"댓글 내용입니다"}
 	// id가 1인 photo에 하위 레코드 comment를 추가
 	@PostMapping(value="/photos/{photoId}/comments")
-	public PhotoComment addPhotoComment(@PathVariable long photoId, @RequestBody PhotoComment comment) {
+	public PhotoComment addPhotoComment(@PathVariable long photoId, @RequestBody PhotoComment comment, 
+			HttpServletRequest req, HttpServletResponse res) {
+		System.out.println(req.getHeader("session-profile"));
+		Session.Profile profile = Session.getSessionProfile(req);
+		System.out.println(profile);
+
+		if(profile == null) {
+			// 401: 인증 필요
+			res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return null;
+		}
+		
+		if(!profile.getRole().equals("USER")) {
+			// 403: 권한 불충분
+			res.setStatus(HttpServletResponse.SC_FORBIDDEN);
+			return null;
+		}		
+		
 		// 값 검증 ...
 		// content가 빈값인지
 		// photoId 해당 데이터가 있는지 확인(FK(외래키) 제약조건으로 처리 가능)
@@ -248,6 +271,7 @@ public class PhotoController {
 		// 상위 테이블의 PK(id)를 넣어줌
 		comment.setPhotoId(photoId);
 		comment.setCreatedTime(new Date().getTime());
+		comment.setUserId(profile.getUserId());	// 사용자 Id 저장
 		
 		// 저장하고 저장한 객체 리턴
 		return cmtRepo.save(comment);

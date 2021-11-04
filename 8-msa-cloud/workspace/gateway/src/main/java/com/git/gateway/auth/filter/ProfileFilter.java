@@ -6,13 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.data.redis.core.ReactiveStringRedisTemplate;
 import org.springframework.data.redis.core.ReactiveValueOperations;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
+import org.springframework.web.cors.reactive.CorsUtils;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
+
+import com.git.gateway.auth.util.WebFilterCors;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -33,12 +37,25 @@ public class ProfileFilter implements WebFilter {
 		String rootPath = req.getPath().subPath(1, 2).toString(); // auth
 		String subPath = req.getPath().subPath(3, 4).toString(); // signin
 		
-		if (rootPath.equals("auth") && subPath.equals("profile")) {
-			List<String> authHeader = req.getHeaders().get("authorization");
+		if (rootPath.equals("auth") && subPath.equals("profile") 
+				&& (req.getMethod() == HttpMethod.GET || req.getMethod() == HttpMethod.OPTIONS) ) {
+			
+			// cors 정책 처리
+			if (CorsUtils.isCorsRequest(req)) {
+				WebFilterCors.setCorsHeader(req, res);
+				if (req.getMethod() == HttpMethod.OPTIONS) {
+				    res.setStatusCode(HttpStatus.OK);
+				    return Mono.empty();
+				}
+			}					
+			
+			List<String> authHeader = req.getHeaders().get("APP_SESSION_ID");
 			
 			if(authHeader != null && authHeader.get(0) != null) {
-				String sessionId = authHeader.get(0).replace("Bearer: ", "");
+				String sessionId = authHeader.get(0);
 
+				System.out.println(sessionId);
+				
 				ReactiveValueOperations<String, String> record = redis.opsForValue();
 				
 				Mono<Void> result = record.get(sessionId)

@@ -56,3 +56,8 @@ $border-radius-sm: 0;
 // Icon
 // npm instal bootstrap-icons
 @import "~bootstrap-icons/font/bootstrap-icons.css";
+
+// NavDropdown에 화살표 버튼 숨기기
+.dropdown-toggle.nav-link::after {
+  display: none;
+}

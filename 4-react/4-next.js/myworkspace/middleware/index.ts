@@ -1,5 +1,6 @@
 import { fork } from "redux-saga/effects";
 import photoSaga from "./modules/photo";
+import profileSaga from "./modules/profile";
 
 // 최상위의 Saga(generator 함수)를 내보기함
 // 그 하위, photoSaga, contactSaga
@@ -8,5 +9,5 @@ export default function* rootSaga() {
   // 비동기로 하위 사가를 처리함
   // 각각 하위사가가 다른 실행 컨텍스트에서 수행됨
   yield fork(photoSaga);
-  // yield fork(contactSaga);
+  yield fork(profileSaga);
 }

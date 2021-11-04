@@ -1,4 +1,5 @@
 import axios from "axios";
+import { createAxiosInstance } from "./_request";
 
 interface SignUpRequest {
   userId: string;
@@ -14,13 +15,30 @@ interface SignInRequest {
   password: string;
 }
 
+export interface ProfileResponse {
+  id: number;
+  userId: string;
+  username: string;
+  email: string;
+  role: string;
+  img: string;
+  sessionId: string;
+}
+
 const authApi = {
   // POST /auth/signup -> success 반환
   signup: (req: SignUpRequest) =>
     axios.post<string>(`${process.env.NEXT_PUBLIC_AUTH_BASE}/auth/signup`, req),
   // POST /auth/signin -> sessionId 반환
-  signin: (req: SignUpRequest) =>
+  signin: (req: SignInRequest) =>
     axios.post<string>(`${process.env.NEXT_PUBLIC_AUTH_BASE}/auth/signin`, req),
+  // GET /auth/profile -> 프로필 반환
+  getProfile: () => {
+    const request = createAxiosInstance();
+    return request.get<ProfileResponse>(
+      `${process.env.NEXT_PUBLIC_AUTH_BASE}/auth/profile`
+    );
+  },
 };
 
 export default authApi;

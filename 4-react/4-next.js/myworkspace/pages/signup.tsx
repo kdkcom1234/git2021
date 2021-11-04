@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { MutableRefObject, useRef } from "react";
 import { Button, FormControl, InputGroup } from "react-bootstrap";
@@ -12,21 +11,19 @@ const SignUp = () => {
 
   const router = useRouter();
 
-  const handleSignUp = () => {
-    authApi
-      .signup({
-        userId: userIdRef.current.value,
-        password: passwordRef.current.value,
-        username: usernameRef.current.value,
-        email: emailRef.current.value,
-        role: "USER",
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (res.data === "success") {
-          router.replace("/signin");
-        }
-      });
+  const handleSignUp = async () => {
+    const result = await authApi.signup({
+      userId: userIdRef.current.value,
+      password: passwordRef.current.value,
+      username: usernameRef.current.value,
+      email: emailRef.current.value,
+      role: "USER",
+    });
+
+    console.log(result.data);
+    if (result.data === "success") {
+      router.replace("/signin");
+    }
   };
 
   return (

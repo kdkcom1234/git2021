@@ -15,3 +15,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+/* #nav-dropdown-profile::after {
+  display: none;
+} */

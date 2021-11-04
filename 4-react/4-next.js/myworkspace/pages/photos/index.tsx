@@ -14,6 +14,7 @@ import { getTimeString } from "../../lib/string";
 
 import Layout from "../../components/layout";
 import Image from "next/image";
+import { checkAuth } from "../../lib/auth";
 
 const Photo = () => {
   // photo state 전체를 가져옴
@@ -21,19 +22,11 @@ const Photo = () => {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
 
-  // const [currentPage, setCurrentPage] = useState<number>(0);
-
-  // photo.isFetched를 가져올때와 바뀔때마다 실행됨
-  // **dispatch 객체는 위에서 생성된 후 바뀌지 않으므로
-  // **dispatch 객체에 따른 effect가 발생하지는 않음
   useEffect(() => {
-    // console.log(dispatch);
-    // console.log(photo.isFetched);
+    checkAuth();
+
     // 데이터 fetch가 안되었으면 데이터를 받아옴
     if (!photo.isFetched) {
-      // 서버에서 데이터를 받아오는 action을 디스패치함
-      // dispatch(requestFetchPhotos());
-
       const photoPageSize = localStorage.getItem("photo_page_size");
 
       dispatch(

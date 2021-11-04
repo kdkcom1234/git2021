@@ -8,9 +8,18 @@ import photoApi from "../api/photo";
 import { PhotoItemResponse } from "../api/photo";
 
 import Image from "next/image";
+import axios, { AxiosResponse } from "axios";
+
+interface PublicPhoto {
+  albumId: number;
+  id: number;
+  title: string;
+  url: string;
+  thumbnailUrl: string;
+}
 
 interface IndexProp {
-  photos: PhotoItemResponse[];
+  photos: PublicPhoto[];
 }
 
 const Index = ({ photos }: IndexProp) => {
@@ -41,7 +50,7 @@ const Index = ({ photos }: IndexProp) => {
                 }}
               >
                 <Image
-                  src={item.photoUrl}
+                  src={item.thumbnailUrl}
                   className="card-img-top"
                   alt={item.title}
                   /* 이미지 크기에 맞게 가운데부분 노출 */
@@ -51,16 +60,8 @@ const Index = ({ photos }: IndexProp) => {
                   width={220}
                   height={150}
                 />
-                {/* <img
-                  src={item.photoUrl}
-                  className="card-img-top"
-                  alt={item.title}
-                /> */}
                 <div className="card-body">
                   <h5 className="card-title">{item.title}</h5>
-                  <h6 className="text-muted">
-                    {getTimeString(item.createdTime)}
-                  </h6>
                 </div>
               </div>
               {/* 컨텐트 wrapper -- 끝 */}
@@ -73,11 +74,65 @@ const Index = ({ photos }: IndexProp) => {
 };
 
 export async function getServerSideProps() {
-  // Fetch data from external API
-  const res = await photoApi.fetchPaging(0, 4);
+  // // // Fetch data from external API
+  const res = await axios.get<PublicPhoto[]>(
+    "https://jsonplaceholder.typicode.com/photos?_start=0&_limit=8"
+  );
+  const photos = res.data;
+
+  // const photos = [
+  //   {
+  //     id: 66,
+  //     title: "알라",
+  //     description: "코알라",
+  //     commentCnt: 0,
+  //     photoUrl:
+  //       "https://d3o6g8deu522v9.cloudfront.net/304c684537bdcb228810f5c1ce6c59f189a2af9e8a3f337d85a2fbee26ea26fd",
+  //     fileType: "image/jpeg",
+  //     fileName: "koala.jpg",
+  //     createdTime: 1635843858981,
+  //     userId: null,
+  //   },
+  //   {
+  //     id: 65,
+  //     title: "펭귄",
+  //     description: "귄이",
+  //     commentCnt: 0,
+  //     photoUrl:
+  //       "https://d3o6g8deu522v9.cloudfront.net/23cb63d7eb7c002c00eabc09874d4effdb03f91aac2586696f4d3fd91c4f4bd1",
+  //     fileType: "image/jpeg",
+  //     fileName: "penguin.jpg",
+  //     createdTime: 1635834011039,
+  //     userId: null,
+  //   },
+  //   {
+  //     id: 59,
+  //     title: "3",
+  //     description: "sd",
+  //     commentCnt: 0,
+  //     photoUrl:
+  //       "https://d3o6g8deu522v9.cloudfront.net/2cbf52e87bf0385a32311ce8ffe7d1f65e8e171d7a9a90a2c67ab641ef90d343",
+  //     fileType: "image/jpeg",
+  //     fileName: "기린.jpg",
+  //     createdTime: 1635753640540,
+  //     userId: null,
+  //   },
+  //   {
+  //     id: 58,
+  //     title: "3",
+  //     description: "3",
+  //     commentCnt: 0,
+  //     photoUrl:
+  //       "https://d3o6g8deu522v9.cloudfront.net/d5d55ff02750837b491002197423db80c3f96387909d305585ed8a750c843312",
+  //     fileType: "image/jpeg",
+  //     fileName: "koala.jpg",
+  //     createdTime: 1635753633160,
+  //     userId: null,
+  //   },
+  // ];
 
   // Pass data to the page via props
-  return { props: { photos: res.data.content } };
+  return { props: { photos } };
 }
 
 export default Index;

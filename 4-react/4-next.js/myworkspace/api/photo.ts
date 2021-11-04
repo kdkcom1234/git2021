@@ -1,4 +1,5 @@
 import axios from "axios";
+import { createAxiosInstance } from "./_request";
 
 export interface PhotoPagingReponse {
   content: PhotoItemResponse[];
@@ -32,37 +33,39 @@ export interface PhotoItemRequest {
 // process.env.변수명
 const photoApi = {
   get: (id: number) =>
-    axios.get<PhotoItemResponse>(
+    createAxiosInstance().get<PhotoItemResponse>(
       `${process.env.NEXT_PUBLIC_API_BASE}/photos/${id}`
     ),
   // axios.get<응답데이터의타입>(요청URL);
   // GET 요청URL HTTP/1.1
   fetch: () =>
-    axios.get<PhotoItemResponse[]>(
+    createAxiosInstance().get<PhotoItemResponse[]>(
       `${process.env.NEXT_PUBLIC_API_BASE}/photos`
     ),
 
   fetchPaging: (page: number, size: number) =>
-    axios.get<PhotoPagingReponse>(
+    createAxiosInstance().get<PhotoPagingReponse>(
       `${process.env.NEXT_PUBLIC_API_BASE}/photos/paging?page=${page}&size=${size}`
     ),
 
   // axios.post<응답타입>(요청URL, 요청객체(JSON바디));
   // POST 요청URL HTTP/1.1  {...}
   add: (photoItem: PhotoItemRequest) =>
-    axios.post<PhotoItemResponse>(
+    createAxiosInstance().post<PhotoItemResponse>(
       `${process.env.NEXT_PUBLIC_API_BASE}/photos`,
       photoItem
     ),
   // axios.delete<응답타입>(요청URL);
   // DELETE 요청URL HTTP/1.1
   remove: (id: number) =>
-    axios.delete<boolean>(`${process.env.NEXT_PUBLIC_API_BASE}/photos/${id}`),
+    createAxiosInstance().delete<boolean>(
+      `${process.env.NEXT_PUBLIC_API_BASE}/photos/${id}`
+    ),
 
   // axios.PUT<응답타입>(요청URL, 요청객체(JSON바디));
   // PUT 요청URL HTTP/1.1  {...}
   modify: (id: number, photoItem: PhotoItemRequest) =>
-    axios.put<PhotoItemResponse>(
+    createAxiosInstance().put<PhotoItemResponse>(
       `${process.env.NEXT_PUBLIC_API_BASE}/photos/${id}`,
       photoItem
     ),

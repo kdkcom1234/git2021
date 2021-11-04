@@ -28,10 +28,6 @@ import reactor.core.publisher.Mono;
 
 @Component
 public class SignUpFilter implements WebFilter {
-
-	private static final String ALLOWED_HEADERS = "x-requested-with, authorization, Content-Type, Content-Length, Authorization, credential, X-XSRF-TOKEN";
-	private static final String ALLOWED_METHODS = "GET, PUT, POST, DELETE, OPTIONS, PATCH";
-	private static final String ALLOWED_ORIGIN = "*";
 	
 	@Autowired
 	private R2dbcEntityTemplate db;
@@ -45,11 +41,12 @@ public class SignUpFilter implements WebFilter {
 		// 요청 경로 ex) /auth/signup
 		String rootPath = req.getPath().subPath(1, 2).toString(); // auth
 		String subPath = req.getPath().subPath(3, 4).toString(); // signup
-		System.out.println(rootPath + ">" + subPath);
+//		System.out.println(rootPath + ">" + subPath);
 
 		// /auth/signup 일때 login 및 profile 정보 생성
 		if (rootPath.equals("auth") && subPath.equals("signup")) {
 			
+			// cors 정책 처리
 			if (CorsUtils.isCorsRequest(req)) {
 				WebFilterCors.setCorsHeader(req, res);
 				if (req.getMethod() == HttpMethod.OPTIONS) {

@@ -12,10 +12,12 @@ import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.data.redis.core.ReactiveStringRedisTemplate;
 import org.springframework.data.redis.core.ReactiveValueOperations;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
+import org.springframework.web.cors.reactive.CorsUtils;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
@@ -26,6 +28,7 @@ import com.git.gateway.auth.entity.Login;
 import com.git.gateway.auth.entity.Profile;
 import com.git.gateway.auth.request.SignInRequest;
 import com.git.gateway.auth.util.Hash;
+import com.git.gateway.auth.util.WebFilterCors;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -53,6 +56,15 @@ public class SignInFilter implements WebFilter {
 		// /auth/signin 일때 인증 처리 및 세션 생성
 		if (rootPath.equals("auth") && subPath.equals("signin")) {
 			System.out.println("--signin--");
+			
+			// cors 정책 처리
+			if (CorsUtils.isCorsRequest(req)) {
+				WebFilterCors.setCorsHeader(req, res);
+				if (req.getMethod() == HttpMethod.OPTIONS) {
+				    res.setStatusCode(HttpStatus.OK);
+				    return Mono.empty();
+				}
+			}						
 			
 			Flux<DataBuffer> result = req.getBody()
 			.map(body -> unmashal(body))
