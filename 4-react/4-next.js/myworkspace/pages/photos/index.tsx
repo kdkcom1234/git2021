@@ -14,7 +14,9 @@ import { getTimeString } from "../../lib/string";
 
 import Layout from "../../components/layout";
 import Image from "next/image";
-import { checkAuth } from "../../lib/auth";
+import { getSessionId } from "../../lib/cookie";
+import { addAlert } from "../../provider/modules/alert";
+import { nanoid } from "@reduxjs/toolkit";
 
 const Photo = () => {
   // photo state 전체를 가져옴
@@ -23,7 +25,18 @@ const Photo = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    checkAuth();
+    // 세션정보가 없으면 로그인 페이지로 이동 시킨다.
+    if (!getSessionId()) {
+      dispatch(
+        addAlert({
+          id: nanoid(),
+          variant: "danger",
+          message: "로그인이 필요한 서비스입니다.",
+        })
+      );
+      router.replace("/signin");
+      return;
+    }
 
     // 데이터 fetch가 안되었으면 데이터를 받아옴
     if (!photo.isFetched) {

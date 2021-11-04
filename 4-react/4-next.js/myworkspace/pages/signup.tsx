@@ -3,6 +3,9 @@ import React, { MutableRefObject, useRef } from "react";
 import { Button, FormControl, InputGroup } from "react-bootstrap";
 import authApi from "../api/auth";
 
+import Progress from "../components/progress";
+import AlertStack from "../components/alert/alertStack";
+
 const SignUp = () => {
   const userIdRef = useRef() as MutableRefObject<HTMLInputElement>;
   const passwordRef = useRef() as MutableRefObject<HTMLInputElement>;
@@ -70,6 +73,9 @@ const SignUp = () => {
             Sign Up
           </Button>
         </InputGroup>
+
+        <Progress />
+        <AlertStack />
       </div>
     </div>
   );

@@ -1,14 +1,9 @@
 import Layout from "../components/layout";
-import Link from "next/link";
 
 import { useRouter } from "next/router";
-import { getTimeString } from "../lib/string";
-
-import photoApi from "../api/photo";
-import { PhotoItemResponse } from "../api/photo";
 
 import Image from "next/image";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 
 interface PublicPhoto {
   albumId: number;
@@ -28,7 +23,7 @@ const Index = ({ photos }: IndexProp) => {
   return (
     <Layout>
       <section>
-        <p>{/* Recent Photos - <Link href="/photos">more..</Link> */}</p>
+        <p>Public Photos</p>
         <div className="d-flex flex-wrap">
           {/* state 데이터 배열에 map함수로 출력 */}
           {photos.map((item, index) => (
@@ -46,7 +41,7 @@ const Index = ({ photos }: IndexProp) => {
                 style={{ cursor: "pointer" }}
                 onClick={() => {
                   // id값을 물고 이동해야함
-                  router.push(`/photos/detail/${item.id}`);
+                  router.push(`/public-photos/${item.id}`);
                 }}
               >
                 <Image

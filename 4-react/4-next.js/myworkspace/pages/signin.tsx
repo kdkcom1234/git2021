@@ -1,10 +1,12 @@
 import { useRouter } from "next/router";
-import { MutableRefObject, useRef } from "react";
+import React, { MutableRefObject, useRef } from "react";
 import Link from "next/link";
 import { Button, FormControl, InputGroup } from "react-bootstrap";
 import authApi from "../api/auth";
 
 import { setSessionId } from "../lib/cookie";
+import Progress from "../components/progress";
+import AlertStack from "../components/alert/alertStack";
 
 const SignIn = () => {
   const router = useRouter();
@@ -65,6 +67,9 @@ const SignIn = () => {
             </a>
           </Link>
         </InputGroup>
+
+        <Progress />
+        <AlertStack />
       </div>
     </div>
   );
