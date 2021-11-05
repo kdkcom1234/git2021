@@ -1,0 +1,17 @@
+// CORS관련 알아야할 상황
+// 선행 확인절차
+AJAX OPTIONS /auth/signup (preflight, 브라우저)
+Access-Control-Request-Headers: content-type
+Access-Control-Request-Method: POST
+Origin: http://localhost:3000
+// 실제 처리 요청
+AJAX POST /auth/signup
+
+// Spring MVC
+. 기본적으로 origin 전부 열려있음, 필요하면 특정 origin에서만 보낼 수 있도록 정책 추가
+. 기본적으로 header 전부 열려있음, 특정 header만 받고 싶으면 정책 추가
+. 기본적으로 method GET/POST/HEAD 만 열려있음, PUT/PATCH/DELETE 쓰고 싶으면 정책 추가
+
+// Spring Cloud Gateway를 통하고 있으면
+. preflight(OPIONS)일 때는 SCG의 CORS 정책을 적용함
+. 실제 호출일 때는 라우팅된 서비스쪽의 CORS 정책을 적용함

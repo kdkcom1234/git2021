@@ -1,0 +1,23 @@
+// 백엔드
+gateway
+/build.gradle
+ - postres, redis, lombok 의존성 필요
+/resources/application.yml
+ - logging, r2dbc(posgres), redis(sesssion)
+/auth 패키지 전체
+** auth 스키마에 login, profile 테이블을 생성해야함
+
+// 프론트엔드
+-----------------
+/api/_request.ts: axios 인스턴스 생성(토큰헤더)
+/api/auth.ts: signup/signin/sessionprofile
+/api/photo.ts: 참고할 코드
+/lib/cookie.ts: 세션쿠키 만들고, 가져오고, 삭제
+/provider/modules/profile.ts: 세션프로필
+/provider/index.ts: profileReducer 넣어야함
+/middleware/modules/profile.ts: 세션프로필
+/components/profile.tsx: 프로필 처리
+/components/layout.tsx: 프로필이 들어가있는 레이아웃
+/pages/signup.tsx: 회원가입
+/pages/signin.tsx: 로그인
+/pages/photos/index.tsx: 인증체크해서 로그인 튕기기 참고

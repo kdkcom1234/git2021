@@ -20,7 +20,7 @@ const SignUp = () => {
       password: passwordRef.current.value,
       username: usernameRef.current.value,
       email: emailRef.current.value,
-      role: "USER",
+      role: "USER", // USER, ADMIN, PARTNER, GUEST....
     });
 
     console.log(result.data);

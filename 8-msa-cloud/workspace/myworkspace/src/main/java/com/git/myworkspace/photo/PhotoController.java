@@ -171,12 +171,20 @@ public class PhotoController {
 			res.setStatus(HttpServletResponse.SC_FORBIDDEN);
 			return false;
 		}		
-		
-		// **특정 사용자의 데이터만 조회		
-//		Optional<Photo> photo = repo.findById(id);
-		Optional<Photo> photo = repo.findByIdAndUserId(id, profile.getUserId());
+				
+		Optional<Photo> photo = repo.findById(id);
+//		Optional<Photo> photo = repo.findByIdAndUserId(id, profile.getUserId());
+
+		// 데이터가 없음(id가 잘못됨)
 		if (photo.isEmpty()) {
+			// 404: 리소스 없음
 			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			return false;
+		}
+		// 데이터는 있으나 해당 사용자의 데이터가 이님
+		if(!photo.get().getUserId().equals(profile.getUserId())) {
+			// 403: 권한 불충분
+			res.setStatus(HttpServletResponse.SC_FORBIDDEN);
 			return false;
 		}
 
@@ -205,11 +213,19 @@ public class PhotoController {
 			return null;
 		}	
 		
-		// **특정 사용자의 데이터만 조회	
-//		Optional<Photo> photoItem = repo.findById(id);
-		Optional<Photo> photoItem = repo.findByIdAndUserId(id, profile.getUserId());
+		Optional<Photo> photoItem = repo.findById(id);
+//		Optional<Photo> photo = repo.findByIdAndUserId(id, profile.getUserId());
+
+		// 데이터가 없음(id가 잘못됨)
 		if (photoItem.isEmpty()) {
+			// 404: 리소스 없음
 			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		// 데이터는 있으나 해당 사용자의 데이터가 이님
+		if(!photoItem.get().getUserId().equals(profile.getUserId())) {
+			// 403: 권한 불충분
+			res.setStatus(HttpServletResponse.SC_FORBIDDEN);
 			return null;
 		}
 

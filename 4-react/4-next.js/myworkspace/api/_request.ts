@@ -25,12 +25,12 @@ const createAxiosInstance = () => {
   // ajax 요청 후 응답이 왔을 때의 후처리
   instance.interceptors.response.use(
     (res) => {
-      console.log("401/403");
+      // console.log("401/403");
       return res;
     },
     // 2xx 이외 범위에 에러 상태코드가 왔을 때 처리
     (error) => {
-      console.log("401/403");
+      // console.log("401/403");
       // 응답 상태코드가 401, 403 이면 로그인 페이지로 이동
       // 401: 인증이 안 됐음
       // 403: 권한이 없음
