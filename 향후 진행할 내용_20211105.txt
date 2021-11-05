@@ -69,18 +69,17 @@
 . 집계쿼리: group by, avg, max, min, sum
 - JPA Projection, native query
 
--- (옵션) next.js
--- (옵션) tailwind css;
--- (옵션) styled components
+. next.js
+- 프로젝트 구성, SSR, CSR, next/link
 
--- (옵션) 프론트엔드 파일업로드 처리
+. 프론트엔드 파일업로드 처리
 
--- (옵션)인증 및 세션, 권한 허가 처리 (프론트엔드)
+. 인증 및 세션, 권한 허가 처리 (프론트엔드)
   - 인증 토큰 쿠키, Header에 토큰 추가, 프로필 조회
 
--- (옵션)그외 개발환경 구성
-  - 프론트엔드 서버: 1개
-    - 메인 80, 그외 8080, 8081
+--------------------------------------------------------------
+-- (옵션) tailwind css;
+-- (옵션) styled components
 
 -- (옵션) 통합배포
   - jenkins, webhook, container(docker)

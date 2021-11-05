@@ -1,0 +1,19 @@
+프론트엔드: 
+- 언어: typescript, sass, html5
+- 프레임워크: next.js
+- React라이브러리: react, redux, redux-toolkit, redux-saga
+- 그외 라이브러리: apex chart, bootstrap, react-bootstrap
+- 호스팅: ec2, nginx
+
+백엔드:
+- 언어: java
+- 프레임워크: spring boot, spring data jpa, spring webflux
+- 라이브러리: querydsl, aws-sdk, r2dbc
+- 데이터베이스: postgresql(메인), redis(캐시, 세션)
+- 외부시스템: 공공데이터포털
+- MSA
+  - 인터페이스: rabbitmq, feign
+  - 게이트웨이: spring cloud gateway
+  - 서비스레지스트리: eureka
+- 빌드/배포: gradle, jenkins
+- AWS: ec2, rds, amazon mq, s3, cloudfront
