@@ -69,60 +69,67 @@ const Index = ({ photos }: IndexProp) => {
 };
 
 export async function getServerSideProps() {
-  // // // Fetch data from external API
+  // // Fetch data from external API
   const res = await axios.get<PublicPhoto[]>(
     "https://jsonplaceholder.typicode.com/photos?_start=0&_limit=8"
   );
   const photos = res.data;
-
   // const photos = [
   //   {
-  //     id: 66,
-  //     title: "알라",
-  //     description: "코알라",
-  //     commentCnt: 0,
-  //     photoUrl:
-  //       "https://d3o6g8deu522v9.cloudfront.net/304c684537bdcb228810f5c1ce6c59f189a2af9e8a3f337d85a2fbee26ea26fd",
-  //     fileType: "image/jpeg",
-  //     fileName: "koala.jpg",
-  //     createdTime: 1635843858981,
-  //     userId: null,
+  //     albumId: 1,
+  //     id: 1,
+  //     title: "accusamus beatae ad facilis cum similique qui sunt",
+  //     url: "https://via.placeholder.com/600/92c952",
+  //     thumbnailUrl: "https://via.placeholder.com/150/92c952",
   //   },
   //   {
-  //     id: 65,
-  //     title: "펭귄",
-  //     description: "귄이",
-  //     commentCnt: 0,
-  //     photoUrl:
-  //       "https://d3o6g8deu522v9.cloudfront.net/23cb63d7eb7c002c00eabc09874d4effdb03f91aac2586696f4d3fd91c4f4bd1",
-  //     fileType: "image/jpeg",
-  //     fileName: "penguin.jpg",
-  //     createdTime: 1635834011039,
-  //     userId: null,
+  //     albumId: 1,
+  //     id: 2,
+  //     title: "reprehenderit est deserunt velit ipsam",
+  //     url: "https://via.placeholder.com/600/771796",
+  //     thumbnailUrl: "https://via.placeholder.com/150/771796",
   //   },
   //   {
-  //     id: 59,
-  //     title: "3",
-  //     description: "sd",
-  //     commentCnt: 0,
-  //     photoUrl:
-  //       "https://d3o6g8deu522v9.cloudfront.net/2cbf52e87bf0385a32311ce8ffe7d1f65e8e171d7a9a90a2c67ab641ef90d343",
-  //     fileType: "image/jpeg",
-  //     fileName: "기린.jpg",
-  //     createdTime: 1635753640540,
-  //     userId: null,
+  //     albumId: 1,
+  //     id: 3,
+  //     title: "officia porro iure quia iusto qui ipsa ut modi",
+  //     url: "https://via.placeholder.com/600/24f355",
+  //     thumbnailUrl: "https://via.placeholder.com/150/24f355",
   //   },
   //   {
-  //     id: 58,
-  //     title: "3",
-  //     description: "3",
-  //     commentCnt: 0,
-  //     photoUrl:
-  //       "https://d3o6g8deu522v9.cloudfront.net/d5d55ff02750837b491002197423db80c3f96387909d305585ed8a750c843312",
-  //     fileType: "image/jpeg",
-  //     fileName: "koala.jpg",
-  //     createdTime: 1635753633160,
-  //     userId: null,
+  //     albumId: 1,
+  //     id: 4,
+  //     title: "culpa odio esse rerum omnis laboriosam voluptate repudiandae",
+  //     url: "https://via.placeholder.com/600/d32776",
+  //     thumbnailUrl: "https://via.placeholder.com/150/d32776",
+  //   },
+  //   {
+  //     albumId: 1,
+  //     id: 5,
+  //     title: "natus nisi omnis corporis facere molestiae rerum in",
+  //     url: "https://via.placeholder.com/600/f66b97",
+  //     thumbnailUrl: "https://via.placeholder.com/150/f66b97",
+  //   },
+  //   {
+  //     albumId: 1,
+  //     id: 6,
+  //     title: "accusamus ea aliquid et amet sequi nemo",
+  //     url: "https://via.placeholder.com/600/56a8c2",
+  //     thumbnailUrl: "https://via.placeholder.com/150/56a8c2",
+  //   },
+  //   {
+  //     albumId: 1,
+  //     id: 7,
+  //     title: "officia delectus consequatur vero aut veniam explicabo molestias",
+  //     url: "https://via.placeholder.com/600/b0f7cc",
+  //     thumbnailUrl: "https://via.placeholder.com/150/b0f7cc",
+  //   },
+  //   {
+  //     albumId: 1,
+  //     id: 8,
+  //     title: "aut porro officiis laborum odit ea laudantium corporis",
+  //     url: "https://via.placeholder.com/600/54176f",
+  //     thumbnailUrl: "https://via.placeholder.com/150/54176f",
   //   },
   // ];
 
