@@ -2,6 +2,7 @@ package com.git.myworkspace.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.bind.annotation.RestController;
 
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -17,11 +18,28 @@ import springfox.documentation.spring.web.plugins.Docket;
 public class SwaggerConfig {
 	@Bean
 	public Docket api() {
+		
+//		// Gateway에서 SessionId -> session-profile로 오는 사용자 정보 헤더 매개변수
+//		RequestParameter sessionProfile = new RequestParameterBuilder()
+//				.name("session-profile")
+//				.description("{\"userId\":\"kdkcom\", \"role\":\"USER\"}")
+//				.required(false)
+//				.in("header")
+//				.build();
+//		
+//		List<RequestParameter> params = new ArrayList<RequestParameter>();
+//		params.add(sessionProfile);
+		
 		return new Docket(DocumentationType.SWAGGER_2)
+//					.globalRequestParameters(params)	// 매개변수 추가
 					.apiInfo(apiInfo())
 					.select()
-					.apis(RequestHandlerSelectors.any())
-					.paths(PathSelectors.any())
+					// 전체, actuator, error 등 포함 됨
+//					.apis(RequestHandlerSelectors.any()) 
+					// REST Controller만
+					.apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
+					// 전체 경로
+					.paths(PathSelectors.any()) 				
 					.build();
 	}
 
