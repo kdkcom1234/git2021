@@ -33,10 +33,16 @@ const authApi = {
   signin: (req: SignInRequest) =>
     axios.post<string>(`${process.env.NEXT_PUBLIC_AUTH_BASE}/auth/signin`, req),
   // GET /auth/profile -> 프로필 반환
-  getProfile: () => {
+  getSessionProfile: () => {
     const request = createAxiosInstance();
     return request.get<ProfileResponse>(
-      `${process.env.NEXT_PUBLIC_AUTH_BASE}/auth/profile`
+      `${process.env.NEXT_PUBLIC_AUTH_BASE}/auth/session-profile`
+    );
+  },
+  clearSessionProfile: () => {
+    const request = createAxiosInstance();
+    return request.delete<string>(
+      `${process.env.NEXT_PUBLIC_AUTH_BASE}/auth/session-profile`
     );
   },
 };

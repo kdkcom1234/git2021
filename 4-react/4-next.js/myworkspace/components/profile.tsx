@@ -2,7 +2,10 @@ import Link from "next/link";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSessionId, removeSessionId } from "../lib/cookie";
-import { requestFetchProfile } from "../middleware/modules/profile";
+import {
+  requestClearSessionProfile,
+  requestFetchSessionProfile,
+} from "../middleware/modules/profile";
 import { AppDispatch, RootState } from "../provider";
 
 import { Nav, NavDropdown } from "react-bootstrap";
@@ -22,7 +25,7 @@ const Profile = () => {
       if (sessionId) {
         // 세션정보가 있으면
         // 프로필 조회하고 프로필 정보 띄움
-        dispatch(requestFetchProfile());
+        dispatch(requestFetchSessionProfile());
       } else {
         // 세션정보가 없으면
         // SIGN-IN 링크 띄움
@@ -32,7 +35,8 @@ const Profile = () => {
 
   const handleSignOut = () => {
     // profile redux state 삭제
-    dispatch(clearProfile());
+    // dispatch(clearProfile());
+    dispatch(requestClearSessionProfile());
     // session 쿠키 삭제
     removeSessionId();
     // 메인화면 이동 (state까지 비우기 위해서 페이지 이동함)
