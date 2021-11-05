@@ -44,7 +44,7 @@ export const profileSlice = createSlice({
       state.img = profile.img;
       state.username = profile.username;
     },
-    removeProfile: (state) => {
+    clearProfile: (state) => {
       state.img = "";
       state.username = "";
     },
@@ -60,7 +60,7 @@ export const profileSlice = createSlice({
 
 // action creator는 action 객체를 생성하는 함수
 // saveProfile(payload) => {type: "profile/saveProfile", payload}
-export const { saveProfile, initialProfile, removeProfile } =
+export const { saveProfile, initialProfile, clearProfile } =
   profileSlice.actions;
 
 // slice.reducer

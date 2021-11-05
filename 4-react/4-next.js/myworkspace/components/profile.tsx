@@ -6,7 +6,7 @@ import { requestFetchProfile } from "../middleware/modules/profile";
 import { AppDispatch, RootState } from "../provider";
 
 import { Nav, NavDropdown } from "react-bootstrap";
-import { removeProfile } from "../provider/modules/profile";
+import { clearProfile } from "../provider/modules/profile";
 import { useRouter } from "next/router";
 
 const Profile = () => {
@@ -32,7 +32,7 @@ const Profile = () => {
 
   const handleSignOut = () => {
     // profile redux state 삭제
-    dispatch(removeProfile());
+    dispatch(clearProfile());
     // session 쿠키 삭제
     removeSessionId();
     // 메인화면 이동 (state까지 비우기 위해서 페이지 이동함)
