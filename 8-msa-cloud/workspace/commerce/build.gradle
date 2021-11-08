@@ -28,6 +28,8 @@ dependencies {
 	testImplementation 'org.springframework.amqp:spring-rabbit-test'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+	// redis
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version: '2.5.5'
 }
 
 test {

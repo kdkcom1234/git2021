@@ -20,6 +20,7 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private int id; // 자동증가값
+	private String category;
 	private String productCode;
 	private String productName;
 	private int price;
