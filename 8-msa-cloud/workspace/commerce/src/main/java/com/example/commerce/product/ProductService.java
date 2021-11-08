@@ -25,7 +25,6 @@ public class ProductService {
 		saveProduct(salesProduct);
 	}
 
-	// 미작성 부분
 	public Product saveProduct(SalesProduct salesProduct) {
 		Product product = Product
 							.builder()
