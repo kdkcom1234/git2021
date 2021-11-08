@@ -17,7 +17,7 @@ public class ProductService {
 
 
 	// 데이터가 갱신되는 시점에 캐시 삭제
-	// ex) 타 시스템에서 데이터를 받아옴
+	// ex) 타 시스템에서 데이터를 받아와서 저장함
 	@CacheEvict(value="products", allEntries = true)
 	@RabbitListener(queues = "sales.product.create")
 	public void receiveSalesProduct(SalesProduct salesProduct) {
