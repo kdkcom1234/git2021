@@ -15,8 +15,10 @@ public class ProductService {
 		this.repo = repo;
 	}
 
+
 	// 데이터가 갱신되는 시점에 캐시 삭제
-	@CacheEvict(key="products", allEntries = true)
+	// ex) 타 시스템에서 데이터를 받아옴
+	@CacheEvict(value="products", allEntries = true)
 	@RabbitListener(queues = "sales.product.create")
 	public void receiveSalesProduct(SalesProduct salesProduct) {
 		System.out.println(salesProduct);
@@ -27,6 +29,7 @@ public class ProductService {
 	public Product saveProduct(SalesProduct salesProduct) {
 		Product product = Product
 							.builder()
+							.category(salesProduct.getCategory())
 							.productCode(salesProduct.getCode())
 							.productName(salesProduct.getName())
 							.salesProductId(salesProduct.getId())
