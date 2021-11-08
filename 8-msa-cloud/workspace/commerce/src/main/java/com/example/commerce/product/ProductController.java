@@ -20,9 +20,14 @@ public class ProductController {
 
 	@Cacheable(value = "products"
 				// 카테고리별 앞쪽 10개의 레코드까지만 캐시함
-				, condition="(#page + 1) * #size <= 10" 
+				, condition="(#page + 1) * #size <= 10"
+				// 페이지크기가 고정이면 카테고리별로 0번째 페이지만 캐시
+//				, condition="#page == 0"
 				// 캐시키이름) 카테고리-페이지-사이즈  ex) all-0-10, beverage-0-5
-				, key = "#category+'-'+#page+'-'+#size") 
+				, key = "#category+'-'+#page+'-'+#size")
+				// 페이지크기가 고정이면
+				// 캐시키이름) 카테고리-페이지  ex) all-0, beverage-0	
+				//, key = "#category+'-'+#page")
 	@GetMapping(value="/products/{category}")
 	// Page객체는 캐시 생성후 조회가 안 됨(기본 생성자 사용불가)
 	// Page 데이터를 응답하는 별도의 응답객체 ProductPageResponse를 만들어서 처리함	
