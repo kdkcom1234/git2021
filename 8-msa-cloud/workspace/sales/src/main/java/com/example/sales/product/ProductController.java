@@ -21,7 +21,7 @@ public class ProductController {
 
 		// DB에 저장할 객체 생성
 		Product product = Product.builder().id(1).name(productRequest.getName()).code("P0001")
-				.unitPrice(productRequest.getUnitPrice()).build();
+				.price(productRequest.getPrice()).build();
 
 		// DB에 저장
 		// repo.save(product)

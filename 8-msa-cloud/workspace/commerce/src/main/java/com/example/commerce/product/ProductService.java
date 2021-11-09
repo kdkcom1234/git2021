@@ -31,6 +31,7 @@ public class ProductService {
 							.category(salesProduct.getCategory())
 							.productCode(salesProduct.getCode())
 							.productName(salesProduct.getName())
+							.price(salesProduct.getPrice())
 							.salesProductId(salesProduct.getId())
 							.build();
 		repo.save(product);

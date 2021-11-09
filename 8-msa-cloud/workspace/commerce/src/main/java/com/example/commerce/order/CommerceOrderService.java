@@ -32,7 +32,7 @@ public class CommerceOrderService {
     @Transactional(rollbackOn = Exception.class)
     public CommerceOrder saveOrder(CommerceOrderRequest reqOrder) {
         // 금액 합산
-        int total = 0;
+        long total = 0;
         for(CommerceOrderRequest.CommerceOrderDetail reqDetail : reqOrder.getDetails()){
             total += reqDetail.getQuantity() * reqDetail.getUnitPrice();
         }

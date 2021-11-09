@@ -15,5 +15,5 @@ public class SalesProduct {
 	private String category;
 	private String code;
 	private String name;
-	private int unitPrice;
+	private int price;
 }
