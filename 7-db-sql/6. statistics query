@@ -5,27 +5,16 @@ select * from sales_order so;
 select * from sales_order_detail sod;
 
 
--- 제품별 주문금액 합계
-select product_name, sum(quantity*unit_price) as amount 
-from sales_order_detail sod 
-group by product_name
-order by 2 desc;
+-- 주문 금액 합계
+select sum(quantity*unit_price) as amount
+from sales_order_detail sod;
 
--- 제품군(카테고리)별 주문금액 합계
-select p.category, sum(quantity*unit_price) as amount
-from sales_order_detail sod
-		join product p on sod.product_id =p.id 
-group by p.category 
-order by 2 desc;
-
--- 특정기간 제품군(카테고리)별 주문금액 합계
-select p.category, sum(quantity*unit_price) as amount
+-- **특정기간 주문금액 합계
+select sum(quantity*unit_price) as amount
 from sales_order_detail sod
 		join sales_order so on sod.sales_order_id = so.id 
-		join product p on sod.product_id =p.id 
-where so."date" between '1997-01-01' and '1997-12-31'
-group by p.category 
-order by 2 desc;
+where so."date" between '1997-02-01' and '1997-02-29';
+
 
 -- 일별 주문금액 합계
 select so."date" , sum(quantity*unit_price) as amount
@@ -41,13 +30,49 @@ from sales_order_detail sod
 group by substring(so."date", 1, 7) 
 order by 1 desc;
 
+-- **특정기간 일별 주문금액 합계
+select so."date" , sum(quantity*unit_price) as amount
+from sales_order_detail sod 
+		join sales_order so on sod.sales_order_id = so.id 
+where so."date" between '1997-02-01' and '1997-02-29'
+group by so."date" 
+order by 1 asc;
+
+
+-- 제품별 주문금액 합계
+select product_name, sum(quantity*unit_price) as amount 
+from sales_order_detail sod 
+group by product_name
+order by 2 desc;
+
+-- 제품군(카테고리)별 주문금액 합계
+select p.category, sum(quantity*unit_price) as amount
+from sales_order_detail sod
+		join product p on sod.product_id =p.id 
+group by p.category 
+order by 2 desc;
+
+-- **특정기간 제품군(카테고리)별 주문금액 합계
+select p.category, sum(quantity*unit_price) as amount
+from sales_order_detail sod
+		join sales_order so on sod.sales_order_id = so.id 
+		join product p on sod.product_id =p.id 
+where so."date" between '1997-02-01' and '1997-02-29'
+group by p.category 
+order by 1 asc;
+
+
+
+
 -- 일별/제품군별 주문금액 합계
 select so."date", p.category, sum(quantity*unit_price) as amount
 from sales_order_detail sod 
 		join sales_order so on sod.sales_order_id = so.id
 		join product p on sod.product_id = p.id
 group by so."date", p.category 
-order by 1 desc;
+where so."date" between '1997-02-01' and '1997-02-29'
+order by 1 asc;
+
 
 -- 월별/제품군별 주문금액 합계- 테이블 피봇(pivot)
 select p.category , 
