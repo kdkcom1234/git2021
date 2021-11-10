@@ -80,7 +80,7 @@ select p.category ,
 		sum(case when substring(so."date", 1, 7) = '1997-01' then (quantity*sod.unit_price) else 0 end) as "1997-01",
 		sum(case when substring(so."date", 1, 7) = '1996-12' then (quantity*sod.unit_price) else 0 end) as "1996-12",
 		sum(case when substring(so."date", 1, 7) = '1996-11' then (quantity*sod.unit_price) else 0 end) as "1996-11",
-		sum(case when substring(so."date", 1, 7) = '1996-10' then (quantity*sod.unit_price) else 0 end) as "1997-01",
+		sum(case when substring(so."date", 1, 7) = '1996-10' then (quantity*sod.unit_price) else 0 end) as "1996-01",
 		sum(case when substring(so."date", 1, 7) = '1996-09' then (quantity*sod.unit_price) else 0 end) as "1996-09"		
 from sales_order_detail sod
 		join sales_order so on sod.sales_order_id = so.id
