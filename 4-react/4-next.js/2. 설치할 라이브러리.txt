@@ -12,3 +12,6 @@ npm install redux-saga
 
 // axios
 npm install axios
+
+// apex chart
+npm install react-apexcharts apexcharts
