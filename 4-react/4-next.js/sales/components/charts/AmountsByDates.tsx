@@ -21,11 +21,16 @@ const AmountsByDates = ({ data }: Prop) => {
     }[];
     options: ApexOptions;
   } = {
-    series: [{ name: "date", data: data.map((item) => item.amount) }],
+    // series: 실제 데이터 값
+    // [{name: "일자", data: [8702, 3400 ...]}]
+    series: [{ name: "일자", data: data.map((item) => item.amount) }],
     options: {
+      // x축의 라벨
       xaxis: {
+        // categories: ["01-01", "01-02" ...]
         categories: data.map((item) => item.date.substr(5, 5)),
       },
+      // y축의 형식을 지정
       yaxis: {
         labels: {
           formatter: function (val: number) {

@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
 
-import dynamic from "next/dynamic";
-const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
-
-import { ApexOptions } from "apexcharts";
 import AmountsRate from "../components/charts/AmountsRate";
 import AmountsByCategories from "../components/charts/AmountsByCategories";
 import AmountsByDates from "../components/charts/AmountsByDates";

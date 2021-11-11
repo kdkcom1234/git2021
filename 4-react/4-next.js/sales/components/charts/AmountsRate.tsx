@@ -6,8 +6,8 @@ const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 import { ApexOptions } from "apexcharts";
 
 interface Prop {
-  amount: number;
-  target: number;
+  amount: number; // 실제값
+  target: number; // 목표값
 }
 
 const AmountsRate = ({ amount, target }: Prop) => {

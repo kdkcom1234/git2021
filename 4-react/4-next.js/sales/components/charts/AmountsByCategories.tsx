@@ -25,18 +25,21 @@ const AmountsByCategories = ({ data }: Prop) => {
     }[];
     options: ApexOptions;
   } = {
-    series: [{ name: "category", data: data.map((item) => item.amount) }],
+    // [{name: "제품군", data: [30330, 7113 ...]}]
+    series: [{ name: "제품군", data: data.map((item) => item.amount) }],
     options: {
       xaxis: {
+        // categories: ["beverages", "condiments" ...]
         categories: data.map((item) => item.category),
       },
-      yaxis: {
-        labels: {
-          formatter: function (val: number) {
-            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-          },
-        },
-      },
+      // y축 형식 지정
+      // yaxis: {
+      //   labels: {
+      //     formatter: function (val: number) {
+      //       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      //     },
+      //   },
+      // },
     },
   };
 
