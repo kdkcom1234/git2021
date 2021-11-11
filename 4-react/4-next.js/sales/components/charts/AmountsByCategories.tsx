@@ -28,6 +28,11 @@ const AmountsByCategories = ({ data }: Prop) => {
     // [{name: "제품군", data: [30330, 7113 ...]}]
     series: [{ name: "제품군", data: data.map((item) => item.amount) }],
     options: {
+      chart: {
+        toolbar: {
+          show: false,
+        },
+      },
       xaxis: {
         // categories: ["beverages", "condiments" ...]
         categories: data.map((item) => item.category),

@@ -163,7 +163,12 @@ const Home = () => {
 
   return (
     <div
-      style={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        flexWrap: "wrap",
+        width: "1000px",
+      }}
     >
       <div style={{ width: "50%" }}>
         <h2 style={{ textAlign: "center" }}>매출목표 달성율</h2>

@@ -25,6 +25,11 @@ const AmountsByDates = ({ data }: Prop) => {
     // [{name: "일자", data: [8702, 3400 ...]}]
     series: [{ name: "일자", data: data.map((item) => item.amount) }],
     options: {
+      chart: {
+        toolbar: {
+          show: false,
+        },
+      },
       // x축의 라벨
       xaxis: {
         // categories: ["01-01", "01-02" ...]

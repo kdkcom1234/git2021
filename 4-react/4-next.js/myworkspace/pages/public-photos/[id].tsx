@@ -49,17 +49,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.params?.id;
 
   // Fetch data from external API
-  // const res = await axios.get<PublicPhoto[]>(
-  //   `https://jsonplaceholder.typicode.com/photos/${id}`
-  // );
-  // const photo = res.data;
-  const photo = {
-    albumId: 1,
-    id: 1,
-    title: "accusamus beatae ad facilis cum similique qui sunt",
-    url: "https://via.placeholder.com/600/92c952",
-    thumbnailUrl: "https://via.placeholder.com/150/92c952",
-  };
+  const res = await axios.get<PublicPhoto[]>(
+    `https://jsonplaceholder.typicode.com/photos/${id}`
+  );
+  const photo = res.data;
+  // const photo = {
+  //   albumId: 1,
+  //   id: 1,
+  //   title: "accusamus beatae ad facilis cum similique qui sunt",
+  //   url: "https://via.placeholder.com/600/92c952",
+  //   thumbnailUrl: "https://via.placeholder.com/150/92c952",
+  // };
   // Pass data to the page via props
   return { props: { photo } };
 };
