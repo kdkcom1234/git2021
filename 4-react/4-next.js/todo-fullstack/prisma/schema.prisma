@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model air_sigungu_hour {
+  data_time String @db.VarChar(255)
+  sido_name String @db.VarChar(20)
+  city_name String @db.VarChar(20)
+  pm10value Int?
+  pm25value Int?
+
+  @@id([city_name, data_time, sido_name])
+  @@index([sido_name, city_name], map: "idx_air_sigungu_hour_1")
+}
+
+model contact {
+  id           BigInt  @id @default(autoincrement())
+  created_time BigInt
+  email        String? @db.VarChar(255)
+  memo         String? @db.VarChar(255)
+  name         String?
+  phone        String? @db.VarChar(255)
+  description  String? @db.VarChar(1000)
+  phone_num    String? @db.VarChar(255)
+}
+
+model covid_sido_daily {
+  gubun         String  @db.VarChar(255)
+  std_day       String  @db.VarChar(255)
+  gubun_en      String? @db.VarChar(255)
+  local_occ_cnt String? @db.VarChar(255)
+  over_flow_cnt String? @db.VarChar(255)
+
+  @@id([gubun, std_day])
+  @@index([std_day, gubun], map: "idx_covid_sido_daily_1")
+}
+
+model photo {
+  id           BigInt  @id @default(autoincrement())
+  created_time BigInt
+  description  String? @db.VarChar(1000)
+  file_name    String? @db.VarChar(255)
+  file_type    String? @db.VarChar(255)
+  photo_url    String?
+  title        String? @db.VarChar(255)
+  user_id      String? @db.VarChar(255)
+}
+
+model photo_comment {
+  id           BigInt  @id @default(autoincrement())
+  content      String? @db.VarChar(1000)
+  created_time BigInt
+  photo_id     BigInt
+  user_id      String? @db.VarChar(255)
+}
+
+model todo {
+  id           BigInt  @id @default(autoincrement())
+  created_time BigInt
+  memo         String? @db.VarChar(255)
+}
