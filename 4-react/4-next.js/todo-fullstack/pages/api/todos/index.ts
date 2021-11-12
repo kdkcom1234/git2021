@@ -27,5 +27,5 @@ async function post(
     },
   });
 
-  res.status(200).json(toSerializable<todo>(createdTodo));
+  res.status(201).json(toSerializable<todo>(createdTodo));
 }
