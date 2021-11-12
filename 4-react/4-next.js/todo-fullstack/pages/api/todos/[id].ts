@@ -7,17 +7,13 @@ export default async function handler(
   res: NextApiResponse<string>
 ) {
   if (req.method === "DELETE") {
-    return del(req, res);
+    const id = req.query.id as string;
+    console.log(id);
+
+    await prisma.todo.delete({
+      where: { id: +id },
+    });
+
+    res.status(200).json("");
   }
-}
-
-async function del(req: NextApiRequest, res: NextApiResponse<string>) {
-  const id = req.query.id as string;
-  console.log(id);
-
-  await prisma.todo.delete({
-    where: { id: +id },
-  });
-
-  res.status(200).json("");
 }

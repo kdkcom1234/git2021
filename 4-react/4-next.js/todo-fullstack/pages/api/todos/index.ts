@@ -9,23 +9,16 @@ export default async function handler(
   res: NextApiResponse<todo[] | todo | undefined>
 ) {
   if (req.method === "POST") {
-    return post(req, res);
+    const todoReq = req.body as todo;
+    console.log(todoReq);
+
+    const createdTodo = await prisma.todo.create({
+      data: {
+        memo: todoReq.memo,
+        created_time: BigInt(new Date().getTime()),
+      },
+    });
+
+    res.status(201).json(toSerializable<todo>(createdTodo));
   }
-}
-
-async function post(
-  req: NextApiRequest,
-  res: NextApiResponse<todo | undefined>
-) {
-  const todoReq = req.body as todo;
-  console.log(todoReq);
-
-  const createdTodo = await prisma.todo.create({
-    data: {
-      memo: todoReq.memo,
-      created_time: BigInt(new Date().getTime()),
-    },
-  });
-
-  res.status(201).json(toSerializable<todo>(createdTodo));
 }
