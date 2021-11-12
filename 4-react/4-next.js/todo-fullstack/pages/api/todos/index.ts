@@ -1,7 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { PrismaClient, todo } from ".prisma/client";
-import { toSerializable } from "../../lib/json";
+import { prisma } from "../../../lib/db";
+import { todo } from ".prisma/client";
+import { toSerializable } from "../../../lib/json";
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,7 +17,6 @@ async function post(
   req: NextApiRequest,
   res: NextApiResponse<todo | undefined>
 ) {
-  const prisma = new PrismaClient();
   const todoReq = req.body as todo;
   console.log(todoReq);
 

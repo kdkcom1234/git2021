@@ -1,15 +1,15 @@
-import { PrismaClient, todo } from ".prisma/client";
 import axios from "axios";
 import { MutableRefObject, useRef, useState } from "react";
 import { toSerializable } from "../lib/json";
-import produce from "immer";
+import { prisma } from "../lib/db";
+import { todo } from ".prisma/client";
 
 const Home = ({ todos }: { todos: todo[] }) => {
   const [todoList, setTodoList] = useState<todo[]>(todos);
 
   const memoRef = useRef() as MutableRefObject<HTMLInputElement>;
 
-  const handleClick = async () => {
+  const handleAddClick = async () => {
     const todoData = toSerializable<todo>({
       id: BigInt(0),
       created_time: BigInt(0),
@@ -22,19 +22,35 @@ const Home = ({ todos }: { todos: todo[] }) => {
     memoRef.current.value = "";
   };
 
+  const handleRemoveClick = async (id: bigint) => {
+    const result = await axios.delete<string>(`/api/todos/${id}`);
+    console.log(result.data);
+
+    setTodoList(todoList.filter((item) => item.id !== id));
+  };
+
   return (
     <div>
       <input type="text" ref={memoRef} />{" "}
       <button
         onClick={() => {
-          handleClick();
+          handleAddClick();
         }}
       >
         ADD
       </button>
       <ul>
         {todoList.map((item) => (
-          <li key={`todo-${item.id}`}>{item.memo}</li>
+          <li key={`todo-${item.id}`}>
+            {item.memo}
+            <button
+              onClick={() => {
+                handleRemoveClick(item.id);
+              }}
+            >
+              X
+            </button>
+          </li>
         ))}
       </ul>
     </div>
@@ -42,7 +58,6 @@ const Home = ({ todos }: { todos: todo[] }) => {
 };
 
 export async function getServerSideProps() {
-  const prisma = new PrismaClient();
   const todos = await prisma.todo.findMany({ orderBy: { id: "desc" } });
 
   return { props: { todos: toSerializable<typeof todos>(todos) } };
