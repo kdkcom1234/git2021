@@ -1,0 +1,33 @@
+// api 작성 경로
+/pages/api 위치에 작성
+
+예) POST /todos -> /pages/api/todos.ts 또는 /pages/api/todos/index.ts
+예) DELETE /todos/1 -> /pages/api/todos/[id].ts
+
+// 기본 request 핸들러 구조
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<string>
+) {
+  res.status(200).json("Hello, Next.js");
+}
+
+// request method에 따른 분기 처리
+if (req.method === "POST") {
+ ...
+}
+
+// request body 처리
+const todoReq = req.body as todo;
+-> body : any -> todoReq : todo 
+-> 
+type todo = {
+    id: bigint;
+    created_time: bigint;
+    memo: string | null;
+}
+
+// request query 처리
+const id = req.query.id as string;
+-> /todos/[id] -> id : string
+
