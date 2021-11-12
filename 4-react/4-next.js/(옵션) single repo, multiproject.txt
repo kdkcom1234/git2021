@@ -1,0 +1,24 @@
+. next-transpile-modules를 사용하여 
+node_modules의 패키지에 tsx를 컴파일 할 수 있음
+
+// 예제 구조
+/app : next.js 애플리케이션
+/common : react.js 공통 컴포넌트 패키지
+
+// /common 
+. /common에 npm 패키지 init 및 react 라이브러리 설치
+ npm init
+ npm install react react-dom
+ index.ts에 컴포넌트 export함
+
+// /app 
+. package.json에 로컬 의존성 추가
+"common": "file:../common"
+
+. npm install
+-> "common" 패키지는 symbolic link(바로가기)로 연결됨
+-> 즉, next.js 개발모드에서 ../common의 파일이 수정되면 
+   Hot reload되어 재기동됨
+
+. npm run build
+-> "common" 패키지의 파일을 포함하여 빌드하여 production버전 파일 생성함
