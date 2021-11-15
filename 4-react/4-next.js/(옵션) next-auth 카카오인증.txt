@@ -1,0 +1,95 @@
+================= 카카오 로그인 설정
+
+// 카카오 개발자 콘솔 접속
+https://developers.kakao.com/
+https://developers.kakao.com/console/app
+
+// 애플리케이션 추가
+앱 이름, 사업자명
+
+// 플랫폼 설정
+1. 요약정보 > 플랫폼 > 플랫폼 설정하기
+2. Web 플랫폼 등록
+3. 사이트 도메인
+   http://localhost
+   http://프론트엔드ec2주소
+
+// Redirect URI 등록
+1. 카카오 로그인 > 활성화 ON
+2. Redirect URI 등록
+   http://localhost:3000/api/auth/callback/kakao
+   http://프론트엔드ec2주소/api/auth/callback/kakao
+
+// 카카오 로그인 동의항목 설정
+1. 카카오 로그인 > 동의항목
+2. 닉네임(필수), 프로필사진(필수), 카카오계정(선택)
+
+// Client Secret 생성
+1. 카카오 로그인 > 보안
+2. Client Secret 코드 생성
+3. 활성화 설정 > 사용함
+
+
+================= NextAuth 환경설정
+** next-auth 4.xxx버전은 현재 베타이고 kakao 연동이 제대로 되지 않는 부분이 있음
+** 3.xx대 버전을 사용해야함
+** 하지만 next-auth 문서는 4.xx버전으로 되어있어 강사가 작성한 코드를 참조하도록함
+
+// 샘플 인증 애플리케이션 생성
+npx create-next-app@latest nextauth --ts
+
+// next-auth 라이브러리 설치(3.xx버전)
+cd nextauth
+npm install next-auth
+
+// 카카오 로그인 환경변수 설정
+1. .env생성
+  KAKAO_CLIENT_ID=카카오개발콘솔>REST API키
+  KAKAO_CLIENT_SECRET=카카오개발콘솔>카카오로그인>보안>코드
+
+// 인증 프로바이더 설정
+/pages/api/auth/[...nextauth].js
+...
+    KakaoProvider({
+      clientId: process.env.KAKAO_CLIENT_ID,
+      clientSecret: process.env.KAKAO_CLIENT_SECRET,
+    }),
+...
+
+// _app.tsx에 SessionProvider 제공
+import { Provider as SessionProvider } from "next-auth/client";
+
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+  return (
+    <SessionProvider session={session}>
+      <Component {...pageProps} />
+    </SessionProvider>
+  );
+}
+
+
+================= SignIn 및 SiginOut, 세션제어
+
+1. /api/auth/signin 로그인 페이지
+2. /api/auth/signin 로그아웃 페이지
+  -> signOut 메서드 처리
+     import { signOut } from "next-auth/client";
+     <button onClick={() => { signOut();}}>Sign Out</button>
+
+3. 세션 제어
+import { useSession } from "next-auth/client";
+const [session] = useSession();
+
+ {session?.user && (
+        <div>
+          <Image
+            src={session.user.image as string}
+            alt={session.user.name as string}
+            width={32}
+            height={24}
+            // layout="responsive"
+            objectFit="cover"
+          />
+  
+
+

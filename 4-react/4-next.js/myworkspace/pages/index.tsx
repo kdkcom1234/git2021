@@ -71,7 +71,7 @@ const Index = ({ photos }: IndexProp) => {
 export async function getServerSideProps() {
   // // Fetch data from external API
   const res = await axios.get<PublicPhoto[]>(
-    "https://jsonplaceholder.typicode.com/photos?_start=0&_limit=8"
+    "https://jsonplaceholder.typicode.com/photos?_start=0&_limit=50"
   );
   const photos = res.data;
   // const photos = [
