@@ -1,2 +1,2 @@
 ssh -i "c:\keyfile\myworkspace.pem" ubuntu@15.164.54.22 "pkill -f node"
-ssh -i "c:\keyfile\myworkspace.pem" ubuntu@15.164.54.22 "cd /home/ubuntu/git2021/4-react/4-next.js/myworkspace; git pull; npm run build; nohup npm start 1>/dev/null 2>&1 &"
+ssh -i "c:\keyfile\myworkspace.pem" ubuntu@15.164.54.22 "cd /home/ubuntu/git2021/4-react/4-next.js/myworkspace; git pull; npm install; npm run build; nohup npm start 1>/dev/null 2>&1 &"
