@@ -6,6 +6,7 @@ const AppBar = () => {
   const [session] = useSession();
   return (
     <div style={{ width: "1200px", display: "flex", justifyContent: "end" }}>
+      {/* // 로그인 되면 나오는 부분 */}
       {session?.user && (
         <div>
           <Image
@@ -29,6 +30,7 @@ const AppBar = () => {
           </span>
         </div>
       )}
+      {/* // 로그인 안 됐을 때 나오는 부분 */}
       {!session?.user && <Link href="/api/auth/signin">Sign In</Link>}
     </div>
   );

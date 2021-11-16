@@ -67,6 +67,10 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   );
 }
 
+// next.config.js에 이미지 도메인 등록
+...
+images: { domains: ["k.kakaocdn.net"] },
+...
 
 ================= SignIn 및 SiginOut, 세션제어
 
