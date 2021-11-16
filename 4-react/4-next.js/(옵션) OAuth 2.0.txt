@@ -1,3 +1,14 @@
+OAuth 2.0 개략 설명
+
+1. 인증 제공자에 client_id(서비스id), response_type(code), redirect_uri(돌아올주소) 매개변수를 보냄
+2. 인증 제공자에서 도메인, client_id, redirect_uri 등을 확인하고 로그인 페이지로 이동시킴
+3. 사용자가 로그인함
+4. 로그인이 완료되면 redirect_uri 주소로 발급한 code값을 매개변수로 붙여서 이동시킴
+5. 발급받은 code값과 client_id, client_secret으로 access_token을 요청함
+6. 응답받은 access_token으로 서비스에 접근(예) 프로필정보가져오기)
+
+
+--------------------------------------------------------------------------------------------
 1. 사용자를 Identity Provider의 인증페이지로 보냄
    - client_id: 카카오에 로그인 할 수 있는 서비스Id
    - response_type: code(기본), password(서버)
@@ -6,7 +17,6 @@
 
 https://kauth.kakao.com/oauth/authorize?
 &response_type=code
-&state=CSRF토큰
 &redirect_uri=http://localhost:3000/api/auth/callback/kakao(로그인하고돌아올주소)
 &client_id=서비스Id
 |
