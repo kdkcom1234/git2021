@@ -1,0 +1,35 @@
+1. 사용자를 Identity Provider의 인증페이지로 보냄
+   - client_id: 카카오에 로그인 할 수 있는 서비스Id
+   - response_type: code(기본), password(서버)
+   - redirect_uri: 로그인이 완료되면 돌아올 주소
+   -> clientId를 IP에서 확인하고, 로그인페이지 이동
+
+https://kauth.kakao.com/oauth/authorize?
+&response_type=code
+&state=CSRF토큰
+&redirect_uri=http://localhost:3000/api/auth/callback/kakao(로그인하고돌아올주소)
+&client_id=서비스Id
+|
+V
+https://accounts.kakao.com/login
+
+
+2. 로그인이 완료가 되면 redirect_uri 주소로 code값을 보냄
+http://localhost:3000/api/auth/callback/kakao?code=uHcJSfw5Yk0v4-pNBTb7Sqn4vsu3r9tnq3F-Zelc0-xQpmjxqWSuDp04tFrKEfr7iJ16egopyV4AAAF9JkBwcw
+
+
+3. 받은 code값으로 access_token을 요청함
+POST /oauth/token
+client_id, client_secret, 
+code: 2단계에서받은 code를 넣음
+|
+V
+{
+  ...
+  "access_token": jwt토큰형식
+  ...
+}
+
+
+4. 받은 access_token으로 서비스(예) 카카오)에 접근함
+  예) 카카오 사용자 프로필 받아옴
