@@ -17,7 +17,10 @@ npm run build
 // next 서버 실행
 nohup npm start &
 
-// nginx reverse proxy 적용
+// (옵션1) 라우팅 테이블 변경
+sudo iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
+
+// (옵션2) nginx reverse proxy 적용
 (디폴트파일이 있다면) sudo rm /etc/nginx/sites-available/default
 (디폴트파일이 있다면) sudo rm /etc/nginx/sites-enabled/default
 
@@ -44,7 +47,6 @@ pkill -f node
 // git에서 변경 소스를 받고 빌드하기
 cd 프로젝트폴더
 git pull && npm run build
-
 
 // next서버 실행
 nohup npm start &
