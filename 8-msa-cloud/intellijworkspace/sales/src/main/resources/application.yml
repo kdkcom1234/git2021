@@ -1,0 +1,22 @@
+server:
+  port: 5050
+spring:
+  rabbitmq:
+    # rabbitmq 서버주소
+#    host: ec2-13-125-61-145.ap-northeast-2.compute.amazonaws.co
+    addresses: amqps://b-a39b9099-87c3-40f8-bb60-285dfa15d12b.mq.ap-northeast-2.amazonaws.com:5671
+    username: rabbitmq
+    password: password123!
+  datasource:
+    driver-class-name: org.postgresql.Driver  #postgresql
+    # jdbc - java databse connector
+    # :postresql - 데이터베이스 엔진
+    # //url - 데이터베이스 주소
+    # :5432 - 데이터베이스 접속 포트
+    # /postgres - 접속할 데이터베이스
+    url: jdbc:postgresql://database-1.cgp5lxuznsxk.ap-northeast-2.rds.amazonaws.com:5432/postgres?currentSchema=sales
+    username: postgres #postgresql
+    password: password123!
+  jpa:
+    show-sql: true
+    generate-ddl: true  # create SQL 명령어를 자동으로 수행함, auto-migration         
