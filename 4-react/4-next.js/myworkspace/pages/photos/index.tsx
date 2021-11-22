@@ -37,7 +37,9 @@ const Photo = () => {
       router.replace("/signin");
       return;
     }
+  });
 
+  useEffect(() => {
     // 데이터 fetch가 안되었으면 데이터를 받아옴
     if (!photo.isFetched) {
       const photoPageSize = localStorage.getItem("photo_page_size");
