@@ -26,7 +26,7 @@
    -> useState, useRef, useEffect
   1.2 Redux
    -> useSelector, useDispatch
-   -> pagination
+   -> Modern React - Redux-Toolkit
   1.3 Axios/AJAX
   1.4 Redux-Saga
   1.5 Next.js Routing(파일기반)
