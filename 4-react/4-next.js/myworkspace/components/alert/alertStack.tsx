@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../provider";
 import Alert from "./alert";
 import { removeAlert } from "../../provider/modules/alert";
+import { useCallback } from "react";
 
 const AlertStack = () => {
   const alert = useSelector((state: RootState) => state.alert);
@@ -19,9 +20,9 @@ const AlertStack = () => {
             key={`alert-${item.id}`}
             variant={item.variant}
             message={item.message}
-            onClose={() => {
+            onClose={useCallback(() => {
               handleOnClose(item.id);
-            }}
+            }, [])}
           />
         ))}
       </div>

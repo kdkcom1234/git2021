@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { AppDispatch, RootState } from "../../provider";
@@ -13,6 +13,7 @@ import Progress from "../../components/progress";
 import AlertStack from "../../components/alert/alertStack";
 
 import Layout from "../../components/layout";
+import React from "react";
 
 const PhotoCreate = () => {
   // 입력 폼 ref 객체
@@ -42,7 +43,7 @@ const PhotoCreate = () => {
     isAddCompleted && router.push("/photos");
   }, [isAddCompleted, router, dispatch]);
 
-  const handleAddClick = () => {
+  const handleAddClick = useCallback(() => {
     // console.log(titleInput.current?.value);
     // console.log(descTxta.current?.value);
     if (fileInput.current?.files?.length) {
@@ -102,7 +103,7 @@ const PhotoCreate = () => {
 
       reader.readAsDataURL(imageFile);
     }
-  };
+  }, []);
 
   return (
     <Layout>
@@ -172,4 +173,4 @@ const PhotoCreate = () => {
   );
 };
 
-export default PhotoCreate;
+export default React.memo(PhotoCreate);
