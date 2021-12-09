@@ -1,0 +1,14 @@
+// myapp 이란 프로젝트 이름으로 typescript 템플릿을 이용하여 생성
+npx create-react-native-app myapp -t with-typescript
+// 프로젝트로 이동
+cd myapp
+// 안드로이드로 실행(expo-cli설치)
+npm run android
+
+Next.js -> 웹프레임워크 -> UI템플릿이 React
+Expo -> 하이브리드앱 개발 도구 -> UI템플릿이 React
+
+// App.tsx
+View, Text : Core Component
+View(div), Text(p)
+-> 일종의 웹의 기본태그들에 해당
