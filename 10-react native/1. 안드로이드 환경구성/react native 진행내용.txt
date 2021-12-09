@@ -1,0 +1,17 @@
+1. Android Studio
+  - https://developer.android.com/studio
+  - 설치
+  - SDK Manager로 안드로이드 11.0(30) SDK 설치
+  - AVD Manager로 에뮬레이터 생성
+    - 기본 Pixel 2로 Android 11(30) 이미지로
+  - ADB, Emulator 경로를 환경변수로 지정해야 함
+    -> C:\Users\사용자계정\AppData\Local\Android\Sdk\platform-tools
+    -> C:\Users\사용자계정\AppData\Local\Android\Sdk\emulator
+      -> 명령창에서 adb, emulator
+  - ANDROID_SDK_ROOT 환경 변수 지정
+    -> C:\Users\사용자계정\AppData\Local\Android\Sdk
+      -> 명령창에서 echo %ANDROID_SDK_ROOT%
+  - ADB 및 에뮬레이터 시작 
+    -> adb kill-server
+    -> adb start-server
+    -> emulator -avd Pixel_2_API_30

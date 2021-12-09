@@ -1,0 +1,26 @@
+. 네이티브 개발
+ - 모바일: iOS, Android, 
+ - PC: .NET
+ - iOS: Swift, Object-C(두개 언어와 개발방식이 전혀다름)
+ - Android: Kotlin, Java(개발방식은 비슷하나 Kotlin은 구현자체 간소화됨)
+ - .NET: C#, VB.NET, F#
+
+. 웹뷰 앱 개발
+ - WebView라고 하는 플랫폼 내장 API를 이용
+ - 일부 네이티브 처리를 해야하는 제약성이 많이 존재함
+   예) 파일처리, js로 파일을 읽을 수 없음 네이티브코드로 짜야함
+ - 단순 컨테츠 보여주기와, 입력폼 약간 존재
+ - SPA 구조로 만들어야 UX적으로 좀더 나음, 네이티브 애니메이션 대비 성능 떨어짐
+ - 1. 원격에 있는 웹사이트를 접속(접속전에 빈화면, 네트워크접속X 컨텐츠X)
+      -> 심사결격 사유(앱자체기능을 넣어야함, 푸시처리, 환경설정, 사이트도메인)
+ - 2. html, css, js를 앱에 내장하여 보여줌(파일로 html제약성)
+
+. 하이브리드 앱 개발
+ - 하나의 언어 또는 개발 방법으로 여러개 플랫폼 개발
+ - 하지만, 개발환경 및 배포는 각 플랫폼에 맞추어야함
+ - 환경구성 -> 구현 -> 배포
+ - 웹중심 -> React Native(js/ts, react) -Facebook
+ - 앱중심 -> Flutter(dart) - Google
+ - PC중심 -> 안드로이드, Xamarin(C#, mono) - MS
+ - Cordova/Capacitor(html/js, phonegap) - Apache
+   -> Ionic(angular, vue)
