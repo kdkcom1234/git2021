@@ -1,0 +1,18 @@
+// react native 개발 시작 옵션 2가지
+https://reactnative.dev/docs/environment-setup
+expo-cli: 모바일 개발 경험 없음, android/ios 네이티브 코드를 숨김, 별도의 환경구성 방법
+react native cli: 모바일 개발 경험 있음, 네이티브 코드가 포함됨, android/ios 환경구성 방법 사용
+
+// expo-cli 설치
+npm install -g expo-cli
+// myapp 이란 프로젝트 이름으로 typescript 템플릿을 이용하여 생성
+expo init myapp -t expo-template-blank-typescript
+// 프로젝트로 이동
+cd myapp
+// 안드로이드로 실행(expo-cli설치)
+npm run android
+
+// App.tsx
+View, Text : Core Component
+View(div), Text(p)
+-> 일종의 웹의 기본태그들에 해당
