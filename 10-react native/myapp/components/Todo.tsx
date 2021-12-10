@@ -1,4 +1,5 @@
-import React from "react";
+import React, { MutableRefObject, useRef, useState } from "react";
+import { nanoid } from "nanoid/non-secure";
 import {
   StyleSheet,
   View,
@@ -9,22 +10,43 @@ import {
 } from "react-native";
 
 export default function Todo() {
+  const [todoList, setTodoList] = useState([
+    { id: nanoid(), memo: "rn 개발" },
+    { id: nanoid(), memo: "expo 문서확인" },
+  ]);
+
+  const [memo, setMemo] = useState("");
+
+  const handleAdd = () => {
+    setTodoList([{ id: nanoid(), memo }, ...todoList]);
+    setMemo("");
+  };
+
   return (
     <View style={styles.container}>
       {/* View: div 태그 */}
       <View style={styles.form}>
-        <TextInput placeholder="memo..." style={styles.input}></TextInput>
-        <Button title="ADD" onPress={() => {}} />
+        <TextInput
+          placeholder="memo..."
+          style={styles.input}
+          onChangeText={(val) => {
+            setMemo(val);
+          }}
+          defaultValue={memo}
+        ></TextInput>
+        <Button
+          title="ADD"
+          onPress={() => {
+            handleAdd();
+          }}
+        />
         {/* Scrollview: scrolle이 있는 div 태그 */}
         {/* 다량의 컴포넌트가 보여야하는 반복적인 리스트 구조는 FlatList 권장(성능) */}
       </View>
       <View style={styles.list}>
         <FlatList
-          data={[
-            { id: 1, memo: "rn 개발" },
-            { id: 2, memo: "expo 문서확인" },
-          ]}
-          renderItem={({ item }) => <Text>{item.memo}</Text>}
+          data={todoList}
+          renderItem={({ item }) => <Text key={item.id}>{item.memo}</Text>}
         />
       </View>
     </View>
