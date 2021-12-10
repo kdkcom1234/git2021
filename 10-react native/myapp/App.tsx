@@ -34,6 +34,16 @@ const Tab = createBottomTabNavigator();
 // 스택 네비게이터 생성
 const ProductStack = createNativeStackNavigator();
 
+// 스택 스크린 생성
+const ProductScreen = () => {
+  return (
+    <ProductStack.Navigator>
+      <ProductStack.Screen name="Product" component={Product} />
+      <ProductStack.Screen name="Detail" component={Detail} />
+    </ProductStack.Navigator>
+  );
+};
+
 // 탭네비게이터 옵션
 // ({route}) => ({} as BottomTabNavigationOptions)
 const screenOptions = ({
@@ -59,7 +69,7 @@ const screenOptions = ({
           ) : (
             <Ionicons name={"checkmark-outline"} size={size} color={color} />
           );
-        case "Product":
+        case "ProductStack":
           return focused ? (
             <Ionicons name={"albums"} size={size} color={color} />
           ) : (
@@ -87,7 +97,11 @@ export default function App() {
         <Tab.Navigator screenOptions={screenOptions}>
           <Tab.Screen name="Home" component={Home} options={{}} />
           <Tab.Screen name="Todo" component={Todo} options={{}} />
-          <Tab.Screen name="Product" component={Product} options={{}} />
+          <Tab.Screen
+            name="ProductStack"
+            component={ProductScreen}
+            options={{ headerShown: false, tabBarLabel: "Product" }}
+          />
           <Tab.Screen name="Favorite" component={Favorite} options={{}} />
         </Tab.Navigator>
       </NavigationContainer>
