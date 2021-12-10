@@ -7,6 +7,7 @@ import {
   TextInput,
   Button,
   FlatList,
+  Pressable,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -60,12 +61,14 @@ export default function Todo() {
           }}
           value={memo}
         ></TextInput>
-        <Button
-          title="ADD"
+        <Pressable
+          style={styles.button}
           onPress={() => {
             handleAdd();
           }}
-        />
+        >
+          <Text style={styles.buttonText}>ADD</Text>
+        </Pressable>
       </View>
       <View style={styles.list}>
         {/* Scrollview: scrolle이 있는 div 태그 */}
@@ -108,6 +111,14 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     width: "50%",
+  },
+  button: {
+    padding: 5,
+    backgroundColor: "#03045e",
+  },
+  buttonText: {
+    fontWeight: "bold",
+    color: "#d0d0d0",
   },
   list: {
     flexGrow: 1,
