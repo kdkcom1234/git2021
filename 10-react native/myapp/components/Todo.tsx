@@ -1,4 +1,4 @@
-import React, { MutableRefObject, useRef, useState } from "react";
+import React, { useState } from "react";
 import { nanoid } from "nanoid/non-secure";
 import {
   StyleSheet,
@@ -8,6 +8,7 @@ import {
   Button,
   FlatList,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Todo() {
   const [todoList, setTodoList] = useState([
@@ -32,7 +33,7 @@ export default function Todo() {
           onChangeText={(val) => {
             setMemo(val);
           }}
-          defaultValue={memo}
+          value={memo}
         ></TextInput>
         <Button
           title="ADD"
@@ -57,7 +58,6 @@ const styles = StyleSheet.create({
   container: {
     // flex: 1 -> 자식요소 주축으로 자동 늘리기, 교차축 자동늘리기, 기본크기는 없음
     flex: 1,
-    backgroundColor: "#fff",
     // borderColor: "red",
     // borderWidth: 1,
     alignItems: "center",
