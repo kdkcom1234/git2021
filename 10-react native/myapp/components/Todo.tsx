@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { nanoid } from "nanoid/non-secure";
 import {
   StyleSheet,
@@ -11,17 +11,42 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Todo() {
-  const [todoList, setTodoList] = useState([
-    { id: nanoid(), memo: "rn 개발" },
-    { id: nanoid(), memo: "expo 문서확인" },
-  ]);
+  const [todoList, setTodoList] = useState<{ id: string; memo: string }[]>([]);
 
   const [memo, setMemo] = useState("");
 
-  const handleAdd = () => {
-    setTodoList([{ id: nanoid(), memo }, ...todoList]);
+  const handleAdd = async () => {
+    // 저장할 배열객체
+    const newTodoList = [{ id: nanoid(), memo }, ...todoList];
+
+    // JSON 문자열로 변환해서 저장
+    await AsyncStorage.setItem("todoList", JSON.stringify(newTodoList));
+
+    // state를 업데이트함
+    setTodoList(newTodoList);
     setMemo("");
   };
+
+  const handleRemove = async (id: string) => {
+    // 저장할 배열객체
+    const newTodoList = todoList.filter((item) => item.id !== id);
+    // JSON 문자열로 변환해서 저장
+    await AsyncStorage.setItem("todoList", JSON.stringify(newTodoList));
+
+    // state를 업데이트함
+    setTodoList(newTodoList);
+    setMemo("");
+  };
+
+  useEffect(() => {
+    const getItem = async () => {
+      const todoJson = await AsyncStorage.getItem("todoList");
+      console.log(todoJson);
+      todoJson && setTodoList(JSON.parse(todoJson));
+    };
+
+    getItem();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -41,13 +66,22 @@ export default function Todo() {
             handleAdd();
           }}
         />
-        {/* Scrollview: scrolle이 있는 div 태그 */}
-        {/* 다량의 컴포넌트가 보여야하는 반복적인 리스트 구조는 FlatList 권장(성능) */}
       </View>
       <View style={styles.list}>
+        {/* Scrollview: scrolle이 있는 div 태그 */}
+        {/* 다량의 컴포넌트가 보여야하는 반복적인 리스트 구조는 FlatList 권장(성능) */}
         <FlatList
           data={todoList}
-          renderItem={({ item }) => <Text key={item.id}>{item.memo}</Text>}
+          renderItem={({ item }) => (
+            <Text
+              onPress={() => {
+                handleRemove(item.id);
+              }}
+              key={`todo-item-${item.id}`}
+            >
+              {item.memo}
+            </Text>
+          )}
         />
       </View>
     </View>
