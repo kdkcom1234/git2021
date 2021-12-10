@@ -18,9 +18,8 @@ export default function Todo() {
         {/* Scrollview: scrolle이 있는 div 태그 */}
         {/* 다량의 컴포넌트가 보여야하는 반복적인 리스트 구조는 FlatList 권장(성능) */}
       </View>
-      <View>
+      <View style={styles.list}>
         <FlatList
-          contentContainerStyle={styles.list}
           data={[
             { id: 1, memo: "rn 개발" },
             { id: 2, memo: "expo 문서확인" },
