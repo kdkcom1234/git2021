@@ -13,7 +13,7 @@ export default function Todo() {
     <View style={styles.container}>
       {/* View: div 태그 */}
       <View style={styles.form}>
-        <TextInput placeholder="memo..." style={{ height: 40 }}></TextInput>
+        <TextInput placeholder="memo..." style={styles.input}></TextInput>
         <Button title="ADD" onPress={() => {}} />
         {/* Scrollview: scrolle이 있는 div 태그 */}
         {/* 다량의 컴포넌트가 보여야하는 반복적인 리스트 구조는 FlatList 권장(성능) */}
@@ -48,6 +48,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     // borderColor: "green",
     // borderWidth: 1,
+  },
+  input: {
+    height: 40,
+    width: "50%",
   },
   list: {
     flexGrow: 1,
