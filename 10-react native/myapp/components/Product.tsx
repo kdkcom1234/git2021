@@ -5,6 +5,7 @@ import { Pressable, Text, View } from "react-native";
 import { StackParamList } from "../types/ParamList";
 
 export default function Product() {
+  // useNavigation<내비게이션속성타입<매개변수타입>>
   const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
   console.log(navigation);
   return (
