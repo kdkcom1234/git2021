@@ -1,18 +1,25 @@
 import { useNavigation } from "@react-navigation/native";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import {
+  NativeStackScreenProps,
+  NativeStackNavigationProp,
+} from "@react-navigation/native-stack";
 import React from "react";
-import { Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import { StackParamList } from "../types/ParamList";
 
 export default function Product() {
-  const { navigation } =
-    useNavigation<NativeStackScreenProps<StackParamList, "Product">>();
-
-  navigation.navigate("Detail", { id: "1234" });
-
+  const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
+  console.log(navigation);
   return (
     <View>
       <Text>Product Component</Text>
+      <Pressable
+        onPress={() => {
+          navigation.navigate("Detail", { id: "1" });
+        }}
+      >
+        <Text>Go To Product Detail</Text>
+      </Pressable>
     </View>
   );
 }
