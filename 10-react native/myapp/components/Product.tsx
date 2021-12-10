@@ -9,7 +9,6 @@ export default function Product() {
   console.log(navigation);
   return (
     <View>
-      <Text>Product Component</Text>
       <Pressable
         onPress={() => {
           navigation.navigate("Detail", { id: "1" });

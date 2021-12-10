@@ -9,7 +9,6 @@ export default function Detail() {
   console.log(route.params?.id);
   return (
     <View>
-      <Text>Detail Component</Text>
       <Text>id: {route.params?.id}</Text>
     </View>
   );
