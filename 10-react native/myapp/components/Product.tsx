@@ -1,8 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import {
-  NativeStackScreenProps,
-  NativeStackNavigationProp,
-} from "@react-navigation/native-stack";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
 import { Pressable, Text, View } from "react-native";
 import { StackParamList } from "../types/ParamList";
