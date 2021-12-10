@@ -45,6 +45,24 @@ const screenOptions = ({
           ) : (
             <Ionicons name={"home-outline"} size={size} color={color} />
           );
+        case "Todo":
+          return focused ? (
+            <Ionicons name={"checkmark"} size={size} color={color} />
+          ) : (
+            <Ionicons name={"checkmark-outline"} size={size} color={color} />
+          );
+        case "Product":
+          return focused ? (
+            <Ionicons name={"albums"} size={size} color={color} />
+          ) : (
+            <Ionicons name={"albums-outline"} size={size} color={color} />
+          );
+        case "Favorite":
+          return focused ? (
+            <Ionicons name={"heart"} size={size} color={color} />
+          ) : (
+            <Ionicons name={"heart-outline"} size={size} color={color} />
+          );
       }
     },
   } as BottomTabNavigationOptions);
