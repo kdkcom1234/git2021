@@ -5,8 +5,10 @@ import { Text, View } from "react-native";
 import { StackParamList } from "../types/ParamList";
 
 export default function Product() {
-  const { navigation, route } =
+  const { navigation } =
     useNavigation<NativeStackScreenProps<StackParamList, "Product">>();
+
+  navigation.navigate("Detail", { id: "1234" });
 
   return (
     <View>

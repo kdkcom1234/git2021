@@ -1,4 +1,5 @@
 // react-navigation
+https://reactnavigation.org/
 
 - SafeAreaContext(노치 및 펀치홀 영역 제어)
   expo install react-native-screens react-native-safe-area-context
