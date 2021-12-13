@@ -1,0 +1,16 @@
+expo build:android
+- package명을 작성(스토어 내의 애플리케이션 id)
+  ex) com.naver.blog, com.gdg.myapp
+- expo 회원가입
+  -> 다시 빌드명령어를 실행해서 로그인한다
+- 빌드파일 선택
+  -> apk: 플레이스토어 외의 마켓배포하거나 폰에 직접 설치
+  -> aab(app-bundle): 플레이스토어 배포할 때 사용(보안옵션 강화)
+- 빌드 queue url에서 빌드 현황확인 후 다운로드 링크 확인(10-15분)
+
+// apk 설치
+-- expo 사이트에서 받은 apk 설치
+adb install 파일명.apk
+
+** react-native-cli로 빌드하고 배포할 때
+https://reactnative.dev/docs/signed-apk-android
