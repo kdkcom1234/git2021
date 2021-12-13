@@ -1,19 +1,31 @@
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Button, Card, Icon } from "react-native-elements";
 import { PRODUCTS } from "../data/products";
 import { StackParamList } from "../types/ParamList";
 
 import { colors } from "../styles";
+import { API_BASE } from "../_env";
 
 export default function Detail() {
   const route = useRoute<RouteProp<StackParamList>>();
-
   console.log(route.params?.id);
   const id = route.params?.id as string;
-  const item = PRODUCTS.find((item) => item.id === id);
+
+  const [item, setItem] = useState<typeof PRODUCTS[0] | undefined>(undefined);
+
+  useEffect(() => {
+    const getItem = async (id: number) => {
+      const result = await fetch(`${API_BASE}/products/${id}`);
+      const data = await result.json();
+
+      setItem(data);
+    };
+
+    getItem(+id);
+  }, []);
 
   return (
     <View style={styles.container}>

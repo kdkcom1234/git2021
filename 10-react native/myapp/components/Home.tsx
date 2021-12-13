@@ -7,7 +7,7 @@ import { Button } from "react-native-elements";
 
 export default function Home() {
   const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
-  console.log(navigation);
+  // console.log(navigation);
 
   return (
     <View style={styles.container}>
