@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FAB } from "react-native-elements";
+import { colors } from "../styles";
 
 export default function Todo() {
   const [todoList, setTodoList] = useState<{ id: string; memo: string }[]>([]);
@@ -115,11 +116,11 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 5,
-    backgroundColor: "#03045e",
+    backgroundColor: colors.primary,
   },
   buttonText: {
     fontWeight: "bold",
-    color: "#d0d0d0",
+    color: colors.light,
   },
   list: {
     flexGrow: 1,

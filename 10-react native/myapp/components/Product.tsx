@@ -34,7 +34,15 @@ export default function Product() {
         data={PRODUCTS}
         // renderItem -> React Component: JSX Elment를 반환하는 함수
         // React Component에 prop으로 {item} 넘겨줌, item이 data속성의 배열에 1개 객체
-        renderItem={ProductItem}
+        renderItem={({ item }) => (
+          <Pressable
+            onPress={() => {
+              navigation.navigate("Detail", { id: item.id });
+            }}
+          >
+            <ProductItem item={item} />
+          </Pressable>
+        )}
       />
     </View>
   );

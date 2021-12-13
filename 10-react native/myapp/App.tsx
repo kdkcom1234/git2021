@@ -24,6 +24,7 @@ import Detail from "./components/Detail";
 // https://ionic.io/ionicons
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { colors } from "./styles";
 
 // 탭 네비게이터 생성
 // createBottomTabNavigator() => 탭내비게이터 함수 컴포넌트를 반환
@@ -84,8 +85,8 @@ const screenOptions = ({
       }
     },
     // 탭 활성화/비활성화 상태에 따른 컬러
-    tabBarActiveTintColor: "#03045e",
-    tabBarInactiveTintColor: "gray",
+    tabBarActiveTintColor: colors.primary,
+    tabBarInactiveTintColor: colors.muted,
   } as BottomTabNavigationOptions);
 
 export default function App() {
