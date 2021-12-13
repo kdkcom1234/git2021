@@ -1,3 +1,24 @@
+https://docs.expo.dev/eas/
+
+// eas cli 설치
+npm install -g eas-cli
+
+// expo 로그인
+eas login
+
+// eas 설정
+eas build:configure
+
+// 빌드 실행
+eas build -p android
+eas build -p ios
+
+// expo 웹에서 빌드 큐 상태 확인
+
+// apk 파일 생성
+
+
+-----------------------------------------
 expo build:android
 - package명을 작성(스토어 내의 애플리케이션 id)
   ex) com.naver.blog, com.gdg.myapp
