@@ -34,6 +34,7 @@ const Tab = createBottomTabNavigator();
 
 // 스택 네비게이터 생성
 const ProductStack = createNativeStackNavigator();
+const HomeStack = createNativeStackNavigator();
 
 // 스택 스크린 생성
 const ProductScreen = () => {
@@ -42,6 +43,14 @@ const ProductScreen = () => {
       <ProductStack.Screen name="Product" component={Product} />
       <ProductStack.Screen name="Detail" component={Detail} />
     </ProductStack.Navigator>
+  );
+};
+const HomeScreen = () => {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="Home" component={Home}></HomeStack.Screen>
+      <HomeStack.Screen name="Detail" component={Detail}></HomeStack.Screen>
+    </HomeStack.Navigator>
   );
 };
 
@@ -58,7 +67,7 @@ const screenOptions = ({
     tabBarIcon: ({ focused, color, size }) => {
       // 경로명으로 아이콘 변경
       switch (route.name) {
-        case "Home":
+        case "HomeStack":
           return focused ? (
             <Ionicons name={"home"} size={size} color={color} />
           ) : (
@@ -96,7 +105,11 @@ export default function App() {
       <NavigationContainer>
         {/* screenOptions는 객체 또는 객체반환함수 */}
         <Tab.Navigator screenOptions={screenOptions}>
-          <Tab.Screen name="Home" component={Home} options={{}} />
+          <Tab.Screen
+            name="HomeStack"
+            component={HomeScreen}
+            options={{ headerShown: false, tabBarLabel: "Home" }}
+          />
           <Tab.Screen name="Todo" component={Todo} options={{}} />
           <Tab.Screen
             name="ProductStack"

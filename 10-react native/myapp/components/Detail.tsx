@@ -18,7 +18,7 @@ export default function Detail() {
   return (
     <View style={styles.container}>
       {item && (
-        <Card>
+        <Card containerStyle={styles.cardContainer}>
           <Card.Title>{item.title}</Card.Title>
           <Card.Divider />
           <Card.Image source={{ uri: item.image }} />
@@ -40,6 +40,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  cardContainer: {
+    width: "100%",
   },
   description: {
     marginBottom: 10,
