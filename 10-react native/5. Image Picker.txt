@@ -1,4 +1,0 @@
-https://docs.expo.dev/versions/latest/sdk/imagepicker/
-expo install expo-image-picker
-// launchImageLibraryAsync
-// launchCameraAsync

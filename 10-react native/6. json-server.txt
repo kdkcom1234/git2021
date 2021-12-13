@@ -1,5 +1,0 @@
-npm install -g json-server
-
-// --host 본인의ip주소
-// ipconfig /all 에서 IPv4 주소를 확인
-json-server --host 192.168.10.130 --watch db.json
