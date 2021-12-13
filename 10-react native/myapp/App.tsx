@@ -15,6 +15,7 @@ import {
 // 탭별 컴포넌트 import
 import Home from "./components/Home";
 import Todo from "./components/Todo";
+import Photo from "./components/Photo";
 import Product from "./components/Product";
 import Favorite from "./components/Favorite";
 
@@ -79,6 +80,12 @@ const screenOptions = ({
           ) : (
             <Ionicons name={"checkmark-outline"} size={size} color={color} />
           );
+        case "Photo":
+          return focused ? (
+            <Ionicons name={"image"} size={size} color={color} />
+          ) : (
+            <Ionicons name={"image-outline"} size={size} color={color} />
+          );
         case "ProductStack":
           return focused ? (
             <Ionicons name={"albums"} size={size} color={color} />
@@ -111,6 +118,7 @@ export default function App() {
             options={{ headerShown: false, tabBarLabel: "Home" }}
           />
           <Tab.Screen name="Todo" component={Todo} options={{}} />
+          <Tab.Screen name="Photo" component={Photo} options={{}} />
           <Tab.Screen
             name="ProductStack"
             component={ProductScreen}
